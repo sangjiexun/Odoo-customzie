@@ -1481,19 +1481,19 @@ msgstr "休暇消化"
 msgid "Leaves Refused"
 msgstr ""
 
-#. module: hr_holidays
+#. module: hr_holidays　add by youshinan
 #: model:ir.actions.act_window,name:hr_holidays.hr_leave_action_my
 #: model:ir.actions.act_window,name:hr_holidays.hr_leave_action_payroll
 #: model:ir.ui.menu,name:hr_holidays.hr_leave_menu_my
 msgid "Leaves Requests"
-msgstr ""
+msgstr "休暇申請"
 
 #. module: hr_holidays
 #: model:mail.activity.type,name:hr_holidays.mail_act_leave_second_approval
 msgid "Leaves Second Approve"
 msgstr ""
 
-#. module: hr_holidays
+#. module: hr_holidays mod by youshinan
 #: model:ir.actions.act_window,name:hr_holidays.action_hr_holidays_summary_employee
 #: model:ir.actions.act_window,name:hr_holidays.open_company_allocation
 #: model:ir.actions.report,name:hr_holidays.action_report_holidayssummary
@@ -1503,7 +1503,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_holiday_pivot
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_summary_employee
 msgid "Leaves Summary"
-msgstr "休暇状況サマリ"
+msgstr "休暇状況"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_holiday_status_view_kanban
@@ -1673,11 +1673,11 @@ msgstr "月"
 msgid "Morning"
 msgstr ""
 
-#. module: hr_holidays
+#. module: hr_holidays add by youshinan
 #: model:ir.actions.act_window,name:hr_holidays.hr_leave_allocation_action_my
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "My Allocations"
-msgstr ""
+msgstr "割当状況"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
@@ -2123,10 +2123,10 @@ msgstr ""
 msgid "Sum"
 msgstr "合計"
 
-#. module: hr_holidays
+#. module: hr_holidays　mod by youshinan
 #: model:ir.ui.menu,name:hr_holidays.menu_open_company_allocation
 msgid "Summary"
-msgstr "サマリ"
+msgstr "休暇状況"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__leave_type_request_unit
