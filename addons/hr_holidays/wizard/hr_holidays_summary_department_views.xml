@@ -28,10 +28,12 @@
             <field name="target">new</field>
         </record>
 
+        <!--mod by youshinan-->
         <menuitem
             name="Report by Department"
             parent="menu_hr_holidays_report"
             action="action_hr_holidays_summary_dept"
+            groups="hr_holidays.make_invisible"
             id="menu_hr_holidays_summary_dept"/>
 
 </odoo>

@@ -366,7 +366,10 @@
         parent="menu_hr_holidays_root"
         sequence="1"
         action="action_hr_holidays_dashboard"
-        groups="hr_holidays.group_hr_holidays_manager"/>
+        groups="base.group_user"/>
+
+<!--youoshinan    groups="hr_holidays.group_hr_holidays_manager" -->
+
 
     <menuitem
         id="menu_hr_holidays_my_leaves"
@@ -399,12 +402,13 @@
         groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
         sequence="3"/>
 
+    <!--mod by youshinan-->
     <menuitem
         id="menu_hr_holidays_report"
         name="Reporting"
         parent="menu_hr_holidays_root"
         sequence="99"
-        groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"/>
+        groups="hr_holidays.make_invisible"/>
 
     <record id="hr_leave_action_new_request" model="ir.actions.act_window">
         <field name="name">New Request</field>
@@ -443,9 +447,14 @@
         <field name="view_id" ref="hr_leave_view_form"/>
     </record>
 
+    <!-- Move to The base by youshinan-->
+    <record id ="make_invisible" model="res.groups">
+        <field name="name">Invisible</field>
+    </record>
     <menuitem
         id="hr_leave_menu_new_request"
         parent="menu_hr_holidays_my_leaves"
+        groups="hr_holidays.make_invisible"
         action="hr_leave_action_new_request"
         sequence="2"/>
 
@@ -565,11 +574,12 @@
         </field>
     </record>
 
+    <!--mod by youshinan-->
     <menuitem
         id="hr_holidays_menu_manager_payroll_to_report"
         name="Leaves to report"
         parent="hr_holidays_menu_manager_payroll"
-        groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
+        groups="hr_holidays.make_invisible"
         action="hr_leave_action_payroll"
         sequence="1"/>
 
@@ -613,9 +623,11 @@
         <field name="act_window_id" ref="action_hr_available_holidays_report"/>
     </record>
 
+    <!--mod by youshinan-->
     <menuitem
         name="Leaves Analysis"
         id="menu_hr_available_holidays_report_tree"
         action="action_hr_available_holidays_report"
-        parent="menu_hr_holidays_report" sequence="5"/>
+        groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
+        parent="menu_hr_holidays_root" sequence="5"/>
 </odoo>
