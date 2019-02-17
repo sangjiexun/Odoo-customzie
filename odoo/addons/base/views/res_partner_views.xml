@@ -108,12 +108,12 @@
                             </div>
                             <label for="street" string="Address"/>
                             <div class="o_address_format">
+                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
                                 <field name="street" placeholder="Street..." class="o_address_street"/>
                                 <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                <field name="city" placeholder="City" class="o_address_city"/>
-                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
                             </div>
                             <field name="website" widget="url" placeholder="e.g. www.odoo.com"/>
                         </group>
@@ -161,17 +161,17 @@
                             <label for="street" string="Address"/>
                             <div class="o_address_format">
                                 <div attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}" class="oe_edit_only"><b>Company Address:</b></div>
-                                <field name="street" placeholder="Street..." class="o_address_street"
+                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
-                                <field name="street2" placeholder="Street 2..." class="o_address_street"
-                                    attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
-                                <field name="city" placeholder="City" class="o_address_city"
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                                 <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" context="{'country_id': country_id, 'zip': zip}"/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                <field name="city" placeholder="City" class="o_address_city"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
-                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'
+                                <field name="street" placeholder="Street..." class="o_address_street"
+                                    attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                             </div>
                             <field name="vat" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
@@ -236,17 +236,17 @@
                             <label for="street" string="Address"/>
                             <div class="o_address_format">
                                 <div attrs="{'invisible': ['|', ('parent_id', '=', False), ('type', '!=', 'contact')]}" class="oe_edit_only"><b>Company Address:</b></div>
-                                <field name="street" placeholder="Street..." class="o_address_street"
+                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
-                                <field name="street2" placeholder="Street 2..." class="o_address_street"
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                                 <field name="city" placeholder="City" class="o_address_city"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                                 <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}" context="{'country_id': country_id, 'zip': zip}"/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"
+                                <field name="street" placeholder="Street..." class="o_address_street"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
-                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"
                                     attrs="{'readonly': [('type', '=', 'contact'),('parent_id', '!=', False)]}"/>
                             </div>
                             <field name="vat" placeholder="e.g. BE0477472701" attrs="{'readonly': [('parent_id','!=',False)]}"/>
@@ -280,13 +280,13 @@
                                     <field name="is_company"/>
                                     <field name="function"/>
                                     <field name="phone"/>
+                                    <field name="country_id"/>
+                                    <field name="zip"/>
+                                    <field name="state_id"/>
+                                    <field name="city"/>
                                     <field name="street"/>
                                     <field name="street2"/>
-                                    <field name="zip"/>
-                                    <field name="city"/>
-                                    <field name="country_id"/>
                                     <field name="mobile"/>
-                                    <field name="state_id"/>
                                     <field name="image_small"/>
                                     <field name="lang"/>
                                     <!-- fields in form x2many view to diminish requests -->
@@ -314,12 +314,12 @@
                                                     <div t-if="record.function.raw_value"><field name="function"/></div>
                                                     <div t-if="record.email.raw_value"><field name="email" widget="email"/></div>
                                                     <div t-if="record.type.raw_value != 'contact'">
+                                                        <field name="country_id"/>
+                                                        <field t-if="record.state_id.raw_value" name="state_id"/>
                                                         <div>
                                                             <field name="zip"/>
                                                             <field name="city"/>
                                                         </div>
-                                                        <field t-if="record.state_id.raw_value" name="state_id"/>
-                                                        <field name="country_id"/>
                                                     </div>
                                                     <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
                                                     <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
@@ -341,12 +341,12 @@
                                                 <label for="street" string="Address"/>
                                                 <div>
                                                     <div class="o_address_format" name="div_address">
+                                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}' context="{'country_id': country_id, 'zip': zip}"/>
+                                                        <field name="city" placeholder="City" class="o_address_city"/>
                                                         <field name="street" placeholder="Street..." class="o_address_street"/>
                                                         <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                                        <field name="city" placeholder="City" class="o_address_city"/>
-                                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}' context="{'country_id': country_id, 'zip': zip}"/>
-                                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
                                                     </div>
                                                 </div>
                                             </group>
@@ -414,12 +414,12 @@
                                 <label for="street" string="Address"/>
                                 <div>
                                     <div class="o_address_format" name="div_address">
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}' context="{'country_id': country_id, 'zip': zip}"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
                                         <field name="street" placeholder="Street..." class="o_address_street"/>
                                         <field name="street2" placeholder="Street 2..." class="o_address_street"/>
-                                        <field name="city" placeholder="City" class="o_address_city"/>
-                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}' context="{'country_id': country_id, 'zip': zip}"/>
-                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
                                     </div>
                                 </div>
                             </group>
@@ -487,13 +487,13 @@
                     <field name="is_company"/>
                     <field name="function"/>
                     <field name="phone"/>
+                    <field name="country_id"/>
+                    <field name="zip"/>
+                    <field name="state_id"/>
+                    <field name="city"/>
                     <field name="street"/>
                     <field name="street2"/>
-                    <field name="zip"/>
-                    <field name="city"/>
-                    <field name="country_id"/>
                     <field name="mobile"/>
-                    <field name="state_id"/>
                     <field name="category_id"/>
                     <field name="image_small"/>
                     <field name="type"/>
