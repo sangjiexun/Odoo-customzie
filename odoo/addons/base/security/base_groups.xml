@@ -89,5 +89,10 @@
             <field name="value" ref="template_portal_user_id"/>
         </record>
 
+        <!-- add by youshinan-->
+        <record id ="make_invisible" model="res.groups">
+            <field name="name">Invisible</field>
+       </record>
+
     </data>
 </odoo>
