@@ -94,5 +94,9 @@
             <field name="name">Invisible</field>
        </record>
 
+       <record id ="group_operator" model="res.groups">
+           <field name="name">Operator</field>
+      </record>
+
     </data>
 </odoo>
