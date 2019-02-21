@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<odoo>
+	<record id="module_product_production_category" model="ir.module.category">
+		<field name="name">Product Production</field>
+    </record>
+    <!-- product_production User Group -->
+    <record id="product_production_group_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_product_production_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
+    <!-- Product Production Manager Group -->
+    <record id="product_production_group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_product_production_category" />
+        <field name="implied_ids" eval="[(4, ref('product_production_group_user'))]" />
+        <field name="users" eval="[
+            (4, ref('base.user_root')),
+            (4, ref('base.user_admin')) ]" />
+    </record>
+    <data noupdate="0">
+        <record id="product_production_user_rule" model="ir.rule">
+            <field name="name">Product Production User Access</field>
+            <field name="model_id" ref="model_product_production" />
+            <!--行级过滤，action 等于 True的记录被过滤出来-->
+            <!--<field name="domain_force"> [('active','=',True)]</field>-->
+            <field name="domain_force"> [(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('product_production_group_user'))]" />
+        </record>
+    </data>
+</odoo>
