@@ -4,10 +4,6 @@
           <menuitem id="menu_board_root" name="Dashboards" sequence="305" web_icon="base,static/description/board.png" groups="base.group_user"/>
           <menuitem id="menu_reporting_dashboard" name="Dashboards" parent="menu_board_root" sequence="0"/>
           <menuitem id="menu_reporting_config" name="Configuration" parent="menu_board_root" sequence="100" groups="base.group_system"/>
-          <!--add by youshinan-->
-          <menuitem name="Protal_Menu" id="menu_protal" sequence="500" groups="base.user_admin,base.group_operator" />
-              <menuitem name="Sub_Protal_Menu" id="sub_menu_protal" sequence="500" groups="base.user_admin,base.group_operator" parent="menu_protal"/>
-
 
       <!-- Top menu item -->
       <menuitem name="Settings"
