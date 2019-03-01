@@ -6941,18 +6941,14 @@ msgid "Account Holder Name"
 msgstr "名義人"
 
 #. module: base
-#: model:ir.model.fields,field_description:base.field_res_partner_bank__branch_name
-#: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
-#: model_terms:ir.ui.view,arch_db:base.view_partner_bank_tree
-msgid "Branch Name"
-msgstr "支店名"
-
-#. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__branch_code
-#: model_terms:ir.ui.view,arch_db:base.view_partner_bank_form
-#: model_terms:ir.ui.view,arch_db:base.view_partner_bank_tree
 msgid "Branch Code"
 msgstr "支店番号"
+
+#. module: base
+#: model:ir.model.fields,field_description:base.field_res_partner_bank__branch_name
+msgid "Branch Name"
+msgstr "支店名"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_invoice_extract
