@@ -1050,6 +1050,38 @@ class OpenERPSession(werkzeug.contrib.sessions.Session):
         if uid: self.get_context()
         return uid
 
+    def authenticate_by_user_barcode(self, db, user_barcode=None, uid=None):
+        """
+        Authenticate the current user with the given db, login and
+        password. If successful, store the authentication parameters in the
+        current session and request.
+
+        :param uid: If not None, that user id will be used instead the login
+                    to authenticate the user.
+        """
+
+        if uid is None:
+            wsgienv = request.httprequest.environ
+            env = dict(
+                base_location=request.httprequest.url_root.rstrip('/'),
+                HTTP_HOST=wsgienv['HTTP_HOST'],
+                REMOTE_ADDR=wsgienv['REMOTE_ADDR'],
+            )
+            uid = odoo.registry(db)['res.users'].authenticate_by_user_barcode(db, user_barcode, env)
+        else:
+            pass
+            #security.check(db, uid, password)
+        self.rotate = True
+        self.db = db
+        self.uid = uid
+        #self.login = login
+        self.session_token = uid and security.compute_session_token(self, request.env)
+        request.uid = uid
+        request.disable_db = False
+
+        if uid: self.get_context()
+        return uid
+
     def check_security(self):
         """
         Check the current authentication parameters to know if those are still
