@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_production_list" name="Product Production List">
+        <t t-call="web.html_container">
+            <script>
+                function myFunction(){
+                alert(222);
+
+                var tbody = document.createElement("tbody");
+                var tr = document.createElement("tr");
+                var td = document.createElement("td");
+                td.innerHTML = "&lt;td>001 &lt;/td>";
+                tr.appendChild(td);
+                var td2 = document.createElement("td");
+                td2.innerHTML = "&lt;td>1&lt;/td> ";
+                tr.appendChild(td2);
+                var td3 = document.createElement("td");
+                td3.innerHTML = "&lt;td>new remark&lt;/td>";
+                tr.appendChild(td3);
+                tbody.appendChild(tr);
+                var parNode = document.getElementById("tbody_production");
+                parNode.appendChild(tbody);
+                }
+            </script>
+            <div class="container">
+                <h1>入庫作業</h1>
+                <p>1:スキャンしたバーコードを表示します｡</p>
+                <p>2:作業完了後､入庫ボタンを押してください</p>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Barcode</th>
+                            <th>Product Status</th>
+                            <th>Remark</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_production">
+                        <t t-foreach="pps" t-as="o">
+                            <tr>
+                                <td><span t-field="o.serial_no" /></td>
+                                <td><span t-field="o.stock_status" /></td>
+                                <td><span t-field="o.remark" /></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <form>
+
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="スキャンしたバーコード" onchange="myFunction()"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg active">Warehousing</button>
+                </form>
+            </div>
+        </t>
+    </template>
+
+    <template id="product_production_warehousing" name="Product Production Warehousing">
+        <div id="wrap" class="container">
+            <h1>生産情報一覧</h1>
+            <t t-foreach="pps" t-as="pp">
+                <div class="row">
+                    <span t-field="pp.name" />,
+                    <span t-field="pp.serial_no" />,
+                    <span t-field="pp.stock_status" />,
+                    <span t-field="pp.product_status" />
+                </div>
+            </t>
+        </div>
+    </template>
+</odoo>

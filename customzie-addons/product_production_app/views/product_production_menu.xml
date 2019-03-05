@@ -1,51 +1,68 @@
 <?xml version="1.0"?>
 <odoo>
     <!-- Product Production App Menu -->
-    <menuitem id="menu_production" name="生産情報"/>
+    <menuitem id="menu_production" name="Product Production"/>
     <!-- Action to open the Product Production list -->
     <act_window id="action_product_production" 
-            name="生産情報" 
+            name="Product Production"
             res_model="product.production" 
             view_mode="tree,form" />
     <!--バッチ入庫作業action-->
     <act_window id="action_product_production_batch" 
-            name="バッチ入庫作業"
+            name="Bulk Warehousing"
             view_id="product_production_input_batch_view"
             res_model="product.production" 
             target="new"
             view_mode="form" />
     <!--個別入庫作業action-->
     <act_window id="action_product_production_individual" 
-            name="個別入庫作業"
+            name="Warehousing"
             view_id="product_production_input_individual_view"
             res_model="product.production" 
             target="new"
-            view_mode="form" />
+            view_mode="tree" />
     <!--清掃action-->
     <act_window id="action_product_production_clean" 
-            name="清掃作業"
+            name="Clean"
             view_id="product_production_clean_view"
+            res_model="product.production" 
+            target="new"
+            view_mode="form" />
+    <!--出荷action-->
+    <act_window id="action_product_production_ship" 
+            name="Shipment"
+            view_id="product_production_ship_view"
             res_model="product.production" 
             target="new"
             view_mode="form" />
     <!--製品一覧menu-->
     <menuitem id="menu_product_production" 
-            name="製品一覧" 
+            name="Production List"
             parent="menu_production"
             action="action_product_production" />
-    <!--バッチ入庫作業menu-->
-    <menuitem id="menu_product_productio_batch"
-            name="バッチ入庫作業画面"
+    <!--一括入庫作業menu-->
+    <menuitem id="menu_product_production_batch"
+            name="Bulk Warehousing"
             parent="menu_production"
             action="action_product_production_batch" />
     <!--個別入庫作業menu-->
-    <menuitem id="menu_product_productio_individual"
-            name="個別入庫作業画面"
+    <menuitem id="menu_product_production_individual"
+            name="Warehousing"
+            parent="menu_production"
+            action="action_product_production_individual" />
+    <!--個別入庫作業-->
+    <menuitem id="menu_product_production_problem"
+            name="Warehousing View(Problem)"
             parent="menu_production"
             action="action_product_production_individual" />
     <!--清掃作業menu-->
-    <menuitem id="menu_product_productio_clean"
-            name="清掃作業画面"
+    <menuitem id="menu_product_production_clean"
+            name="Clean"
             parent="menu_production"
             action="action_product_production_clean" />
+    <!--出荷作業menu-->
+    <menuitem id="menu_product_production_ship"
+            name="Shipment"
+            parent="menu_production"
+            action="action_product_production_ship" />
 </odoo>
