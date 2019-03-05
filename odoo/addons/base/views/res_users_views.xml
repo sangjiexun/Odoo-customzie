@@ -191,6 +191,8 @@
                             <field name="email" invisible="1"/>
                             <label for="login" class="oe_edit_only" string="Email Address"/>
                             <h2><field name="login"/></h2>
+                            <label for="user_barcode" class="oe_edit_only" string="User Barcode" />
+                            <h2><field name="user_barcode" readonly="1" /></h2>
                             <group>
                                 <field name="partner_id" readonly="1" required="0" groups="base.group_no_one"
                                         attrs="{'invisible': [('id', '=', False)]}"/>
@@ -233,7 +235,8 @@
                 <tree string="Users">
                     <field name="name"/>
                     <field name="login"/>
-                    <field name="lang"/>
+                    <field name="user_barcode"/>
+                    <field name="create_date"/>
                     <field name="login_date"/>
                 </tree>
             </field>
