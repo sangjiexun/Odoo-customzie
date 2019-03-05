@@ -437,7 +437,7 @@
 
                 <script type="text/javascript">
                    function myFunction(){
-                        var x=document.getElementById("x_user_barcode").value;
+                        var x=document.getElementById("user_barcode").value;
                         if(x.length == 9){
                             document.getElementById("login_btn").click();
                         }
@@ -445,8 +445,8 @@
                 </script>
 
                 <div class="form-group field-login">
-                    <label for="x_user_barcode">User Barcode</label>
-                    <input type="text" placeholder="User Barcode" name="x_user_barcode" t-att-value="x_user_barcode" id="x_user_barcode" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off" oninput="myFunction()"/>
+                    <label for="user_barcode">User Barcode</label>
+                    <input type="text" placeholder="User Barcode" name="user_barcode" t-att-value="user_barcode" id="user_barcode" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off" oninput="myFunction()"/>
                 </div>
 
                 <p class="alert alert-danger" t-if="error" role="alert">

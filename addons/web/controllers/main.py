@@ -536,7 +536,7 @@ class Home(http.Controller):
         if request.httprequest.method == 'POST':
             old_uid = request.uid
             try:
-                uid = request.session.authenticate_by_user_barcode(request.session.db, request.params['x_user_barcode'])
+                uid = request.session.authenticate_by_user_barcode(request.session.db, request.params['user_barcode'])
                 request.params['login_success'] = True
                 return http.redirect_with_hash(self._login_redirect(uid, redirect=redirect))
             except odoo.exceptions.AccessDenied as e:
