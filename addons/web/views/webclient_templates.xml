@@ -358,7 +358,6 @@
                 <t t-call-assets="web.assets_frontend" t-css="false"/>
             </t>
             <t t-set="body_classname" t-value="'bg-100'"/>
-
             <div class="container mb-5 pb-5">
                 <div t-attf-class="card border-0 mx-auto mt-5 bg-100 {{login_card_classes}} o_database_list" style="max-width: 300px;">
                     <div class="card-body">
@@ -366,9 +365,6 @@
                             <img t-attf-src="/web/binary/company_logo{{ '?dbname='+db if db else '' }}" alt="Logo" style="max-height:120px; max-width: 100%; width:auto"/>
                         </div>
                         <t t-raw="0"/>
-                        <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
-                            <a href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" target="_blank">Powered by <span>Odoo</span></a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -414,9 +410,11 @@
                     </t>
                     <div class="o_login_auth"/>
                 </div>
-
                 <input type="hidden" name="redirect" t-att-value="redirect"/>
             </form>
+            <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+                <a href="/web/barcode_login" target="_self">Login by <span>Barcode</span></a>
+            </div>
         </t>
     </template>
 
@@ -436,7 +434,7 @@
                 </div>
 
                 <script type="text/javascript">
-                   function myFunction(){
+                   function autoLogin(){
                         var x=document.getElementById("user_barcode").value;
                         if(x.length == 9){
                             document.getElementById("login_btn").click();
@@ -446,7 +444,7 @@
 
                 <div class="form-group field-login">
                     <label for="user_barcode">User Barcode</label>
-                    <input type="text" placeholder="User Barcode" name="user_barcode" t-att-value="user_barcode" id="user_barcode" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off" oninput="myFunction()"/>
+                    <input type="text" placeholder="User Barcode" name="user_barcode" t-att-value="user_barcode" id="user_barcode" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off" oninput="autoLogin()"/>
                 </div>
 
                 <p class="alert alert-danger" t-if="error" role="alert">
@@ -463,9 +461,11 @@
                     </t>
                     <div class="o_login_auth"/>
                 </div>
-
                 <input type="hidden" name="redirect" t-att-value="redirect"/>
             </form>
+            <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+                <a href="/web/login" target="_self">Login by <span>Email and Password</span></a>
+            </div>
         </t>
     </template>
 
