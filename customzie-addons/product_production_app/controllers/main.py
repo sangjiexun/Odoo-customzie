@@ -17,3 +17,9 @@ class ProductProduction(http.Controller):
         pp = http.request.env['product.production']
         pps = pp.search([])
         return http.request.render('product_production_app.product_production_warehousing', {'pps': pps})
+    # 一括入庫画面
+    @http.route('/production/bulkwarehousing', auth='user')
+    def warehousing(self, **kwargs):
+        pp = http.request.env['product.production']
+        pps = pp.search([])
+        return http.request.render('product_production_app.product_production_bulk_warehousing', {'pps': pps})

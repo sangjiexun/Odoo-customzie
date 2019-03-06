@@ -17,10 +17,10 @@
     <!--個別入庫作業action-->
     <act_window id="action_product_production_individual" 
             name="Warehousing"
-            view_id="product_production_input_individual_view"
+            view_id="product_production_warehousing"
             res_model="product.production" 
             target="new"
-            view_mode="tree" />
+            view_mode="form" />
     <!--清掃action-->
     <act_window id="action_product_production_clean" 
             name="Clean"
