@@ -464,7 +464,7 @@
 
                 <div class="form-group field-login">
                     <label for="user_barcode">User Barcode</label>
-                    <input type="password" placeholder="User Barcode" name="user_barcode" t-att-value="user_barcode" id="user_barcode" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off" oninput="autoLogin()"/>
+                    <input type="password" placeholder="User Barcode" name="user_barcode" t-att-value="user_barcode" id="user_barcode" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" autofocus="autofocus" autocapitalize="off" oninput="autoLogin()" onfocus="this.select();"/>
                 </div>
 
                 <p class="alert alert-danger" t-if="error" role="alert">
