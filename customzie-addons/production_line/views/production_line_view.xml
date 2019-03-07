@@ -1,0 +1,129 @@
+<?xml version="1.0"?> 
+<odoo>
+    <record id="view_production_form" model="ir.ui.view">
+    	<field name="name">production.line.form</field>
+		<field name="model">production.line</field>
+		<field name="arch" type="xml">
+        <form string="production_line">
+	        <header>
+		        <button name="button_print" type="object" string="print barcode" />
+	        </header>
+	        <sheet>
+		        <group name="group_top">
+			        <group name="group_left">
+    	                <field name="name" />
+	  		            <field name="barcode"/>
+			            <field name="product_no" />
+                        <field name="purchase_order_name" />
+			        </group>
+			        <group name="group_right">
+		                <field name="repair_order_name" />
+		                <field name="sale_order_name" />
+				        <field name="stock_status"/>
+				        <field name="product_status"/>
+                    </group>
+                </group>
+                <group name="group_under">
+                    <field name="remark" />
+		        </group>
+	        </sheet>
+        </form>
+		</field>
+    </record>
+    <record id="view_tree_product_production" model="ir.ui.view">
+        <field name="name">製品一覧</field>
+        <field name="model">product.production</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="name"/>
+                <field name="barcode"/>  
+                <field name="product_no"/>  
+                <field name="purchase_order_name"/>  
+                <field name="repair_order_name"/>  
+                <field name="sale_order_name"/>  
+                <field name="serial_no"/>  
+                <field name="stock_status"/>  
+                <field name="stock_status_child"/>
+                <field name="product_status"/>
+                <field name="remark"/>
+            </tree>
+        </field>
+    </record>
+    <record id="product_production_clean_view" model="ir.ui.view">
+        <field name="name">製品清掃</field>
+        <field name="model">product.production</field>
+        <!--<field name="priority">15</field>-->
+        <field name="arch" type="xml">
+        <form string="product_production">
+            <header>
+              <!--<button name="button_input_individual" type="object" string="入庫" />-->
+            </header>
+            <sheet>
+                <notebook>
+                    <page string="スキャンしたバーコード" name="barcode_lines">
+                            <tree>
+                                <field name="barcode" />
+                            </tree>
+                            <!-- <field name="product_no" />-->
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+        </field>
+    </record>
+    <record id="product_production_input_batch_view" model="ir.ui.view">
+        <field name="name">製品一括入庫</field>
+        <field name="model">product.production</field>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+        <form string="product_production">
+            <header>
+                    <!--<button name="button_input_individual" type="object" string="入庫" />-->
+            </header>
+            <sheet>
+                <group name="group_left">
+                    <field name="barcode" string="スキャン開始バーコード"/>
+                </group>
+                <group name="group_right">
+                    <field name="barcode" string="スキャン完了バーコード"/>
+                </group>
+            </sheet>
+        </form>
+        </field>
+    </record>
+    <record id="product_production_input_individual_view" model="ir.ui.view">
+        <field name="name">製品個別入庫</field>
+        <field name="model">product.production</field>
+        <!--<field name="priority">15</field>-->
+        <field name="arch" type="xml">
+            <tree editable="bottom" string="スキャンしたバーコード一覧">
+                 <field name="product_no" />
+                 <field name="barcode" />
+                 <field name="product_status" />
+                 <field name="remark" />
+             </tree>
+        </field>
+    </record>
+    <record id="product_production_ship_view" model="ir.ui.view">
+        <field name="name">製品出荷</field>
+        <field name="model">product.production</field>
+        <!--<field name="priority">15</field>-->
+        <field name="arch" type="xml">
+        <form string="product_production">
+            <header>
+              <!--<button name="button_input_individual" type="object" string="入庫" />-->
+            </header>
+            <sheet>
+                <notebook>
+                    <page string="スキャンしたバーコード" name="barcode_lines">
+                            <tree>
+                                <field name="barcode" />
+                            </tree>
+                            <!-- <field name="product_no" />-->
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+        </field>
+    </record>
+</odoo>

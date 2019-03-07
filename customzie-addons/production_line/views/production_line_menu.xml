@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- Production App Menu -->
+    <menuitem id="menu_production" name="Production"/>
+    <!-- Action to open the Production Line list -->
+    <act_window id="action_production_line"
+            name="Production Line"
+            res_model="production.line"
+            view_mode="tree,form,kanban" />
+    <!--batch_action-->
+    <act_window id="action_production_batch"
+            name="Bulk Warehousing"
+            view_id="production_batch"
+            res_model="production.line"
+            target="new"
+            view_mode="form" />
+    <!--individual_action-->
+    <act_window id="action_production_individual"
+            name="Warehousing"
+            view_id="production_warehousing"
+            res_model="production.line"
+            target="new"
+            view_mode="form" />
+    <!--clean_action-->
+    <act_window id="action_production_clean"
+            name="Clean"
+            view_id="production_clean"
+            res_model="production.line"
+            target="new"
+            view_mode="form" />
+    <!--ship_action-->
+    <act_window id="action_production_ship"
+            name="Shipment"
+            view_id="production_ship"
+            res_model="production.line"
+            target="new"
+            view_mode="form" />
+    <!--production_menu-->
+    <menuitem id="menu_production_line"
+            name="Production List"
+            parent="menu_production"
+            action="action_production_line" />
+    <!--batch_menu-->
+    <menuitem id="menu_production_batch"
+            name="Bulk Warehousing"
+            parent="menu_production"
+            action="action_production_batch" />
+    <!--individual_menu-->
+    <menuitem id="menu_production_individual"
+            name="Warehousing"
+            parent="menu_production"
+            action="action_production_individual" />
+    <!--clean_menu-->
+    <menuitem id="menu_production_clean"
+            name="Clean"
+            parent="menu_production"
+            action="action_production_clean" />
+    <!--ship_menu-->
+    <menuitem id="menu_production_ship"
+            name="Shipment"
+            parent="menu_production"
+            action="action_production_ship" />
+</odoo>
