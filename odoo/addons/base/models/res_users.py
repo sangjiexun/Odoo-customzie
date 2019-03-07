@@ -8,6 +8,8 @@ import ipaddress
 import itertools
 import logging
 import hmac
+import random
+import string
 
 from collections import defaultdict
 from hashlib import sha256
@@ -434,10 +436,12 @@ class Users(models.Model):
 
     @api.model
     def _get_next_user_barcode(self):
-        result_ids = self.with_context(active_test=False).search([('user_barcode', '!=', False)], order="user_barcode desc", limit=1)
-        if result_ids:
-            return str(int(result_ids.user_barcode) + 1)
-        return "100000001"
+        while True:
+            random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=9))
+            result = self.with_context(active_test=False).search([('user_barcode', '=', random_str)], limit=1)
+            if not result:
+                break
+        return  random_str
 
     @api.multi
     def write(self, values):
