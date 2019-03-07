@@ -441,7 +441,7 @@ class Users(models.Model):
             result = self.with_context(active_test=False).search([('user_barcode', '=', random_str)], limit=1)
             if not result:
                 break
-        return  random_str
+        return random_str
 
     @api.multi
     def write(self, values):
