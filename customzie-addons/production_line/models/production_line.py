@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -*-
-from odoo import api,fields, models
+from odoo import api, fields, models
 from odoo.exceptions import Warning
 
 class ProductionLine(models.Model):
 
     _name = 'production.line'
     _description = 'Production Line'
+    _order = 'id'
 
-    barcode = fields.Char('barcode', size=13, readonly=True)
+    barcode = fields.Char('barcode', compute='_compute_barcode')
     product_no = fields.Char('Product No', readonly=True)
-    serial_no  = fields.Char('Serial No', readonly=True)
+    product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
+    product_no = fields.Many2one('product.product', 'Product No', related='product_id.product_no', index=True, readonly=True)
+
+    serial_no = fields.Char('Serial No', compute='_compute_serial')
 
     name = fields.Char('Name')
     purchase_order_line  = fields.Char('Purchase Order Name',readonly=True)
@@ -24,6 +28,21 @@ class ProductionLine(models.Model):
         ('3', '瑕疵品(その他)'),
     ], default='0', string='Product Status')
     remark  = fields.Text('Remark') #備考 メモ
+
+
+    @api.one
+    def _compute_barcode(self):
+        self.barcode = self.product_no + self.serial_no
+
+    @api.one
+    def _compute_serial(self):
+        self.serial_no = "0000001"
+
+
+
+
+
+
     #scan_barcode event
     def onchange_scan_barcode(self):
         return True
