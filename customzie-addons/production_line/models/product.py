@@ -11,3 +11,4 @@ class ProductProduct(models.Model):
     @api.one
     def _compute_product_no(self):
         self.code = "123456"
+
