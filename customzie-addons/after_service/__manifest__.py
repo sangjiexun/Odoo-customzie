@@ -6,8 +6,12 @@
     'category': '',
     'depends': ['base', 'sale', 'stock', 'production_line'],
     'application': True,
+    'license': 'LGPL-3',
     'data': [
         'views/after_service_views.xml',
         'views/after_service_templates.xml',
+        'security/after_service_security.xml',
+        'security/ir.model.access.csv',
+
     ],
 }

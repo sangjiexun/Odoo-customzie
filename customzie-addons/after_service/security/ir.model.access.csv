@@ -1,2 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_after_service_after_service,after_service.after_service,model_after_service_after_service,,1,0,0,0
+access_after_service_user,AfterServiceUser,model_after_service,after_service_group_user,1,1,1,0
+access_after_service_manager,AfterServiceManager,model_after_service,after_service_group_manager,1,1,1,1
+access_treatment_book_user,AfterServiceUser,model_treatment_book,after_service_group_user,1,0,0,0
+access_treatment_book_manager,AfterServiceManager,model_treatment_book,after_service_group_manager,1,1,1,1

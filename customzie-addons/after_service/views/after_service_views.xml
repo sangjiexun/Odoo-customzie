@@ -1,61 +1,146 @@
 <?xml version="1.0"?>
 <odoo>
-  <!--data-->
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="after_service.list">
-      <field name="name">after_service list</field>
-      <field name="model">after_service.after_service</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-    -->
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="after_service.action_window">
-      <field name="name">after_service window</field>
-      <field name="res_model">after_service.after_service</field>
-      <field name="view_mode">tree,form</field>
+    <record id="after_service_form_view" model="ir.ui.view">
+        <field name="name">after.service.form</field>
+        <field name="model">after.service</field>
+        <field name="arch" type="xml">
+            <form string="After Service" class="o_after_service">
+            <header>
+                <!--field name="state" widget="statusbar" statusbar_visible="draft"/-->
+            </header>
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name" />
+                        <field name="order_id" />
+                    </group>
+                    <group>
+                        <field name="barcode" />
+                        <field name="treatment_book_id" />
+                    </group>
+                </group>
+                <field name="treatment_remark" ref="treatment.book.treatment_book"/>
+            </sheet>>
+            </form>
+        </field>
     </record>
-    -->
 
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="after_service.action_server">
-      <field name="name">after_service server</field>
-      <field name="model_id" ref="model_after_service_after_service"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
+    <record id="after_service_tree_view" model="ir.ui.view">
+        <field name="name">after.service.tree</field>
+        <field name="model">after.service</field>
+        <field name="arch" type="xml">
+            <tree string="After Service" class="o_after_service">
+                <field name="name" />
+                <field name="order_id" />
+                <field name="barcode" />
+                <field name="treatment_book_id" />
+            </tree>
+        </field>
     </record>
-    -->
+
+    <record id="treatment_book_form_view" model="ir.ui.view">
+        <field name="name">treatment.book.form</field>
+        <field name="model">treatment.book</field>
+        <field name="arch" type="xml">
+            <form string="Treatment Book" class="o_treatment_book">
+            <header>
+                <!--field name="state" widget="statusbar" statusbar_visible="draft"/-->
+            </header>
+            <sheet>
+                <field name="name" />
+                <field name="treatment_book" />
+            </sheet>>
+            </form>
+        </field>
+    </record>
+
+    <record id="treatment_book_tree_view" model="ir.ui.view">
+        <field name="name">treatment.book.tree</field>
+        <field name="model">treatment.book</field>
+        <field name="arch" type="xml">
+            <tree string="Treatment Book" class="o_treatment_book">
+                <field name="name" />
+                <field name="treatment_book" />
+            </tree>
+        </field>
+    </record>
+
+     <!--record id="view_after_service_filter" model="ir.ui.view">
+        <field name="name">after.service.list.select</field>
+        <field name="model">after.service</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search After Service">
+                <field name="name" string="After Service" filter_domain="['|','|',('name','ilike',self)]"/>
+                <field name="order_id"/>
+                <field name="barcode"/>
+                <field name="treatment_book_id"/>
+                <field name="treatment_remark"/>
+           </search>
+        </field>
+    </record>
+
+    <record id="after_service_view_search" model="ir.ui.view">
+        <field name="name">after.service.search</field>
+        <field name="model">after.service</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="after.service.view_after_service_filter"/>
+        <field name="arch" type="xml">
+        </field>
+    </record-->
+
+    <!-- Action to open the after service -->
+    <record id="action_after_service" model="ir.actions.act_window">
+        <field name="name">After Service</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">after.service</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <!--field name="view_id" ref="after.service.after_service_form_view"/>
+        <field name="search_view_id" ref="after.service.after_service_view_search"/-->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new after service
+            </p>
+        </field>
+    </record>
+
+    <!-- Action to open the treatment book -->
+    <record id="action_treatment_book" model="ir.actions.act_window">
+        <field name="name">Treatment Book</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">treatment.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <!--field name="view_id" ref="after.service.after_service_form_view"/>
+        <field name="search_view_id" ref="after.service.after_service_view_search"/-->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new treatment
+            </p>
+        </field>
+    </record>
+
 
     <!-- Top menu item -->
-    <!--
-    <menuitem name="after_service" id="after_service.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="after_service.menu_1" parent="after_service.menu_root"/>
-    <menuitem name="Menu 2" id="after_service.menu_2" parent="after_service.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="after_service.menu_1_list" parent="after_service.menu_1"
-              action="after_service.action_window"/>
-    <menuitem name="Server to list" id="after_service" parent="after_service.menu_2"
-              action="after_service.action_server"/>
-    -->
-  <!--/data-->
+    <menuitem id="after_service_menu_root"
+        name="After Service"
+        web_icon="after_service,static/description/icon.png"
+        groups="after_service_group_user"
+        sequence="7"/>
+
+    <menuitem id="menu_after_service"
+        name="After Service"
+        parent="after_service_menu_root"
+        action="action_after_service"
+        groups="after_service_group_user"
+        sequence="2"/>
+
+    <menuitem id="menu_treatment_book"
+        name="Treatment Book"
+        parent="after_service_menu_root"
+        action="action_treatment_book"
+        groups="after_service_group_user"
+        sequence="3"/>
 </odoo>

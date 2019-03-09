@@ -34,7 +34,7 @@ class ProductionLine(models.Model):
 
     # after service
     after_service_id = fields.Many2one('after.service', string='After Service', ondelete='cascade', index=True, copy=False, readonly=True)
-    treatment_type_id = fields.Many2one('treatment.book', related='after_service_id', store=True, string='Treatment Id', readonly=True)
+    # treatment_type_id = fields.Many2one('treatment.book', related='after_service_id', store=True, string='Treatment Id', readonly=True)
 
     @api.depends('purchase_product_no', 'serial_no')
     def _compute_barcode(self):
