@@ -1,6 +1,6 @@
 <?xml version="1.0"?> 
 <odoo>
-    <record id="view_production_form" model="ir.ui.view">
+    <!--record id="view_production_form" model="ir.ui.view">
     	<field name="name">production.line.form</field>
 		<field name="model">production.line</field>
 		<field name="arch" type="xml">
@@ -52,11 +52,9 @@
     <record id="product_production_clean_view" model="ir.ui.view">
         <field name="name">製品清掃</field>
         <field name="model">product.production</field>
-        <!--<field name="priority">15</field>-->
         <field name="arch" type="xml">
         <form string="product_production">
             <header>
-              <!--<button name="button_input_individual" type="object" string="入庫" />-->
             </header>
             <sheet>
                 <notebook>
@@ -64,7 +62,6 @@
                             <tree>
                                 <field name="barcode" />
                             </tree>
-                            <!-- <field name="product_no" />-->
                     </page>
                 </notebook>
             </sheet>
@@ -78,7 +75,6 @@
         <field name="arch" type="xml">
         <form string="product_production">
             <header>
-                    <!--<button name="button_input_individual" type="object" string="入庫" />-->
             </header>
             <sheet>
                 <group name="group_left">
@@ -94,7 +90,6 @@
     <record id="product_production_input_individual_view" model="ir.ui.view">
         <field name="name">製品個別入庫</field>
         <field name="model">product.production</field>
-        <!--<field name="priority">15</field>-->
         <field name="arch" type="xml">
             <tree editable="bottom" string="スキャンしたバーコード一覧">
                  <field name="product_no" />
@@ -107,11 +102,9 @@
     <record id="product_production_ship_view" model="ir.ui.view">
         <field name="name">製品出荷</field>
         <field name="model">product.production</field>
-        <!--<field name="priority">15</field>-->
         <field name="arch" type="xml">
         <form string="product_production">
             <header>
-              <!--<button name="button_input_individual" type="object" string="入庫" />-->
             </header>
             <sheet>
                 <notebook>
@@ -119,11 +112,10 @@
                             <tree>
                                 <field name="barcode" />
                             </tree>
-                            <!-- <field name="product_no" />-->
                     </page>
                 </notebook>
             </sheet>
         </form>
         </field>
-    </record>
+    </record-->
 </odoo>

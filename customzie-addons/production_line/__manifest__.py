@@ -1,15 +1,13 @@
+# -*- coding: utf-8 -*-
+
 {
     'name': "Production Line",
     'description': "Production Line",
-
-    'author': "YUAN CHUANG",
-    #'category': 'Uncategorized',
-    'version': '12.0.0.1',
-
+    'version': '12.0.1.0',
+    'category': '',
     # any module necessary for this one to work correctly
-    'depends': ['base,product'],
+    'depends': ['base', 'product', 'stock', 'sale', 'purchase'],
     'application': True,
-    'license': 'LGPL-3',
     'data': [
         'views/production_line_view.xml',
         'views/production_line_menu.xml',

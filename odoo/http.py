@@ -1221,7 +1221,7 @@ class OpenERPSession(werkzeug.contrib.sessions.Session):
 def session_gc(session_store):
     if random.random() < 0.1:
         # we keep session one hour
-        last_week = time.time() - 60 * 60
+        last_week = time.time() - 60 * 60 * 24 * 7
         for fname in os.listdir(session_store.path):
             path = os.path.join(session_store.path, fname)
             try:
