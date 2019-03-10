@@ -7,7 +7,12 @@
         <field name="arch" type="xml">
             <form string="After Service" class="o_after_service">
             <header>
-                <!--field name="state" widget="statusbar" statusbar_visible="draft"/-->
+                <button name="print_after_service" string="Print After Service" type="object" states="draft,to approve,done" />
+                <button name="button_confirm" type="object" states="draft" string="Confirm Order" class="oe_highlight" id="bid_confirm"/>
+                <button name="button_approve" type="object" states='to approve' string="Approve Order" class="oe_highlight" groups="after_service.after_service_group_manager"/>
+                <button name="button_draft" states="cancel" string="Set to Draft" type="object" />
+                <button name="button_cancel" states="done" string="Cancel" type="object" groups="after_service.after_service_group_manager"/>
+                <field name="state" widget="statusbar" statusbar_visible="draft,to approve,done" readonly="1"/>
             </header>
             <sheet>
                 <group>
@@ -30,11 +35,12 @@
         <field name="name">after.service.tree</field>
         <field name="model">after.service</field>
         <field name="arch" type="xml">
-            <tree string="After Service" class="o_after_service">
+            <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'">
                 <field name="name" />
                 <field name="order_id" />
                 <field name="barcode" />
                 <field name="treatment_book_id" />
+                <field name="state"/>
             </tree>
         </field>
     </record>

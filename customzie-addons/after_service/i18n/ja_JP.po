@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* after_service
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-09 18:05+0000\n"
+"PO-Revision-Date: 2019-03-09 18:05+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: after_service
+#: model:ir.actions.act_window,name:after_service.action_after_service
+#: model:ir.model,name:after_service.model_after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__name
+#: model:ir.module.category,name:after_service.module_after_service_category
+#: model:ir.ui.menu,name:after_service.after_service_menu_root
+#: model:ir.ui.menu,name:after_service.menu_after_service
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_tree_view
+msgid "After Service"
+msgstr "アフターサービス"
+
+#. module: after_service
+#: model:res.groups,name:after_service.after_service_group_manager
+msgid "After Service Manager"
+msgstr ""
+
+#. module: after_service
+#: model:res.groups,name:after_service.after_service_group_user
+msgid "After Service User"
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__barcode
+msgid "Barcode"
+msgstr "バーコード"
+
+#. module: after_service
+#: model_terms:ir.actions.act_window,help:after_service.action_after_service
+msgid "Create a new after service"
+msgstr ""
+
+#. module: after_service
+#: model_terms:ir.actions.act_window,help:after_service.action_treatment_book
+msgid "Create a new treatment"
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__create_uid
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__create_date
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__display_name
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__id
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__id
+msgid "ID"
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service____last_update
+#: model:ir.model.fields,field_description:after_service.field_treatment_book____last_update
+msgid "Last Modified on"
+msgstr "最終更新日"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__write_uid
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__write_date
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__order_id
+msgid "Sale Order"
+msgstr "販売オーダ"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__name
+msgid "Treatment"
+msgstr "処置名"
+
+#. module: after_service
+#: model:ir.actions.act_window,name:after_service.action_treatment_book
+#: model:ir.model,name:after_service.model_treatment_book
+#: model:ir.model.fields,field_description:after_service.field_treatment_book__treatment_book
+#: model:ir.ui.menu,name:after_service.menu_treatment_book
+#: model_terms:ir.ui.view,arch_db:after_service.treatment_book_form_view
+#: model_terms:ir.ui.view,arch_db:after_service.treatment_book_tree_view
+msgid "Treatment Book"
+msgstr "処置書"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__treatment_remark
+msgid "Treatment Remark"
+msgstr "処置備考"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__treatment_book_id
+msgid "Treatment Type"
+msgstr "処置分類"
+
+#. module: after_service
+#: model:treatment.book,name:after_service.treatment_book_exchange
+msgid "exchange"
+msgstr "交換"
+
+#. module: after_service
+#: model:treatment.book,name:after_service.treatment_book_repair
+msgid "repair"
+msgstr "修理"
+
+#. module: after_service
+#: model:treatment.book,name:after_service.treatment_book_return
+msgid "return"
+msgstr "返品"
+
+#. module: after_service
+#: model:treatment.book,name:after_service.treatment_book_treat
+msgid "treat"
+msgstr "処置"
+
