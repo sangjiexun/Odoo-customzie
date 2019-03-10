@@ -14,26 +14,46 @@ class ProductionLine(models.Model):
     serial_no = fields.Char('Serial No', compute='_compute_serial', store=True)
 
     # Purchase
-    purchase_order_line_id = fields.Many2one('purchase.order.line', string='Purchase Reference', required=True, ondelete='cascade', index=True, copy=False, readonly=True)
-    purchase_order_id = fields.Many2one(related='purchase_order_line_id.order_id', store=True, string='Purchase Order', readonly=True)
-    purchase_partner_id = fields.Many2one('res.partner', related='purchase_order_id.partner_id', store=True, string='Supplier', readonly=True)
-    purchase_move_ids = fields.Many2one('stock.move', related='purchase_order_line_id', store=True, string='Purchase Move', readonly=True)
-    purchase_product_id = fields.Many2one(related='purchase_order_line_id.product_id', store=True, string='Purchase Product', readonly=True)
-    purchase_product_no = fields.Many2one('product.product', related='purchase_product_id', store=True, string='Purchase Product No', readonly=True)
-
+    purchase_order_line_id = fields.Many2one(
+        'purchase.order.line', string='Purchase Reference',
+        required=True, ondelete='cascade', index=True, copy=False, readonly=True)
+    purchase_order_id = fields.Many2one(
+        'purchase.order.line', string='Purchase Order',
+        readonly=True, related='purchase_order_line_id.order_id')
+    purchase_partner_id = fields.Many2one(
+        'res.partner',  string='Supplier',
+        readonly=True, related='purchase_order_id.partner_id')
     # Sale
-    sale_order_line_id = fields.Many2one('sale.order.line', string='Sale Reference', ondelete='cascade', index=True, copy=False, readonly=True)
-    sale_order_id = fields.Many2one(related='sale_order_line_id.order_id', store=True, string='Sale Order', readonly=True)
-    sale_partner_id = fields.Many2one('res.partner', related='sale_order_id.partner_id', store=True, string='Customer', readonly=True)
-    sale_move_ids = fields.Many2one('stock.move', related='sale_order_line_id', store=True, string='Sale_Move', readonly=True)
-    sale_product_id = fields.Many2one(related='sale_order_line_id.product_id', store=True, string='Order Product', readonly=True)
-    sale_product_no = fields.Many2one('product.product', related='sale_product_id', store=True, string='Sale Product No', readonly=True)
+    sale_order_line_id = fields.Many2one(
+        'sale.order.line', string='Sale Reference', ondelete='cascade',
+        index=True, copy=False, readonly=True)
+    sale_order_id = fields.Many2one(
+        'sale.order.line', string='Sale Order',
+        readonly=True, related='sale_order_line_id.order_id')
+    sale_partner_id = fields.Many2one(
+        'res.partner', string='Customer',
+        readonly=True, related='sale_order_id.order_partner_id')
+
+    product_id = fields.Many2one(
+        'product.product', string='Product',
+        readonly=True, related='purchase_order_line_id.product_id')
+    product_no = fields.Many2one(
+        'product.product', string='Product No',
+        readonly=True, related='product_id.product_no', store=True)
+
+    stock_picking__id = fields.Many2one(
+        'stock.picking', string='Stock Picking',
+        readonly=True, store=True)
+
+
     is_clean = fields.Boolean(default=False, readonly=True)
     is_defect = fields.Boolean(default=False, readonly=True)
     defect_remark = fields.Text('Defect Remark')
 
     # after service
-    after_service_id = fields.Many2one('after.service', string='After Service', ondelete='cascade', index=True, copy=False, readonly=True)
+    after_service_id = fields.Many2one(
+        'after.service', string='After Service',
+        ondelete='cascade', index=True, copy=False, readonly=True)
     # treatment_type_id = fields.Many2one('treatment.book', related='after_service_id', store=True, string='Treatment Id', readonly=True)
 
     @api.depends('purchase_product_no', 'serial_no')
