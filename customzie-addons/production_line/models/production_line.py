@@ -2,18 +2,26 @@
 from odoo import api, fields, models
 from odoo.exceptions import Warning
 
+
 class ProductionLine(models.Model):
 
     _name = 'production.line'
     _description = 'Production Line'
     _order = 'id'
 
-    barcode = fields.Char('barcode', compute='_compute_barcode')
-    product_no = fields.Char('Product No', readonly=True)
-    product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
-    product_no = fields.Many2one('product.product', 'Product No', related='product_id.product_no', index=True, readonly=True)
+    barcode = fields.Char('Barcode', compute='_compute_barcode')
+    serial_no = fields.Char('Serial No', compute='_compute_serial', readonly=True)
+    purchase_order_line_id = fields.Many2one('purchase.order.line', 'Purchase Order Line', index=True)
+    sale_order_line_id = fields.Many2one('sale.order.line', 'Sale Order Line', index=True, required=True)
+    product_id = fields.Many2one('purchase.order.line', related='purchase.order.line.id.product_id', string='Product')
+    product_no = fields.Many2one('purchase.order.line', related='purchase.order.line.id.product_no', string='Product No')
 
-    serial_no = fields.Char('Serial No', compute='_compute_serial')
+
+
+
+
+
+
 
     name = fields.Char('Name')
     purchase_order_line  = fields.Char('Purchase Order Name',readonly=True)
@@ -37,60 +45,3 @@ class ProductionLine(models.Model):
     @api.one
     def _compute_serial(self):
         self.serial_no = "0000001"
-
-
-
-
-
-
-    #scan_barcode event
-    def onchange_scan_barcode(self):
-        return True
-    #印刷
-    def button_print(self):
-        #for book in self:
-         #   if not book.isbn:
-          #      raise Warningg('Please provide an ISBN for %s' % book.name)
-           # if book.isbn and not book._check_isbn():
-            #    raise Warning('%s is an invalid ISBN' % book.isbn)
-        return True
-    #増加
-    def button_insert(self):
-        # serial_no 参考例
-        # param = (env['ir.sequence'].next_by_code('dycrm.cwbh'),record.id)
-        #保存的时候根据record.id当前记录的id值，更新表的cwbh字段
-        # env.cr.execute("update dycrm_main set cwbh=%s where id=%s"% param)
-        
-        # barcode処理追加
-        # barcode = product_no+serial_no
-        #for book in self:
-         #   if not book.isbn:
-          #      raise Warningg('Please provide an ISBN for %s' % book.name)
-           # if book.isbn and not book._check_isbn():
-            #    raise Warning('%s is an invalid ISBN' % book.isbn)
-        return True
-    #更新
-    def button_update(self):
-        #for book in self:
-         #   if not book.isbn:
-          #      raise Warningg('Please provide an ISBN for %s' % book.name)
-           # if book.isbn and not book._check_isbn():
-            #    raise Warning('%s is an invalid ISBN' % book.isbn)
-        return True
-    #検索
-    def button_search(self):
-        #for book in self:
-         #   if not book.isbn:
-          #      raise Warningg('Please provide an ISBN for %s' % book.name)
-           # if book.isbn and not book._check_isbn():
-            #    raise Warning('%s is an invalid ISBN' % book.isbn)
-        return True
-    def button_input_individual(self):
-        #個別入庫画面に遷移
-        return True
-    def button_input_batch(self):
-        #バッチ入庫画面に遷移
-        return True
-    def button_input_confrim(self):
-        #入庫画面の｢入庫｣ボタンの対応
-        return True
