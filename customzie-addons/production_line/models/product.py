@@ -10,5 +10,6 @@ class ProductProduct(models.Model):
 
     @api.multi
     def _compute_product_no(self):
-        self.product_no = "123456"
+        for line in self:
+            line.product_no = "123456"
 
