@@ -28,10 +28,13 @@ class ProductionLine(models.Model):
     sale_move_ids = fields.Many2one('stock.move', related='sale_order_line_id', store=True, string='Sale_Move', readonly=True)
     sale_product_id = fields.Many2one(related='sale_order_line_id.product_id', store=True, string='Order Product', readonly=True)
     sale_product_no = fields.Many2one('product.product', related='sale_product_id', store=True, string='Sale Product No', readonly=True)
+    is_clean = fields.Boolean(default=False, readonly=True)
+    is_defect = fields.Boolean(default=False, readonly=True)
+    defect_remark = fields.Text('Defect Remark')
 
-    # repair
-    # repair_line_id = fields.Many2one('repair.line', string='Repair Line', ondelete='cascade', index=True, copy=False, readonly=True)
-    # repair_id = fields.Many2one(related='repair_line_id.repair_id', store=True, string='Repair id', readonly=True)
+    # after service
+    after_service_id = fields.Many2one('after.service', string='After Service', ondelete='cascade', index=True, copy=False, readonly=True)
+    treatment_type_id = fields.Many2one('treatment.book', related='after_service_id', store=True, string='Treatment Id', readonly=True)
 
     @api.depends('purchase_product_no', 'serial_no')
     def _compute_barcode(self):

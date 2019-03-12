@@ -3,6 +3,7 @@
 {
     'name': "Production Line",
     'description': "Production Line",
+    'author': "youshinan",
     'version': '12.0.1.0',
     'category': '',
     # any module necessary for this one to work correctly
