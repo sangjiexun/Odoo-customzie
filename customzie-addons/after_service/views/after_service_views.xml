@@ -127,20 +127,17 @@
     <menuitem id="after_service_menu_root"
         name="After Service"
         web_icon="after_service,static/description/icon.png"
-        groups="after_service_group_user"
         sequence="7"/>
 
     <menuitem id="menu_after_service"
         name="After Service"
         parent="after_service_menu_root"
         action="action_after_service"
-        groups="after_service_group_user"
         sequence="2"/>
 
     <menuitem id="menu_treatment_book"
         name="Treatment Book"
         parent="after_service_menu_root"
         action="action_treatment_book"
-        groups="after_service_group_user"
         sequence="3"/>
 </odoo>
