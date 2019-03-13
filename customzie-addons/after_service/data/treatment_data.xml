@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- treatment book default data -->
+        <record id="treatment_book_return" model="treatment.book">
+            <field name="name">return</field>
+            <field name="treatment_book">ReturnsReturnsReturnsReturnsReturnsReturns</field>
+        </record>
+        <record id="treatment_book_repair" model="treatment.book">
+            <field name="name">repair</field>
+            <field name="treatment_book">repairrepairrepairrepairrepairrepairrepai</field>
+        </record>
+        <record id="treatment_book_exchange" model="treatment.book">
+            <field name="name">exchange</field>
+            <field name="treatment_book">exchangeexchangeexchangeexchangeexchange</field>
+        </record>
+        <record id="treatment_book_treat" model="treatment.book">
+            <field name="name">treat</field>
+            <field name="treatment_book">treattreattreattreattreattreattreattreat</field>
+        </record>
+    </data>
+</odoo>

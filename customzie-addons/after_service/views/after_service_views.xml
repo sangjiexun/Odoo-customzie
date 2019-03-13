@@ -19,8 +19,8 @@
                         <field name="barcode" />
                         <field name="treatment_book_id" />
                     </group>
+                    <field name="treatment_remark" ref="treatment.book.treatment_book"/>
                 </group>
-                <field name="treatment_remark" ref="treatment.book.treatment_book"/>
             </sheet>>
             </form>
         </field>
@@ -48,8 +48,10 @@
                 <!--field name="state" widget="statusbar" statusbar_visible="draft"/-->
             </header>
             <sheet>
-                <field name="name" />
-                <field name="treatment_book" />
+                <group>
+                    <field name="name" />
+                    <field name="treatment_book" />
+                </group>
             </sheet>>
             </form>
         </field>

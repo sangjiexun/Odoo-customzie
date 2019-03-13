@@ -10,6 +10,7 @@
     'data': [
         'views/after_service_views.xml',
         'views/after_service_templates.xml',
+        'data/treatment_data.xml',
         'security/after_service_security.xml',
         'security/ir.model.access.csv',
 
