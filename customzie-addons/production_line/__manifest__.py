@@ -11,7 +11,6 @@
     'application': True,
     'data': [
         'views/production_line_view.xml',
-        'views/production_line_menu.xml',
         'security/production_line_security.xml',
         'security/ir.model.access.csv',
     ],
