@@ -10,36 +10,36 @@ class ProductionLine(models.Model):
     _order = 'id'
 
     name = fields.Char('Production Line', required=True, index=True)
-    barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
-    serial_no = fields.Char('Serial No', compute='_compute_serial', store=True)
+    barcode = fields.Char('Barcode')
+    serial_no = fields.Char('Serial No')
 
     # Purchase
     purchase_order_line_id = fields.Many2one(
         'purchase.order.line', string='Purchase Reference',
         required=True, ondelete='cascade', index=True, copy=False, readonly=True)
     purchase_order_id = fields.Many2one(
-        'purchase.order.line', string='Purchase Order',
+        string='Purchase Order',
         readonly=True, related='purchase_order_line_id.order_id')
     purchase_partner_id = fields.Many2one(
         'res.partner',  string='Supplier',
-        readonly=True, related='purchase_order_id.partner_id')
+        readonly=True, related='purchase_order_line_id.partner_id')
     # Sale
     sale_order_line_id = fields.Many2one(
         'sale.order.line', string='Sale Reference', ondelete='cascade',
         index=True, copy=False, readonly=True)
     sale_order_id = fields.Many2one(
-        'sale.order.line', string='Sale Order',
+        string='Sale Order',
         readonly=True, related='sale_order_line_id.order_id')
     sale_partner_id = fields.Many2one(
         'res.partner', string='Customer',
-        readonly=True, related='sale_order_id.order_partner_id')
+        readonly=True, related='sale_order_line_id.order_partner_id')
 
     product_id = fields.Many2one(
         'product.product', string='Product',
-        readonly=True, related='purchase_order_line_id.product_id')
+        readonly=True, related='purchase_order_line_id.product_id', store=True)
     product_no = fields.Many2one(
-        'product.product', string='Product No',
-        readonly=True, related='product_id.product_no', store=True)
+        string='Product No',
+        readonly=True, related='purchase_order_line_id.product_id', store=True)
 
     stock_picking__id = fields.Many2one(
         'stock.picking', string='Stock Picking',
@@ -50,18 +50,33 @@ class ProductionLine(models.Model):
     is_defect = fields.Boolean(default=False, readonly=True)
     defect_remark = fields.Text('Defect Remark')
 
+    # kanban
+    color = fields.Integer('Color Index')
+    priority = fields.Selection(
+        [('0', 'Low'),
+         ('1', 'Normal'),
+         ('2', 'High')],
+        'Priority',
+        default='1')
+    kanban_state = fields.Selection(
+        [('normal', 'In Progress'),
+         ('blocked', 'Blocked'),
+         ('done', 'Ready for next stage')],
+        'Kanban State',
+        default='normal')
+
     # after service
     after_service_id = fields.Many2one(
         'after.service', string='After Service',
         ondelete='cascade', index=True, copy=False, readonly=True)
     # treatment_type_id = fields.Many2one('treatment.book', related='after_service_id', store=True, string='Treatment Id', readonly=True)
 
-    @api.depends('purchase_product_no', 'serial_no')
+    @api.depends('product_no', 'serial_no')
     def _compute_barcode(self):
         for line in self:
-            line.barcode = line.purchase_product_no + line.serial_no
+            line.barcode = line.product_no + line.serial_no
 
-    @api.depends('purchase_product_no')
+    @api.depends('product_no')
     def _compute_serial(self):
         for line in self:
             line.serial_no = "0000001"

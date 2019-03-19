@@ -16,6 +16,16 @@
         </field>
     </record>
 
+    <record id="production_line_kanban" model="ir.ui.view">
+        <field name="model">Production.line</field>
+        <field name="arch" type="xml">
+            <kanban>
+
+
+            </kanban>
+        </field>
+    </record>
+
     <!-- Top menu item -->
     <menuitem id="operation_menu_root"
         name="Operation"
