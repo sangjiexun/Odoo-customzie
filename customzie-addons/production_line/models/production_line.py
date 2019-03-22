@@ -50,25 +50,10 @@ class ProductionLine(models.Model):
     is_defect = fields.Boolean(default=False, readonly=True)
     defect_remark = fields.Text('Defect Remark')
 
-    # kanban
-    color = fields.Integer('Color Index')
-    priority = fields.Selection(
-        [('0', 'Low'),
-         ('1', 'Normal'),
-         ('2', 'High')],
-        'Priority',
-        default='1')
-    kanban_state = fields.Selection(
-        [('normal', 'In Progress'),
-         ('blocked', 'Blocked'),
-         ('done', 'Ready for next stage')],
-        'Kanban State',
-        default='normal')
-
     # after service
-    after_service_id = fields.Many2one(
-        'after.service', string='After Service',
-        ondelete='cascade', index=True, copy=False, readonly=True)
+    #after_service_id = fields.Many2one(
+    #    'after.service', string='After Service',
+    #    ondelete='cascade', index=True, copy=False, readonly=True)
     # treatment_type_id = fields.Many2one('treatment.book', related='after_service_id', store=True, string='Treatment Id', readonly=True)
 
     @api.depends('product_no', 'serial_no')
