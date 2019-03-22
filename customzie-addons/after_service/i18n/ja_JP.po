@@ -95,6 +95,31 @@ msgid "Last Updated on"
 msgstr "最終更新日"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__state
+msgid "Status"
+msgstr "ステータス"
+
+#. module: after_service
+#: selection:after.service,state:0
+msgid "Quotation"
+msgstr "見積"
+
+#. module: after_service
+#: selection:after.service,state:0
+msgid "To Approve"
+msgstr "照査"
+
+#. module: after_service
+#: selection:after.service,state:0
+msgid "Locked"
+msgstr "承認"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__saleOrderFilter
+msgid "Sale Order ByNo"
+msgstr "注文検索"
+
+#. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__order_id
 msgid "Sale Order"
 msgstr "販売オーダ"
@@ -125,6 +150,21 @@ msgid "Treatment Type"
 msgstr "処置分類"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__partner_name
+msgid "Partner Name"
+msgstr "お客様"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__order_note
+msgid "Order Note"
+msgstr "注文メモ"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+msgid "Create Date"
+msgstr "問い合わせ日"
+
+#. module: after_service
 #: model:treatment.book,name:after_service.treatment_book_exchange
 msgid "exchange"
 msgstr "交換"
@@ -136,6 +176,7 @@ msgstr "修理"
 
 #. module: after_service
 #: model:treatment.book,name:after_service.treatment_book_return
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 msgid "return"
 msgstr "返品"
 
@@ -143,4 +184,3 @@ msgstr "返品"
 #: model:treatment.book,name:after_service.treatment_book_treat
 msgid "treat"
 msgstr "処置"
-
