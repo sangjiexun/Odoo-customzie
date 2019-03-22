@@ -1,6 +1,5 @@
 from odoo import fields, models
 
-
 class CheckoutStage(models.Model):
     _name = 'library.checkout.stage'
     _description = 'Checkout Stage'
@@ -16,5 +15,4 @@ class CheckoutStage(models.Model):
         ('done', 'Returned'),
         ('cancel', 'Cancelled')],
         default='new',
-        )
-
+    )

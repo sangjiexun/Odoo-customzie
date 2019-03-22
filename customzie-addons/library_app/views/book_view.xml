@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <odoo>
     <record id="view_form_book" model="ir.ui.view">
         <field name="name">Book Form</field>
@@ -6,7 +6,8 @@
         <field name="arch" type="xml">
             <form string="Book">
                 <header>
-                    <button name="button_check_isbn" type="object" string="Check ISBN" />
+                    <button name="button_check_isbn" type="object"
+                        string="Check ISBN" />
                 </header>
                 <sheet>
                     <group name="group_top">
@@ -20,16 +21,6 @@
                             <field name="isbn" />
                             <field name="active" />
                             <field name="image" widget="image" />
-                        </group>
-                    </group>
-                    <group name="group_bottom">
-                        <group name="group_left">
-                            <field name="copies" />
-                            <field name="avg_rating" />
-                            <field name="price" />
-                            <field name="last_borrow_date" />
-                            <field name="descr" />
-                            <field name="notes" />
                         </group>
                     </group>
                 </sheet>
@@ -54,8 +45,12 @@
         <field name="arch" type="xml">
             <search>
                 <field name="publisher_id" />
-                <filter name="filter_active" string="Active" domain="[('active','=',True)]" />
-                <filter name="filter_inactive" string="Inactive" domain="[('active','=',False)]" />
+                <filter name="filter_active"
+                    string="Active"
+                    domain="[('active','=',True)]" />
+               <filter name="filter_inactive"
+                    string="Inactive"
+                    domain="[('active','=',False)]" />
             </search>
         </field>
     </record>
