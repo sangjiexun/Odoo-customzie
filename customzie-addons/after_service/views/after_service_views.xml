@@ -15,18 +15,31 @@
                 <field name="state" widget="statusbar" statusbar_visible="draft,to approve,done" readonly="1"/>
             </header>
             <sheet>
+              <div>
+                  <h1>
+                      <field name="saleOrderFilter" />
+                  </h1>
+              </div>
                 <group>
                     <group>
                         <field name="name" />
                         <field name="order_id" />
+                        <field name="order_note" />
                     </group>
                     <group>
+                        <field name="partner_name" />
                         <field name="barcode" />
                         <field name="treatment_book_id" />
                     </group>
                     <field name="treatment_remark" ref="treatment.book.treatment_book"/>
                 </group>
-            </sheet>>
+            </sheet>
+            <!-- mail mixin fields -->
+            <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers" />
+            <field name="activity_ids" widget="mail_activity" />
+            <field name="message_ids" widget="mail_thread" />
+            </div>
             </form>
         </field>
     </record>
@@ -41,6 +54,7 @@
                 <field name="barcode" />
                 <field name="treatment_book_id" />
                 <field name="state"/>
+                <field name="create_date" />
             </tree>
         </field>
     </record>
@@ -74,22 +88,26 @@
         </field>
     </record>
 
-     <!--record id="view_after_service_filter" model="ir.ui.view">
+     <record id="view_after_service_filter" model="ir.ui.view">
         <field name="name">after.service.list.select</field>
         <field name="model">after.service</field>
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search After Service">
-                <field name="name" string="After Service" filter_domain="['|','|',('name','ilike',self)]"/>
-                <field name="order_id"/>
-                <field name="barcode"/>
+                <field name="name" string="After Service" filter_domain="['|','|',('name','ilike',self),('order_id','ilike',self),('partner_name','ilike',self),('treatment_book_id','ilike',self)]"/>
+                <field name="order_id" />
+                <field name="partner_name"/>
                 <field name="treatment_book_id"/>
-                <field name="treatment_remark"/>
+                <filter string="return" name="treatment_book_return" domain="[('treatment_book_id','=','返品')]"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="Create Date" name="order_date" domain="[]" context="{'group_by':'create_date'}"/>
+                </group>
            </search>
         </field>
     </record>
 
-    <record id="after_service_view_search" model="ir.ui.view">
+    <!--record id="after_service_view_search" model="ir.ui.view">
         <field name="name">after.service.search</field>
         <field name="model">after.service</field>
         <field name="mode">primary</field>
