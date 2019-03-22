@@ -9,4 +9,11 @@
     <!-- Menu item to open the Book list -->
     <menuitem id="menu_library_book" name="Books"
         parent="menu_library" action="action_library_book" />
+
+    <act_window id="action_library_categ" name="Categories"
+        res_model="library.book.category" view_mode="tree,form" />
+    <!-- Menu item to open the Book list -->
+    <!-- 增加图书分类 -->
+    <menuitem id="menu_library_categ" name="Categories"
+        parent="menu_library" action="action_library_categ" />
 </odoo>

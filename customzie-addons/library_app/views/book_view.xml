@@ -22,6 +22,16 @@
                             <field name="image" widget="image" />
                         </group>
                     </group>
+                    <group name="group_bottom">
+                        <group name="group_left">
+                            <field name="copies" />
+                            <field name="avg_rating" />
+                            <field name="price" />
+                            <field name="last_borrow_date" />
+                            <field name="descr" />
+                            <field name="notes" />
+                        </group>
+                    </group>
                 </sheet>
             </form>
         </field>
