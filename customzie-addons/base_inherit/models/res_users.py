@@ -5,7 +5,7 @@ import string
 
 
 class Users(models.Model):
-    _inherit = 'res.partner.bank'
+    _inherit = 'res.users'
 
     # User can write on a few of his own fields (but not his groups for example)
     SELF_WRITEABLE_FIELDS = ['signature', 'action_id', 'company_id', 'user_barcode', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz']

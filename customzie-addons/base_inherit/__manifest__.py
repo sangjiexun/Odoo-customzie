@@ -7,13 +7,13 @@
     'version': '12.0.1.0',
     'category': '',
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'base', 'base', 'base'],
     'application': False,
     'data': [
+        'security/base_groups.xml',
         'views/res_users_views.xml',
         'views/res_bank_views.xml',
         'views/res_company_views.xml',
         #'views/res_partner_views.xml',
-        'security/base_groups.xml',
     ],
 }
