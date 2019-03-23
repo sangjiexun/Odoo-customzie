@@ -28,7 +28,7 @@ class StockWarehouse(models.Model):
         ('mrp_one_step', 'Manufacture (1 step)'),
         ('pbm', 'Pick components and then manufacture (2 steps)'),
         ('pbm_sam', 'Pick components, manufacture and then store products (3 steps)')],
-        'Manufacture', default='mrp_one_step', required=True,
+        'Manufacture', default='pbm_sam', required=True,
         help="Produce : Move the raw materials to the production location\
         directly and start the manufacturing process.\nPick / Produce : Unload\
         the raw materials from the Stock to Input location first, and then\

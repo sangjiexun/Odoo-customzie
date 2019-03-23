@@ -39,13 +39,13 @@ class Warehouse(models.Model):
         ('one_step', 'Receive goods directly (1 step)'),
         ('two_steps', 'Receive goods in input and then stock (2 steps)'),
         ('three_steps', 'Receive goods in input, then quality and then stock (3 steps)')],
-        'Incoming Shipments', default='one_step', required=True,
+        'Incoming Shipments', default='two_steps', required=True,
         help="Default incoming route to follow")
     delivery_steps = fields.Selection([
         ('ship_only', 'Deliver goods directly (1 step)'),
         ('pick_ship', 'Send goods in output and then deliver (2 steps)'),
         ('pick_pack_ship', 'Pack goods, send goods in output and then deliver (3 steps)')],
-        'Outgoing Shipments', default='ship_only', required=True,
+        'Outgoing Shipments', default='pick_ship', required=True,
         help="Default outgoing route to follow")
     wh_input_stock_loc_id = fields.Many2one('stock.location', 'Input Location')
     wh_qc_stock_loc_id = fields.Many2one('stock.location', 'Quality Control Location')
