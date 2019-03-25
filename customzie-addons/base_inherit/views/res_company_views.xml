@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_company_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_address_format']" position="replace">
+                <div class="o_address_format">
+                   <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True}'/>
+                   <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                   <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                   <field name="city" placeholder="City" class="o_address_city"/>
+                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -47,9 +47,7 @@ msgstr ""
 
 #. module: sale
 #: model:mail.template,report_name:sale.email_template_edi_sale
-msgid ""
-"${(object.name or '').replace('/','_')}${object.state == 'draft' and "
-"'_draft' or ''}"
+msgid "${(object.name or '').replace('/','_')}"
 msgstr ""
 
 #. module: sale
@@ -474,6 +472,11 @@ msgid "Accept &amp; Pay"
 msgstr ""
 
 #. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.mail_notification_paynow_online
+msgid "Accept and sign online"
+msgstr ""
+
+#. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__access_warning
 msgid "Access warning"
 msgstr ""
@@ -543,7 +546,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.product_configurator_configure
 #: model_terms:ir.ui.view,arch_db:sale.product_configurator_configure_optional_products
 msgid "Add one"
-msgstr ""
+msgstr "Lägg till en"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_account_invoice__comment
@@ -859,7 +862,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model,name:sale.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfigurations Inställningar"
 
 #. module: sale
 #: model:ir.ui.menu,name:sale.menu_sale_config
@@ -1387,6 +1390,11 @@ msgid "Forbidden values on non-accountable sale order line"
 msgstr ""
 
 #. module: sale
+#: selection:res.config.settings,auth_signup_uninvited:0
+msgid "Free sign up"
+msgstr ""
+
+#. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_account_invoice_report_salesteam
 msgid ""
 "From this report, you can have an overview of the amount invoiced to your "
@@ -1705,6 +1713,12 @@ msgid "Invoicing"
 msgstr "Fakturering"
 
 #. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
+msgid "Invoicing Address"
+msgstr ""
+
+#. module: sale
+#: model:ir.model.fields,field_description:sale.field_product_product__invoice_policy
 #: model:ir.model.fields,field_description:sale.field_product_template__invoice_policy
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__default_invoice_policy
 msgid "Invoicing Policy"
@@ -2095,6 +2109,11 @@ msgid "Office chairs can harm your floor: protect it."
 msgstr ""
 
 #. module: sale
+#: selection:res.config.settings,auth_signup_uninvited:0
+msgid "On invitation"
+msgstr ""
+
+#. module: sale
 #: model_terms:ir.actions.act_window,help:sale.act_res_partner_2_sale_order
 #: model_terms:ir.actions.act_window,help:sale.action_orders_salesteams
 #: model_terms:ir.actions.act_window,help:sale.action_quotations
@@ -2150,7 +2169,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_product_template__optional_product_ids
 msgid "Optional Products"
-msgstr ""
+msgstr "Alternativa Produkter"
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_product_template__optional_product_ids
@@ -2343,6 +2362,11 @@ msgstr "Betala nu"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid "Pay now"
+msgstr ""
+
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.mail_notification_paynow_online
+msgid "Pay online"
 msgstr ""
 
 #. module: sale
@@ -2920,7 +2944,7 @@ msgstr "Försäljningsanalys"
 #. module: sale
 #: model:ir.model,name:sale.model_sale_report
 msgid "Sales Analysis Report"
-msgstr ""
+msgstr "Försäljningsanalys Raport"
 
 #. module: sale
 #: model:ir.model,name:sale.model_crm_team
@@ -3141,6 +3165,12 @@ msgid "Sell and purchase products in different units of measure"
 msgstr ""
 
 #. module: sale
+#: model:ir.model.fields,field_description:sale.field_res_config_settings__module_website_sale_digital
+msgid ""
+"Sell digital products - provide downloadable content on your customer portal"
+msgstr ""
+
+#. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Sell products by multiple of unit # per package"
 msgstr ""
@@ -3269,6 +3299,11 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Show standard terms &amp; conditions on orders"
+msgstr ""
+
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.mail_notification_paynow_online
+msgid "Sign and pay online"
 msgstr ""
 
 #. module: sale

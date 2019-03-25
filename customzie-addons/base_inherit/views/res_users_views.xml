@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_simple_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.simplified.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_simple_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='company_id']" position="before">
+                <label for="user_barcode" class="oe_edit_only" string="User Barcode"/>
+                <field name="user_barcode"  readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_form_base_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.base.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[field/@name='partner_id']" position="before">
+                <label for="user_barcode" class="oe_edit_only" string="User Barcode" />
+                <h2><field name="user_barcode" readonly="1" /></h2>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_tree_inherit" model="ir.ui.view">
+        <field name="name">res.users.tree.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login_date']" position="before">
+                <field name="user_barcode"/>
+                <field name="create_date"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

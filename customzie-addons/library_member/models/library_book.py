@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 
+
 class Book(models.Model):
     _inherit = 'library.book'
     is_available = fields.Boolean('Is Available?')
@@ -18,4 +19,5 @@ class Book(models.Model):
             return digits[-1] == check
         else:
             return super()._check_isbn()
+
 

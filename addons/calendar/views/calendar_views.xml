@@ -340,14 +340,14 @@
         <field name="view_id" ref="view_calendar_event_form"/>
     </record>
 
-    <!-- Menus --><!--mod by youshinan-->
+    <!-- Menus -->
     <menuitem
         id="mail_menu_calendar"
         name="Calendar"
         sequence="2"
         action="action_calendar_event"
         web_icon="calendar,static/description/icon.png"
-        groups="base.make_invisible"/>
+        groups="base.group_user"/>
 
     <menuitem
         id="menu_calendar_configuration"

@@ -15,12 +15,12 @@
                         <group string="Address">
                             <label for="street" string="Address"/>
                             <div class="o_address_format">
-                                <field name="country" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
-                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
-                                <field name="state" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
-                                <field name="city" placeholder="City" class="o_address_city"/>
                                 <field name="street" placeholder="Street..." class="o_address_street"/>
                                 <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="state" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
                             </div>
                         </group>
                         <group string="Communication">
@@ -65,15 +65,14 @@
                 <form string="Bank account">
                     <group>
                         <group>
+                            <field name="acc_number"/>
+                            <field name="acc_type"/>
                             <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
                             <field name="partner_id"/>
-                            <field name="bank_id"/>
-                            <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
-                            <field name="acc_type"/>
                         </group>
                         <group>
-                            <field name="branch_name"/>
-                            <field name="acc_number"/>
+                            <field name="bank_id"/>
+                            <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
                             <field name="acc_holder_name"/>
                         </group>
                     </group>
@@ -86,12 +85,11 @@
             <field name="arch" type="xml">
                 <tree string="Bank Accounts">
                     <field name="sequence" invisible="1"/>
-                    <field name="bank_name"/>
-                    <field name="branch_name"/>
                     <field name="acc_number"/>
-                    <field name="acc_holder_name" invisible="1"/>
+                    <field name="bank_name"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <field name="partner_id"/>
+                    <field name="acc_holder_name" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -121,3 +119,4 @@
 
     </data>
 </odoo>
+

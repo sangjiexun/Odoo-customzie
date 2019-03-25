@@ -51,12 +51,12 @@ class Bank(models.Model):
                 domain = ['&'] + domain
         bank_ids = self._search(domain + args, limit=limit, access_rights_uid=name_get_uid)
         return self.browse(bank_ids).name_get()
-
+        
     @api.onchange('country')
     def _onchange_country_id(self):
         if self.country and self.country != self.state.country_id:
             self.state = False
-
+            
     @api.onchange('state')
     def _onchange_state(self):
         if self.state.country_id:
@@ -85,8 +85,6 @@ class ResPartnerBank(models.Model):
     bank_id = fields.Many2one('res.bank', string='Bank')
     bank_name = fields.Char(related='bank_id.name', readonly=False)
     bank_bic = fields.Char(related='bank_id.bic', readonly=False)
-    branch_code = fields.Char('Branch Code')
-    branch_name = fields.Char('Branch Name')
     sequence = fields.Integer()
     currency_id = fields.Many2one('res.currency', string='Currency')
     company_id = fields.Many2one('res.company', 'Company', default=lambda self: self.env.user.company_id, ondelete='cascade')
