@@ -16,7 +16,7 @@ class ProductionLine(models.Model):
     # Purchase
     purchase_order_line_id = fields.Many2one(
         'purchase.order.line', string='Purchase Reference',
-        required=True, ondelete='cascade', index=True, copy=False, readonly=True)
+        required=True, ondelete='cascade', copy=False, readonly=True)
     purchase_order_id = fields.Many2one(
         string='Purchase Order',
         readonly=True, related='purchase_order_line_id.order_id')
@@ -25,8 +25,7 @@ class ProductionLine(models.Model):
         readonly=True, related='purchase_order_line_id.partner_id')
     # Sale
     sale_order_line_id = fields.Many2one(
-        'sale.order.line', string='Sale Reference', ondelete='cascade',
-        index=True, copy=False, readonly=True)
+        'sale.order.line', string='Sale Reference', readonly=True)
     sale_order_id = fields.Many2one(
         string='Sale Order',
         readonly=True, related='sale_order_line_id.order_id')
@@ -44,7 +43,6 @@ class ProductionLine(models.Model):
     stock_picking__id = fields.Many2one(
         'stock.picking', string='Stock Picking',
         readonly=True, store=True)
-
 
     is_clean = fields.Boolean(default=False, readonly=True)
     is_defect = fields.Boolean(default=False, readonly=True)
