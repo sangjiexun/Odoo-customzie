@@ -85,6 +85,7 @@ class PurchaseOrder(models.Model):
     def button_approve(self, force=False):
         result = super(PurchaseOrder, self).button_approve(force=force)
         self._create_picking()
+        self._create_production_line()
         return result
 
     @api.multi
@@ -215,6 +216,22 @@ class PurchaseOrder(models.Model):
                 picking.message_post_with_view('mail.message_origin_link',
                     values={'self': picking, 'origin': order},
                     subtype_id=self.env.ref('mail.mt_note').id)
+        return True
+
+    @api.multi
+    def _create_production_line(self):
+        for order in self:
+            ProductionLine = self.env['production.line']
+            for line in order.order_line:
+                for i in range(int(line.product_qty)):
+                    res = {
+                        'purchase_order_line_id': line.id,
+                        'purchase_order_id': line.order_id.id,
+                        'product_id': line.product_id.id,
+                        'purchase_partner_id': line.partner_id.id,
+                        'name': line.name,
+                    }
+                    ProductionLine.create(res)
         return True
 
 

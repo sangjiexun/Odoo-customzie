@@ -12,6 +12,7 @@
     'data': [
         'views/production_line_view.xml',
         'views/product_template_views.xml',
+        'views/product_views.xml',
         'security/production_line_security.xml',
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
