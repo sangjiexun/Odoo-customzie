@@ -220,8 +220,8 @@ class PurchaseOrder(models.Model):
 
     @api.multi
     def _create_production_line(self):
+        ProductionLine = self.env['production.line']
         for order in self:
-            ProductionLine = self.env['production.line']
             for line in order.order_line:
                 for i in range(int(line.product_qty)):
                     res = {
@@ -229,7 +229,7 @@ class PurchaseOrder(models.Model):
                         'purchase_order_id': line.order_id.id,
                         'product_id': line.product_id.id,
                         'purchase_partner_id': line.partner_id.id,
-                        'name': line.name,
+                        'name': order.name,
                     }
                     ProductionLine.create(res)
         return True

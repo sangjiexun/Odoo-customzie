@@ -9,7 +9,7 @@ class ProductionLine(models.Model):
     _description = 'Production Line'
     _order = 'id'
 
-    name = fields.Char('Production Line', required=True, index=True)
+    name = fields.Char('Production Line')
     barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
     serial_no = fields.Char('Serial No', compute='_get_next_user_barcode', store=True)
 
@@ -18,6 +18,9 @@ class ProductionLine(models.Model):
         'purchase.order.line', string='Purchase Reference', ondelete='set null')
     purchase_order_id = fields.Many2one(string='Purchase Order', related="purchase_order_line_id.order_id", store=True)
     purchase_partner_id = fields.Many2one(string='Supplier', related="purchase_order_line_id.partner_id", store=True)
+
+    inventory_name = fields.Char()
+
     # Sale
     sale_order_line_id = fields.Many2one('sale.order.line', string='Sale Reference')
     sale_order_id = fields.Integer(string='Sale Order')
@@ -34,10 +37,22 @@ class ProductionLine(models.Model):
     is_defect = fields.Boolean(default=False, readonly=True)
     defect_remark = fields.Text('Defect Remark')
 
+
     # after service
     after_service_id = fields.Many2one(
         'after.service', string='After Service',
         ondelete='set null')
+
+    state = fields.Selection([
+        ('draft', 'New'),
+        ('inventory', 'Inventory'),
+        ('cleaned', 'Cleaned'),
+        ('picked', 'Picked'),
+        ('done', 'Sold'),
+        ('return', 'Return'),
+        ('defect', 'Defect'),
+        ('cancel', 'Cancelled')
+    ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
     @api.depends('product_no')
     @api.model
