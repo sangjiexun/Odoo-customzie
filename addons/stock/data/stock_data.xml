@@ -123,6 +123,8 @@
         <record id="warehouse0" model="stock.warehouse">
             <field name="partner_id" ref="base.main_partner"/>
             <field name="code">WH</field>
+            <field name="reception_steps">two_steps</field>
+            <field name="delivery_steps">pick_ship</field>
         </record>
  
         <record id="sequence_mrp_op" model="ir.sequence">
