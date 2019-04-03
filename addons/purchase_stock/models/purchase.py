@@ -230,6 +230,7 @@ class PurchaseOrder(models.Model):
                         'product_id': line.product_id.id,
                         'purchase_partner_id': line.partner_id.id,
                         'name': order.name,
+                        'operation_id': '1',
                     }
                     ProductionLine.create(res)
         return True

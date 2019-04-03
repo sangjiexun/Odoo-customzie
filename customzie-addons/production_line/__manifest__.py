@@ -16,5 +16,6 @@
         'security/production_line_security.xml',
         'security/ir.model.access.csv',
         'data/ir_sequence_data.xml',
+        'data/production_operation_data.xml',
     ],
 }
