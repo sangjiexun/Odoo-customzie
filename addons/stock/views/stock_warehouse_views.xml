@@ -47,14 +47,14 @@
                                     <group string="Locations">
                                         <field name="wh_input_stock_loc_id" readonly="1"/>
                                         <field name="wh_qc_stock_loc_id" readonly="1"/>
-                                        <field name="wh_pack_stock_loc_id" readonly="1"/>
+                                        <field name="wh_clean_stock_loc_id" readonly="1"/>
                                         <field name="wh_output_stock_loc_id" readonly="1"/>
                                     </group>
                                     <group string="Operation Types">
                                         <field name="in_type_id" readonly="1"/>
                                         <field name="int_type_id" readonly="1"/>
                                         <field name="pick_type_id" readonly="1"/>
-                                        <field name="pack_type_id" readonly="1"/>
+                                        <field name="clean_type_id" readonly="1"/>
                                         <field name="out_type_id" readonly="1"/>
                                     </group>
                                 </group>

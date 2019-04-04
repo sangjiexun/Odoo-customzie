@@ -44,16 +44,16 @@ class Warehouse(models.Model):
     delivery_steps = fields.Selection([
         ('ship_only', 'Deliver goods directly (1 step)'),
         ('pick_ship', 'Send goods in output and then deliver (2 steps)'),
-        ('pick_pack_ship', 'Pack goods, send goods in output and then deliver (3 steps)')],
+        ('pick_clean_ship', 'Clean goods, send goods in output and then deliver (3 steps)')],
         'Outgoing Shipments', default='ship_only', required=True,
         help="Default outgoing route to follow")
     wh_input_stock_loc_id = fields.Many2one('stock.location', 'Input Location')
     wh_qc_stock_loc_id = fields.Many2one('stock.location', 'Quality Control Location')
     wh_output_stock_loc_id = fields.Many2one('stock.location', 'Output Location')
-    wh_pack_stock_loc_id = fields.Many2one('stock.location', 'Packing Location')
+    wh_clean_stock_loc_id = fields.Many2one('stock.location', 'Cleaning Location')
     mto_pull_id = fields.Many2one('stock.rule', 'MTO rule')
     pick_type_id = fields.Many2one('stock.picking.type', 'Pick Type')
-    pack_type_id = fields.Many2one('stock.picking.type', 'Pack Type')
+    clean_type_id = fields.Many2one('stock.picking.type', 'Clean Type')
     out_type_id = fields.Many2one('stock.picking.type', 'Out Type')
     in_type_id = fields.Many2one('stock.picking.type', 'In Type')
     int_type_id = fields.Many2one('stock.picking.type', 'Internal Type')
@@ -209,7 +209,7 @@ class Warehouse(models.Model):
         warehouse_data = {}
         sequence_data = self._get_sequence_values()
 
-        # suit for each warehouse: reception, internal, pick, pack, ship
+        # suit for each warehouse: reception, internal, pick, clean, ship
         max_sequence = self.env['stock.picking.type'].search_read([('sequence', '!=', False)], ['sequence'], limit=1, order='sequence desc')
         max_sequence = max_sequence and max_sequence[0]['sequence'] or 0
 
@@ -444,7 +444,7 @@ class Warehouse(models.Model):
             'wh_input_stock_loc_id': {'name': _('Input'), 'active': reception_steps != 'one_step', 'usage': 'internal'},
             'wh_qc_stock_loc_id': {'name': _('Quality Control'), 'active': reception_steps == 'three_steps', 'usage': 'internal'},
             'wh_output_stock_loc_id': {'name': _('Output'), 'active': delivery_steps != 'ship_only', 'usage': 'internal'},
-            'wh_pack_stock_loc_id': {'name': _('Packing Zone'), 'active': delivery_steps == 'pick_pack_ship', 'usage': 'internal'},
+            'wh_clean_stock_loc_id': {'name': _('Cleaning Zone'), 'active': delivery_steps == 'pick_clean_ship', 'usage': 'internal'},
         }
         return sub_locations
 
@@ -524,7 +524,7 @@ class Warehouse(models.Model):
         names = {'one_step': _('Receive in 1 step (stock)'), 'two_steps': _('Receive in 2 steps (input + stock)'),
                  'three_steps': _('Receive in 3 steps (input + quality + stock)'), 'crossdock': _('Cross-Dock'),
                  'ship_only': _('Deliver in 1 step (ship)'), 'pick_ship': _('Deliver in 2 steps (pick + ship)'),
-                 'pick_pack_ship': _('Deliver in 3 steps (pick + pack + ship)')}
+                 'pick_clean_ship': _('Deliver in 3 steps (pick + clean + ship)')}
         return names[route_type]
 
     def get_rules_dict(self):
@@ -546,9 +546,9 @@ class Warehouse(models.Model):
                 'pick_ship': [
                     self.Routing(warehouse.lot_stock_id, warehouse.wh_output_stock_loc_id, warehouse.pick_type_id, 'pull'),
                     self.Routing(warehouse.wh_output_stock_loc_id, customer_loc, warehouse.out_type_id, 'pull')],
-                'pick_pack_ship': [
-                    self.Routing(warehouse.lot_stock_id, warehouse.wh_pack_stock_loc_id, warehouse.pick_type_id, 'pull'),
-                    self.Routing(warehouse.wh_pack_stock_loc_id, warehouse.wh_output_stock_loc_id, warehouse.pack_type_id, 'pull'),
+                'pick_clean_ship': [
+                    self.Routing(warehouse.lot_stock_id, warehouse.wh_clean_stock_loc_id, warehouse.pick_type_id, 'pull'),
+                    self.Routing(warehouse.wh_clean_stock_loc_id, warehouse.wh_output_stock_loc_id, warehouse.clean_type_id, 'pull'),
                     self.Routing(warehouse.wh_output_stock_loc_id, customer_loc, warehouse.out_type_id, 'pull')],
                 'company_id': warehouse.company_id.id,
             } for warehouse in self
@@ -660,7 +660,7 @@ class Warehouse(models.Model):
             sequence_data = warehouse._get_sequence_values()
             warehouse.in_type_id.sequence_id.write(sequence_data['in_type_id'])
             warehouse.out_type_id.sequence_id.write(sequence_data['out_type_id'])
-            warehouse.pack_type_id.sequence_id.write(sequence_data['pack_type_id'])
+            warehouse.clean_type_id.sequence_id.write(sequence_data['clean_type_id'])
             warehouse.pick_type_id.sequence_id.write(sequence_data['pick_type_id'])
             warehouse.int_type_id.sequence_id.write(sequence_data['int_type_id'])
 
@@ -678,11 +678,11 @@ class Warehouse(models.Model):
         loc_warehouse = switch_warehouses.filtered(lambda wh: not wh._location_used(wh.wh_output_stock_loc_id))
         if loc_warehouse:
             loc_warehouse.mapped('wh_output_stock_loc_id').write({'active': False})
-        loc_warehouse = switch_warehouses.filtered(lambda wh: not wh._location_used(wh.wh_pack_stock_loc_id))
+        loc_warehouse = switch_warehouses.filtered(lambda wh: not wh._location_used(wh.wh_clean_stock_loc_id))
         if loc_warehouse:
-            loc_warehouse.mapped('wh_pack_stock_loc_id').write({'active': False})
-        if new_delivery_step == 'pick_pack_ship':
-            self.mapped('wh_pack_stock_loc_id').write({'active': True})
+            loc_warehouse.mapped('wh_clean_stock_loc_id').write({'active': False})
+        if new_delivery_step == 'pick_clean_ship':
+            self.mapped('wh_clean_stock_loc_id').write({'active': True})
         if new_delivery_step != 'ship_only':
             self.mapped('wh_output_stock_loc_id').write({'active': True})
 
@@ -709,8 +709,8 @@ class Warehouse(models.Model):
             'out_type_id': {'default_location_src_id': output_loc.id},
             'pick_type_id': {
                 'active': self.delivery_steps != 'ship_only',
-                'default_location_dest_id': output_loc.id if self.delivery_steps == 'pick_ship' else self.wh_pack_stock_loc_id.id},
-            'pack_type_id': {'active': self.delivery_steps == 'pick_pack_ship'},
+                'default_location_dest_id': output_loc.id if self.delivery_steps == 'pick_ship' else self.wh_clean_stock_loc_id.id},
+            'clean_type_id': {'active': self.delivery_steps == 'pick_clean_ship'},
             'int_type_id': {},
         }
 
@@ -738,15 +738,15 @@ class Warehouse(models.Model):
                 'default_location_dest_id': False,
                 'sequence': max_sequence + 5,
                 'barcode': self.code.replace(" ", "").upper() + "-DELIVERY",
-            }, 'pack_type_id': {
-                'name': _('Pack'),
+            }, 'clean_type_id': {
+                'name': _('Clean'),
                 'code': 'internal',
                 'use_create_lots': False,
                 'use_existing_lots': True,
-                'default_location_src_id': self.wh_pack_stock_loc_id.id,
+                'default_location_src_id': self.wh_clean_stock_loc_id.id,
                 'default_location_dest_id': output_loc.id,
                 'sequence': max_sequence + 4,
-                'barcode': self.code.replace(" ", "").upper() + "-PACK",
+                'barcode': self.code.replace(" ", "").upper() + "-CLEAN",
             }, 'pick_type_id': {
                 'name': _('Pick'),
                 'code': 'internal',
@@ -783,9 +783,9 @@ class Warehouse(models.Model):
                 'prefix': self.code + '/OUT/', 'padding': 5,
                 'company_id': self.company_id.id,
             },
-            'pack_type_id': {
-                'name': self.name + ' ' + _('Sequence packing'),
-                'prefix': self.code + '/PACK/', 'padding': 5,
+            'clean_type_id': {
+                'name': self.name + ' ' + _('Sequence cleaning'),
+                'prefix': self.code + '/CLEAN/', 'padding': 5,
                 'company_id': self.company_id.id,
             },
             'pick_type_id': {
