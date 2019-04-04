@@ -124,7 +124,7 @@
             <field name="partner_id" ref="base.main_partner"/>
             <field name="code">WH</field>
             <field name="reception_steps">two_steps</field>
-            <field name="delivery_steps">pick_ship</field>
+            <field name="delivery_steps">pick_clean_ship</field>
         </record>
  
         <record id="sequence_mrp_op" model="ir.sequence">
@@ -160,8 +160,8 @@
                 'record': obj().env.ref('stock.warehouse0').wh_output_stock_loc_id,
                 'noupdate': True,
             }, {
-                'xml_id': 'stock.location_pack_zone',
-                'record': obj().env.ref('stock.warehouse0').wh_pack_stock_loc_id,
+                'xml_id': 'stock.location_clean_zone',
+                'record': obj().env.ref('stock.warehouse0').wh_clean_stock_loc_id,
                 'noupdate': True,
             }, {
                 'xml_id': 'stock.picking_type_internal',
