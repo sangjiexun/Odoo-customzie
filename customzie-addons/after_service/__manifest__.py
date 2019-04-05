@@ -5,7 +5,7 @@
     'version': '12.0.1.0',
     'category': '',
     'author': "youshinan",
-    'depends': ['base', 'sale', 'stock', 'production_line'],
+    'depends': ['base', 'sale', 'stock', 'production_line','mail'],
     'application': True,
     'license': 'LGPL-3',
     'data': [
@@ -13,10 +13,9 @@
         'views/after_service_templates.xml',
         'data/treatment_data.xml',
         'data/ir_sequence_data.xml',
-        'report/after_service_reports.xml',
-        'report/after_service_templates.xml',
         'security/after_service_security.xml',
         'security/ir.model.access.csv',
+        'reports/after_service_report.xml'
 
     ],
 }
