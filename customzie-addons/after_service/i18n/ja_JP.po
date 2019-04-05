@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-09 18:05+0000\n"
-"PO-Revision-Date: 2019-03-09 18:05+0000\n"
+"POT-Creation-Date: 2019-04-05 15:14+0000\n"
+"PO-Revision-Date: 2019-04-05 15:14+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,16 +16,39 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_needaction
+msgid "Action Needed"
+msgstr "要アクション"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__activity_ids
+msgid "Activities"
+msgstr "活動"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__activity_state
+msgid "Activity State"
+msgstr "活動状態"
+
+#. module: after_service
 #: model:ir.actions.act_window,name:after_service.action_after_service
+#: model:ir.actions.report,name:after_service.action_after_service_report
 #: model:ir.model,name:after_service.model_after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__name
+#: model:ir.model.fields,field_description:after_service.field_stock_move__after_service_id
 #: model:ir.module.category,name:after_service.module_after_service_category
 #: model:ir.ui.menu,name:after_service.after_service_menu_root
 #: model:ir.ui.menu,name:after_service.menu_after_service
 #: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
 #: model_terms:ir.ui.view,arch_db:after_service.after_service_tree_view
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 msgid "After Service"
 msgstr "アフターサービス"
+
+#. module: after_service
+#: model:ir.actions.act_window,name:after_service.action_after_service_aggregate
+msgid "After Service Aggregate"
+msgstr "種別統計"
 
 #. module: after_service
 #: model:res.groups,name:after_service.after_service_group_manager
@@ -33,9 +56,30 @@ msgid "After Service Manager"
 msgstr ""
 
 #. module: after_service
+#: model:ir.ui.menu,name:after_service.menu_after_service_report
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_aggregate_tree_view
+msgid "After Service Report"
+msgstr "レポーティング"
+
+#. module: after_service
 #: model:res.groups,name:after_service.after_service_group_user
 msgid "After Service User"
 msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__date_approve
+msgid "Approval Date"
+msgstr "承認日"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+msgid "Approve Order"
+msgstr "オーダー承認"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_attachment_count
+msgid "Attachment Count"
+msgstr "添付数"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__barcode
@@ -43,14 +87,34 @@ msgid "Barcode"
 msgstr "バーコード"
 
 #. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+msgid "Cancel"
+msgstr "取消"
+
+#. module: after_service
+#: selection:after.service,state:0
+msgid "Cancelled"
+msgstr "取り消す"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+msgid "Confirm Order"
+msgstr "オーダ確認"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+msgid "Create Date"
+msgstr "作成日"
+
+#. module: after_service
 #: model_terms:ir.actions.act_window,help:after_service.action_after_service
 msgid "Create a new after service"
-msgstr ""
+msgstr "新しいアフターサービ帳票を作成する"
 
 #. module: after_service
 #: model_terms:ir.actions.act_window,help:after_service.action_treatment_book
 msgid "Create a new treatment"
-msgstr ""
+msgstr "新しい処置を作成する"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__create_uid
@@ -71,10 +135,50 @@ msgid "Display Name"
 msgstr "表示名"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_follower_ids
+msgid "Followers"
+msgstr "フォロワー"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "フォロワー (チャネル)"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "フォロワー (取引先)"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+msgid "Group By"
+msgstr "グループ化"
+
+#. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__id
 #: model:ir.model.fields,field_description:after_service.field_treatment_book__id
 msgid "ID"
 msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__message_unread
+msgid "If checked new messages require your attention."
+msgstr "チェックされている場合は、新しいメッセージに注意が必要です。"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "チェックされている場合は、新しいメッセージに注意が必要です。"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_is_follower
+msgid "Is Follower"
+msgstr "フォロー中　"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service____last_update
@@ -95,9 +199,99 @@ msgid "Last Updated on"
 msgstr "最終更新日"
 
 #. module: after_service
-#: model:ir.model.fields,field_description:after_service.field_after_service__state
-msgid "Status"
-msgstr "ステータス"
+#: selection:after.service,state:0
+msgid "Locked"
+msgstr "ロック"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_has_error
+msgid "Message Delivery error"
+msgstr "メッセージ配信エラー"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_ids
+msgid "Messages"
+msgstr "メッセージ"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__move_id
+msgid "Move"
+msgstr "移動"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__move_id
+msgid "Move created by the After service"
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "次の活動期限"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__activity_summary
+msgid "Next Activity Summary"
+msgstr "次の活動サマリ"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__activity_type_id
+msgid "Next Activity Type"
+msgstr "次の活動タイプ"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_needaction_counter
+msgid "Number of Actions"
+msgstr "アクションの数"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_has_error_counter
+msgid "Number of error"
+msgstr "エラー数"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "アクションを必要とするメッセージの数"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "配信エラーのメッセージ数"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__message_unread_counter
+msgid "Number of unread messages"
+msgstr "未読メッセージ件数"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__order_note
+msgid "Order Note"
+msgstr "注文メモ"
+
+#. module: after_service
+#: selection:after.service,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__partner_name
+msgid "Partner Name"
+msgstr "取引先名"
+
+#. module: after_service
+#: selection:after.service,activity_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+msgid "Print After Service"
+msgstr "印刷"
 
 #. module: after_service
 #: selection:after.service,state:0
@@ -105,14 +299,9 @@ msgid "Quotation"
 msgstr "見積"
 
 #. module: after_service
-#: selection:after.service,state:0
-msgid "To Approve"
-msgstr "照査"
-
-#. module: after_service
-#: selection:after.service,state:0
-msgid "Locked"
-msgstr "承認"
+#: model:ir.model.fields,field_description:after_service.field_after_service__activity_user_id
+msgid "Responsible User"
+msgstr "担当者"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__saleOrderFilter
@@ -121,8 +310,46 @@ msgstr "注文検索"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__order_id
-msgid "Sale Order"
-msgstr "販売オーダ"
+msgid "Sale Order Id"
+msgstr "販売オーダー番号"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+msgid "Search After Service"
+msgstr ""
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+msgid "Set to Draft"
+msgstr "ドラフトに設定"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__state
+msgid "Status"
+msgstr "ステータス"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: after_service
+#: model:ir.model,name:after_service.model_stock_move
+msgid "Stock Move"
+msgstr "在庫移動"
+
+#. module: after_service
+#: selection:after.service,state:0
+msgid "To Approve"
+msgstr "承認"
+
+#. module: after_service
+#: selection:after.service,activity_state:0
+msgid "Today"
+msgstr "本日"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_treatment_book__name
@@ -150,37 +377,75 @@ msgid "Treatment Type"
 msgstr "処置分類"
 
 #. module: after_service
-#: model:ir.model.fields,field_description:after_service.field_after_service__partner_name
-msgid "Partner Name"
-msgstr "お客様"
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_unread
+msgid "Unread Messages"
+msgstr "未読メッセージ"
 
 #. module: after_service
-#: model:ir.model.fields,field_description:after_service.field_after_service__order_note
-msgid "Order Note"
-msgstr "注文メモ"
+#: model:ir.model.fields,field_description:after_service.field_after_service__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "未読メッセージカウンター"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__website_message_ids
+msgid "Website Messages"
+msgstr "ウェブサイトメッセージ"
+
+#. module: after_service
+#: model:ir.model.fields,help:after_service.field_after_service__website_message_ids
+msgid "Website communication history"
+msgstr "ウェブサイトコミュニケーション履歴"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
-msgid "Create Date"
-msgstr "問い合わせ日"
-
-#. module: after_service
 #: model:treatment.book,name:after_service.treatment_book_exchange
 msgid "exchange"
 msgstr "交換"
 
 #. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:treatment.book,name:after_service.treatment_book_repair
 msgid "repair"
 msgstr "修理"
 
 #. module: after_service
-#: model:treatment.book,name:after_service.treatment_book_return
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+#: model:treatment.book,name:after_service.treatment_book_return
 msgid "return"
 msgstr "返品"
 
 #. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:treatment.book,name:after_service.treatment_book_treat
 msgid "treat"
 msgstr "処置"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
+msgid "Customer Name"
+msgstr "お客様："
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
+msgid "After Service No"
+msgstr "アフターサービス番号："
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
+msgid "Bar Code"
+msgstr "バーコード："
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
+msgid "Treatment Id"
+msgstr "処置分類："
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
+msgid "Order Note"
+msgstr "注文メモ："
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
+msgid "Sale Order No"
+msgstr "販売オーダー番号："
