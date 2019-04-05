@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError, ValidationError
 from odoo.exceptions import Warning
 
@@ -55,6 +55,7 @@ class AfterService(models.Model):
             self.order_id=self.saleOrderFilter.name
             self.partner_name = self.saleOrderFilter.partner_id.name
             self.order_note = self.saleOrderFilter.note
+            #self.order_amount_total = self.saleOrderFilter.total
 
     @api.onchange('treatment_book_id')
     def onchange_treatment_book_id(self):
@@ -63,7 +64,7 @@ class AfterService(models.Model):
 
     @api.multi
     def print_after_service(self):
-        return self.env.ref('after_service.action_report_after_service').report_action(self)
+        return self.env.ref('after_service.action_after_service_report').report_action(self)
 
     @api.multi
     def button_approve(self, force=False):
