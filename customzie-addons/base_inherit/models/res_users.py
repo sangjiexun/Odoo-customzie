@@ -18,10 +18,7 @@ class Users(models.Model):
     def create(self, vals_list):
         users = super(Users, self.with_context(default_customer=False)).create(vals_list)
         for user in users:
-            user.partner_id.active = user.active
             user.update({'user_barcode': self._get_next_user_barcode()})
-            if user.partner_id.company_id:
-                user.partner_id.write({'company_id': user.company_id.id})
         return users
 
     @api.model
