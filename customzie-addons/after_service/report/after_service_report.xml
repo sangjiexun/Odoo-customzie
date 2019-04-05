@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data noupdate="1">
+      <report id="action_after_service_report"
+          string="After Service"
+          model="after.service"
+          report_type="qweb-pdf"
+          name="after_service.report_after_service_template" />
+
+          <template id="report_after_service_template">
+            <t t-call="web.html_container">
+              <t t-call="web.external_layout">
+
+                <div class="page">
+                  <!-- Report header content -->
+                  <div class="html_container">
+                    <t t-foreach="docs" t-as="o">
+                      <!-- Report row content -->
+                      <div class="col-3">
+                        <h4><span t-field="o.saleOrderFilter" /></h4>
+                      </div>
+                      <div class="row">
+                        <div class="col-2">After Service No</div>
+                        <span t-field="o.partner_name" />
+                        <div class="col-2">Customer Name</div>
+                        <span t-field="o.partner_name" />
+                      </div>
+                      <div class="row">
+                        <div class="col-2">Sale Order No</div>
+                        <span t-field="o.order_id" />
+                        <div class="col-2">Bar Code</div>
+                        <span t-field="o.barcode" />
+                      </div>
+                      <div class="row">
+                        <div class="col-2">Order Note</div>
+                        <span t-field="o.order_note" />
+                        <div class="col-2">Treatment Id</div>
+                        <span t-field="o.treatment_book_id" />
+                      </div>
+                      <div class="col-2">
+                        <span t-field="o.treatment_remark" />
+                      </div>
+                    </t>
+                  <!-- Report footer content -->
+                  </div>
+                </div>
+              </t>
+            </t>
+          </template>
+        </data>
+</odoo>
