@@ -32,6 +32,7 @@
                         <field name="treatment_book_id" />
                     </group>
                     <field name="treatment_remark" ref="treatment.book.treatment_book"/>
+                    <!--<field name="order_amount_total" />-->
                 </group>
             </sheet>
             <!-- mail mixin fields -->
@@ -48,7 +49,22 @@
         <field name="name">after.service.tree</field>
         <field name="model">after.service</field>
         <field name="arch" type="xml">
-            <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'">
+            <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'" >
+                <field name="name" />
+                <field name="order_id" />
+                <field name="barcode" />
+                <field name="treatment_book_id" />
+                <field name="state"/>
+                <field name="create_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="after_service_aggregate_tree_view" model="ir.ui.view">
+        <field name="name">after.service.aggregate.tree</field>
+        <field name="model">after.service</field>
+        <field name="arch" type="xml">
+            <tree string="After Service Report" create="false" edit="false" delete="false" >
                 <field name="name" />
                 <field name="order_id" />
                 <field name="barcode" />
@@ -99,6 +115,9 @@
                 <field name="partner_name"/>
                 <field name="treatment_book_id"/>
                 <filter string="return" name="treatment_book_return" domain="[('treatment_book_id','=','返品')]"/>
+                <filter string="repair" name="treatment_book_repair" domain="[('treatment_book_id','=','修理')]"/>
+                <filter string="exchange" name="treatment_book_exchange" domain="[('treatment_book_id','=','交換')]"/>
+                <filter string="treat" name="treatment_book_treat" domain="[('treatment_book_id','=','処置')]"/>
                 <separator/>
                 <group expand="0" string="Group By">
                     <filter string="Create Date" name="order_date" domain="[]" context="{'group_by':'create_date'}"/>
@@ -107,15 +126,6 @@
         </field>
     </record>
 
-    <!--record id="after_service_view_search" model="ir.ui.view">
-        <field name="name">after.service.search</field>
-        <field name="model">after.service</field>
-        <field name="mode">primary</field>
-        <field name="inherit_id" ref="after.service.view_after_service_filter"/>
-        <field name="arch" type="xml">
-        </field>
-    </record-->
-
     <!-- Action to open the after service -->
     <record id="action_after_service" model="ir.actions.act_window">
         <field name="name">After Service</field>
@@ -123,13 +133,17 @@
         <field name="res_model">after.service</field>
         <field name="view_mode">tree,form</field>
         <field name="view_type">form</field>
-        <!--field name="view_id" ref="after.service.after_service_form_view"/>
-        <field name="search_view_id" ref="after.service.after_service_view_search"/-->
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new after service
-            </p>
-        </field>
+        <field name="view_id" ref="after_service.after_service_tree_view"/>
+
+    </record>
+
+    <!-- Action to open the after service -->
+    <record id="action_after_service_aggregate" model="ir.actions.act_window">
+        <field name="name">After Service Aggregate</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">after.service</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="after_service.after_service_aggregate_tree_view"/>
     </record>
 
     <!-- Action to open the treatment book -->
@@ -139,15 +153,12 @@
         <field name="res_model">treatment.book</field>
         <field name="view_mode">tree,form</field>
         <field name="view_type">form</field>
-        <!--field name="view_id" ref="after.service.after_service_form_view"/>
-        <field name="search_view_id" ref="after.service.after_service_view_search"/-->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create a new treatment
             </p>
         </field>
     </record>
-
 
     <!-- Top menu item -->
     <menuitem id="after_service_menu_root"
@@ -166,4 +177,11 @@
         parent="after_service_menu_root"
         action="action_treatment_book"
         sequence="3"/>
+
+    <menuitem id="menu_after_service_report"
+        name="After Service Report"
+        parent="after_service_menu_root"
+        action="action_after_service_aggregate"
+        sequence="4"/>
+
 </odoo>
