@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <!-- treatment book default data -->
         <record id="treatment_book_return" model="treatment.book">
             <field name="name">return</field>
-            <field name="treatment_book">ReturnsReturnsReturnsReturnsReturnsReturns</field>
+            <field name="treatment_book">返品に関する処置書の詳細内容を表示する</field>
         </record>
         <record id="treatment_book_repair" model="treatment.book">
             <field name="name">repair</field>
-            <field name="treatment_book">repairrepairrepairrepairrepairrepairrepai</field>
+            <field name="treatment_book">修理に関する処置書の詳細内容を表示する</field>
         </record>
         <record id="treatment_book_exchange" model="treatment.book">
             <field name="name">exchange</field>
-            <field name="treatment_book">exchangeexchangeexchangeexchangeexchange</field>
+            <field name="treatment_book">交換に関する処置書の詳細内容を表示する</field>
         </record>
         <record id="treatment_book_treat" model="treatment.book">
             <field name="name">treat</field>
-            <field name="treatment_book">treattreattreattreattreattreattreattreat</field>
+            <field name="treatment_book">適切な処置に関する処置書の詳細内容を表示する</field>
         </record>
     </data>
 </odoo>
