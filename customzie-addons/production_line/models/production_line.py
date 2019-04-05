@@ -134,21 +134,20 @@ class ProductionLine(models.Model):
         ('cancel', 'Cancelled')
     ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
-
     @api.depends('product_no')
     @api.model
     def _get_next_user_barcode(self):
         for line in self:
-            line.serial_no = self.search([('product_no', '=', line.product_no)], limit=1).serial_no
-            if line.serial_no:
-                line.serial_no
-            else:
-                line.serial_no = '0000001'
+            rec = self.search([('product_no', '=', line.product_no)], order="serial_no", limit=1)
+            if rec:
+                return str(int(rec.serial_no) + 1)
+            return '0000001'
 
     @api.depends('product_no', 'serial_no')
     def _compute_barcode(self):
         for line in self:
             line.barcode = str(line.product_no) + str(line.serial_no)
+
 
 
 

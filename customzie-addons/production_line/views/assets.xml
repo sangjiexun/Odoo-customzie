@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend_inherit_production" inherit_id="web.assets_backend" name="Production backend assets">
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/production_line/static/src/js/jquery-barcode.min.js"></script>
+            <script type="text/javascript" src="/production_line/static/src/js/user-barcode.js"></script>
+        </xpath>
+    </template>
+</odoo>
