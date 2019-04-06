@@ -15,7 +15,7 @@
         'data/ir_sequence_data.xml',
         'security/after_service_security.xml',
         'security/ir.model.access.csv',
-        'reports/after_service_report.xml'
+        'report/after_service_report.xml'
 
     ],
 }

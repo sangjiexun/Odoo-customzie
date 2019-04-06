@@ -6,6 +6,8 @@
         <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='barcode']" position="after">
+                <field name="marker_name" />
+                <field name="marker_product_no" />
                 <field name="product_no" />
             </xpath>
         </field>
@@ -17,8 +19,23 @@
         <field name="inherit_id" ref="product.product_normal_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='barcode']" position="after">
+                <field name="marker_name" />
+                <field name="marker_product_no" />
                 <field name="product_no" />
             </xpath>
         </field>
     </record>
+    <record id="product_search_inherit_form_view" model="ir.ui.view">
+        <field name="name">product.product.search.inherit</field>
+        <field name="model">product.product</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="product.product_search_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="marker_name" string="Marker Name"/>
+                <field name="marker_product_no" string="Marker Product No"/>
+            </field>
+        </field>
+    </record>
+
 </odoo>

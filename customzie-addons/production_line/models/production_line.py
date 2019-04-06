@@ -17,29 +17,25 @@ class ProductionOperation(models.Model):
     action_name = fields.Char('Action Name')
     production_line = fields.One2many('production.line', 'operation_id', string='Production Lines', copy=True)
     # Statistics for the kanban view
-    count_picking_inventory = fields.Integer(compute='_compute_picking_inventory')
+    count_picking_inventory = fields.Integer(compute='_compute_picking_inventory', store=True)
     count_picking_pick = fields.Integer(compute='_compute_picking_pick')
     count_picking_manufacture = fields.Integer(compute='_compute_picking_manufacture')
     count_picking_clean = fields.Integer(compute='_compute_picking_clean')
     count_picking_delivery = fields.Integer(compute='_compute_picking_delivery')
 
-    @api.onchange('production.line.need_inventory', 'production.line.inventory_uid', 'production.line.inventory_date')
+    @api.multi
     def _compute_picking_inventory(self):
         return self.env['production.line'].search_count([('need_inventory', '=', True), ('state', '=', 'draft')])
 
-    @api.multi
     def _compute_picking_pick(self):
         return self.env['production.line'].search_count([('need_pick', '=', True), ('state', '=', 'inventory')])
 
-    @api.multi
     def _compute_picking_manufacture(self):
         return self.env['production.line'].search_count([('need_manufacture', '=', True), ('state', '=', 'inventory')])
 
-    @api.multi
     def _compute_picking_clean(self):
         return self.env['production.line'].search_count([('need_clean', '=', True), ('state', '=', 'inventory' or 'manufactured')])
 
-    @api.multi
     def _compute_picking_delivery(self):
         return self.env['production.line'].search_count([('need_delivery', '=', True), ('state', '=', 'inventory' or 'cleaned' or 'inventory')])
 
@@ -119,7 +115,7 @@ class ProductionLine(models.Model):
         'Bom Production')
 
     # after service
-    after_service_id = fields.Many2one('after.service', string='After Service', ondelete='set null')
+    # after_service_id = fields.Many2one('after.service', string='After Service', ondelete='set null')
 
     state = fields.Selection([
         ('draft', 'New'),
@@ -152,6 +148,26 @@ class ProductionLine(models.Model):
     def _compute_barcode(self):
         for line in self:
             line.barcode = str(line.product_no) + str(line.serial_no)
+
+    @api.onchange('inventory_date', 'pick_date', 'manufacture_date', 'clean_date', 'delivery_date')
+    def _compute_picking(self):
+        """
+        Trigger the recompute of the Picking if the production is changed.
+        """
+        return self.env['production.operation']._compute_picking_inventory()
+
+
+class MarkerInfo(models.Model):
+
+    _name = 'marker.info'
+    _description = 'Marker Info'
+    _order = 'id'
+
+    name = fields.Char('Marker', required=True, index=True)
+
+
+
+
 
 
 

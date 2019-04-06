@@ -38,7 +38,7 @@
         <field name="name">production.operation.kanban</field>
         <field name="model">production.operation</field>
         <field name="arch" type="xml">
-            <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
+            <kanban class="oe_background_grey o_kanban_dashboard o_account_kanban" create="false">
                 <field name="name"/>
                 <field name="color"/>
                 <field name="sequence"/>
@@ -54,31 +54,21 @@
                                 <div t-attf-class="o_kanban_card_header">
                                     <div class="o_kanban_card_header_title">
                                         <div class="o_primary">
-                                            <strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong>
-                                            <!--a type="object" name="get_stock_picking_action_picking_type">
+                                            <!--strong class="o_kanban_record_title"><span><t t-esc="record.name.value"/></span></strong-->
+                                            <a type="object" name="get_stock_picking_action_picking_type">
                                                 <field name="name"/>
-                                            </a-->
+                                            </a>
                                         </div>
-                                        <!--div class="o_secondary"><field class="o_secondary"  name="warehouse_id"/></div-->
                                     </div>
-                                    <!--div class="o_kanban_manage_button_section">
-                                        <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
-                                    </div-->
                                 </div>
                                 <div class="container o_kanban_card_content">
                                     <div class="row">
                                         <div class="col-6 o_kanban_primary_left">
                                             <button class="btn btn-primary" name="process" type="object">
-                                                <span> To Process <t t-esc="record.count_picking_inventory.value"/></span>
+                                                <span> To Process <t t-esc="record.count_picking_inventory.raw_value"/></span>
                                             </button>
-                                            <a name="get_action_picking_tree_waiting" type="object">
-                                                Waiting
-                                            </a>
                                         </div>
                                         <div class="col-6 o_kanban_primary_right">
-                                            <div t-if="record.count_picking_inventory.raw_value > 0" class="row">
-                                            </div>
-
                                             <div t-if="record.count_picking_inventory.raw_value > 0" class="row">
                                                 <div class="col-9">
                                                     <a name="waiting" type="object">
@@ -93,6 +83,21 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </t>
+                    <t t-name="OperationTop">
+                        <div t-attf-class="o_kanban_card_header">
+                            <div class="o_kanban_card_header_title">
+                                <div class="o_primary">
+                                    <a type="object" name="open_action"><field name="name"/></a>
+                                </div>
+                                <!--div class="o_secondary" t-att-title="dashboard.title">
+                                    <field name="type"/>
+                                </div-->
+                            </div>
+                            <!--div class="o_kanban_manage_button_section">
+                                <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" aria-label="Selection" role="img" title="Selection"/></a>
+                            </div-->
                         </div>
                     </t>
 
