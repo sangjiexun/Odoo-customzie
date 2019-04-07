@@ -183,7 +183,6 @@ class ProductionLine(models.Model):
         barcode.drawOn(c, x, y + 3.4*mm)
 
 
-
 class MarkerInfo(models.Model):
 
     _name = 'marker.info'

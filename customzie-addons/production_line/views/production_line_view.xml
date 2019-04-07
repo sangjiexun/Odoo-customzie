@@ -49,7 +49,7 @@
         <field name="name">production.line.tree</field>
         <field name="model">production.line</field>
         <field name="arch" type="xml">
-            <tree string="Production Line">
+            <tree string="Production Line" create="false" edit="false" delete="false">
                 <field name="barcode" />
                 <field name="inventory_uid" />
                 <field name="pick_uid" />
