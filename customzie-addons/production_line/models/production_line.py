@@ -171,7 +171,7 @@ class ProductionLine(models.Model):
             y = ymargin + sheight * (10 - (i // 4))
             self.draw_label(c, x, y, line.barcode)
             i += 1
-        c.save()
+        c.showPage()
 
     @staticmethod
     def draw_label(c, x, y, data):
