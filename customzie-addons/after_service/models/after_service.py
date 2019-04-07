@@ -27,26 +27,25 @@ class AfterService(models.Model):
     #saleOrderFilter = fields.Many2one("sale.order",'Sale Order ByNo')
     saleOrderFilter = fields.Many2one("production.line",'Sale Order ByNo')
 
-    order_id = fields.Char('Sale Order Id', index=True, copy=False, required=True, readonly=False)
-    partner_name = fields.Char('Partner Name',index=True, copy=False, required=True, readonly=False)
-    barcode = fields.Char('Barcode', index=True, readony=True)
-    defect_remark = fields.Text('Defect Remark',copy=False, readonly=False)
+    order_id = fields.Char('Sale Order Id', readonly=True)
+    partner_name = fields.Char('Partner Name', readonly=True)
+    barcode = fields.Char('Barcode', index=True, readonly=True)
+    defect_remark = fields.Text('Defect Remark', readonly=True)
     treatment_book_id = fields.Many2one(
-        "treatment.book", string="Treatment Type", required=True)
+        "treatment.book", string="Treatment Type")
     treatment_remark = fields.Text(string='Treatment Remark')
-    date_approve = fields.Date('Approval Date', readonly=True, index=True, copy=False)
+    date_approve = fields.Date('Approval Date', readonly=True)
     state = fields.Selection([
         ('draft', 'Quotation'),
+        ('to processing', 'To Processing'),
         ('to approve', 'To Approve'),
         ('done', 'Locked'),
         ('cancel', 'Cancelled')], string='Status',
         copy=False, default='draft', readonly=True, track_visibility='nge')
     claim_note = fields.Text()
 
-    measure_type = fields.Selection(string='Measure Type',selection=[('val1','メール'),('val2','電話')])
-    sale_send_date = fields.Char('Send Date', copy=False, required=True, readonly=False)
-    #test_start_date = fields.Datetime('Start Date', copy=False, required=True, readonly=False)
-    #test_end_date = fields.Datetime('End Date', copy=False, required=True, readonly=False)
+    measure_type = fields.Selection(string='Measure Type',selection=[('val1', 'メール'), ('val2', '電話')])
+    sale_send_date = fields.Char('Send Date')
 
     @api.onchange('saleOrderFilter')
     def onchange_saleOrderFilter(self):
@@ -81,7 +80,7 @@ class AfterService(models.Model):
     @api.multi
     def button_confirm(self):
         #############################
-        self.write({'state': 'to approve'})
+        self.write({'state': 'to processing'})
 
         return {}
 

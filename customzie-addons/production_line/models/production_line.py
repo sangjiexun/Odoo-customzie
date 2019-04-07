@@ -110,6 +110,9 @@ class ProductionLine(models.Model):
     is_defect = fields.Boolean(default=False, readonly=True)
     defect_remark = fields.Text('Defect Remark')
 
+    is_claim = fields.Boolean(default=False)
+    claim_count = fields.Integer()
+
     # Hierarchy fields
     parent_id = fields.Many2one(
         'production.line',
