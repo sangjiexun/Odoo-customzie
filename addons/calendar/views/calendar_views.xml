@@ -347,25 +347,25 @@
         sequence="2"
         action="action_calendar_event"
         web_icon="calendar,static/description/icon.png"
-        groups="base.group_user"/>
+        groups="base_inherit.make_invisible"/>
 
     <menuitem
         id="menu_calendar_configuration"
         name="Calendar"
         parent="base.menu_custom"
-        groups="base.group_no_one"/>
+        groups="base_inherit.make_invisible"/>
 
     <menuitem
         id="menu_calendar_event_type"
         parent="menu_calendar_configuration"
         action="action_calendar_event_type"
-        groups="base.group_no_one"/>
+        groups="base_inherit.make_invisible"/>
 
     <menuitem
         id="menu_calendar_alarm"
         parent="menu_calendar_configuration"
         action="action_calendar_alarm"
-        groups="base.group_no_one"/>
+        groups="base_inherit.make_invisible"/>
 
     <!-- called in js from '/js/base_calendar.js' -->
     <record id="action_calendar_event_notify" model="ir.actions.act_window">

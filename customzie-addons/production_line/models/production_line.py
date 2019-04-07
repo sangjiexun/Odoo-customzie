@@ -157,13 +157,6 @@ class ProductionLine(models.Model):
         for line in self:
             line.barcode = str(line.product_no) + str(line.serial_no)
 
-    @api.onchange('inventory_date', 'pick_date', 'manufacture_date', 'clean_date', 'delivery_date')
-    def _compute_picking(self):
-        """
-        Trigger the recompute of the Picking if the production is changed.
-        """
-        return self.env['production.operation']._compute_picking_inventory()
-
     @api.multi
     def print_barcode(self):
         c = canvas.Canvas("production_barcode_print.pdf", pagesize=A4)
