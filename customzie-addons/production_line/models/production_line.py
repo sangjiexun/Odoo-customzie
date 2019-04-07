@@ -159,7 +159,8 @@ class ProductionLine(models.Model):
 
     @api.multi
     def print_barcode(self):
-        c = canvas.Canvas("/opt/production_barcode_print.pdf", pagesize=A4)
+        FILENAME = '/opt/production_barcode_print.pdf'
+        c = canvas.Canvas(FILENAME, pagesize=A4)
         xmargin = 8.4 * mm
         ymargin = 8.8 * mm
         swidth = 48.3 * mm
@@ -171,6 +172,7 @@ class ProductionLine(models.Model):
             y = ymargin + sheight * (10 - (i // 4))
             self.draw_label(c, x, y, line.barcode)
             i += 1
+        c.showPage()
         c.save()
 
     @staticmethod
