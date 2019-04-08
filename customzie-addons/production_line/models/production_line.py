@@ -52,7 +52,7 @@ class ProductionLine(models.Model):
 
     name = fields.Char('Production Line')
     barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
-    serial_no = fields.Char('Serial No', compute='_get_next_user_barcode', store=True)
+    serial_no = fields.Char('Serial No')
 
     operation_id = fields.Many2one('production.operation', string='Production Oeration', index=True)
 
@@ -134,14 +134,19 @@ class ProductionLine(models.Model):
         ('cancel', 'Cancelled')
     ], string='Status', readonly=True, index=True, copy=False, default='draft', track_visibility='onchange')
 
-    @api.depends('product_no')
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super(ProductionLine, self).create(vals_list)
+        for line in lines:
+            line.update({'serial_no': self._get_next_serial_no(line.product_no)})
+        return lines
+
     @api.model
-    def _get_next_user_barcode(self):
-        for line in self:
-            rec = self.search([('product_no', '=', line.product_no)], order="serial_no", limit=1)
-            if rec:
-                return str(int(rec.serial_no) + 1)
-            return '0000001'
+    def _get_next_serial_no(self, product_no):
+        max_line = self.search([('product_no', '=', product_no), ('serial_no', '!=', False)], order="serial_no desc", limit=1)
+        if max_line:
+            return str(int(max_line.serial_no) + 1)
+        return '10000001'
 
     @api.depends('product_no', 'serial_no')
     def _compute_barcode(self):
