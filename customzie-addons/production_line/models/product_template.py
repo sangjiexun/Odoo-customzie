@@ -10,6 +10,9 @@ class ProductTemplate(models.Model):
         "marker.info", string="Marker Name")
     marker_product_no = fields.Char('Marker Product')
     product_no = fields.Char('Product No', required=True, index=True, copy=False, default='New')
+    ceo_price = fields.Float(
+        'Ceo Cost', company_dependent=True,
+        groups="base_inherit.group_ceo",)
 
     @api.model
     def create(self, vals):
