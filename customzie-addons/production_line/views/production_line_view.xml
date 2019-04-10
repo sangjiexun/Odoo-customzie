@@ -16,6 +16,17 @@
         </field>
     </record>
 
+    <record id="action_barcode_print_button" model="ir.actions.server">
+        <field name="name">Barcode Print</field>
+        <field name="model_id" ref="model_production_line"/>
+        <field name="binding_model_id" ref="model_production_line"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                records.print_barcode()
+        </field>
+    </record>
+
     <record id="production_operation_action" model="ir.actions.act_window">
         <field name="name">Operation Overview</field>
         <field name="res_model">production.operation</field>

@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
 from odoo.exceptions import Warning
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.units import mm
+from reportlab.graphics.barcode import code128
 
 
 class ProductionOperation(models.Model):
@@ -155,6 +159,32 @@ class ProductionLine(models.Model):
         Trigger the recompute of the Picking if the production is changed.
         """
         return self.env['production.operation']._compute_picking_inventory()
+
+    @api.multi
+    def print_barcode(self):
+        c = canvas.Canvas("production_barcode_print.pdf", pagesize=A4)
+        xmargin = 8.4 * mm
+        ymargin = 8.8 * mm
+        swidth = 48.3 * mm
+        sheight = 25.4 * mm
+        i = 0
+
+        for line in self:
+            x = xmargin + swidth * (i % 4)
+            y = ymargin + sheight * (10 - (i // 4))
+            self.draw_label(c, x, y, line.barcode)
+            i += 1
+        c.save()
+
+    @staticmethod
+    def draw_label(c, x, y, data):
+        c.setLineWidth(0.5)
+        c.rect(x, y, 48.3*mm, 25.4*mm, stroke=1, fill=0)
+        c.setFont("Courier-Bold", 8)
+        c.drawString(x + 14.6*mm, y + 13.4*mm, data)
+        barcode = code128.Code128("*"+data+"*", barWidth=0.26*mm, barHeight=8.0*mm, checksum=False)
+        barcode.drawOn(c, x, y + 3.4*mm)
+
 
 
 class MarkerInfo(models.Model):
