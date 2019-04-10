@@ -21,27 +21,31 @@ class ProductionOperation(models.Model):
     action_name = fields.Char('Action Name')
     production_line = fields.One2many('production.line', 'operation_id', string='Production Lines', copy=True)
     # Statistics for the kanban view
-    count_picking_inventory = fields.Integer(compute='_compute_picking_inventory', store=True)
+    count_picking_inventory = fields.Integer(compute='_compute_picking_inventory')
     count_picking_pick = fields.Integer(compute='_compute_picking_pick')
     count_picking_manufacture = fields.Integer(compute='_compute_picking_manufacture')
     count_picking_clean = fields.Integer(compute='_compute_picking_clean')
     count_picking_delivery = fields.Integer(compute='_compute_picking_delivery')
 
-    @api.multi
+    @api.one
     def _compute_picking_inventory(self):
-        return self.env['production.line'].search_count([('need_inventory', '=', True), ('state', '=', 'draft')])
-
+        self.count_picking_inventory = self.env['production.line'].search_count([('need_inventory', '=', True), ('state', '=', 'draft')])
+    
+    @api.one
     def _compute_picking_pick(self):
-        return self.env['production.line'].search_count([('need_pick', '=', True), ('state', '=', 'inventory')])
+        self.count_picking_pick = self.env['production.line'].search_count([('need_pick', '=', True), ('state', '=', 'inventory')])
 
+    @api.one
     def _compute_picking_manufacture(self):
-        return self.env['production.line'].search_count([('need_manufacture', '=', True), ('state', '=', 'inventory')])
-
+        self.count_picking_manufacture = self.env['production.line'].search_count([('need_manufacture', '=', True), ('state', '=', 'inventory')])
+ 
+    @api.one
     def _compute_picking_clean(self):
-        return self.env['production.line'].search_count([('need_clean', '=', True), ('state', '=', 'inventory' or 'manufactured')])
+        self.count_picking_clean = self.env['production.line'].search_count([('need_clean', '=', True), ('state', '=', 'inventory' or 'manufactured')])
 
+    @api.one
     def _compute_picking_delivery(self):
-        return self.env['production.line'].search_count([('need_delivery', '=', True), ('state', '=', 'inventory' or 'cleaned' or 'inventory')])
+        self.count_picking_delivery = self.env['production.line'].search_count([('need_delivery', '=', True), ('state', '=', 'inventory' or 'cleaned' or 'inventory')])
 
 
 class ProductionLine(models.Model):
