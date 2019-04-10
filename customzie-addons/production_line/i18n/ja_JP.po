@@ -1,0 +1,511 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* production_line
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-30 01:52+0000\n"
+"PO-Revision-Date: 2019-03-30 01:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: production_line
+#: model_terms:ir.ui.view,arch_db:production_line.production_operation_kanban
+msgid "<span> To Process</span>"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__active
+msgid "Active"
+msgstr "有効"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__after_service_id
+msgid "After Service"
+msgstr "アフターサービス"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__barcode
+msgid "Barcode"
+msgstr "バーコード"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__child_ids
+msgid "Bom Production"
+msgstr "製造Bom"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Cancelled"
+msgstr "取消"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__clean_date
+msgid "Clean Date"
+msgstr "清掃日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__clean_name
+msgid "Clean Name"
+msgstr "清掃単"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__clean_uid
+msgid "Clean Uid"
+msgstr "清掃担当"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Cleaned"
+msgstr "清掃済"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__color
+msgid "Color"
+msgstr "色"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__count_picking_clean
+msgid "Count Picking Clean"
+msgstr "清掃数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__count_picking_delivery
+msgid "Count Picking Delivery"
+msgstr "出荷数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__count_picking_inventory
+msgid "Count Picking Inventory"
+msgstr "入庫数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__count_picking_manufacture
+msgid "Count Picking Manufacture"
+msgstr "製造数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__count_picking_pick
+msgid "Count Picking Pick"
+msgstr "出庫数"
+
+#. module: production_line
+#: model_terms:ir.actions.act_window,help:production_line.production_operation_action
+msgid "Create a new operation type"
+msgstr ""
+
+#. module: production_line
+#: model_terms:ir.actions.act_window,help:production_line.action_operation
+msgid "Create a new production"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__create_uid
+#: model:ir.model.fields,field_description:production_line.field_production_operation__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__create_date
+#: model:ir.model.fields,field_description:production_line.field_production_operation__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__sale_order_partner_id
+msgid "Customer"
+msgstr "顧客"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Defect"
+msgstr "瑕疵"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__defect_remark
+msgid "Defect Remark"
+msgstr "瑕疵コメント"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Delivery"
+msgstr "配送"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__delivery_date
+msgid "Delivery Date"
+msgstr "配送日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__delivery_name
+msgid "Delivery Name"
+msgstr "配送単"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__delivery_uid
+msgid "Delivery Uid"
+msgstr "出荷担当"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__display_name
+#: model:ir.model.fields,field_description:production_line.field_production_operation__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__id
+#: model:ir.model.fields,field_description:production_line.field_production_operation__id
+msgid "ID"
+msgstr ""
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Inventory"
+msgstr "入荷"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__inventory_date
+msgid "Inventory Date"
+msgstr "在庫調整日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__inventory_name
+msgid "Inventory Name"
+msgstr "入荷日単"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__inventory_uid
+msgid "Inventory Uid"
+msgstr "入荷担当"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__is_clean
+msgid "Is Clean"
+msgstr "清掃必要"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__is_defect
+msgid "Is Defect"
+msgstr "瑕疵品"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line____last_update
+#: model:ir.model.fields,field_description:production_line.field_production_operation____last_update
+msgid "Last Modified on"
+msgstr "最終更新日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__write_uid
+#: model:ir.model.fields,field_description:production_line.field_production_operation__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__write_date
+#: model:ir.model.fields,field_description:production_line.field_production_operation__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__manufacture_date
+msgid "Manufacture Date"
+msgstr "製造日"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__manufacture_name
+msgid "Manufacture Name"
+msgstr "製造単"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__manufacture_uid
+msgid "Manufacture Uid"
+msgstr "製造担当"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Manufactured"
+msgstr "製造済"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__need_clean
+msgid "Need Clean"
+msgstr "待清掃数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__need_delivery
+msgid "Need Delivery"
+msgstr "待配送数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__need_inventory
+msgid "Need Inventory"
+msgstr "待入庫数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__need_manufacture
+msgid "Need Manufacture"
+msgstr "待製造数"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__need_pick
+msgid "Need Pick"
+msgstr "待出庫数"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "New"
+msgstr "新規"
+
+#. module: production_line
+#: model:ir.actions.act_window,name:production_line.action_operation
+#: model:ir.ui.menu,name:production_line.operation_menu_root
+msgid "Operation"
+msgstr "作業"
+
+#. module: production_line
+#: model:ir.ui.menu,name:production_line.menu_operation_clean
+msgid "Operation Clean"
+msgstr "清掃作業"
+
+#. module: production_line
+#: model:ir.ui.menu,name:production_line.menu_operation_delivery
+msgid "Operation Delivery"
+msgstr "出荷作業"
+
+#. module: production_line
+#: model:ir.ui.menu,name:production_line.menu_operation_inventory
+msgid "Operation Inventory"
+msgstr "入荷作業"
+
+#. module: production_line
+#: model:ir.ui.menu,name:production_line.menu_operation_manufacture
+msgid "Operation Manufacture"
+msgstr "製造作業"
+
+#. module: production_line
+#: model:ir.actions.act_window,name:production_line.production_operation_action
+msgid "Operation Overview"
+msgstr "作業概要"
+
+#. module: production_line
+#: model:ir.ui.menu,name:production_line.menu_operation_pick
+msgid "Operation Pick"
+msgstr "出庫"
+
+#. module: production_line
+#: model:ir.ui.menu,name:production_line.menu_operation
+msgid "Overview"
+msgstr "概要"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__parent_id
+msgid "Parent Production"
+msgstr "製造品"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__pick_date
+msgid "Pick Date"
+msgstr "出庫日時"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__pick_name
+msgid "Pick Name"
+msgstr "出庫単"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__pick_uid
+msgid "Pick Uid"
+msgstr "出庫担当"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Picked"
+msgstr "出庫"
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_product_product
+#: model:ir.model.fields,field_description:production_line.field_production_line__product_id
+msgid "Product"
+msgstr "プロダクト"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_product_product__product_no
+#: model:ir.model.fields,field_description:production_line.field_product_template__product_no
+#: model:ir.model.fields,field_description:production_line.field_production_line__product_no
+msgid "Product No"
+msgstr "製品番号"
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_product_template
+msgid "Product Template"
+msgstr "プロダクトテンプレート"
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__name
+#: model:ir.module.category,name:production_line.module_production_line_category
+msgid "Production Line"
+msgstr ""
+
+#. module: production_line
+#: model:res.groups,name:production_line.production_group_manager
+msgid "Production Manager"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__name
+msgid "Production Operation"
+msgstr ""
+
+#. module: production_line
+#: model:res.groups,name:production_line.production_group_user
+msgid "Production User"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_production_history
+msgid "Production history"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_production_operation
+msgid "Production operation"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_purchase_order
+#: model:ir.model.fields,field_description:production_line.field_production_line__purchase_order_id
+msgid "Purchase Order"
+msgstr "購買オーダ"
+
+#. module: production_line
+#: model:ir.model,name:production_line.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "購買オーダ明細"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__purchase_price_unit
+msgid "Purchase Price"
+msgstr "購買価格"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__purchase_order_line_id
+msgid "Purchase Reference"
+msgstr ""
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Returned"
+msgstr "返品"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__sale_order_id
+msgid "Sale Order"
+msgstr "販売オーダ"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__sale_price_unit
+msgid "Sale Price"
+msgstr "販売価格"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__sale_order_line_id
+msgid "Sale Reference"
+msgstr ""
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_operation__sequence
+msgid "Sequence"
+msgstr "付番"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__serial_no
+msgid "Serial No"
+msgstr "シリアル"
+
+#. module: production_line
+#: selection:production.line,state:0
+msgid "Sold"
+msgstr "販売済"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__state
+msgid "Status"
+msgstr "ステータス"
+
+#. module: production_line
+#: model:ir.model.fields,field_description:production_line.field_production_line__purchase_partner_id
+msgid "Supplier"
+msgstr "仕入先"
+
+#. module: production_line
+#: model_terms:ir.actions.act_window,help:production_line.production_operation_action
+msgid "The operation type system allows you to assign each stock\n"
+"            operation a specific type which will alter its views accordingly.\n"
+"            On the operation type you could e.g. specify if packing is needed by default,\n"
+"            if it should show the customer."
+msgstr ""
+
+#. module: production_line
+#: code:addons/production_line/models/purchase.py:30
+#, python-format
+msgid "Unable to cancel purchase order %s as some receptions have already been done."
+msgstr ""
+
+#. module: production_line
+#: model:ir.model.fields,help:production_line.field_production_operation__sequence
+msgid "Used to order the 'All Operations' kanban view"
+msgstr "「全てのオペレーション」かんばんビューの並び順調整に使用"
+
+#. module: production_line
+#: model_terms:ir.ui.view,arch_db:production_line.production_operation_kanban
+msgid "Waiting"
+msgstr "待機中"
+
+#. module: production_line
+#: model:ir.model.fields,help:production_line.field_production_line__sale_order_partner_id
+msgid "You can find a customer by its Name, TIN, Email or Internal Reference."
+msgstr ""
+
+#. module: production_line
+#: model:ir.model.fields,help:production_line.field_production_line__purchase_partner_id
+msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
+msgstr ""
+
+#. module: production_line
+#: code:addons/production_line/models/purchase.py:57
+#, python-format
+msgid "You must set a Vendor Location for this partner %s"
+msgstr ""
+
+#. module: production_line
+#: model:production.operation,name:production_line.operation_clean
+msgid "operation clean"
+msgstr "清掃"
+
+#. module: production_line
+#: model:production.operation,name:production_line.operation_delivery
+msgid "operation delivery"
+msgstr "配送"
+
+#. module: production_line
+#: model:production.operation,name:production_line.operation_inventory
+msgid "operation inventory"
+msgstr "入庫"
+
+#. module: production_line
+#: model:production.operation,name:production_line.operation_manufacture
+msgid "operation manufacture"
+msgstr "組立"
+
+#. module: production_line
+#: model:production.operation,name:production_line.operation_pick
+msgid "operation pick"
+msgstr "出庫"
+
