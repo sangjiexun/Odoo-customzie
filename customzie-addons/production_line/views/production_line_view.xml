@@ -45,6 +45,26 @@
         </field>
     </record>
 
+    <record id="production_line_tree_view" model="ir.ui.view">
+        <field name="name">production.line.tree</field>
+        <field name="model">production.line</field>
+        <field name="arch" type="xml">
+            <tree string="Production Line">
+                <field name="barcode" />
+                <field name="inventory_uid" />
+                <field name="pick_uid" />
+                <field name="manufacture_uid" />
+                <field name="clean_uid"/>
+                <field name="delivery_uid"/>
+                <field name="sale_order_id"/>
+                <field name="sale_order_partner_id"/>
+                <field name="sale_price_unit"/>
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+
     <record model="ir.ui.view" id="production_operation_kanban">
         <field name="name">production.operation.kanban</field>
         <field name="model">production.operation</field>
