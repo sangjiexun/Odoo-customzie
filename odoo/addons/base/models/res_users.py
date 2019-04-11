@@ -8,6 +8,8 @@ import ipaddress
 import itertools
 import logging
 import hmac
+import random
+import string
 
 from collections import defaultdict
 from hashlib import sha256
@@ -204,9 +206,9 @@ class Users(models.Model):
     __uid_cache = defaultdict(dict)             # {dbname: {uid: password}}
 
     # User can write on a few of his own fields (but not his groups for example)
-    SELF_WRITEABLE_FIELDS = ['signature', 'action_id', 'company_id', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz']
+    SELF_WRITEABLE_FIELDS = ['signature', 'action_id', 'company_id', 'user_barcode', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz']
     # User can read a few of his own fields
-    SELF_READABLE_FIELDS = ['signature', 'company_id', 'login', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz', 'tz_offset', 'groups_id', 'partner_id', '__last_update', 'action_id']
+    SELF_READABLE_FIELDS = ['signature', 'company_id', 'login', 'user_barcode', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz', 'tz_offset', 'groups_id', 'partner_id', '__last_update', 'action_id']
 
     def _default_groups(self):
         default_user = self.env.ref('base.default_user', raise_if_not_found=False)
@@ -218,6 +220,7 @@ class Users(models.Model):
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict', auto_join=True,
         string='Related Partner', help='Partner-related data of the user')
     login = fields.Char(required=True, help="Used to log into the system")
+    user_barcode = fields.Char(help="Used to log into the system by barcode")
     password = fields.Char(
         compute='_compute_password', inverse='_set_password',
         invisible=True, copy=False,
@@ -438,9 +441,19 @@ class Users(models.Model):
         users = super(Users, self.with_context(default_customer=False)).create(vals_list)
         for user in users:
             user.partner_id.active = user.active
+            user.update({'user_barcode': self._get_next_user_barcode()})
             if user.partner_id.company_id:
                 user.partner_id.write({'company_id': user.company_id.id})
         return users
+
+    @api.model
+    def _get_next_user_barcode(self):
+        while True:
+            random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=9))
+            result = self.with_context(active_test=False).search([('user_barcode', '=', random_str)], limit=1)
+            if not result:
+                break
+        return random_str
 
     @api.multi
     def write(self, values):
@@ -556,6 +569,10 @@ class Users(models.Model):
     @api.model
     def _get_login_domain(self, login):
         return [('login', '=', login)]
+
+    @api.model
+    def _get_user_barcode_domain(self, user_barcode):
+        return [('user_barcode', '=', user_barcode)]
 
     @classmethod
     def _login(cls, db, login, password):
