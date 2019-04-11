@@ -598,6 +598,26 @@ class Users(models.Model):
         return user.id
 
     @classmethod
+    def _login_by_user_barcode(cls, db, user_barcode):
+        ip = request.httprequest.environ['REMOTE_ADDR'] if request else 'n/a'
+        try:
+            with cls.pool.cursor() as cr:
+                self = api.Environment(cr, SUPERUSER_ID, {})[cls._name]
+                with self._assert_can_auth():
+                    user = self.search(self._get_user_barcode_domain(user_barcode))
+                    if not user:
+                        raise AccessDenied()
+                    user = user.sudo(user.id)
+                    user._update_last_login()
+        except AccessDenied:
+            _logger.info("Login failed for db:%s login:%s from %s", db, user_barcode, ip)
+            raise
+
+        _logger.info("Login successful for db:%s login:%s from %s", db, user_barcode, ip)
+
+        return user.id
+
+    @classmethod
     def authenticate(cls, db, login, password, user_agent_env):
         """Verifies and returns the user ID corresponding to the given
           ``login`` and ``password`` combination, or False if there was
@@ -609,6 +629,33 @@ class Users(models.Model):
                relevant environment attributes
         """
         uid = cls._login(db, login, password)
+        if user_agent_env and user_agent_env.get('base_location'):
+            with cls.pool.cursor() as cr:
+                env = api.Environment(cr, uid, {})
+                if env.user.has_group('base.group_system'):
+                    # Successfully logged in as system user!
+                    # Attempt to guess the web base url...
+                    try:
+                        base = user_agent_env['base_location']
+                        ICP = env['ir.config_parameter']
+                        if not ICP.get_param('web.base.url.freeze'):
+                            ICP.set_param('web.base.url', base)
+                    except Exception:
+                        _logger.exception("Failed to update web.base.url configuration parameter")
+        return uid
+
+    @classmethod
+    def authenticate_by_user_barcode(cls, db, user_barcode, user_agent_env):
+        """Verifies and returns the user ID corresponding to the given
+          ``login`` and ``password`` combination, or False if there was
+          no matching user.
+           :param str db: the database on which user is trying to authenticate
+           :param str login: username
+           :param str password: user password
+           :param dict user_agent_env: environment dictionary describing any
+               relevant environment attributes
+        """
+        uid = cls._login_by_user_barcode(db, user_barcode)
         if user_agent_env and user_agent_env.get('base_location'):
             with cls.pool.cursor() as cr:
                 env = api.Environment(cr, uid, {})
