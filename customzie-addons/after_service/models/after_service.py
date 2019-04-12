@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
+from datetime import datetime
+from openerp import tools
 from odoo.exceptions import UserError, ValidationError
 from odoo.exceptions import Warning
 
@@ -22,18 +24,13 @@ class AfterService(models.Model):
         default=lambda self: self.env['ir.sequence'].next_by_code('after.service'),
         copy=False, required=True, readonly=True)
 
-    saleOrderFilter = fields.Many2one("sale.order",'Sale Order ByNo')
+    #saleOrderFilter = fields.Many2one("sale.order",'Sale Order ByNo')
+    saleOrderFilter = fields.Many2one("production.line",'Sale Order ByNo')
 
-    # Sale
-    # production_line_id = fields.Many2one('production.line', string='Production Reference', ondelete='cascade', index=True, copy=False, readonly=True)
     order_id = fields.Char('Sale Order Id', index=True, copy=False, required=True, readonly=False)
     partner_name = fields.Char('Partner Name',index=True, copy=False, required=True, readonly=False)
-    # sale_partner_id = fields.Many2one('res.partner', related='production_line_id.sale_partner_id', store=True, string='Customer', readonly=True)
-    # sale_move_ids = fields.Many2one('stock.move', related='sale_order_line_id', store=True, string='Sale_Move', readonly=True)
     barcode = fields.Char('Barcode', index=True, readony=True)
-    # sale_product_id = fields.Many2one(related='production_line_id.sale_product_id', store=True, string='Order Product', readonly=True)
-    # sale_product_no = fields.Many2one('product.product', related='sale_product_id', store=True, string='Sale Product No', readonly=True)
-    order_note = fields.Text('Order Note',copy=False, required=True, readonly=False)
+    defect_remark = fields.Text('Defect Remark',copy=False, readonly=False)
     treatment_book_id = fields.Many2one(
         "treatment.book", string="Treatment Type", required=True)
     treatment_remark = fields.Text(string='Treatment Remark')
@@ -44,18 +41,23 @@ class AfterService(models.Model):
         ('done', 'Locked'),
         ('cancel', 'Cancelled')], string='Status',
         copy=False, default='draft', readonly=True, track_visibility='nge')
-    move_id = fields.Many2one(
-        'stock.move', 'Move',
-        copy=False, readonly=True, track_visibility="onchange",
-        help="Move created by the After service")
+    claim_note = fields.Text()
+
+    measure_type = fields.Selection(string='Measure Type',selection=[('val1','メール'),('val2','電話')])
+    sale_send_date = fields.Char('Send Date', copy=False, required=True, readonly=False)
+    #test_start_date = fields.Datetime('Start Date', copy=False, required=True, readonly=False)
+    #test_end_date = fields.Datetime('End Date', copy=False, required=True, readonly=False)
 
     @api.onchange('saleOrderFilter')
     def onchange_saleOrderFilter(self):
         if self.saleOrderFilter:
-            self.order_id=self.saleOrderFilter.name
-            self.partner_name = self.saleOrderFilter.partner_id.name
-            self.order_note = self.saleOrderFilter.note
-            #self.order_amount_total = self.saleOrderFilter.total
+            self.order_id=self.saleOrderFilter.sale_order_id
+            self.partner_name = self.saleOrderFilter.sale_order_partner_id.name
+            self.defect_remark = self.saleOrderFilter.defect_remark
+            #self.sale_send_date = str((fields.Datetime.today() - self.saleOrderFilter.delivery_date).days + 1) + "日"
+            self.sale_send_date = str(21) + "日"
+            #self.test_start_date = self.saleOrderFilter.confirmation_date
+            #self.test_end_date = fields.Datetime.today()
 
     @api.onchange('treatment_book_id')
     def onchange_treatment_book_id(self):
@@ -78,7 +80,9 @@ class AfterService(models.Model):
 
     @api.multi
     def button_confirm(self):
+        #############################
         self.write({'state': 'to approve'})
+
         return {}
 
     @api.multi
