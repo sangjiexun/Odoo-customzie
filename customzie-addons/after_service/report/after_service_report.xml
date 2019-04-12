@@ -5,6 +5,7 @@
           string="After Service"
           model="after.service"
           report_type="qweb-pdf"
+          menu="False"
           name="after_service.report_after_service_template" />
 
           <template id="report_after_service_template">
