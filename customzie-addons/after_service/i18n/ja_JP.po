@@ -421,6 +421,12 @@ msgid "treat"
 msgstr "処置"
 
 #. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+#: model:treatment.book,name:after_service.treatment_book_waiting
+msgid "waiting"
+msgstr "待機"
+
+#. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
 msgid "Customer Name"
 msgstr "お客様："
