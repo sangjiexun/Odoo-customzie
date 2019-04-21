@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_production_user,ProductionUser,model_production_line,production_group_user,1,0,0,0
-access_production_manager,ProductionManager,model_production_line,production_group_manager,1,1,1,1
-access_production_line_operator,GroupOperator,model_production_line,base_inherit.group_operator,1,1,1,1
-access_production_operation_operator,GroupOperator,model_production_operation,base_inherit.group_operator,1,1,1,1
-access_marker_info_operator,GroupOperator,model_marker_info,base_inherit.group_operator,1,0,0,0
-access_marker_info_manager,ProductionManager,model_marker_info,production_group_manager,1,1,1,1
