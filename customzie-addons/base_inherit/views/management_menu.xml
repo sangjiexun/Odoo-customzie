@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_management_root"
+        name="Management Menu"
+        groups="base_inherit.group_ceo" sequence="1"/>
+
+    <!--統計-->
+    <menuitem id="management_statistics"
+        name="Statistics"
+        groups="base_inherit.group_ceo"
+        parent="menu_management_root" sequence="8"/>
+
+    <!--休暇分析-->
+    <menuitem id="management_holidays_report_tree"
+        name="Leaves Analysis"
+        action="hr_holidays.action_hr_available_holidays_report"
+        groups="base_inherit.group_ceo"
+        parent="management_statistics" sequence="10"/>
+
+    <menuitem id="management_return_report"
+        name="Return Report"
+        groups="base_inherit.group_ceo"
+        action="hr_holidays.action_hr_available_holidays_report"
+        parent="management_statistics" sequence="10"/>
+
+    <menuitem id="management_man_hour"
+        name="Man-hour Report"
+        groups="base_inherit.group_ceo"
+        action="hr_holidays.action_hr_available_holidays_report"
+        parent="management_statistics" sequence="10"/>
+
+
+    <!--取引関連-->
+    <menuitem id="management_deal_report"
+        name="Deal Reporting"
+        groups="base_inherit.group_ceo"
+        parent="menu_management_root" sequence="9"/>
+
+    <!--販売レポート-->
+    <menuitem id="management_sale_report"
+        name="Sale Reporting"
+        action="sale.action_order_report_all"
+        groups="base_inherit.group_ceo"
+        parent="management_deal_report" sequence="10"/>
+
+    <!--購買レポート-->
+    <menuitem id="management_purchase_report"
+        name="Purchase Reporting"
+        action="purchase.action_purchase_order_report_all"
+        groups="base_inherit.group_ceo"
+        parent="management_deal_report" sequence="10"/>
+
+    <!--在庫関連-->
+    <menuitem id="management_warehouse_report"
+        name="Stock Reporting"
+        action="purchase.action_purchase_order_report_all"
+        groups="base_inherit.group_ceo"
+        parent="menu_management_root" sequence="10"/>
+
+    <menuitem id="management_inventory_valuation"
+        name="Inventory Reporting"
+        action="stock.action_stock_quantity_history"
+        parent="management_warehouse_report" sequence="10" />
+
+    <menuitem id="management_valuation_report"
+        name="Valuation Reporting"
+        action="stock_account.action_stock_inventory_valuation"
+        parent="management_warehouse_report" sequence="10" />
+
+</odoo>

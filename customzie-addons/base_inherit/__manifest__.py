@@ -14,6 +14,6 @@
         'views/res_users_views.xml',
         'views/res_bank_views.xml',
         'views/res_company_views.xml',
-        #'views/res_partner_views.xml',
+        'views/management_menu.xml',
     ],
 }

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--record id="product_variant_easy_edit_view_base_inherit" model="ir.ui.view">
+        <field name="name">product.product.view.form.easy.base.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="after">
+                <field name="marker_name" />
+                <field name="marker_product_no" />
+            </xpath>
+            <xpath expr="//field[@name='standard_price']" position="after">
+                <field name="ceo_price" widget='monetary' groups="base_inherit.group_ceo"/>
+                <field name="product_no" />
+            </xpath>
+        </field>
+    </record-->
+
+    <record id="product_normal_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.product.form.inherit</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <field name="type" position="after">
+                <field name="marker_name" />
+                <field name="marker_product_no" />
+            </field>
+            <xpath expr="//field[@name='currency_id']" position="before">
+                <field name="ceo_price" widget='monetary' groups="base_inherit.group_ceo"/>
+                <field name="product_no" />
+            </xpath>
+            <xpath expr="//field[@name='categ_id']" position="replace">
+                <field name="categ_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//group[@name='group_general']" position="after">
+                <group name="group_spec">
+                    <field name="spec_cpu"/>
+                    <field name="spec_memory"/>
+                    <field name="spec_hard_disc"/>
+                    <field name="spec_driver"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_template_kanban_produciton_line_view">
+        <field name="name">Product Template Kanban Production</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <ul position="inside">
+                <li t-if="record.spec_cpu.raw_value"><field name="spec_cpu"/></li>
+                <li t-if="record.spec_memory.raw_value"><field name="spec_memory"/></li>
+                <li t-if="record.spec_hard_disc.raw_value"><field name="spec_hard_disc"/></li>
+                <li t-if="record.spec_driver.raw_value"><field name="spec_driver"/></li>
+            </ul>
+        </field>
+    </record>
+
+
+    <record id="product_template_search_view_inherit" model="ir.ui.view">
+        <field name="name">product.template.search.form.inherit</field>
+        <field name="model">product.template</field>
+        <!--field name="mode">primary</field-->
+        <field name="inherit_id" ref="product.product_template_search_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <separator/>
+                <field name="marker_name" string="Marker Name"/>
+                <field name="marker_product_no" string="Marker Product No"/>
+                <field name="spec_cpu" string="Spec Cpu"/>
+                <field name="spec_memory" string="Spec Memory"/>
+                <field name="spec_hard_disc" string="Spec HardDisk"/>
+                <field name="spec_driver" string="Spec Driver"/>
+                <separator/>
+            </field>
+        </field>
+    </record>
+
+
+</odoo>
