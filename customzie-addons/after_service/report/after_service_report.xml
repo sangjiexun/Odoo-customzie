@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <data noupdate="1">
+  <data noupdate="0">
       <report id="action_after_service_report"
           string="After Service"
           model="after.service"
@@ -17,29 +17,137 @@
                   <div class="html_container">
                     <t t-foreach="docs" t-as="o">
                       <!-- Report row content -->
-                      <div class="col-3">
-                        <h4><span t-field="o.saleOrderFilter" /></h4>
+                      <div class="col-12 text-center">
+                        <h4>修理／返品依頼・対応書</h4>
                       </div>
+                      <table class="table table-borther table-hover table-striped">
+                        <tbody>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.sale_order_partner_id" class="col-3 bm-2">
+                                    <strong>Sale Order Partner Id</strong>
+                                    <p t-field="o.sale_order_partner_id" class="m-0"/>
+                                </div>
+                                <div t-if="o.sale_order_date" class="col-3 bm-2">
+                                    <strong>Sale Order Date</strong>
+                                    <p t-field="o.sale_order_date" class="m-0"/>
+                                </div>
+                                <div t-if="o.inquiry_date" class="col-3 bm-2">
+                                    <strong>Inquiry Date</strong>
+                                    <p t-field="o.inquiry_date" class="m-0"/>
+                                </div>
+                                <div t-if="o.contact_person" class="col-3 bm-2">
+                                    <strong>Contact Person</strong>
+                                    <p t-field="o.contact_person" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.sale_order_product" class="col-9 bm-2">
+                                    <strong>Sale Order Product</strong>
+                                    <p t-field="o.sale_order_product" class="m-0"/>
+                                </div>
+                                <div t-if="o.sale_order_id" class="col-3 bm-2">
+                                    <strong>Sale Order Id</strong>
+                                    <p t-field="o.sale_order_id" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr />
+                      <table class="table table-borther table-hover table-striped">
+                        <tbody>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.inquiry_note" class="col-12 bm-2">
+                                    <strong>Inquiry Note</strong>
+                                    <p t-field="o.inquiry_note" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.treatment_book_id" class="col-12 bm-2">
+                                    <strong>Treatment Remark</strong>
+                                    <p t-field="o.treatment_remark" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                      <hr />
+
                       <div class="row">
-                        <div class="col-2">After Service No</div>
-                        <span t-field="o.partner_name" />
-                        <div class="col-2">Customer Name</div>
-                        <span t-field="o.partner_name" />
+                        <div class="col-12 bm-2">
+                            <strong>Operator Note</strong>
+                        </div>
                       </div>
+                      <table class="table table-borther table-hover table-striped">
+                        <tbody>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.returned_date" class="col-6 bm-2">
+                                    <strong>Returned Date</strong>
+                                    <p t-field="o.returned_date" class="m-0"/>
+                                </div>
+                                <div t-if="o.reshipping_date" class="col-6 bm-2">
+                                    <strong>Reshipping Date</strong>
+                                    <p t-field="o.reshipping_date" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.repair_type" class="col-12 bm-2">
+                                    <strong>Repair Type</strong>
+                                    <span t-field="o.repair_type" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.problem_reason" class="col-12 bm-2">
+                                    <strong>Problem Reason</strong>
+                                    <span t-field="o.problem_reason" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                          <tr>
+                            <th>
+                              <div class="row">
+                                <div t-if="o.other_reason" class="col-12 bm-2">
+                                    <strong>Other Reason</strong>
+                                    <span t-field="o.other_reason" class="m-0"/>
+                                </div>
+                              </div>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
                       <div class="row">
-                        <div class="col-2">Sale Order No</div>
-                        <span t-field="o.order_id" />
-                        <div class="col-2">Bar Code</div>
-                        <span t-field="o.barcode" />
-                      </div>
-                      <div class="row">
-                        <div class="col-2">Order Note</div>
-                        <span t-field="o.order_note" />
-                        <div class="col-2">Treatment Id</div>
-                        <span t-field="o.treatment_book_id" />
-                      </div>
-                      <div class="col-2">
-                        <span t-field="o.treatment_remark" />
+                        <div class="col-6 bm-2">
+                        </div>
+                        <div t-if="o.treatment_operator" class="col-12 bm-2">
+                            <strong>Company</strong>
+                            <span t-field="o.treatment_operator" class="m-0"/>
+                        </div>
                       </div>
                     </t>
                   <!-- Report footer content -->

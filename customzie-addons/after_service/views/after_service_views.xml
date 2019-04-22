@@ -10,9 +10,9 @@
                 <button name="print_after_service" string="Print After Service" type="object" states="done" />
                 <button name="button_confirm" type="object" states="draft" string="To Processing" class="oe_highlight" id="bid_confirm"/>
                 <button name="button_approve" type="object" states='to approve' string="Approve Order" class="oe_highlight" groups="after_service.after_service_group_manager"/>
-                <button name="button_processing" type="object" states='to processing' string="Processing Order" class="oe_highlight"/>
-                <button name="button_draft" states="cancel" string="Set to Draft" type="object" />
-                <button name="button_cancel" states="done" string="Cancel" type="object" groups="after_service.after_service_group_manager"/>
+                <button name="button_processing" type="object" states='to processing' string="Processing Order" class="oe_highlight" />
+                <button name="button_draft"  type="object" states="cancel" string="Set to Draft" />
+                <button name="button_cancel" type="object" states="done" string="Cancel" groups="after_service.after_service_group_manager"/>
                 <field name="state" widget="statusbar" statusbar_visible="draft,to processing,done" readonly="1"/>
             </header>
             <sheet>
@@ -23,25 +23,63 @@
               </div>
                 <group>
                     <group>
-                        <field name="saleOrderFilter" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="order_id" readonly="1"/>
-                        <field name="measure_type" widget="radio" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="partner_name" readonly="1"/>
+                        <field name="sale_order_filter" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="contact_person" />
+                        <field name="sale_order_id" />
+                        <field name="sale_order_product" />
+                        <field name="sale_order_date" />
+                        <field name="defect_remark" />
                     </group>
                     <group>
-                        <field name="barcode" readonly="1"/>
-                        <field name="defect_remark" readonly="1"/>
-                        <field name="sale_send_date" readonly="1"/>
+                        <field name="inquiry_date" />
+                        <field name="measure_type" widget="radio" attrs="{'readonly':[('state','!=','draft')]}" options="{'horizontal':true}"/>
+                        <field name="sale_order_partner_id" />
+                        <field name="barcode" />
+                        <field name="order_elapsed_days" attrs="{'readonly':[('state','!=','draft')]}"/>
                     </group>
-                    <group>
-                        <field name="claim_note" attrs="{'readonly':[('state','!=','draft')]}" />
-                    </group>
+                </group>
+                <hr />
+                <group>
+                    <field name="inquiry_note" attrs="{'readonly':[('state','!=','draft')]}" />
+                    <!--<field name="contact_treatment" widget="Selection"/>-->
                 </group>
                 <group>
-                    <field name="treatment_book_id" attrs="{'readonly':[('state','=','draft')]}"/>
-                    <field name="treatment_remark" ref="treatment.book.treatment_book" attrs="{'readonly':[('state','=','draft')]}"/>
+                  <group>
+                    <field name="treatment_book_id" />
+                    <!--<field name="treatment_book_id" attrs="{'readonly':[('state','in',['draft','to approve','cancel','done'])]}" />
+                    <field name="treatment_remark" ref="treatment.book.treatment_book" attrs="{'readonly':[('state','in',['draft','cancel','done'])]}"/>-->
+                  </group>
                 </group>
-            </sheet>
+                <group>
+                    <field name="treatment_remark" />
+                    <!--<field name="treatment_book_id" attrs="{'readonly':[('state','in',['draft','to approve','cancel','done'])]}" />
+                    <field name="treatment_remark" ref="treatment.book.treatment_book" attrs="{'readonly':[('state','in',['draft','cancel','done'])]}"/>-->
+                </group>
+                <hr />
+                <group>
+                  <group>
+                    <field name="returned_date" />
+                  </group>
+                  <group>
+                    <field name="reshipping_date" />
+                  </group>
+                  <group>
+                    <field name="repair_type" widget="many2many_checkboxes" options="{'horizontal':true}"/>
+                  </group>
+                </group>
+                <group>
+                  <group>
+                    <field name="problem_reason" widget="many2many_checkboxes"/>
+                  </group>
+                </group>
+                <group>
+                  <group>
+                    <field name="other_reason" />
+                  </group>
+                  <group>
+                  </group>
+                </group>
+              </sheet>
             <!-- mail mixin fields -->
             <div class="oe_chatter">
             <field name="message_follower_ids" widget="mail_followers" />
@@ -57,12 +95,13 @@
         <field name="model">after.service</field>
         <field name="arch" type="xml">
             <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'" delete="false">
-                <field name="name" />
-                <field name="order_id" />
-                <field name="barcode" />
-                <field name="treatment_book_id" />
+                <field name="name"/>
+                <field name="sale_order_id" />
+                <field name="measure_type" />
+                <!--<field name="treatment_book_id" />-->
+                <field name="treatment_operator" />
+                <field name="is_claim" />
                 <field name="state"/>
-                <field name="create_date" />
             </tree>
         </field>
     </record>
@@ -73,40 +112,40 @@
         <field name="arch" type="xml">
             <tree string="After Service Report" create="false" edit="false" delete="false">
                 <field name="name" />
-                <field name="order_id" />
+                <field name="sale_order_id" />
                 <field name="barcode" />
-                <field name="treatment_book_id" />
+                <!--<field name="treatment_book_id" />-->
                 <field name="state"/>
                 <field name="create_date" />
             </tree>
         </field>
     </record>
 
-    <record id="treatment_book_form_view" model="ir.ui.view">
-        <field name="name">treatment.book.form</field>
-        <field name="model">treatment.book</field>
+    <record id="repair_type_form_view" model="ir.ui.view">
+        <field name="name">repair.type.form</field>
+        <field name="model">repair.type</field>
         <field name="arch" type="xml">
-            <form string="Treatment Book" class="o_treatment_book">
+            <form string="Repair Type" class="o_repair_type">
             <header>
                 <!--field name="state" widget="statusbar" statusbar_visible="draft"/-->
             </header>
             <sheet>
                 <group>
                     <field name="name" />
-                    <field name="treatment_book" />
+                    <!--<field name="treatment_book" />-->
                 </group>
             </sheet>>
             </form>
         </field>
     </record>
 
-    <record id="treatment_book_tree_view" model="ir.ui.view">
-        <field name="name">treatment.book.tree</field>
-        <field name="model">treatment.book</field>
+    <record id="repair_type_tree_view" model="ir.ui.view">
+        <field name="name">repair.type.tree</field>
+        <field name="model">repair.type</field>
         <field name="arch" type="xml">
-            <tree string="Treatment Book" class="o_treatment_book">
+            <tree string="Repair Type" class="o_repair_type">
                 <field name="name" />
-                <field name="treatment_book" />
+                <!--<field name="treatment_book" />-->
             </tree>
         </field>
     </record>
@@ -117,16 +156,16 @@
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search After Service">
-                <field name="name" string="After Service" filter_domain="['|','|',('name','ilike',self),('order_id','ilike',self),('partner_name','ilike',self),('treatment_book_id','ilike',self)]"/>
-                <field name="order_id" />
-                <field name="partner_name"/>
-                <field name="treatment_book_id"/>
+                <field name="name" string="After Service" filter_domain="['|','|',('name','ilike',self),('sale_order_id','ilike',self),('partner_name','ilike',self)]"/>
+                <field name="sale_order_id" />
+                <field name="sale_order_partner_id"/>
+                <!--<field name="treatment_book_id"/>
                 <filter string="waiting" name="treatment_book_waiting" domain="[('treatment_book_id','=','待機')]"/>
                 <filter string="return" name="treatment_book_return" domain="[('treatment_book_id','=','返品')]"/>
                 <filter string="repair" name="treatment_book_repair" domain="[('treatment_book_id','=','修理')]"/>
                 <filter string="exchange" name="treatment_book_exchange" domain="[('treatment_book_id','=','交換')]"/>
                 <filter string="treat" name="treatment_book_treat" domain="[('treatment_book_id','=','処置')]"/>
-                <separator/>
+                <separator/>-->
                 <group expand="0" string="Group By">
                     <filter string="Create Date" name="order_date" domain="[]" context="{'group_by':'create_date'}"/>
                 </group>
@@ -155,10 +194,10 @@
     </record>
 
     <!-- Action to open the treatment book -->
-    <record id="action_treatment_book" model="ir.actions.act_window">
-        <field name="name">Treatment Book</field>
+    <record id="action_repair_type" model="ir.actions.act_window">
+        <field name="name">Repair Type</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">treatment.book</field>
+        <field name="res_model">repair.type</field>
         <field name="view_mode">tree,form</field>
         <field name="view_type">form</field>
         <field name="help" type="html">
@@ -180,16 +219,16 @@
         action="action_after_service"
         sequence="2"/>
 
-    <menuitem id="menu_treatment_book"
-        name="Treatment Book"
+<!--    <menuitem id="menu_repair_type"
+        name="Repair type"
         parent="after_service_menu_root"
-        action="action_treatment_book"
-        sequence="3"/>
+        action="action_repair_type"
+        sequence="3"/>-->
 
     <menuitem id="menu_after_service_report"
         name="After Service Report"
         parent="after_service_menu_root"
         action="action_after_service_aggregate"
-        sequence="4"/>
+        sequence="3"/>
 
 </odoo>

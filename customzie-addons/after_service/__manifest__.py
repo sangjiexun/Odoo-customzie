@@ -12,10 +12,9 @@
         'security/after_service_security.xml',
         'security/ir.model.access.csv',
         'views/after_service_views.xml',
-        'views/after_service_templates.xml',
+        'report/after_service_report.xml',
         'data/treatment_data.xml',
         'data/ir_sequence_data.xml',
-        'report/after_service_report.xml'
 
     ],
 }

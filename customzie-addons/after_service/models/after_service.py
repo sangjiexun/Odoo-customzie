@@ -6,12 +6,32 @@ from openerp import tools
 from odoo.exceptions import UserError, ValidationError
 from odoo.exceptions import Warning
 
-
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
     after_service_id = fields.Many2one('after.service')
 
+class TreatmentBook(models.Model):
+    _name = 'treatment.book'
+    _description = 'Treatment Book'
+    _order = 'id'
+
+    name = fields.Char('Treatment', required=True, index=True, translate=True)
+    treatment_book = fields.Text(string='Treatment Book')
+
+class RepairType(models.Model):
+    _name = 'repair.type'
+    _description = 'Repair Type'
+    _order = 'id'
+
+    name = fields.Char(string='Repiar Type', required=True, index=True, translate=True)
+
+class ProblemReason(models.Model):
+    _name = 'problem.reason'
+    _description = 'Problem Reason'
+    _order = 'id'
+
+    name = fields.Char(string='Problem Reason', required=True, index=True, translate=True)
 
 class AfterService(models.Model):
     _name = 'after.service'
@@ -19,43 +39,101 @@ class AfterService(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'id'
 
+    #After Service Reference
     name = fields.Char(
         'After Service',
         default=lambda self: self.env['ir.sequence'].next_by_code('after.service'),
         copy=False, required=True, readonly=True)
 
-    #saleOrderFilter = fields.Many2one("sale.order",'Sale Order ByNo')
-    saleOrderFilter = fields.Many2one("production.line",'Sale Order ByNo')
+    #Sale Order Filter
+    sale_order_filter = fields.Many2one("production.line",string='Sale Order Filter',required=True)
 
-    order_id = fields.Char('Sale Order Id', readonly=True)
-    partner_name = fields.Char('Partner Name', readonly=True)
-    barcode = fields.Char('Barcode', index=True, readonly=True)
-    defect_remark = fields.Text('Defect Remark', readonly=True)
+    #Sale Order Partner Id
+    sale_order_partner_id = fields.Many2one(string='Sale Order Partner Id',related="sale_order_filter.sale_order_partner_id",store=True)
+    #partner_name = fields.Many2one(string='Partner Name',related="sale_order_filter.sale_order_partner_id",store=True)
+
+    #Sale Order Date
+    sale_order_date = fields.Datetime(string="Sale Order Date", related="sale_order_filter.delivery_date",store=True)
+
+    #Inquiry Date
+    inquiry_date = fields.Date(string="Inquiry Date",default=lambda self: self._get_current_date())
+
+    #Contact Person
+    contact_person = fields.Many2one('res.users',string="Contact Person")
+
+    #Sale Order Product
+    sale_order_product = fields.Many2one(string="Sale Order Product", related="sale_order_filter.product_id",store=True)
+
+    #Sale Order Id
+    sale_order_id = fields.Char(string='Sale Order Id',related="sale_order_filter.sale_order_id.name",store=True)
+
+    #Inquiry Note
+    inquiry_note = fields.Text(string="Inquiry Note")
+
+    #Contact Treatment
+    contact_treatment = fields.Selection(
+        [('type1','Repairing'),
+         ('type2','Returned Goods')],
+        string="Contact Treatment")
+
     treatment_book_id = fields.Many2one(
         "treatment.book", string="Treatment Type")
+
     treatment_remark = fields.Text(string='Treatment Remark')
-    date_approve = fields.Date('Approval Date', readonly=True)
+
+
+    #Order Elapsed Days
+    order_elapsed_days = fields.Char(sting='Order Elapsed Days')
+
+    #Returned Date
+    returned_date = fields.Date(string="Returned Date",default=lambda self: self._get_current_date())
+
+    #Reshipping Date
+    reshipping_date = fields.Date(string="Reshipping Date",default=lambda self: self._get_current_date())
+
+    #Repair Type
+    repair_type = fields.Many2many('repair.type',string="Repair Type")
+
+    #Problem Reason
+    problem_reason = fields.Many2many('problem.reason',string="Problem Reason")
+
+    #Other Reason
+    other_reason = fields.Text(string="Other Reason")
+
+    #Treatment Operator
+    treatment_operator = fields.Many2one('res.users',string="Treatment Operator")
+
+    barcode = fields.Char(string='Barcode',related="sale_order_filter.barcode",store=True)
+    defect_remark = fields.Text(string='Defect Remark',related="sale_order_filter.defect_remark",store=True)
+    date_approve = fields.Date('Approval Date')
     state = fields.Selection([
         ('draft', 'Quotation'),
         ('to processing', 'To Processing'),
         ('to approve', 'To Approve'),
-        ('done', 'Locked'),
+        ('done', 'Finshed'),
         ('cancel', 'Cancelled')], string='Status',
-        copy=False, default='draft', readonly=True, track_visibility='nge')
-    claim_note = fields.Text()
+        copy=False, default='draft', track_visibility='nge')
+    is_claim = fields.Boolean('is_claim', default=False)
 
-    measure_type = fields.Selection(string='Measure Type',selection=[('val1', 'メール'), ('val2', '電話')])
-    sale_send_date = fields.Char('Send Date')
+    measure_type = fields.Selection(
+        [('val1', 'mail'),
+        ('val2', 'telephone')],
+        string='Measure Type',required=True)
 
-    @api.onchange('saleOrderFilter')
-    def onchange_saleOrderFilter(self):
-        if self.saleOrderFilter:
-            self.order_id=self.saleOrderFilter.sale_order_id
-            self.partner_name = self.saleOrderFilter.sale_order_partner_id.name
-            self.defect_remark = self.saleOrderFilter.defect_remark
-            #self.sale_send_date = str((fields.Datetime.today() - self.saleOrderFilter.delivery_date).days + 1) + "日"
-            self.sale_send_date = str(21) + "日"
-            #self.test_start_date = self.saleOrderFilter.confirmation_date
+    @api.model
+    def _get_current_date(self):
+        return fields.Date.today()
+
+    @api.onchange('sale_order_filter')
+    def onchange_sale_order_filter(self):
+        if self.sale_order_filter:
+            #self.order_id=self.sale_order_filter.sale_order_id.name
+            #self.barcode=self.sale_order_filter.barcode
+            #self.defect_remark = self.sale_order_filter.defect_remark
+            #self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + "日"
+            self.order_elapsed_days = str(21) + "日"
+            self.is_claim = self.sale_order_filter.is_claim
+            #self.test_start_date = self.sale_order_filter.confirmation_date
             #self.test_end_date = fields.Datetime.today()
 
     @api.onchange('treatment_book_id')
@@ -68,32 +146,37 @@ class AfterService(models.Model):
         return self.env.ref('after_service.action_after_service_report').report_action(self)
 
     @api.multi
+    def button_draft(self):
+        if not self.measure_type:
+            raise UserError(_("問い合わせ手段を選択ください"))
+        else:
+            self.write({'state': 'draft'})
+        return {}
+
+    @api.multi
+    def button_processing(self, force=False):
+        if not self.repair_type:
+            raise UserError(_("処置内容を入力してください"))
+        else:
+            self.write({'treatment_operator': self.env.uid})
+            self.write({'is_claim': self.sale_order_filter.is_claim})
+            if self.sale_order_filter.is_claim:
+                self.write({'state': 'to approve'})
+            else:
+                self.write({'state': 'done', 'date_approve': fields.Date.context_today(self)})
+        return {}
+
+    @api.multi
     def button_approve(self, force=False):
         self.write({'state': 'done', 'date_approve': fields.Date.context_today(self)})
         return {}
 
     @api.multi
-    def button_draft(self):
-        self.write({'state': 'draft'})
-        return {}
-
-    @api.multi
     def button_confirm(self):
-        #############################
         self.write({'state': 'to processing'})
-
         return {}
 
     @api.multi
     def button_cancel(self):
         self.write({'state': 'cancel'})
         return {}
-
-
-class TreatmentBook(models.Model):
-    _name = 'treatment.book'
-    _description = 'Treatment Book'
-    _order = 'id'
-
-    name = fields.Char('Treatment', required=True, index=True, translate=True)
-    treatment_book = fields.Text(string='Treatment Book')
