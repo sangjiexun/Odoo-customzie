@@ -108,25 +108,30 @@
             <field name="model">momo.product.line</field>
             <field name="arch" type="xml">
                 <search string="Product Line">
+                    <field name="product_name"/>
                     <field name="barcode"/>
-                    <separator/>
+                    <field name="current_location"/>
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
                </search>
             </field>
         </record>
 
         <!-- tree view for product line -->
         <record id="view_product_line_tree" model="ir.ui.view">
-          <field name="name">Product Line List View</field>
-          <field name="model">momo.product.line</field>
-          <field name="arch" type="xml">
-            <tree>
-              <field name="product_name"/>
-              <field name="barcode"/>
-              <field name="current_location"/>
-              <field name="printed"/>
-              <field name="remark"/>
-            </tree>
-          </field>
+            <field name="name">Product Line List View</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="product_name"/>
+                    <field name="barcode"/>
+                    <field name="current_location"/>
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+                    <field name="printed"/>
+                    <field name="remark"/>
+                </tree>
+            </field>
         </record>
 
         <!-- window action for product line -->
