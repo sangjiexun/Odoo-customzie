@@ -163,7 +163,7 @@ class ProductLine(models.Model):
         sum_count = init_count + len(product_line_active_ids)
         page_count = sum_count // 65 + 1
 
-        pdf_name_first = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S_')
+        pdf_name_first = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S_')
 
         for x in range(page_count):
             pdf_name = pdf_name_first + str(x) + ".pdf"
