@@ -78,8 +78,11 @@ class ProductLine(models.Model):
                                         copy=True)
 
     current_location = fields.Char('Current Location', compute='_compute_current_location', store=True)
-    sale_order_name = fields.Char('Sale Order No', compute='_compute_sale_info', store=True)
+    sale_order_id = fields.Char('Sale Order Id', compute='_compute_sale_info', store=True)
+    sale_order_name = fields.Char('Sale Order Name', compute='_compute_sale_info', store=True)
+    customer_id = fields.Char('Customer Id', compute='_compute_sale_info', store=True)
     customer_name = fields.Char('Customer Name', compute='_compute_sale_info', store=True)
+    delivery_date = fields.Datetime('Delivery Date', compute='_compute_sale_info', store=True)
     is_defective = fields.Boolean('Is Defective Product Line', default=False)
     defective_detail = fields.Text('Defective Detail')
 
@@ -127,6 +130,9 @@ class ProductLine(models.Model):
             if newest_sale_order:
                 self.sale_order_name = newest_sale_order.name
                 self.customer_name = newest_sale_order.partner_id.name
+                self.sale_order_id = newest_sale_order.id
+                self.customer_id = newest_sale_order.partner_id.id
+                self.delivery_date = newest_sale_order.create_date
 
 
     @api.model
