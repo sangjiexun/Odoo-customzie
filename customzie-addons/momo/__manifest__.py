@@ -19,12 +19,13 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'stock', 'purchase'],
+    'depends': ['base', 'stock', 'purchase', 'sale_stock'],
 
     # always loaded
     'data': [
         'security/product_line_security.xml',
         'security/ir.model.access.csv',
+        'views/wizard_product_line.xml',
         'views/momo_product_line_scanner_view.xml',
         'views/momo_product_line_view.xml',
         'views/product_template_views.xml',

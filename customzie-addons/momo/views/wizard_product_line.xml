@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="barcode_print_wizard" model="ir.ui.view">
+        <field name="name">Barcode Print Wizard</field>
+        <field name="model">momo.barcode.print.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <from>
+                <group>
+                    <field name="start_row"/>
+                    <field name="start_column"/>
+                </group>
+                <footer>
+                    <button string="Cancel" special="cancel"/>
+                    <button name="print_barcode1" string="Start Print" type="object" class="oe_highlight"/>
+                </footer>
+            </from>
+        </field>
+    </record>
+
+</odoo>
