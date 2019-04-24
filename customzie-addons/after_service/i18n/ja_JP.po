@@ -444,19 +444,14 @@ msgid "<strong>Other Reason</strong>"
 msgstr "追記事項"
 
 #. module: after_service
-#: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
-msgid "<strong>Company</strong>"
-msgstr "和順商事株式会社　責任者"
-
-#. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__reshipping_date
 msgid "Reshipping Date"
-msgstr "再発送日"
+msgstr "発送日"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
 msgid "<strong>Reshipping Date</strong>"
-msgstr "再発送日"
+msgstr "発送日"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__order_id

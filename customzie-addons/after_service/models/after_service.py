@@ -6,11 +6,6 @@ from openerp import tools
 from odoo.exceptions import UserError, ValidationError
 from odoo.exceptions import Warning
 
-class StockMove(models.Model):
-    _inherit = 'stock.move'
-
-    after_service_id = fields.Many2one('after.service')
-
 class TreatmentBook(models.Model):
     _name = 'treatment.book'
     _description = 'Treatment Book'
@@ -46,14 +41,16 @@ class AfterService(models.Model):
         copy=False, required=True, readonly=True)
 
     #Sale Order Filter
-    sale_order_filter = fields.Many2one("production.line",string='Sale Order Filter',required=True)
+    sale_order_filter = fields.Many2one('momo.product.line', 'Sale Order Filter', required=True)
+    #sale_order_filter = fields.Many2one('Sale Order Filter')
 
     #Sale Order Partner Id
-    sale_order_partner_id = fields.Many2one(string='Sale Order Partner Id',related="sale_order_filter.sale_order_partner_id",store=True)
-    #partner_name = fields.Many2one(string='Partner Name',related="sale_order_filter.sale_order_partner_id",store=True)
+    sale_order_partner_id = fields.Char(string='Sale Order Partner Id',related='sale_order_filter.sale_order_name',store=True)
+    #sale_order_partner_id = fields.Char(string='Sale Order Partner Id')
 
     #Sale Order Date
-    sale_order_date = fields.Datetime(string="Sale Order Date", related="sale_order_filter.delivery_date",store=True)
+    sale_order_date = fields.Datetime(string='Sale Order Date', related='sale_order_filter.delivery_date',store=True)
+    #sale_order_date = fields.Datetime(string='Sale Order Date')
 
     #Inquiry Date
     inquiry_date = fields.Date(string="Inquiry Date",default=lambda self: self._get_current_date())
@@ -62,13 +59,21 @@ class AfterService(models.Model):
     contact_person = fields.Many2one('res.users',string="Contact Person")
 
     #Sale Order Product
-    sale_order_product = fields.Many2one(string="Sale Order Product", related="sale_order_filter.product_id",store=True)
+    sale_order_product = fields.Many2one(string='Sale Order Product', related='sale_order_filter.product_id',store=True)
+    #sale_order_product = fields.Many2one(string='Sale Order Product')
 
     #Sale Order Id
-    sale_order_id = fields.Char(string='Sale Order Id',related="sale_order_filter.sale_order_id.name",store=True)
+    sale_order_id = fields.Many2one(string='Sale Order Id',related='sale_order_filter.sale_order_id',store=True)
+    #sale_order_id = fields.Char(string='Sale Order Id')
+
+    barcode = fields.Char(string='Barcode',related='sale_order_filter.barcode',store=True)
+    #barcode = fields.Char(string='Barcode')
+
+    defect_remark = fields.Text(string='Defect Remark',related='sale_order_filter.defective_detail',store=True)
+    #defect_remark = fields.Text(string='Defect Remark')
 
     #Inquiry Note
-    inquiry_note = fields.Text(string="Inquiry Note")
+    inquiry_note = fields.Text(string='Inquiry Note')
 
     #Contact Treatment
     contact_treatment = fields.Selection(
@@ -77,7 +82,7 @@ class AfterService(models.Model):
         string="Contact Treatment")
 
     treatment_book_id = fields.Many2one(
-        "treatment.book", string="Treatment Type")
+        'treatment.book', string='Treatment Type')
 
     treatment_remark = fields.Text(string='Treatment Remark')
 
@@ -86,25 +91,28 @@ class AfterService(models.Model):
     order_elapsed_days = fields.Char(sting='Order Elapsed Days')
 
     #Returned Date
-    returned_date = fields.Date(string="Returned Date",default=lambda self: self._get_current_date())
+    returned_date = fields.Date(string='Returned Date',default=lambda self: self._get_current_date())
 
     #Reshipping Date
-    reshipping_date = fields.Date(string="Reshipping Date",default=lambda self: self._get_current_date())
+    reshipping_date = fields.Date(string='Reshipping Date',default=lambda self: self._get_current_date())
 
     #Repair Type
-    repair_type = fields.Many2many('repair.type',string="Repair Type")
+    repair_type = fields.Many2many('repair.type',string='Repair Type')
 
     #Problem Reason
-    problem_reason = fields.Many2many('problem.reason',string="Problem Reason")
+    problem_reason = fields.Many2many('problem.reason',string='Problem Reason')
 
     #Other Reason
-    other_reason = fields.Text(string="Other Reason")
+    other_reason = fields.Text(string='Other Reason')
 
     #Treatment Operator
-    treatment_operator = fields.Many2one('res.users',string="Treatment Operator")
+    treatment_operator = fields.Many2one('res.users',string='Treatment Operator')
 
-    barcode = fields.Char(string='Barcode',related="sale_order_filter.barcode",store=True)
-    defect_remark = fields.Text(string='Defect Remark',related="sale_order_filter.defect_remark",store=True)
+    #Company Id
+    company_id = fields.Many2one(
+            'res.company', 'Company',
+            default=lambda self: self.env['res.company']._company_default_get('treatment_operator'))
+
     date_approve = fields.Date('Approval Date')
     state = fields.Selection([
         ('draft', 'Quotation'),

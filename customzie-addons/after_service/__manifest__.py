@@ -5,7 +5,7 @@
     'version': '12.0.1.0',
     'category': '',
     'author': "youshinan",
-    'depends': ['base', 'sale', 'stock', 'production_line','mail'],
+    'depends': ['momo','mail'],
     'application': True,
     'license': 'LGPL-3',
     'data': [

@@ -6,7 +6,8 @@
           model="after.service"
           report_type="qweb-pdf"
           menu="False"
-          name="after_service.report_after_service_template" />
+          name="after_service.report_after_service_template"
+          print_report_name="(object.name).replace('/','') + '_' + (str(object.date_approve).replace('-',''))" />
 
           <template id="report_after_service_template">
             <t t-call="web.html_container">
@@ -18,9 +19,9 @@
                     <t t-foreach="docs" t-as="o">
                       <!-- Report row content -->
                       <div class="col-12 text-center">
-                        <h4>修理／返品依頼・対応書</h4>
+                        <h2><b>修理／返品依頼・対応書</b></h2>
                       </div>
-                      <table class="table table-borther table-hover table-striped">
+                      <table class="table table-bordered mb32" style="table-layout:auto" font-size="22rem">
                         <tbody>
                           <tr>
                             <th>
@@ -60,8 +61,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <hr />
-                      <table class="table table-borther table-hover table-striped">
+                      <table class="table table-bordered mb32" style="table-layout:auto">
                         <tbody>
                           <tr>
                             <th>
@@ -86,14 +86,12 @@
                         </tbody>
                       </table>
 
-                      <hr />
-
                       <div class="row">
                         <div class="col-12 bm-2">
                             <strong>Operator Note</strong>
                         </div>
                       </div>
-                      <table class="table table-borther table-hover table-striped">
+                      <table class="table table-bordered mb32" style="table-layout:auto">
                         <tbody>
                           <tr>
                             <th>
@@ -145,7 +143,7 @@
                         <div class="col-6 bm-2">
                         </div>
                         <div t-if="o.treatment_operator" class="col-12 bm-2">
-                            <strong>Company</strong>
+                            <span t-field="o.company_id" class="m-0"/>：
                             <span t-field="o.treatment_operator" class="m-0"/>
                         </div>
                       </div>
