@@ -45,6 +45,7 @@ class ProductLineCreator(models.Model):
                             'product_id': line.product_id.id,
                             'remark': self.remark,
                             'init_location': self.init_location,
+                            'need_clean': self.need_clean,
                         }
                         self.env['momo.product.line'].create(res)
                     creator.update({'is_created': True})
@@ -60,6 +61,7 @@ class ProductLineCreatorDetail(models.Model):
                                               required=True)
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     need_qty = fields.Float('Need Quantity', default=0.0, required=True)
+    need_clean = fields.Boolean('Need Clean', default=True)
 
 
 class ProductLine(models.Model):
@@ -87,6 +89,10 @@ class ProductLine(models.Model):
     delivery_date = fields.Datetime('Delivery Date', compute='_compute_sale_info', store=True)
     is_defective = fields.Boolean('Is Defective Product Line', default=False)
     defective_detail = fields.Text('Defective Detail')
+
+    need_clean = fields.Boolean('Need Clean', default=True)
+    is_cleaned = fields.Boolean('Is Cleaned', default=False)
+
 
     remark = fields.Char('Remark')
 

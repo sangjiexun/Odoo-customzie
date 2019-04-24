@@ -30,6 +30,7 @@
                             <tree string="CreatorDetail" editable="bottom">
                                 <field name="product_id"/>
                                 <field name="need_qty"/>
+                                <field name="need_clean"/>
                             </tree>
                         </field>
                     </sheet>
@@ -86,7 +87,9 @@
                             <field name="current_location" readonly="1"/>
                             <field name="sale_order_name" readonly="1"/>
                             <field name="customer_name" readonly="1"/>
-                            <field name="printed"/>
+                            <field name="printed" readonly="1"/>
+                            <field name="need_clean"/>
+                            <field name="is_clean" readonly="1"/>
                             <field name="remark"/>
                         </group>
                         <field name="stock_picking_ids" widget="one2many_list">
@@ -129,6 +132,8 @@
                     <field name="sale_order_name"/>
                     <field name="customer_name"/>
                     <field name="printed"/>
+                    <field name="need_clean"/>
+                    <field name="is_clean"/>
                     <field name="remark"/>
                 </tree>
             </field>
