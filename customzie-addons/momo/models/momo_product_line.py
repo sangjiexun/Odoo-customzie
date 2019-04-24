@@ -166,6 +166,11 @@ class ProductLine(models.Model):
         }
 
     @api.multi
+    def clean(self):
+        for line in self:
+            line.update({'is_cleaned': True})
+
+    @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
         init_count = (start_row - 1) * 5 + (start_column - 1)
         sum_count = init_count + len(product_line_active_ids)

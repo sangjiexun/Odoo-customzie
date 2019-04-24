@@ -89,7 +89,7 @@
                             <field name="customer_name" readonly="1"/>
                             <field name="printed" readonly="1"/>
                             <field name="need_clean"/>
-                            <field name="is_clean" readonly="1"/>
+                            <field name="is_cleaned" readonly="1"/>
                             <field name="remark"/>
                         </group>
                         <field name="stock_picking_ids" widget="one2many_list">
@@ -133,7 +133,7 @@
                     <field name="customer_name"/>
                     <field name="printed"/>
                     <field name="need_clean"/>
-                    <field name="is_clean"/>
+                    <field name="is_cleaned"/>
                     <field name="remark"/>
                 </tree>
             </field>
