@@ -78,9 +78,11 @@ class ProductLine(models.Model):
                                         copy=True)
 
     current_location = fields.Char('Current Location', compute='_compute_current_location', store=True)
-    sale_order_id = fields.Char('Sale Order Id', compute='_compute_sale_info', store=True)
+
+    sale_order_id = fields.Many2one('sale.order', 'Sale Order Id', compute='_compute_sale_info', store=True)
     sale_order_name = fields.Char('Sale Order Name', compute='_compute_sale_info', store=True)
-    customer_id = fields.Char('Customer Id', compute='_compute_sale_info', store=True)
+
+    customer_id = fields.Many2one('res.partner', 'Customer Id', compute='_compute_sale_info', store=True)
     customer_name = fields.Char('Customer Name', compute='_compute_sale_info', store=True)
     delivery_date = fields.Datetime('Delivery Date', compute='_compute_sale_info', store=True)
     is_defective = fields.Boolean('Is Defective Product Line', default=False)
