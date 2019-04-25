@@ -52,7 +52,7 @@ class AfterService(models.Model):
     #sale_order_date = fields.Datetime(string='Sale Order Date')
 
     #Inquiry Date
-    inquiry_date = fields.Date(string='Inquiry Date',default=lambda self: self._get_current_date())
+    inquiry_date = fields.Date(string='Inquiry Date',default=fields.Date.today())
 
     #Contact Person
     contact_person = fields.Many2one('res.users',string='Contact Person', default=lambda self: self.env.user)
