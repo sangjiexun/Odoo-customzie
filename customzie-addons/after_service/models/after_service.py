@@ -85,7 +85,6 @@ class AfterService(models.Model):
 
     treatment_remark = fields.Text(string='Treatment Remark')
 
-
     #Order Elapsed Days
     order_elapsed_days = fields.Char(sting='Order Elapsed Days', store=True)
 
@@ -120,6 +119,7 @@ class AfterService(models.Model):
         ('done', 'Finshed'),
         ('cancel', 'Cancelled')], string='Status',
         copy=False, default='draft', track_visibility='nge')
+        
     is_claim = fields.Boolean('is_claim', default=False)
 
     measure_type = fields.Selection(
@@ -140,8 +140,11 @@ class AfterService(models.Model):
     @api.onchange('sale_order_filter')
     def onchange_sale_order_filter(self):
         if self.sale_order_filter:
-            self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + "日"
-            self.is_claim = self.sale_order_filter.is_claim
+            if not self.sale_order_filter.delivery_date:
+                self.order_elapsed_days = '20日'
+            else:
+                self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + '日'
+            self.is_claim = self.sale_order_filter.is_defective
 
     @api.onchange('treatment_book_id')
     def onchange_treatment_book_id(self):
