@@ -1,29 +1,13 @@
 <?xml version="1.0"?>
 <odoo>
-    <!--record id="product_variant_easy_edit_view_base_inherit" model="ir.ui.view">
-        <field name="name">product.product.view.form.easy.base.inherit</field>
-        <field name="model">product.product</field>
-        <field name="inherit_id" ref="product.product_variant_easy_edit_view" />
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='barcode']" position="after">
-                <field name="marker_name" />
-                <field name="marker_product_no" />
-            </xpath>
-            <xpath expr="//field[@name='standard_price']" position="after">
-                <field name="ceo_price" widget='monetary' groups="base_inherit.group_ceo"/>
-                <field name="product_no" />
-            </xpath>
-        </field>
-    </record-->
-
     <record id="product_normal_form_view_inherit" model="ir.ui.view">
         <field name="name">product.product.form.inherit</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
             <field name="type" position="after">
-                <field name="marker_name" />
-                <field name="marker_product_no" />
+                <field name="maker_name" />
+                <field name="maker_product_no" />
             </field>
             <xpath expr="//field[@name='currency_id']" position="before">
                 <field name="ceo_price" widget='monetary' groups="base_inherit.group_ceo"/>
@@ -66,8 +50,8 @@
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <separator/>
-                <field name="marker_name" string="Marker Name"/>
-                <field name="marker_product_no" string="Marker Product No"/>
+                <field name="maker_name" string="Maker Name"/>
+                <field name="maker_product_no" string="Maker Product No"/>
                 <field name="spec_cpu" string="Spec Cpu"/>
                 <field name="spec_memory" string="Spec Memory"/>
                 <field name="spec_hard_disc" string="Spec HardDisk"/>

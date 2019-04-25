@@ -6,9 +6,9 @@ from odoo import api, fields, models
 class ProductProduct(models.Model):
     _inherit = 'product.product'
 
-    marker_name = fields.Many2one(
-        "marker.info", string="Marker Name")
-    marker_product_no = fields.Char('Marker Product')
+    maker_name = fields.Many2one(
+        "maker.info", string="Maker Name")
+    maker_product_no = fields.Char('Maker Product')
     product_no = fields.Char('Product No', readonly=True, index=True, copy=False, default='New')
     ceo_price = fields.Float(
         'Ceo Cost', company_dependent=True,
@@ -25,10 +25,10 @@ class ProductProduct(models.Model):
         return super(ProductProduct, self).create(vals)
 
 
-class MarkerInfo(models.Model):
+class MakerInfo(models.Model):
 
-    _name = 'marker.info'
-    _description = 'Marker Info'
+    _name = 'maker.info'
+    _description = 'Maker Info'
     _order = 'id'
 
-    name = fields.Char('Marker', required=True, index=True)
+    name = fields.Char('Maker', required=True, index=True)

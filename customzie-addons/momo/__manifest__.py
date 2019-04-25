@@ -31,7 +31,7 @@
         'views/product_template_views.xml',
         'views/product_views.xml',
         'data/ir_sequence_data.xml',
-        'data/marker_data.xml',
+        'data/maker_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

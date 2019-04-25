@@ -231,7 +231,7 @@ class ProductLinePicking(models.Model):
 
     product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
     stock_picking_id = fields.Many2one('stock.picking', 'Stock Picking', index=True, required=True)
-    barcode = fields.Char(related='product_line_id.barcode')
+    barcode = fields.Char(related='product_line_id.barcode', store=True, readonly=False)
     name = fields.Char(related='stock_picking_id.name')
     sale_id = fields.Integer('Sale Id', related='stock_picking_id.sale_id.id')
     picking_type_id = fields.Integer('Picking Type Id', related='stock_picking_id.picking_type_id.id')

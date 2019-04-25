@@ -1,0 +1,455 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* momo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-25 12:28+0000\n"
+"PO-Revision-Date: 2019-04-25 12:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__barcode
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__barcode
+msgid "Barcode"
+msgstr "バーコード"
+
+#. module: momo
+#: model:ir.actions.server,name:momo.action_barcode_print_button
+msgid "Barcode Print"
+msgstr "バーコード印刷"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.barcode_print_wizard
+msgid "Cancel"
+msgstr "取消"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__ceo_price
+#: model:ir.model.fields,field_description:momo.field_product_template__ceo_price
+msgid "Ceo Cost"
+msgstr "仕入原価"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_creator_form
+msgid "CreatorDetail"
+msgstr "生成明細"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__current_location
+msgid "Current Location"
+msgstr "在庫位置"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__customer_id
+msgid "Customer Id"
+msgstr "お客様ID"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__customer_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__customer_name
+msgid "Customer Name"
+msgstr "お客様名"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__defective_detail
+msgid "Defective Detail"
+msgstr "不良明細"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__delivery_date
+msgid "Delivery Date"
+msgstr "配送日"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__id
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__id
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__id
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__id
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__id
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__id
+msgid "ID"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__init_location
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__init_location_id
+msgid "Init Location"
+msgstr "初期位置"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__is_cleaned
+msgid "Is Cleaned"
+msgstr "清掃済"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__is_created
+msgid "Is Created"
+msgstr "生成済"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__is_defective
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__is_defective
+msgid "Is Defective Product Line"
+msgstr "不良製品"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__printed
+msgid "Is Printed"
+msgstr "印刷済"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_product_line____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking____last_update
+msgid "Last Modified on"
+msgstr "最終更新日"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_form
+msgid "List of Product Lline Picking"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__init_location
+msgid "Location Name"
+msgstr "ロケーション名"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_maker_info__name
+msgid "Maker"
+msgstr "メーカー"
+
+#. module: momo
+#: model:ir.model,name:momo.model_maker_info
+msgid "Maker Info"
+msgstr "メーカー情報"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__maker_name
+#: model:ir.model.fields,field_description:momo.field_product_template__maker_name
+#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
+msgid "Maker Name"
+msgstr "メーカー名"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__maker_product_no
+#: model:ir.model.fields,field_description:momo.field_product_template__maker_product_no
+msgid "Maker Product"
+msgstr "メーカー製品No"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
+msgid "Maker Product No"
+msgstr "メーカー製品No"
+
+#. module: momo
+#: model:ir.ui.menu,name:momo.momo_menu_root
+msgid "MoMo"
+msgstr "製品管理"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__product_name
+msgid "Name"
+msgstr "名称"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__need_clean
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__need_clean
+msgid "Need Clean"
+msgstr "要清掃品"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__need_qty
+msgid "Need Quantity"
+msgstr "要生成数"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__picking_type_id
+msgid "Picking Type Id"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__picking_type_id_name
+msgid "Picking Type Name"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__start_column
+msgid "Print Start Column"
+msgstr "印刷初期列"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__start_row
+msgid "Print Start Row"
+msgstr "印刷初期行"
+
+#. module: momo
+#: model:ir.model,name:momo.model_product_product
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__product_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__product_id
+msgid "Product"
+msgstr "プロダクト"
+
+#. module: momo
+#: model:ir.actions.act_window,name:momo.action_product_line
+#: model:ir.model,name:momo.model_momo_product_line
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__product_line_id
+#: model:ir.module.category,name:momo.module_momo_category
+#: model:ir.ui.menu,name:momo.momo_menu_product_line
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_creator_form
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_form
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_search
+msgid "Product Line"
+msgstr "製品明細"
+
+#. module: momo
+#: model:ir.model,name:momo.model_momo_product_line_creator
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__product_line_creator_id
+#: model:ir.ui.menu,name:momo.momo_menu_product_line_creator
+msgid "Product Line Creator"
+msgstr "製品明細生成"
+
+#. module: momo
+#: model:ir.actions.act_window,name:momo.action_product_line_creator
+msgid "Product Line Creator Action"
+msgstr ""
+
+#. module: momo
+#: model:ir.model,name:momo.model_momo_product_line_creator_detail
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__creator_detail_ids
+msgid "Product Line Creator Detail"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_creator_detail_group_manager
+msgid "Product Line Creator Detail Manager"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_creator_detail_group_user
+msgid "Product Line Creator Detail User"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_creator_group_manager
+msgid "Product Line Creator Manager"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_creator_group_user
+msgid "Product Line Creator User"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_group_manager
+msgid "Product Line Manager"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_group_operator
+msgid "Product Line Operator"
+msgstr ""
+
+#. module: momo
+#: model:ir.model,name:momo.model_momo_product_line_picking
+#: model:ir.model.fields,field_description:momo.field_stock_picking__product_line_picking_ids
+#: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_form
+msgid "Product Line Picking"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_picking_group_manager
+msgid "Product Line Picking Manager"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_picking_group_user
+msgid "Product Line Picking User"
+msgstr ""
+
+#. module: momo
+#: model:res.groups,name:momo.product_line_group_user
+msgid "Product Line User"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__product_no
+#: model:ir.model.fields,field_description:momo.field_product_product__product_no
+#: model:ir.model.fields,field_description:momo.field_product_template__product_no
+msgid "Product No"
+msgstr "製品No"
+
+#. module: momo
+#: model:ir.model,name:momo.model_product_template
+msgid "Product Template"
+msgstr "プロダクトテンプレート"
+
+#. module: momo
+#: model:ir.actions.server,name:momo.server_action_product_line_creator_button
+msgid "ProdutLine Create"
+msgstr "製品明細生成"
+
+#. module: momo
+#: model:ir.model,name:momo.model_purchase_order
+msgid "Purchase Order"
+msgstr "購買オーダ"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__name
+msgid "Reference"
+msgstr "参照"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__remark
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__remark
+msgid "Remark"
+msgstr "リマーク"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__sale_id
+msgid "Sale Id"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_order_id
+msgid "Sale Order Id"
+msgstr "注文番号"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_order_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__sale_order_name
+msgid "Sale Order Name"
+msgstr "注文名"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_tree
+msgid "Scan"
+msgstr "スキャン"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__serial_no
+msgid "Serial No"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__spec_cpu
+#: model:ir.model.fields,field_description:momo.field_product_template__spec_cpu
+#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
+msgid "Spec Cpu"
+msgstr "CPU"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__spec_driver
+#: model:ir.model.fields,field_description:momo.field_product_template__spec_driver
+#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
+msgid "Spec Driver"
+msgstr "ドライバー"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__spec_hard_disc
+#: model:ir.model.fields,field_description:momo.field_product_template__spec_hard_disc
+#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
+msgid "Spec HardDisk"
+msgstr "ハードディスク"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_product_product__spec_memory
+#: model:ir.model.fields,field_description:momo.field_product_template__spec_memory
+#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
+msgid "Spec Memory"
+msgstr "メモリ"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.barcode_print_wizard
+msgid "Start Print"
+msgstr "印刷開始"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__state
+msgid "State"
+msgstr "都道府県/州"
+
+#. module: momo
+#: model:ir.actions.act_window,name:momo.action_stock_picking
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__stock_picking_ids
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__stock_picking_id
+#: model:ir.ui.menu,name:momo.momo_stock_picking
+msgid "Stock Picking"
+msgstr "在庫ピッキング"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_form
+msgid "StockPicking"
+msgstr ""
+
+#. module: momo
+#: model:ir.model,name:momo.model_stock_picking
+msgid "Transfer"
+msgstr "運送"
+
+#. module: momo
+#: model:ir.model,name:momo.model_momo_barcode_print_wizard
+msgid "barcode.print.wizard"
+msgstr "バーコード印刷設定"
+

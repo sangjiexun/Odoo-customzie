@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="maker_lenovo" model="maker.info">
+            <field name="name">レノボ</field>
+        </record>
+        <record id="maker_pana" model="maker.info">
+            <field name="name">パナソニック</field>
+        </record>
+        <record id="maker_dell" model="maker.info">
+            <field name="name">DELL（デル）</field>
+        </record>
+        <record id="maker_toshiba" model="maker.info">
+            <field name="name">東芝</field>
+        </record>
+        <record id="maker_vaio" model="maker.info">
+            <field name="name">VAIO</field>
+        </record>
+        <record id="maker_nec" model="maker.info">
+            <field name="name">NEC</field>
+        </record>
+        <record id="maker_asus" model="maker.info">
+            <field name="name">アスース</field>
+        </record>
+        <record id="maker_fujitsu" model="maker.info">
+            <field name="name">富士通</field>
+        </record>
+        <record id="maker_onkyo" model="maker.info">
+            <field name="name">オンキョー</field>
+        </record>
+    </data>
+</odoo>
