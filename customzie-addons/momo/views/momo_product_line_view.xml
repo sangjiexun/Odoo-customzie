@@ -164,7 +164,7 @@
                         </group>
 
                         <field name="product_line_picking_ids" widget="one2many_list">
-                            <tree string="Product Line Picking" editable="top">
+                            <tree string="Product Line Picking" editable="bottom">
                                 <field name="product_line_id" invisible="1"/>
                                 <field name="barcode"/>
                                 <field name="is_defective"/>
@@ -225,10 +225,9 @@
             <field name="model">momo.product.line.picking</field>
             <field name="arch" type="xml">
                 <pivot string="Product Line Picking" disable_linking="True" display_quantity="True">
-                    <field name="stock_picking_id" type="row"/>
+                    <field name="picking_type_id_name" type="row"/>
                     <field name="create_date" interval="month" type="col"/>
-                    <field name="create_uid" type="row"/>
-                    <field name="create_uid" type="measure"/>
+
                 </pivot>
             </field>
         </record>
@@ -238,10 +237,8 @@
             <field name="model">momo.product.line.picking</field>
             <field name="arch" type="xml">
                 <graph string="Product Line Picking">
-                    <field name="stock_picking_id" type="row"/>
+                    <field name="picking_type_id_name" type="row"/>
                     <field name="create_date" interval="month" type="col"/>
-                    <field name="create_uid" type="row"/>
-                    <field name="create_uid" type="measure"/>
                 </graph>
             </field>
         </record>

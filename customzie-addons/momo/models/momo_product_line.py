@@ -231,12 +231,18 @@ class ProductLinePicking(models.Model):
 
     product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
     stock_picking_id = fields.Many2one('stock.picking', 'Stock Picking', index=True, required=True)
-    barcode = fields.Char(related='product_line_id.barcode', store=True, readonly=False)
+    barcode = fields.Char('Barcode')
     name = fields.Char(related='stock_picking_id.name')
     sale_id = fields.Integer('Sale Id', related='stock_picking_id.sale_id.id')
     picking_type_id = fields.Integer('Picking Type Id', related='stock_picking_id.picking_type_id.id')
-    picking_type_id_name = fields.Char('Picking Type Name', related='stock_picking_id.picking_type_id.name')
+    picking_type_id_name = fields.Char('Picking Type Name', related='stock_picking_id.picking_type_id.name', store=True, translate=True)
     sale_order_name = fields.Char('Sale Order Name', related='stock_picking_id.sale_id.name')
     customer_name = fields.Char('Customer Name', related='stock_picking_id.sale_id.partner_id.name')
     is_defective = fields.Boolean(related='product_line_id.is_defective')
     state = fields.Char(string='State')
+
+    @api.onchange('barcode')
+    def onchange_barcode(self):
+        for line in self:
+            res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
+            line.product_line_id = res.id
