@@ -164,8 +164,8 @@
                         </group>
 
                         <field name="product_line_picking_ids" widget="one2many_list">
-                            <tree string="Product Line Picking" editable="bottom">
-                                <field name="product_line_id"/>
+                            <tree string="Product Line Picking" editable="top">
+                                <field name="product_line_id" invisible="1"/>
                                 <field name="barcode"/>
                                 <field name="is_defective"/>
                             </tree>

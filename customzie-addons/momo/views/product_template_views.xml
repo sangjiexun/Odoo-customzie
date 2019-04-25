@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
             <field name="type" position="after">
-                <field name="marker_name" />
-                <field name="marker_product_no" />
+                <field name="maker_name" />
+                <field name="maker_product_no" />
             </field>
             <xpath expr="//field[@name='currency_id']" position="before">
                 <field name="ceo_price" widget='monetary' groups="base_inherit.group_ceo"/>

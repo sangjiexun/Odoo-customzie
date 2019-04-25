@@ -6,9 +6,9 @@ from odoo import api, fields, models
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    marker_name = fields.Many2one(
-        "marker.info", string="Marker Name")
-    marker_product_no = fields.Char('Marker Product')
+    maker_name = fields.Many2one(
+        "maker.info", string="Maker Name")
+    maker_product_no = fields.Char('Maker Product')
     product_no = fields.Char('Product No', required=True, index=True, copy=False, default='New')
     ceo_price = fields.Float(
         'Ceo Cost', company_dependent=True,
