@@ -15,7 +15,6 @@ class Picking(models.Model):
         view_id = self.env.ref('momo.view_stock_picking_form').id
         context = dict(self.env.context)
         context['form_view_initial_mode'] = 'edit'
-        print("view_id:", view_id)
         return {
             'type': 'ir.actions.act_window',
             'view_type': 'form',
