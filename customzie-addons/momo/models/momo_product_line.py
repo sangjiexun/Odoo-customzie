@@ -10,6 +10,7 @@ from reportlab.graphics.barcode import code128
 
 class BarcodePrintWizard(models.TransientModel):
     _name = "momo.barcode.print.wizard"
+    _description = 'barcode.print.wizard'
 
     start_row = fields.Integer('Print Start Row', default=1)
     start_column = fields.Integer('Print Start Column', default=1)
@@ -233,10 +234,10 @@ class ProductLinePicking(models.Model):
     stock_picking_id = fields.Many2one('stock.picking', 'Stock Picking', index=True, required=True)
     barcode = fields.Char(related='product_line_id.barcode')
     name = fields.Char(related='stock_picking_id.name')
-    sale_id = fields.Integer('stock.picking', related='stock_picking_id.sale_id.id')
-    picking_type_id = fields.Integer('stock.picking', related='stock_picking_id.picking_type_id.id')
-    picking_type_id_name = fields.Char('stock.picking', related='stock_picking_id.picking_type_id.name')
-    sale_order_name = fields.Char('stock.picking', related='stock_picking_id.sale_id.name')
-    customer_name = fields.Char('stock.picking', related='stock_picking_id.sale_id.partner_id.name')
+    sale_id = fields.Integer('Sale Id', related='stock_picking_id.sale_id.id')
+    picking_type_id = fields.Integer('Picking Type Id', related='stock_picking_id.picking_type_id.id')
+    picking_type_id_name = fields.Char('Picking Type Name', related='stock_picking_id.picking_type_id.name')
+    sale_order_name = fields.Char('Sale Order Name', related='stock_picking_id.sale_id.name')
+    customer_name = fields.Char('Customer Name', related='stock_picking_id.sale_id.partner_id.name')
     is_defective = fields.Boolean(related='product_line_id.is_defective')
     state = fields.Char(string='State')

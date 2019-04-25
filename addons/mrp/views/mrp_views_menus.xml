@@ -27,7 +27,6 @@
         <menuitem id="menu_mrp_reporting"
               name="Reporting"
               parent="menu_mrp_root"
-              groups="base_inherit.make_invisible"
               sequence="25"/>
 
         <menuitem id="menu_mrp_configuration"

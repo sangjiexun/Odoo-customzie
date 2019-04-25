@@ -366,10 +366,7 @@
         parent="menu_hr_holidays_root"
         sequence="1"
         action="action_hr_holidays_dashboard"
-        groups="base.group_user"/>
-
-<!--youoshinan    groups="hr_holidays.group_hr_holidays_manager" -->
-
+        groups="hr_holidays.group_hr_holidays_manager"/>
 
     <menuitem
         id="menu_hr_holidays_my_leaves"
@@ -402,13 +399,12 @@
         groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
         sequence="3"/>
 
-    <!--mod by youshinan-->
     <menuitem
         id="menu_hr_holidays_report"
         name="Reporting"
         parent="menu_hr_holidays_root"
         sequence="99"
-        groups="base_inherit.make_invisible"/>
+        groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"/>
 
     <record id="hr_leave_action_new_request" model="ir.actions.act_window">
         <field name="name">New Request</field>
@@ -447,11 +443,9 @@
         <field name="view_id" ref="hr_leave_view_form"/>
     </record>
 
-    <!--mod by youshinan-->
     <menuitem
         id="hr_leave_menu_new_request"
         parent="menu_hr_holidays_my_leaves"
-        groups="base_inherit.make_invisible"
         action="hr_leave_action_new_request"
         sequence="2"/>
 
@@ -571,12 +565,11 @@
         </field>
     </record>
 
-    <!--mod by youshinan-->
     <menuitem
         id="hr_holidays_menu_manager_payroll_to_report"
         name="Leaves to report"
         parent="hr_holidays_menu_manager_payroll"
-        groups="base_inherit.make_invisible"
+        groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"
         action="hr_leave_action_payroll"
         sequence="1"/>
 
@@ -620,11 +613,9 @@
         <field name="act_window_id" ref="action_hr_available_holidays_report"/>
     </record>
 
-    <!--mod by youshinan-->
     <menuitem
         name="Leaves Analysis"
         id="menu_hr_available_holidays_report_tree"
         action="action_hr_available_holidays_report"
-        groups="base_inherit.make_invisible"
-        parent="menu_hr_holidays_root" sequence="5"/>
+        parent="menu_hr_holidays_report" sequence="5"/>
 </odoo>
