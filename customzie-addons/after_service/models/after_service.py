@@ -35,10 +35,9 @@ class AfterService(models.Model):
     _order = 'id'
 
     #After Service Reference
-    name = fields.Char(
-        'After Service',
-        default=lambda self: self.env['ir.sequence'].next_by_code('after.service'),
-        copy=False, required=True, readonly=True)
+    name = fields.Char(string='After Service',required=True, index=True, copy=False, readonly=True, default=lambda self: _('New'))
+        #default=lambda self: self.env['ir.sequence'].next_by_code('after.service'),
+        #copy=False, required=True, readonly=True)
 
     #Sale Order Filter
     sale_order_filter = fields.Many2one('momo.product.line', 'Sale Order Filter', required=True)
@@ -53,10 +52,10 @@ class AfterService(models.Model):
     #sale_order_date = fields.Datetime(string='Sale Order Date')
 
     #Inquiry Date
-    inquiry_date = fields.Date(string="Inquiry Date",default=lambda self: self._get_current_date())
+    inquiry_date = fields.Date(string='Inquiry Date',default=lambda self: self._get_current_date())
 
     #Contact Person
-    contact_person = fields.Many2one('res.users',string="Contact Person")
+    contact_person = fields.Many2one('res.users',string='Contact Person', default=lambda self: self.env.user)
 
     #Sale Order Product
     sale_order_product = fields.Many2one(string='Sale Order Product', related='sale_order_filter.product_id',store=True)
@@ -79,7 +78,7 @@ class AfterService(models.Model):
     contact_treatment = fields.Selection(
         [('type1','Repairing'),
          ('type2','Returned Goods')],
-        string="Contact Treatment")
+        string='Contact Treatment')
 
     treatment_book_id = fields.Many2one(
         'treatment.book', string='Treatment Type')
@@ -88,13 +87,13 @@ class AfterService(models.Model):
 
 
     #Order Elapsed Days
-    order_elapsed_days = fields.Char(sting='Order Elapsed Days')
+    order_elapsed_days = fields.Char(sting='Order Elapsed Days', store=True)
 
     #Returned Date
-    returned_date = fields.Date(string='Returned Date',default=lambda self: self._get_current_date())
+    returned_date = fields.Date(string='Returned Date',default=fields.Date.today())
 
     #Reshipping Date
-    reshipping_date = fields.Date(string='Reshipping Date',default=lambda self: self._get_current_date())
+    reshipping_date = fields.Date(string='Reshipping Date',default=fields.Date.today())
 
     #Repair Type
     repair_type = fields.Many2many('repair.type',string='Repair Type')
@@ -129,20 +128,20 @@ class AfterService(models.Model):
         string='Measure Type',required=True)
 
     @api.model
-    def _get_current_date(self):
-        return fields.Date.today()
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('after.service') or _('New')
+        return super(AfterService, self).create(vals)
+
+    #@api.model
+    #def _get_current_date(self):
+    #    return fields.Date.today()
 
     @api.onchange('sale_order_filter')
     def onchange_sale_order_filter(self):
         if self.sale_order_filter:
-            #self.order_id=self.sale_order_filter.sale_order_id.name
-            #self.barcode=self.sale_order_filter.barcode
-            #self.defect_remark = self.sale_order_filter.defect_remark
-            #self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + "日"
-            self.order_elapsed_days = str(21) + "日"
+            self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + "日"
             self.is_claim = self.sale_order_filter.is_claim
-            #self.test_start_date = self.sale_order_filter.confirmation_date
-            #self.test_end_date = fields.Datetime.today()
 
     @api.onchange('treatment_book_id')
     def onchange_treatment_book_id(self):

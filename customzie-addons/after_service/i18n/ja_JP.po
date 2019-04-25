@@ -274,6 +274,12 @@ msgid "Number of unread messages"
 msgstr "未読メッセージ件数"
 
 #. module: after_service
+#: code:customzie-addons/after_service/models/after_service.py:36
+#, python-format
+msgid "New"
+msgstr "新規"
+
+#. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
 msgid "Order Note"
 msgstr "注文メモ："
