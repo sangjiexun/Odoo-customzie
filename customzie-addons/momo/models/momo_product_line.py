@@ -46,7 +46,7 @@ class ProductLineCreator(models.Model):
                             'product_id': line.product_id.id,
                             'remark': self.remark,
                             'init_location': self.init_location,
-                            'need_clean': self.need_clean,
+                            'need_clean': line.need_clean,
                         }
                         self.env['momo.product.line'].create(res)
                     creator.update({'is_created': True})
@@ -93,7 +93,6 @@ class ProductLine(models.Model):
 
     need_clean = fields.Boolean('Need Clean', default=True)
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
-
 
     remark = fields.Char('Remark')
 
