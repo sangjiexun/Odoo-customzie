@@ -93,6 +93,7 @@ class ProductLine(models.Model):
 
     need_clean = fields.Boolean('Need Clean', default=True)
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
+    clean_location = fields.Char('Clean Location')
 
     remark = fields.Char('Remark')
 
@@ -246,3 +247,27 @@ class ProductLinePicking(models.Model):
         for line in self:
             res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
             line.product_line_id = res.id
+
+
+class CleanHistory(models.Model):
+    _name = 'momo.clean.history'
+    _description = 'Clean History'
+    _order = 'id'
+
+    barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super(ProductLine, self).create(vals_list)
+        for line in lines:
+            line.update({'serial_no': self._get_next_serial_no(line.product_no)})
+        return lines
+
+    @api.onchange('barcode')
+    def onchange_barcode(self):
+        if self.code == 'incoming':
+            self.default_location_src_id = self.env.ref('stock.stock_location_suppliers').id
+            self.default_location_dest_id = self.env.ref('stock.stock_location_stock').id
+        elif self.code == 'outgoing':
+            self.default_location_src_id = self.env.ref('stock.stock_location_stock').id
+            self.default_location_dest_id = self.env.ref('stock.stock_location_customers').id
