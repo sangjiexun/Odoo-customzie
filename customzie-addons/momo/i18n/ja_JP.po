@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-25 12:28+0000\n"
-"PO-Revision-Date: 2019-04-25 12:28+0000\n"
+"POT-Creation-Date: 2019-04-27 14:10+0000\n"
+"PO-Revision-Date: 2019-04-27 14:10+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,6 +36,16 @@ msgstr "取消"
 #: model:ir.model.fields,field_description:momo.field_product_template__ceo_price
 msgid "Ceo Cost"
 msgstr "仕入原価"
+
+#. module: momo
+#: model:ir.model,name:momo.model_momo_clean_history
+msgid "Clean History"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__clean_location
+msgid "Clean Location"
+msgstr ""
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_maker_info__create_uid
@@ -225,6 +235,17 @@ msgid "Need Quantity"
 msgstr "要生成数"
 
 #. module: momo
+#: model_terms:ir.actions.act_window,help:momo.product_line_picking_statistics_action
+msgid "No data for analysis"
+msgstr ""
+
+#. module: momo
+#: model:ir.actions.act_window,name:momo.action_pick_to_stock
+#: model:ir.ui.menu,name:momo.momo_product_line_pick_to_stock
+msgid "Pick To Stock"
+msgstr "再入庫"
+
+#. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__picking_type_id
 msgid "Picking Type Id"
 msgstr ""
@@ -232,7 +253,7 @@ msgstr ""
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__picking_type_id_name
 msgid "Picking Type Name"
-msgstr ""
+msgstr "ピックタイプ"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_barcode_print_wizard__start_column
@@ -314,6 +335,8 @@ msgstr ""
 #. module: momo
 #: model:ir.model,name:momo.model_momo_product_line_picking
 #: model:ir.model.fields,field_description:momo.field_stock_picking__product_line_picking_ids
+#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_graph
+#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_pivot
 #: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_form
 msgid "Product Line Picking"
 msgstr ""
@@ -322,6 +345,12 @@ msgstr ""
 #: model:res.groups,name:momo.product_line_picking_group_manager
 msgid "Product Line Picking Manager"
 msgstr ""
+
+#. module: momo
+#: model:ir.actions.act_window,name:momo.product_line_picking_statistics_action
+#: model:ir.ui.menu,name:momo.momo_product_line_picking_statistics
+msgid "Product Line Picking Statistics"
+msgstr "ピック統計"
 
 #. module: momo
 #: model:res.groups,name:momo.product_line_picking_group_user
@@ -341,9 +370,20 @@ msgid "Product No"
 msgstr "製品No"
 
 #. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_to_stock_form
+#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_to_stock_tree
+msgid "Product Pick to Stock"
+msgstr ""
+
+#. module: momo
 #: model:ir.model,name:momo.model_product_template
 msgid "Product Template"
 msgstr "プロダクトテンプレート"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_tree
+msgid "Production Line Tree"
+msgstr "製品明細"
 
 #. module: momo
 #: model:ir.actions.server,name:momo.server_action_product_line_creator_button
@@ -452,4 +492,9 @@ msgstr "運送"
 #: model:ir.model,name:momo.model_momo_barcode_print_wizard
 msgid "barcode.print.wizard"
 msgstr "バーコード印刷設定"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_to_stock_form
+msgid "pick2stock"
+msgstr "再入庫"
 

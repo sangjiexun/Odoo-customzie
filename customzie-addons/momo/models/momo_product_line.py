@@ -74,13 +74,13 @@ class ProductLine(models.Model):
     product_no = fields.Char(related='product_id.product_no')
     product_name = fields.Char(related='product_id.product_tmpl_id.name')
     serial_no = fields.Char(string='Serial No')
-    barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
+    barcode = fields.Char('Barcode', compute='_compute_barcode', store=True, readonly=False)
     printed = fields.Boolean('Is Printed', default=False)
     init_location = fields.Char('Init Location', required=True)
     stock_picking_ids = fields.One2many('momo.product.line.picking', 'product_line_id', 'Stock Picking',
                                         copy=True)
 
-    current_location = fields.Char('Current Location', compute='_compute_current_location', store=True)
+    current_location = fields.Char('Current Location', compute='_compute_current_location', store=True, translate=True)
 
     sale_order_id = fields.Many2one('sale.order', 'Sale Order Id', compute='_compute_sale_info', store=True)
     sale_order_name = fields.Char('Sale Order Name', compute='_compute_sale_info', store=True)
@@ -171,6 +171,11 @@ class ProductLine(models.Model):
         for line in self:
             line.update({'is_cleaned': True})
 
+    @api.one
+    def pick2stock(self):
+        self.write({'current_location': 'stock'})
+
+
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
         init_count = (start_row - 1) * 5 + (start_column - 1)
@@ -248,6 +253,7 @@ class ProductLinePicking(models.Model):
             res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
             line.product_line_id = res.id
 
+'''
 
 class CleanHistory(models.Model):
     _name = 'momo.clean.history'
@@ -271,3 +277,4 @@ class CleanHistory(models.Model):
         elif self.code == 'outgoing':
             self.default_location_src_id = self.env.ref('stock.stock_location_stock').id
             self.default_location_dest_id = self.env.ref('stock.stock_location_customers').id
+'''

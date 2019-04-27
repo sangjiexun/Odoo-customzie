@@ -111,8 +111,8 @@
             <field name="model">momo.product.line</field>
             <field name="arch" type="xml">
                 <search string="Product Line">
-                    <field name="product_name"/>
                     <field name="barcode"/>
+                    <field name="product_name"/>
                     <field name="current_location"/>
                     <field name="sale_order_name"/>
                     <field name="customer_name"/>
@@ -125,7 +125,7 @@
             <field name="name">Product Line List View</field>
             <field name="model">momo.product.line</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree string="Production Line Tree" create="false" edit="false" delete="false">
                     <field name="product_name"/>
                     <field name="barcode"/>
                     <field name="current_location"/>
@@ -135,6 +135,8 @@
                     <field name="need_clean"/>
                     <field name="is_cleaned"/>
                     <field name="remark"/>
+                    <field name="is_defective"/>
+                    <field name="defective_detail"/>
                 </tree>
             </field>
         </record>
@@ -145,7 +147,8 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">momo.product.line</field>
             <field name="limit">80</field>
-            <field name="view_mode">tree,form</field>
+            <!--field name="view_mode">tree,form</field-->
+            <field name="view_mode">tree</field>
             <field name="view_type">form</field>
         </record>
 
@@ -154,7 +157,7 @@
             <field name="name">stock picking form</field>
             <field name="model">stock.picking</field>
             <field name="arch" type="xml">
-                <form string="List of Product Lline Picking">
+                <form string="List of Product Lline Picking" create="false" delete="false">
                     <sheet>
                         <group>
                             <group>
@@ -182,12 +185,17 @@
             <field name="mode">primary</field>
             <field name="inherit_id" ref="stock.vpicktree"/>
             <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
                 <xpath expr="//field[@name='partner_id']" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='backorder_id']" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='state']" position="after">
-                    <button name="action_stock_picking" string="Scan" type="object"/>
+                    <button name="action_stock_picking" string="Scan" type="object" class="oe_highlight"/>
                 </xpath>
             </field>
         </record>
@@ -219,7 +227,7 @@
             <field name="act_window_id" ref="action_stock_picking"/>
         </record>
 
-
+        <!-- statistics -->
         <record id="product_line_picking_pivot" model="ir.ui.view">
             <field name="name">product.line.picking.pivot</field>
             <field name="model">momo.product.line.picking</field>
@@ -269,12 +277,74 @@
             <field name="act_window_id" ref="product_line_picking_statistics_action"/>
         </record>
 
+        <!-- Pick to stock -->
+        <record id='product_line_picking_to_stock_form' model='ir.ui.view'>
+            <field name="name">product.line.pick.to.stock</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <form string="Product Pick to Stock" create="false" delete="false">
+                    <header>
+                        <button name="pick2stock" string="pick2stock" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_name" readonly="1"/>
+                                <field name="barcode" readonly="1"/>
+                                <field name="current_location" readonly="1"/>
+                                <field name="is_defective"/>
+                                <field name="defective_detail"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id='product_line_picking_to_stock_tree' model='ir.ui.view'>
+            <field name="name">product.line.pick.to.stock</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Product Pick to Stock">
+                    <field name="barcode"/>
+                    <field name="is_defective"/>
+                    <field name="defective_detail"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pick_to_stock" model="ir.actions.act_window">
+            <field name="name">Pick To Stock</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="view_product_line_search"/>
+        </record>
+
+        <record id="action_pick_to_stock_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_line_tree"/>
+            <field name="act_window_id" ref="action_pick_to_stock"/>
+        </record>
+
+        <record id="action_pick_to_stock_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_line_picking_to_stock_form"/>
+            <field name="act_window_id" ref="action_pick_to_stock"/>
+        </record>
+
+
         <!-- Top menu item -->
         <menuitem name="MoMo" id="momo_menu_root" action="stock.stock_picking_type_action"/>
         <menuitem name="Product Line"  id="momo_menu_product_line" parent="momo_menu_root" action="action_product_line"/>
         <menuitem name="Stock Picking" id="momo_stock_picking" parent="momo_menu_root" action="action_stock_picking"/>
         <menuitem name="Product Line Creator" id="momo_menu_product_line_creator" parent="momo_menu_root" action="action_product_line_creator"/>
         <menuitem name="Product Line Picking Statistics" id="momo_product_line_picking_statistics" parent="momo_menu_root" action="product_line_picking_statistics_action"/>
+        <menuitem name="Pick To Stock" id="momo_product_line_pick_to_stock" parent="momo_menu_root" action="action_pick_to_stock"/>
 
     </data>
 </odoo>
