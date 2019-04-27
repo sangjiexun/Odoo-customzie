@@ -131,12 +131,14 @@
                     <field name="current_location"/>
                     <field name="sale_order_name"/>
                     <field name="customer_name"/>
-                    <field name="printed"/>
+                    <!--field name="printed"/>
                     <field name="need_clean"/>
-                    <field name="is_cleaned"/>
+                    <field name="is_cleaned"/-->
                     <field name="remark"/>
+                    <field name="product_rank"/>
                     <field name="is_defective"/>
                     <field name="defective_detail"/>
+                    <field name="remark"/>
                 </tree>
             </field>
         </record>
@@ -287,14 +289,29 @@
                         <button name="pick2stock" string="pick2stock" type="object" class="oe_highlight"/>
                     </header>
                     <sheet>
-                        <group>
-                            <group>
-                                <field name="product_name" readonly="1"/>
-                                <field name="barcode" readonly="1"/>
-                                <field name="current_location" readonly="1"/>
-                                <field name="is_defective"/>
-                                <field name="defective_detail"/>
+                        <label for="product_name" class="oe_edit_only"/>
+                        <h1><field name="product_name"/></h1>
+                        <label for="barcode" class="oe_edit_only"/>
+                        <h2><field name="barcode" readonly="1"/></h2>
+                        <label for="current_location" class="oe_edit_only"/>
+                        <h2><field name="current_location"/></h2>
+                        <group col="12">
+                            <group colspan="12">
+                                <field name="is_defective" colspan="4"/>
+                                <field name="defective_detail" colspan="8"/>
                             </group>
+                            <newline/>
+                            <group colspan="12">
+                                <field name="product_rank" colspan="8"/>
+                            </group>
+                            <newline/>
+                            <label for="rack_prefix" String="Rack"/>
+                            <div colspan="6">
+                                <field name="rack_prefix" colspan="1" nolable="1"/>
+                                <field name="rack_suffix" colspan="1" nolable="1"/>
+                                <span>-</span>
+                                <field name="rack_no" colspan="1" nolable="1"/>
+                            </div>
                         </group>
                     </sheet>
                 </form>

@@ -13,28 +13,11 @@ class BarcodePrintWizard(models.TransientModel):
     _description = 'barcode.print.wizard'
 
     start_row = fields.Selection([
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5'),
-        (6, '6'),
-        (7, '7'),
-        (8, '8'),
-        (9, '9'),
-        (10, '10'),
-        (11, '11'),
-        (12, '12'),
-        (13, '13')
-    ], string='Print Start Row', default='1')
+        (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'), (6, '6'), (7, '7'), (8, '8'),
+        (9, '9'), (10, '10'), (11, '11'), (12, '12'), (13, '13'),], string='Print Start Row', default='1')
 
     start_column = fields.Selection([
-        (1, '1'),
-        (2, '2'),
-        (3, '3'),
-        (4, '4'),
-        (5, '5')
-    ], string='Print Start Column', default='1')
+        (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),], string='Print Start Column', default='1')
 
     @api.multi
     def print_barcode1(self):
@@ -112,6 +95,32 @@ class ProductLine(models.Model):
     delivery_date = fields.Datetime('Delivery Date', compute='_compute_sale_info', store=True)
     is_defective = fields.Boolean('Is Defective Product Line', default=False)
     defective_detail = fields.Text('Defective Detail')
+
+    product_rank = fields.Selection([
+        ('N', 'n rank'),
+        ('NS', 'ns rank'),
+        ('S', 's rank'),
+        ('SA', 'sa rank'),
+        ('A', 'a rank'),
+        ('AB', 'ab rank'),
+        ('B', 'b rank'),
+        ('C', 'c rank'),
+        ('D', 'd rank'),
+    ], string='Ranking',  translate=True, default='N')
+
+    rack_prefix = fields.Selection([
+        ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F'),
+    ], string='Rack Prefix', default='A')
+
+    rack_suffix = fields.Selection([
+        ('a', 'a'), ('b', 'b'), ('c', 'c'), ('d', 'd'), ('e', 'e'), ('f', 'f'),
+        ('g', 'g'), ('h', 'h'), ('i', 'i'), ('j', 'j'), ('k', 'k'), ('l', 'l'), ('m', 'm'),
+        ('n', 'n'), ('o', 'o'), ('p', 'p'), ('q', 'q'), ('r', 'r'), ('s', 's'), ('t', 't'),
+        ('u', 'u'), ('v', 'v'), ('w', 'w'), ('x', 'x'), ('y', 'y'), ('z', 'z'),
+    ], string='Rack Suffix', default='a')
+
+    rack_no = fields.Selection([
+        ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'),], string='Rack No', default='1')
 
     need_clean = fields.Boolean('Need Clean', default=True)
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
@@ -194,7 +203,7 @@ class ProductLine(models.Model):
 
     @api.one
     def pick2stock(self):
-        self.write({'current_location': 'stock'})
+        self.write({'current_location': 'Stock'})
 
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
