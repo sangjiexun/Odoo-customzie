@@ -357,6 +357,48 @@
         </record>
 
 
+        <!-- form view for production exchange -->
+        <record id="view_product_exchange_form" model="ir.ui.view">
+            <field name="name">product exchange form</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <form string="Product Exchange" create="false" delete="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="barcode"/>
+                                <field name="product_name" readonly="1"/>
+                            </group>
+                        </group>
+
+                        <field name="child_ids" widget="one2many_list">
+                            <tree string="Child Line" editable="bottom">
+                                <field name="barcode"/>
+                                <field name="product_name"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_exchange" model="ir.actions.act_window">
+            <field name="name">Product Exchange</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="action_product_exchange_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_product_exchange_form"/>
+            <field name="act_window_id" ref="action_product_exchange"/>
+        </record>
+
+
         <!-- Top menu item -->
         <menuitem name="MoMo" id="momo_menu_root" action="stock.stock_picking_type_action"/>
         <menuitem name="Product Line"  id="momo_menu_product_line" parent="momo_menu_root" action="action_product_line"/>
@@ -364,6 +406,7 @@
         <menuitem name="Product Line Creator" id="momo_menu_product_line_creator" parent="momo_menu_root" action="action_product_line_creator"/>
         <menuitem name="Product Line Picking Statistics" id="momo_product_line_picking_statistics" parent="momo_menu_root" action="product_line_picking_statistics_action"/>
         <menuitem name="Pick To Stock" id="momo_product_line_pick_to_stock" parent="momo_menu_root" action="action_pick_to_stock"/>
+        <menuitem name="Product Exchange" id="momo_product_exchange" parent="momo_menu_root" action="action_product_exchange"/>
 
     </data>
 </odoo>
