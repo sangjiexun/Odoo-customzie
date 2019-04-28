@@ -366,7 +366,7 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="barcode"/>
+                                <field name="barcode" readonly="0"/>
                                 <field name="product_name" readonly="1"/>
                             </group>
                         </group>
