@@ -364,9 +364,14 @@
             <field name="arch" type="xml">
                 <form string="Product Exchange" create="false" delete="false">
                     <sheet>
+                        <header>
+                            <button name="ProductLink" string="ProductLink" type="object" class="oe_highlight"/>
+                            <!--button name="ProductUnlink" string="ProductUnlink" type="object" class="oe_highlight"/-->
+                            <!--button string="Cancel" type="object" name="cancel" special="cancel" /-->
+                        </header>
                         <group>
                             <group>
-                                <field name="barcode" readonly="0"/>
+                                <field name="barcode" readonly="1"/>
                                 <field name="product_name" readonly="1"/>
                             </group>
                         </group>
@@ -374,7 +379,7 @@
                         <field name="child_ids" widget="one2many_list">
                             <tree string="Child Line" editable="bottom">
                                 <field name="barcode"/>
-                                <field name="product_name"/>
+                                <field name="product_id"/>
                             </tree>
                         </field>
                     </sheet>
@@ -386,10 +391,19 @@
             <field name="name">Product Exchange</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">momo.product.line</field>
-            <field name="view_mode">form</field>
+            <field name="view_mode">tree,form</field>
             <field name="view_type">form</field>
-            <field name="target">new</field>
+            <field name="target">main</field>
+            <field name="search_view_id" ref="view_product_line_search"/>
         </record>
+
+        <record id="action_product_exchange_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_line_tree"/>
+            <field name="act_window_id" ref="action_product_exchange"/>
+        </record>
+
 
         <record id="action_product_exchange_view_form" model="ir.actions.act_window.view">
             <field name="sequence" eval="2"/>

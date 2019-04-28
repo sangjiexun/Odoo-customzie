@@ -109,7 +109,7 @@ class ProductLine(models.Model):
     parent_id = fields.Many2one(
         'momo.product.line',
         'Parent Production',
-        ondelete='restrict')
+        ondelete='set null')
 
     # Optional but good to have:
     child_ids = fields.One2many(
@@ -202,6 +202,12 @@ class ProductLine(models.Model):
         if line:
             return line
 
+    @api.onchange('barcode')
+    def onchange_barcode(self):
+        for line in self:
+            res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
+            line.product_id = res.product_id
+
     @api.multi
     def call_print_wizard(self):
         view_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
@@ -224,7 +230,12 @@ class ProductLine(models.Model):
 
     @api.one
     def pick2stock(self):
-        self.write({'current_location': 'Stock'})
+        self.write({'current_location': 'stock'})
+
+    @api.one
+    def ProductLink(self):
+        for line in self:
+            line.write({'parent_id': line.child_ids})
 
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
