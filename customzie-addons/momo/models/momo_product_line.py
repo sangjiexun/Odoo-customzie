@@ -180,7 +180,7 @@ class ProductLine(models.Model):
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
         init_count = (start_row - 1) * 5 + (start_column - 1)
         sum_count = init_count + len(product_line_active_ids)
-        page_count = sum_count // 65 + 1
+        page_count = (sum_count -1) // 65 + 1
 
         pdf_name_first = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S_')
 
