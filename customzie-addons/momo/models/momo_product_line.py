@@ -67,7 +67,7 @@ class ProductLineCreator(models.Model):
                                          'Product Line Creator Detail', copy=True)
     is_created = fields.Boolean('Is Created', default=False)
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
-    purchase_order_name = fields.Char('Purchase Order', related='purchase_id.name', store=True)
+    purchase_order_name = fields.Char('Purchase Order Name', related='purchase_id.name', store=True)
     create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
@@ -203,6 +203,8 @@ class ProductLine(models.Model):
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
     clean_location = fields.Char('Clean Location')
 
+    restock = fields.Boolean('Restock', default=False)
+
     remark = fields.Char('Remark')
 
     maker_name = fields.Char('Maker Name')
@@ -237,10 +239,14 @@ class ProductLine(models.Model):
     @api.one
     @api.depends('stock_picking_ids')
     def _compute_current_location(self):
-        newest_product_line_picking = self.env['momo.product.line.picking'].search([('product_line_id', '=', self.id)],
-                                                                                   order="id desc", limit=1)
+        newest_product_line_picking = self.env['momo.product.line.picking'].search([('product_line_id', '=', self.id)], order="id desc", limit=1)
+        company_user = self.env.user.company_id
+        warehouse=self.env['stock.warehouse'].search([('company_id', '=', company_user.id)], limit=1)
         if newest_product_line_picking:
-            newest_stock_picking = self.env['stock.picking'].browse(newest_product_line_picking.stock_picking_id.id)
+            if self.restock:
+                newest_stock_picking = self.env['stock.picking'].browse(warehouse.lot_stock_id.id)
+            else:
+                newest_stock_picking = self.env['stock.picking'].browse(newest_product_line_picking.stock_picking_id.id)
             self.current_location = newest_stock_picking.location_dest_id.name
         else:
             self.current_location = self.init_location
@@ -292,7 +298,8 @@ class ProductLine(models.Model):
 
     @api.one
     def pick2stock(self):
-        self.write({'current_location': 'stock'})
+        self.write({'restock': True})
+#        self._compute_current_location()
 
     @api.one
     def ProductLink(self):
@@ -380,6 +387,14 @@ class ProductLinePicking(models.Model):
         for line in self:
             res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
             line.product_line_id = res.id
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super().create(vals_list)
+        for line in lines:
+            res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
+            res.write({'restock': False})
+        return lines
 
 
 class ProductCleanHistory(models.Model):
