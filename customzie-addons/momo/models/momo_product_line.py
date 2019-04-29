@@ -44,8 +44,8 @@ class ProductLineCreator(models.Model):
                     for i in range(int(line.need_qty)):
                         res = {
                             'product_id': line.product_id.id,
-                            'remark': self.remark,
-                            'init_location': self.init_location,
+                            'remark': creator.remark,
+                            'init_location': creator.init_location,
                             'need_clean': line.need_clean,
                         }
                         self.env['momo.product.line'].create(res)
