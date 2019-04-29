@@ -38,16 +38,20 @@ class ProductLineCreator(models.Model):
 
     @api.multi
     def _create_product_line(self):
+        print("creator size:", len(self))
         for creator in self:
             if not creator.is_created:
                 for line in creator.creator_detail_ids:
+                    print("hello1")
                     for i in range(int(line.need_qty)):
+                        print("hello2")
                         res = {
                             'product_id': line.product_id.id,
                             'remark': creator.remark,
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
                         }
+                        print("hello3")
                         self.env['momo.product.line'].create(res)
                     creator.update({'is_created': True})
         return True
@@ -143,7 +147,6 @@ class ProductLine(models.Model):
                 self.customer_id = newest_sale_order.partner_id.id
                 self.delivery_date = newest_sale_order.create_date
 
-
     @api.model
     def search_for_scanner(self, location, barcode):
         line = self.env['momo.product.line'].search(
@@ -175,33 +178,35 @@ class ProductLine(models.Model):
     def pick2stock(self):
         self.write({'current_location': 'stock'})
 
-
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
         init_count = (start_row - 1) * 5 + (start_column - 1)
         sum_count = init_count + len(product_line_active_ids)
-        page_count = (sum_count -1) // 65 + 1
+        page_count = (sum_count - 1) // 65 + 1
 
-        pdf_name_first = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S_')
+        pdf_name = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S_') + ".pdf"
+
+        c = canvas.Canvas(pdf_name, pagesize=A4)
 
         for x in range(page_count):
-            pdf_name = pdf_name_first + str(x) + ".pdf"
-            # first page
+
             if x == 0:
-                self.print_barcode(pdf_name, product_line_active_ids[0:(65 - init_count)], start_row, start_column)
+                self.print_barcode(c, product_line_active_ids[0:(65 - init_count)], start_row, start_column)
             # last page
             elif x == page_count - 1:
-                self.print_barcode(pdf_name,
+                self.print_barcode(c,
                                    product_line_active_ids[(65 - init_count) + 65 * (x - 1):(sum_count - init_count)])
             # other pages
             else:
-                self.print_barcode(pdf_name,
+                self.print_barcode(c,
                                    product_line_active_ids[(65 - init_count) + 65 * (x - 1):(65 - init_count) + 65])
 
-    @api.multi
-    def print_barcode(self, pdf_name, product_line_active_ids, start_row=1, start_column=1):
+        c.save()
+        webbrowser.open_new(pdf_name)
 
-        c = canvas.Canvas(pdf_name, pagesize=A4)
+    @api.multi
+    def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):
+
         xmargin = 3.5 * mm
         ymargin = 10.92 * mm
         swidth = 40.6 * mm
@@ -217,8 +222,8 @@ class ProductLine(models.Model):
             self.draw_label(c, x, y, line.barcode)
             line.update({'printed': True})
             i += 1
-        c.save()
-        webbrowser.open_new(pdf_name)
+
+        c.showPage()
 
     @staticmethod
     def draw_label(c, x, y, data):
@@ -241,7 +246,8 @@ class ProductLinePicking(models.Model):
     name = fields.Char(related='stock_picking_id.name')
     sale_id = fields.Integer('Sale Id', related='stock_picking_id.sale_id.id')
     picking_type_id = fields.Integer('Picking Type Id', related='stock_picking_id.picking_type_id.id')
-    picking_type_id_name = fields.Char('Picking Type Name', related='stock_picking_id.picking_type_id.name', store=True, translate=True)
+    picking_type_id_name = fields.Char('Picking Type Name', related='stock_picking_id.picking_type_id.name', store=True,
+                                       translate=True)
     sale_order_name = fields.Char('Sale Order Name', related='stock_picking_id.sale_id.name')
     customer_name = fields.Char('Customer Name', related='stock_picking_id.sale_id.partner_id.name')
     is_defective = fields.Boolean(related='product_line_id.is_defective')
@@ -252,6 +258,7 @@ class ProductLinePicking(models.Model):
         for line in self:
             res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
             line.product_line_id = res.id
+
 
 '''
 
