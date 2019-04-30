@@ -63,16 +63,13 @@ class ProductLineCreator(models.Model):
         for creator in self:
             if not creator.is_created:
                 for line in creator.creator_detail_ids:
-                    print("hello1")
                     for i in range(int(line.need_qty)):
-                        print("hello2")
                         res = {
                             'product_id': line.product_id.id,
                             'remark': creator.remark,
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
                         }
-                        print("hello3")
                         self.env['momo.product.line'].create(res)
                     creator.update({'is_created': True})
         return True
