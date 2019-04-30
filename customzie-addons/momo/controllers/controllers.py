@@ -6,7 +6,7 @@ class Momo(http.Controller):
 
     @http.route('/momo/reports/<string:pdf_name>', auth='public')
     def get_pdf_file(self, pdf_name):
-        pdf_path = "/home/developer/odoo-dev/odoo/customzie-addons/momo/reports/"
+        pdf_path = "/opt/"
         pdf_file = pdf_path + pdf_name
         pdf = open(pdf_file,'rb')
         pdfhttpheaders = [

@@ -261,7 +261,7 @@ class ProductLine(models.Model):
             self.current_location = self.init_location
 
     @api.one
-    @api.depends('stock_picking_ids')
+    @api.depends('stock_picking_ids', 'restock')
     def _compute_sale_info(self):
         newest_product_line_picking = self.env['momo.product.line.picking'].search(
             [('product_line_id', '=', self.id), ('sale_id', '!=', False)],
@@ -313,7 +313,7 @@ class ProductLine(models.Model):
         self._compute_current_location()
 
     @api.one
-    def ProductLink(self):
+    def productLink(self):
         for line in self:
             line.write({'parent_id': line.child_ids})
 
@@ -331,7 +331,7 @@ class ProductLine(models.Model):
         sum_count = init_count + len(product_line_active_ids)
         page_count = (sum_count - 1) // 65 + 1
 
-        pdf_path = "/home/developer/odoo-dev/odoo/customzie-addons/momo/reports/"
+        pdf_path = "/opt/"
         pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
         pdf_file = pdf_path + pdf_name
 
