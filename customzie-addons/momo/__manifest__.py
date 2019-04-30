@@ -33,6 +33,7 @@
         'views/product_views.xml',
         'data/ir_sequence_data.xml',
         'data/maker_data.xml',
+        'data/ir_cron_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

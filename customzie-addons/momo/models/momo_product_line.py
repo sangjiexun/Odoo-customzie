@@ -6,6 +6,7 @@ from reportlab.lib.units import mm
 from reportlab.graphics.barcode import code128
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+import shutil, os
 
 
 class BarcodePrintWizard(models.TransientModel):
@@ -331,7 +332,7 @@ class ProductLine(models.Model):
         sum_count = init_count + len(product_line_active_ids)
         page_count = (sum_count - 1) // 65 + 1
 
-        pdf_path = "/opt/"
+        pdf_path = "/opt/pdf/"
         pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
         pdf_file = pdf_path + pdf_name
 
@@ -382,6 +383,14 @@ class ProductLine(models.Model):
         c.drawString(x + 8.6 * mm, y + 13.4 * mm, data)
         barcode = code128.Code128(data, barWidth=0.26 * mm, barHeight=8.0 * mm, checksum=False)
         barcode.drawOn(c, x - 3.3 * mm, y + 3.4 * mm)
+
+    @api.multi
+    def _delete_barcode_pdf(self):
+        pdf_path = "/opt/pdf/"
+        shutil.rmtree(pdf_path)
+        os.mkdir(pdf_path)
+
+#        os.remove(pdf_path)
 
 
 class ProductLinePicking(models.Model):
