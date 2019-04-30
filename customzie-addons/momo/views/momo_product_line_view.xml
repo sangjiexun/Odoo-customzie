@@ -376,42 +376,29 @@
                         <button name="pick2stock" string="pick2stock" type="object" class="oe_highlight"/>
                     </header>
                     <sheet>
-                        <label for="product_name" class="oe_edit_only"/>
+                        <label for="product_name"/>
                         <h1><field name="product_name"/></h1>
-                        <label for="barcode" class="oe_edit_only"/>
+                        <label for="barcode"/>
                         <h2><field name="barcode" readonly="1"/></h2>
-                        <label for="current_location" class="oe_edit_only"/>
+                        <label for="current_location"/>
                         <h2><field name="current_location"/></h2>
-                        <group col="12">
-                            <group colspan="12">
-                                <field name="is_defective" colspan="4"/>
-                                <field name="defective_detail" colspan="8"/>
-                            </group>
-                            <newline/>
-                            <group colspan="12">
-                                <field name="product_rank" colspan="8"/>
-                            </group>
-                            <newline/>
+
+                        <div class="col-12">
+                            <label for="is_defective" />
+                            <field name="is_defective" class="oe_inline"/>
+                            <field name="defective_detail"/>
+                        </div>
+
+                        <div class="col-4">
+                            <label for="product_rank" />
+                            <field name="product_rank" class="oe_inline"/>
+                        </div>
+                        <div colspan="6">
                             <label for="rack_prefix" String="Rack"/>
-                            <div colspan="6">
-                                <field name="rack_prefix" colspan="1" nolable="1"/>
-                                <field name="rack_suffix" colspan="1" nolable="1"/>
-                                <span>-</span>
-                                <field name="rack_no" colspan="1" nolable="1"/>
-                            </div>
-                        </group>
-                        <group>
-                          <group>
-                            <field name="maker_name" />
-                            <field name="spec_cpu" />
-                            <field name="spec_hard_disc" />
-                          </group>
-                          <group>
-                            <field name="maker_product_no" />
-                            <field name="spec_memory" />
-                            <field name="spec_driver" />
-                          </group>
-                        </group>
+                            <field name="rack_prefix" class="oe_inline" nolable="1"/>
+                            <field name="rack_suffix" class="oe_inline" nolable="1"/>-
+                            <field name="rack_no" class="oe_inline" nolable="1"/>
+                        </div>
                     </sheet>
                 </form>
             </field>
