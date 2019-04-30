@@ -12,8 +12,29 @@ class BarcodePrintWizard(models.TransientModel):
     _name = "momo.barcode.print.wizard"
     _description = 'barcode.print.wizard'
 
-    start_row = fields.Integer('Print Start Row', default=1)
-    start_column = fields.Integer('Print Start Column', default=1)
+    start_row = fields.Selection([
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
+        (6, '6'),
+        (7, '7'),
+        (8, '8'),
+        (9, '9'),
+        (10, '10'),
+        (11, '11'),
+        (12, '12'),
+        (13, '13')
+    ], string='Print Start Row', default='1')
+
+    start_column = fields.Selection([
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5')
+    ], string='Print Start Column', default='1')
 
     @api.multi
     def print_barcode1(self):
@@ -156,7 +177,7 @@ class ProductLine(models.Model):
 
     @api.multi
     def call_print_wizard(self):
-        view_id = self.env['momo.barcode.print.wizard'].create({'start_row': 1, 'start_column': 1}).id
+        view_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Barcode Print Wizard',
@@ -184,7 +205,7 @@ class ProductLine(models.Model):
         sum_count = init_count + len(product_line_active_ids)
         page_count = (sum_count - 1) // 65 + 1
 
-        pdf_name = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S_') + ".pdf"
+        pdf_name = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
 
         c = canvas.Canvas(pdf_name, pagesize=A4)
 
