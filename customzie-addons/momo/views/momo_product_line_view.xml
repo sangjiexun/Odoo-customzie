@@ -319,10 +319,10 @@
         <!-- statistics -->
         <record id="product_line_picking_pivot" model="ir.ui.view">
             <field name="name">product.line.picking.pivot</field>
-            <field name="model">momo.product.line.picking</field>
+            <field name="model">momo.production.picking.report</field>
             <field name="arch" type="xml">
                 <pivot string="Product Line Picking" disable_linking="True" display_quantity="True">
-                    <field name="picking_type_id_name" type="row"/>
+                    <field name="picking_type_name" type="row"/>
                     <field name="create_date" interval="month" type="col"/>
 
                 </pivot>
@@ -331,10 +331,10 @@
 
         <record id='product_line_picking_graph' model='ir.ui.view'>
             <field name="name">product.line.picking.graph</field>
-            <field name="model">momo.product.line.picking</field>
+            <field name="model">momo.production.picking.report</field>
             <field name="arch" type="xml">
                 <graph string="Product Line Picking">
-                    <field name="picking_type_id_name" type="row"/>
+                    <field name="picking_type_name" type="row"/>
                     <field name="create_date" interval="month" type="col"/>
                 </graph>
             </field>
@@ -342,7 +342,7 @@
 
         <record id="product_line_picking_statistics_action" model="ir.actions.act_window">
           <field name="name">Product Line Picking Statistics</field>
-          <field name="res_model">momo.product.line.picking</field>
+          <field name="res_model">momo.production.picking.report</field>
           <field name="view_type">form</field>
           <field name="view_mode">pivot,graph</field>
           <field name="view_id"></field>  <!-- force empty -->
@@ -383,7 +383,7 @@
                         <label for="current_location"/>
                         <h2><field name="current_location"/></h2>
 
-                        <div class="col-12">
+                        <div class="col-10">
                             <label for="is_defective" />
                             <field name="is_defective" class="oe_inline"/>
                             <field name="defective_detail"/>
