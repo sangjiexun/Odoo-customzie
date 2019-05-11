@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <record id="treatment_book_return" model="treatment.book">
-            <field name="name">return</field>
-            <field name="treatment_book">送料負担にて、返金させて頂きます。</field>
-        </record>
         <record id="treatment_book_repair" model="treatment.book">
             <field name="name">repair</field>
             <field name="treatment_book">送料負担にて、商品を修理させて頂きます。修理詳細は下記にご参照ください。</field>
+        </record>
+        <record id="treatment_book_return" model="treatment.book">
+            <field name="name">return</field>
+            <field name="treatment_book">送料負担にて、返金させて頂きます。</field>
         </record>
         <record id="memory_exchange" model="repair.type">
             <field name="name">memory</field>

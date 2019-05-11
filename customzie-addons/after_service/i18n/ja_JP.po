@@ -34,21 +34,25 @@ msgstr "活動状態"
 #: model:ir.actions.act_window,name:after_service.action_after_service
 #: model:ir.actions.report,name:after_service.action_after_service_report
 #: model:ir.model,name:after_service.model_after_service
-#: model:ir.model.fields,field_description:after_service.field_after_service__name
 #: model:ir.model.fields,field_description:after_service.field_stock_move__after_service_id
 #: model:ir.module.category,name:after_service.module_after_service_category
 #: model:ir.ui.menu,name:after_service.after_service_menu_root
 #: model:ir.ui.menu,name:after_service.menu_after_service
-#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
 #: model_terms:ir.ui.view,arch_db:after_service.after_service_tree_view
+#: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
+msgid "After Service"
+msgstr "修理・返品"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__name
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 msgid "After Service"
-msgstr "アフターサービス"
+msgstr "帳票番号"
 
 #. module: after_service
 #: model:ir.actions.act_window,name:after_service.action_after_service_aggregate
 msgid "After Service Aggregate"
-msgstr "アフターサービス種別統計"
+msgstr "修理・返品統計"
 
 #. module: after_service
 #: model:res.groups,name:after_service.after_service_group_manager
@@ -224,6 +228,18 @@ msgid "Measure Type"
 msgstr "問い合わせ方法"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__is_defective
+msgid "Is Defective"
+msgstr "瑕疵状態"
+
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+#: model:treatment.book,name:after_service.treatment_book_repair
+msgid "is_defective"
+msgstr "瑕疵品"
+
+#. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__message_has_error
 msgid "Message Delivery error"
 msgstr "メッセージ配信エラー"
@@ -307,7 +323,7 @@ msgstr "処理承認"
 #. module: after_service
 #: selection:after.service,state:0
 msgid "Quotation"
-msgstr "見積"
+msgstr "受理"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__activity_user_id
@@ -388,11 +404,6 @@ msgstr "問い合わせ内容"
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
 msgid "<strong>Inquiry Note</strong>"
 msgstr "問い合わせ内容"
-
-#. module: after_service
-#: model:ir.model.fields,field_description:after_service.field_after_service__contact_treatment
-msgid "Contact Treatment"
-msgstr "対応"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__order_elapsed_days
@@ -530,6 +541,16 @@ msgid "Treatment Book"
 msgstr "処置書"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__treatment_operator
+msgid "Treatment Operator"
+msgstr "処置担当"
+
+#. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__treatment_book_id
+msgid "Treatment Type"
+msgstr "処置分類"
+
+#. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__treatment_remark
 msgid "Treatment Remark"
 msgstr "処置備考"
@@ -538,11 +559,6 @@ msgstr "処置備考"
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
 msgid "<strong>Treatment Remark</strong>"
 msgstr "対応内容"
-
-#. module: after_service
-#: model:ir.model.fields,field_description:after_service.field_after_service__treatment_book_id
-msgid "Treatment Type"
-msgstr "処置分類"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__message_unread
@@ -566,93 +582,107 @@ msgstr "ウェブサイトコミュニケーション履歴"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+#: model:repair.type,name:after_service.treatment_book_repair
+#: model:treatment.book,name:after_service.treatment_book_repair
+msgid "repair"
+msgstr "修理"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
+#: model:repair.type,name:after_service.treatment_book_return
+#: model:treatment.book,name:after_service.treatment_book_return
+msgid "return"
+msgstr "返品"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:repair.type,name:after_service.memory_exchange
 msgid "memory"
-msgstr "１、メモリー交換"
+msgstr "■メモリー交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:repair.type,name:after_service.hdd_ssd_exchange
 msgid "hdd_ssd"
-msgstr "２、ＨＨＤ(ＳＳＤ)交換"
+msgstr "■ＨＨＤ(ＳＳＤ)交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:repair.type,name:after_service.os_reinstall
 msgid "os"
-msgstr "３、ＯＳ再インストール"
+msgstr "■ＯＳ再インストール"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:repair.type,name:after_service.body_exchange
 msgid "body"
-msgstr "４、本体交換"
+msgstr "■本体交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:repair.type,name:after_service.other
 msgid "other"
-msgstr "５、その他"
+msgstr "■その他"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason1
 msgid "reason1"
-msgstr "１、メモリー不具合の為にメモリー交換"
+msgstr "■メモリー不具合の為にメモリー交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason2
 msgid "reason2"
-msgstr "２、ＨＤＤ不具合の為にＨＤＤ交換して再インストール"
+msgstr "■ＨＤＤ不具合の為にＨＤＤ交換して再インストール"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason3
 msgid "reason3"
-msgstr "３、モニター不具合の為にモニター交換"
+msgstr "■モニター不具合の為にモニター交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason4
 msgid "reason4"
-msgstr "４、商品破損での商品交換"
+msgstr "■商品破損での商品交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason5
 msgid "reason5"
-msgstr "５、商品不具合（初期不良）の為に本体交換"
+msgstr "■商品不具合（初期不良）の為に本体交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason6
 msgid "reason6"
-msgstr "６、キーボード不良でキーボード交換"
+msgstr "■キーボード不良でキーボード交換"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason7
 msgid "reason7"
-msgstr "７、システム不具合での、再インストール"
+msgstr "■システム不具合での、再インストール"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason8
 msgid "reason８"
-msgstr "８、問題無し"
+msgstr "■問題無し"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason9
 msgid "reason9"
-msgstr "９、設定ミス（お客様誤操作）"
+msgstr "■設定ミス（お客様誤操作）"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 #: model:problem.reason,name:after_service.reason10
 msgid "reason10"
-msgstr "１０、その他"
+msgstr "■その他"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter

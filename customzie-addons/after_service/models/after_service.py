@@ -36,20 +36,15 @@ class AfterService(models.Model):
 
     #After Service Reference
     name = fields.Char(string='After Service',required=True, index=True, copy=False, readonly=True, default=lambda self: _('New'))
-        #default=lambda self: self.env['ir.sequence'].next_by_code('after.service'),
-        #copy=False, required=True, readonly=True)
 
     #Sale Order Filter
     sale_order_filter = fields.Many2one('momo.product.line', 'Sale Order Filter', required=True)
-    #sale_order_filter = fields.Many2one('Sale Order Filter')
 
     #Sale Order Partner Id
     sale_order_partner_id = fields.Char(string='Sale Order Partner Id',related='sale_order_filter.sale_order_name',store=True)
-    #sale_order_partner_id = fields.Char(string='Sale Order Partner Id')
 
     #Sale Order Date
     sale_order_date = fields.Datetime(string='Sale Order Date', related='sale_order_filter.delivery_date',store=True)
-    #sale_order_date = fields.Datetime(string='Sale Order Date')
 
     #Inquiry Date
     inquiry_date = fields.Date(string='Inquiry Date',default=fields.Date.today())
@@ -59,26 +54,22 @@ class AfterService(models.Model):
 
     #Sale Order Product
     sale_order_product = fields.Many2one(string='Sale Order Product', related='sale_order_filter.product_id',store=True)
-    #sale_order_product = fields.Many2one(string='Sale Order Product')
 
     #Sale Order Id
     sale_order_id = fields.Many2one(string='Sale Order Id',related='sale_order_filter.sale_order_id',store=True)
-    #sale_order_id = fields.Char(string='Sale Order Id')
 
     barcode = fields.Char(string='Barcode',related='sale_order_filter.barcode',store=True)
-    #barcode = fields.Char(string='Barcode')
 
     defect_remark = fields.Text(string='Defect Remark',related='sale_order_filter.defective_detail',store=True)
-    #defect_remark = fields.Text(string='Defect Remark')
 
     #Inquiry Note
     inquiry_note = fields.Text(string='Inquiry Note')
 
     #Contact Treatment
-    contact_treatment = fields.Selection(
-        [('type1','Repairing'),
-         ('type2','Returned Goods')],
-        string='Contact Treatment')
+    #contact_treatment = fields.Selection(
+    #    [('type1','Repairing'),
+    #     ('type2','Returned Goods')],
+    #    string='Contact Treatment')
 
     treatment_book_id = fields.Many2one(
         'treatment.book', string='Treatment Type')
@@ -86,7 +77,7 @@ class AfterService(models.Model):
     treatment_remark = fields.Text(string='Treatment Remark')
 
     #Order Elapsed Days
-    order_elapsed_days = fields.Char(sting='Order Elapsed Days', store=True)
+    order_elapsed_days = fields.Char(sting='Order Elapsed Days', store=True ,readonly=True)
 
     #Returned Date
     returned_date = fields.Date(string='Returned Date',default=fields.Date.today())
@@ -118,9 +109,9 @@ class AfterService(models.Model):
         ('to approve', 'To Approve'),
         ('done', 'Finshed'),
         ('cancel', 'Cancelled')], string='Status',
-        copy=False, default='draft', track_visibility='nge')
-        
-    is_claim = fields.Boolean('is_claim', default=False)
+        copy=False, default='draft')
+
+    is_defective = fields.Boolean(string='Is Defective', default=False)
 
     measure_type = fields.Selection(
         [('val1', 'mail'),
@@ -133,10 +124,6 @@ class AfterService(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('after.service') or _('New')
         return super(AfterService, self).create(vals)
 
-    #@api.model
-    #def _get_current_date(self):
-    #    return fields.Date.today()
-
     @api.onchange('sale_order_filter')
     def onchange_sale_order_filter(self):
         if self.sale_order_filter:
@@ -144,7 +131,7 @@ class AfterService(models.Model):
                 self.order_elapsed_days = '20日'
             else:
                 self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + '日'
-            self.is_claim = self.sale_order_filter.is_defective
+            self.is_defective = self.sale_order_filter.is_defective
 
     @api.onchange('treatment_book_id')
     def onchange_treatment_book_id(self):
@@ -169,8 +156,8 @@ class AfterService(models.Model):
             raise UserError(_("処置内容を入力してください"))
         else:
             self.write({'treatment_operator': self.env.uid})
-            self.write({'is_claim': self.sale_order_filter.is_claim})
-            if self.sale_order_filter.is_claim:
+            self.write({'is_defective': self.sale_order_filter.is_defective})
+            if self.treatment_book_id.name == 'return':
                 self.write({'state': 'to approve'})
             else:
                 self.write({'state': 'done', 'date_approve': fields.Date.context_today(self)})
