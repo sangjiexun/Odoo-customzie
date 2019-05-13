@@ -36,7 +36,8 @@ class ProductLineCreator(models.Model):
                                          'Product Line Creator Detail', copy=True)
     is_created = fields.Boolean('Is Created', default=False)
     purchase_order_id = fields.Many2one('purchase.order', 'Purchase Order')
-    create_type = fields.Char('Auto Create or Manu Create', default='manu')
+    purchase_order_name = fields.Char('Purchase Order', related='purchase_order_id.name', store=True)
+    create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
     init_location = fields.Char(related='init_location_id.name')
@@ -103,6 +104,18 @@ class ProductLine(models.Model):
     delivery_date = fields.Datetime('Delivery Date', compute='_compute_sale_info', store=True)
     is_defective = fields.Boolean('Is Defective Product Line', default=False)
     defective_detail = fields.Text('Defective Detail')
+
+    # Hierarchy fields
+    parent_id = fields.Many2one(
+        'momo.product.line',
+        'Parent Production',
+        ondelete='restrict')
+
+    # Optional but good to have:
+    child_ids = fields.One2many(
+        'momo.product.line',
+        'parent_id',
+        'Bom Production')
 
     product_rank = fields.Selection([
         ('N', 'n rank'),

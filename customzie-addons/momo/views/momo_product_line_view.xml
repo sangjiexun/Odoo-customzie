@@ -23,6 +23,8 @@
                         <group>
                             <field name="is_created" readonly="1"/>
                             <field name="create_date" readonly="1"/>
+                            <field name="create_type" readonly="1"/>
+                            <field name="purchase_order_name" readonly="1"/>
                             <field name="init_location_id"/>
                         </group>
                         <field name="creator_detail_ids" widget="one2many_list">
@@ -46,6 +48,8 @@
                     <field name="id"/>
                     <field name="is_created"/>
                     <field name="create_date"/>
+                    <field name="create_type"/>
+                    <field name="purchase_order_name"/>
                     <field name="init_location"/>
                 </tree>
             </field>
