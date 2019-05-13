@@ -20,7 +20,8 @@ class PurchaseOrder(models.Model):
 
     @api.multi
     def _create_product_line_creator(self):
-        creator = self.env['momo.product.line.creator'].create({'remark': self.name, 'init_location_id': '8'})
+        creator = self.env['momo.product.line.creator'].create(
+            {'create_type': 'auto', 'purchase_order_id': self.id, 'init_location_id': '8'})
         for order in self:
             for line in order.order_line:
                 res = {

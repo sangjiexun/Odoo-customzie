@@ -24,7 +24,6 @@
                             <field name="is_created" readonly="1"/>
                             <field name="create_date" readonly="1"/>
                             <field name="init_location_id"/>
-                            <field name="remark"/>
                         </group>
                         <field name="creator_detail_ids" widget="one2many_list">
                             <tree string="CreatorDetail" editable="bottom">
@@ -48,7 +47,6 @@
                     <field name="is_created"/>
                     <field name="create_date"/>
                     <field name="init_location"/>
-                    <field name="remark"/>
                 </tree>
             </field>
         </record>
@@ -90,7 +88,6 @@
                             <field name="printed" readonly="1"/>
                             <field name="need_clean"/>
                             <field name="is_cleaned" readonly="1"/>
-                            <field name="remark"/>
                         </group>
                         <field name="stock_picking_ids" widget="one2many_list">
                             <tree string="StockPicking" editable="bottom">
@@ -128,17 +125,18 @@
                 <tree string="Production Line Tree" create="false" edit="false" delete="false">
                     <field name="product_name"/>
                     <field name="barcode"/>
+                    <field name="purchase_order_name"/>
+                    <field name="supplier_name"/>
+                    <field name="purchase_date"/>
                     <field name="current_location"/>
                     <field name="sale_order_name"/>
                     <field name="customer_name"/>
                     <!--field name="printed"/>
                     <field name="need_clean"/>
                     <field name="is_cleaned"/-->
-                    <field name="remark"/>
                     <field name="product_rank"/>
                     <field name="is_defective"/>
                     <field name="defective_detail"/>
-                    <field name="remark"/>
                 </tree>
             </field>
         </record>

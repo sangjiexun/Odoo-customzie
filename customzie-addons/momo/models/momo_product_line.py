@@ -35,7 +35,8 @@ class ProductLineCreator(models.Model):
                                          'product_line_creator_id',
                                          'Product Line Creator Detail', copy=True)
     is_created = fields.Boolean('Is Created', default=False)
-    remark = fields.Char('Remark')
+    purchase_order_id = fields.Many2one('purchase.order', 'Purchase Order')
+    create_type = fields.Char('Auto Create or Manu Create', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
     init_location = fields.Char(related='init_location_id.name')
@@ -49,7 +50,7 @@ class ProductLineCreator(models.Model):
                     for i in range(int(line.need_qty)):
                         res = {
                             'product_id': line.product_id.id,
-                            'remark': creator.remark,
+                            'purchase_order_id': creator.purchase_order_id.id,
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
                         }
@@ -86,6 +87,13 @@ class ProductLine(models.Model):
                                         copy=True)
 
     current_location = fields.Char('Current Location', compute='_compute_current_location', store=True, translate=True)
+
+    purchase_order_id = fields.Many2one('purchase.order', 'Purchase Order')
+    purchase_order_name = fields.Char(related='purchase_order_id.name', store=True)
+    purchase_date = fields.Date('Purchase Date', related='purchase_order_id.date_approve', store=True)
+
+    supplier_id = fields.Many2one('res.partner', 'Supplier Id', related='purchase_order_id.partner_id', store=True)
+    supplier_name = fields.Char('Supplier Name', related='purchase_order_id.partner_id.name', store=True)
 
     sale_order_id = fields.Many2one('sale.order', 'Sale Order Id', compute='_compute_sale_info', store=True)
     sale_order_name = fields.Char('Sale Order Name', compute='_compute_sale_info', store=True)
