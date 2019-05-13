@@ -36,7 +36,7 @@ class ProductLineCreator(models.Model):
                                          'Product Line Creator Detail', copy=True)
     is_created = fields.Boolean('Is Created', default=False)
     purchase_order_id = fields.Many2one('purchase.order', 'Purchase Order')
-    purchase_order_name = fields.Char('Purchase Order', related='purchase_order_id.name', store=True)
+    purchase_order_name = fields.Char('Purchase Order Name', related='purchase_order_id.name', store=True)
     create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
