@@ -387,6 +387,23 @@
             </field>
         </record>
 
+        <record id="view_defective_product_line_filter" model="ir.ui.view">
+           <field name="name">defective.product.line.filter</field>
+           <field name="model">momo.product.line</field>
+           <field name="priority" eval="15"/>
+           <field name="arch" type="xml">
+               <search string="Defective Product Line Filter">
+                   <separator/>
+                   <filter string="is_defective" name="is_defective" domain="[('is_defective','=',True)]"/>
+                   <separator/>
+                   <group expand="0" string="Group By">
+                       <filter string="Purchase Date" name="purchase_date" domain="[]" context="{'group_by':'purchase_date'}"/>
+                       <filter string="Purchase Order Name" name="purchase_order_name" domain="[]" context="{'group_by':'purchase_order_name'}"/>
+                   </group>
+              </search>
+           </field>
+       </record>
+
         <record id="action_product_exchange" model="ir.actions.act_window">
             <field name="name">Product Exchange</field>
             <field name="type">ir.actions.act_window</field>
