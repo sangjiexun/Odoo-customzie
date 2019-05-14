@@ -72,7 +72,7 @@ class AfterService(models.Model):
     #    string='Contact Treatment')
 
     treatment_book_id = fields.Many2one(
-        'treatment.book', string='Treatment Type')
+        'treatment.book', string='Treatment Type',required=True)
 
     treatment_remark = fields.Text(string='Treatment Remark')
 
@@ -118,6 +118,19 @@ class AfterService(models.Model):
         ('val2', 'telephone')],
         string='Measure Type',required=True)
 
+#    @api.multi
+#    def show_tree_view(self):
+#        self.ensure_one()
+#        return {
+#            'name': _("Export data"),
+#            'view_type': 'form',
+#            'view_mode': 'tree',
+#            'res_model': self.model,
+#            'view_id': False,
+#            'type': 'ir.actions.act_window',
+#            'context': self.env.context,
+#        }
+
     @api.model
     def create(self, vals):
         if vals.get('name', 'New') == 'New':
@@ -128,7 +141,7 @@ class AfterService(models.Model):
     def onchange_sale_order_filter(self):
         if self.sale_order_filter:
             if not self.sale_order_filter.delivery_date:
-                self.order_elapsed_days = '20日'
+                self.order_elapsed_days = ''
             else:
                 self.order_elapsed_days = str((fields.Datetime.today() - self.sale_order_filter.delivery_date).days + 1) + '日'
             self.is_defective = self.sale_order_filter.is_defective
@@ -147,16 +160,19 @@ class AfterService(models.Model):
         if not self.measure_type:
             raise UserError(_("問い合わせ手段を選択ください"))
         else:
-            self.write({'state': 'draft'})
+            if not self.treatment_book_id:
+                raise UserError(_("処置分類を入力してください"))
+            else:
+                self.write({'state': 'draft'})
         return {}
 
     @api.multi
     def button_processing(self, force=False):
         if not self.repair_type:
-            raise UserError(_("処置内容を入力してください"))
+            raise UserError(_("対応内容を入力してください"))
         else:
             self.write({'treatment_operator': self.env.uid})
-            self.write({'is_defective': self.sale_order_filter.is_defective})
+            self.write({'is_defective': self.is_defective})
             if self.treatment_book_id.name == 'return':
                 self.write({'state': 'to approve'})
             else:
