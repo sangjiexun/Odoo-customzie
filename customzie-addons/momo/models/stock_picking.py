@@ -3,9 +3,10 @@
 from odoo import api, fields, models, _
 
 
-class Picking(models.Model):
+class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
+    purchase_id = fields.Many2one(related="group_id.purchase_id", string="Purchase Order", store=True, readonly=False)
     product_line_picking_ids = fields.One2many('momo.product.line.picking', 'stock_picking_id', 'Product Line Picking',
                                                copy=True)
 
