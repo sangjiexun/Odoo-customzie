@@ -141,7 +141,7 @@ class ProductLine(models.Model):
     ], string='Rack Suffix', default='a')
 
     rack_no = fields.Selection([
-        ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'),], string='Rack No', default='1')
+        ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], string='Rack No', default='1')
 
     need_clean = fields.Boolean('Need Clean', default=True)
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
