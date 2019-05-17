@@ -199,7 +199,7 @@
                 <xpath expr="//field[@name='backorder_id']" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='state']" position="after">
-                    <button name="action_stock_picking" string="Scan" type="object" class="oe_highlight"/>
+                    <button name="action_stock_picking" string="Scan" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'assigned')]}"/>
                 </xpath>
             </field>
         </record>
