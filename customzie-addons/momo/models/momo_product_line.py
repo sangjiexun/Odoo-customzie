@@ -26,27 +26,57 @@ class BarcodePrintWizard(models.TransientModel):
                                                                    self.start_column)
 
 
+class ProductLineGroup(models.Model):
+    _name = "momo.product.line.group"
+    _description = 'momo.product.line.group'
+
+    group_id = fields.Many2one('procurement.group', 'Procurement Group')
+    product_line_link_ids = fields.One2many('momo.product.line.link', 'product_line_group_id', 'Product Line Link',
+                                            copy=True)
+
+
+class ProductLineLink(models.Model):
+    _name = "momo.product.line.link"
+    _description = 'momo.product.line.link'
+
+    product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group', index=True, required=True)
+    product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
+
+    barcode = fields.Char('Barcode')
+
+    @api.onchange('barcode')
+    def onchange_barcode(self):
+        for line in self:
+            res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
+            line.product_line_id = res.id
+
+
 class ProductLineCreator(models.Model):
     _name = 'momo.product.line.creator'
     _description = 'Product Line Creator'
     _order = 'id desc'
 
+    name = fields.Char('Name', readonly=True, index=True, copy=False, default='New')
     creator_detail_ids = fields.One2many('momo.product.line.creator.detail',
                                          'product_line_creator_id',
                                          'Product Line Creator Detail', copy=True)
     is_created = fields.Boolean('Is Created', default=False)
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
-    purchase_order_name = fields.Char('Purchase Order Name', related='purchase_id.name', store=True)
+    purchase_order_name = fields.Char('Purchase Order', related='purchase_id.name', store=True)
     create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
     init_location = fields.Char(related='init_location_id.name')
+    group_id = fields.Char('Group Id')
 
     @api.multi
     def _create_product_line(self):
-        print("creator size:", len(self))
         for creator in self:
             if not creator.is_created:
+                product_line_group_id = self.env['momo.product.line.group'].create({'group_id': self.group_id}).id
+                if self.group_id:
+                    self.env['procurement.group'].search([('id', '=', self.group_id)]).update(
+                        {'product_line_group_id': product_line_group_id})
                 for line in creator.creator_detail_ids:
                     for i in range(int(line.need_qty)):
                         res = {
@@ -55,9 +85,18 @@ class ProductLineCreator(models.Model):
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
                         }
-                        self.env['momo.product.line'].create(res)
+                        product_line = self.env['momo.product.line'].create(res)
+                        self.env['momo.product.line.link'].create(
+                            {'product_line_group_id': product_line_group_id, 'product_line_id': product_line.id,
+                             'barcode': product_line.barcode})
                     creator.update({'is_created': True})
         return True
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('name'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('momo.product.line.creator') or '/'
+        return super(ProductLineCreator, self).create(vals)
 
 
 class ProductLineCreatorDetail(models.Model):
@@ -105,6 +144,8 @@ class ProductLine(models.Model):
     is_defective = fields.Boolean('Is Defective Product Line', default=False)
     defective_detail = fields.Text('Defective Detail')
 
+    product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group')
+
     # Hierarchy fields
     parent_id = fields.Many2one(
         'momo.product.line',
@@ -131,7 +172,7 @@ class ProductLine(models.Model):
 
     rack_prefix = fields.Selection([
         ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F'),
-    ], string='Rack Prefix', default='A')
+    ], string='Rack Prefix', default='')
 
     rack_suffix = fields.Selection([
         ('a', 'a'), ('b', 'b'), ('c', 'c'), ('d', 'd'), ('e', 'e'), ('f', 'f'),

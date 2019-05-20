@@ -45,10 +45,10 @@
             <field name="model">momo.product.line.creator</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="create_type"/>
                     <field name="is_created"/>
                     <field name="create_date"/>
-                    <field name="create_type"/>
                     <field name="purchase_order_name"/>
                     <field name="init_location"/>
                 </tree>
@@ -57,7 +57,7 @@
 
         <!-- window action for product line creator -->
         <record id="action_product_line_creator" model="ir.actions.act_window">
-            <field name="name">Product Line Creator Action</field>
+            <field name="name">Product Line Creator</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">momo.product.line.creator</field>
             <field name="limit">15</field>
@@ -76,6 +76,7 @@
                     action = records.call_print_wizard()
             </field>
         </record>
+
         <!-- form view for product line -->
         <record id="view_product_line_form" model="ir.ui.view">
             <field name="name">Product Line Form View</field>
@@ -200,11 +201,67 @@
                 </xpath>
                 <xpath expr="//field[@name='state']" position="after">
                     <button name="action_stock_picking" string="Scan" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'assigned')]}"/>
+                    <button name="action_open_pl_group" string="Link List" type="object" class="oe_highlight" attrs="{'invisible':[('state', '!=', 'assigned')]}"/>
                 </xpath>
             </field>
         </record>
 
-        <!-- window action for stock picking -->
+        <!-- server action for product line group -->
+        <record id="server_action_one_step_button" model="ir.actions.server">
+            <field name="name">Move With One Step</field>
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                   records._create_product_line_picking()
+            </field>
+        </record>
+
+
+        <!-- form view for product line group -->
+        <record id="view_product_link_group_form" model="ir.ui.view">
+            <field name="name">Picking Line Group Form View</field>
+            <field name="model">momo.product.line.group</field>
+            <field name="arch" type="xml">
+                <form string="Product Line Group">
+                    <sheet>
+                        <group>
+                            <field name="id"/>
+                            <field name="create_date"/>
+                        </group>
+                        <field name="product_line_link_ids" widget="one2many_list">
+                            <tree string="ProductLineDetail" editable="bottom">
+                                <field name="barcode"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for product line group -->
+        <record id="view_product_link_group_tree" model="ir.ui.view">
+            <field name="name">Picking Line Group Tree View</field>
+            <field name="model">momo.product.line.group</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for product line group -->
+        <record id="action_group_comfirm" model="ir.actions.act_window">
+            <field name="name">Product line Group</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line.group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+        
+		<!-- window action for stock picking -->		
         <record id="action_stock_picking" model="ir.actions.act_window">
             <field name="name">Stock Picking</field>
             <field name="type">ir.actions.act_window</field>

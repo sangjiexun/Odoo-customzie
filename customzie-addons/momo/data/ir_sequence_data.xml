@@ -22,5 +22,12 @@
             <!--field name="company_id" eval="False"/-->
         </record>
 
+        <record id="sequence_momo_product_line_creator_no" model="ir.sequence">
+            <field name="name">Product Line Creator No</field>
+            <field name="code">momo.product.line.creator</field>
+            <field name="prefix">PLC</field>
+            <field name="padding">6</field>
+        </record>
+
     </data>
 </odoo>

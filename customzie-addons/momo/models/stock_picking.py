@@ -3,7 +3,7 @@
 from odoo import api, fields, models, _
 
 
-class StockPicking(models.Model):
+class Picking(models.Model):
     _inherit = 'stock.picking'
 
     purchase_id = fields.Many2one(related="group_id.purchase_id", string="Purchase Order", store=True, readonly=False)
@@ -25,3 +25,23 @@ class StockPicking(models.Model):
             'res_id': self.id,
             'context': context,
         }
+
+    @api.multi
+    def action_open_pl_group(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'momo.product.line.group',
+            'res_id': self.group_id.product_line_group_id.id,
+        }
+
+    @api.multi
+    def _create_product_line_picking(self):
+        for picking in self:
+            product_line_group = picking.group_id.product_line_group_id
+            if product_line_group:
+                for line in product_line_group.product_line_link_ids:
+                    self.env['momo.product.line.picking'].create(
+                        {'stock_picking_id': picking.id, 'product_line_id': line.product_line_id.id,
+                         'barcode': line.barcode})

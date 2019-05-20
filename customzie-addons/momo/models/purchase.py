@@ -9,6 +9,7 @@ class ProcurementGroup(models.Model):
     _inherit = 'procurement.group'
 
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
+    product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group')
 
 
 class PurchaseOrder(models.Model):
@@ -27,7 +28,7 @@ class PurchaseOrder(models.Model):
     @api.multi
     def _create_product_line_creator(self):
         creator = self.env['momo.product.line.creator'].create(
-            {'create_type': 'auto', 'purchase_id': self.id, 'init_location_id': '8'})
+            {'create_type': 'auto', 'purchase_id': self.id, 'init_location_id': '8', 'group_id': self.group_id.id})
         for order in self:
             for line in order.order_line:
                 res = {
@@ -40,7 +41,6 @@ class PurchaseOrder(models.Model):
 
     @api.model
     def _prepare_picking(self):
-        print("process in momo.")
         if not self.group_id:
             self.group_id = self.group_id.create({
                 'name': self.name,
