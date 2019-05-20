@@ -6,7 +6,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.graphics.barcode import code128
-
+from odoo.exceptions import UserError, ValidationError
 
 class BarcodePrintWizard(models.TransientModel):
     _name = "momo.barcode.print.wizard"
@@ -22,9 +22,12 @@ class BarcodePrintWizard(models.TransientModel):
     @api.multi
     def print_barcode1(self):
         product_line_active_ids = self._context.get('product_line_active_ids')
-        self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row,
-                                                                   self.start_column)
-
+        self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
+        #return{
+        #    "type": "ir.actions.act_url",
+        #    "url" : "/opt/barcode_print_2019_05_20_09_11_49.pdf",
+        #    "target": "self",
+        #}
 
 class ProductLineGroup(models.Model):
     _name = "momo.product.line.group"
@@ -84,6 +87,16 @@ class ProductLineCreator(models.Model):
                             'purchase_id': creator.purchase_id.id,
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
+
+                            'maker_name': line.product_id.product_tmpl_id.maker_name.name,
+                            'maker_product_no': line.product_id.product_tmpl_id.maker_product_no,
+                            'product_no': line.product_id.product_tmpl_id.product_no,
+                            'ceo_price': line.product_id.product_tmpl_id.ceo_price,
+                            'spec_cpu': line.product_id.product_tmpl_id.spec_cpu,
+                            'spec_memory': line.product_id.product_tmpl_id.spec_memory,
+                            'spec_hard_disc': line.product_id.product_tmpl_id.spec_hard_disc,
+                            'spec_driver': line.product_id.product_tmpl_id.spec_driver,
+
                         }
                         product_line = self.env['momo.product.line'].create(res)
                         self.env['momo.product.line.link'].create(
@@ -189,6 +202,15 @@ class ProductLine(models.Model):
     clean_location = fields.Char('Clean Location')
 
     remark = fields.Char('Remark')
+
+    maker_name = fields.Char('Maker Name')
+    maker_product_no = fields.Char('Maker Product')
+    product_no = fields.Char('Product No', readonly=True, index=True, copy=False, default='New')
+    ceo_price = fields.Float('Ceo Cost', company_dependent=True, groups="base_inherit.group_ceo",)
+    spec_cpu = fields.Char('Spec Cpu')
+    spec_memory = fields.Char('Spec Memory')
+    spec_hard_disc = fields.Char('Spec HardDisk')
+    spec_driver = fields.Char('Spec Driver')
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -302,7 +324,8 @@ class ProductLine(models.Model):
                                    product_line_active_ids[(65 - init_count) + 65 * (x - 1):(65 - init_count) + 65])
 
         c.save()
-        webbrowser.open_new(pdf_name)
+        return pdf_name
+        #webbrowser.open(pdf_name)
 
     @api.multi
     def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):

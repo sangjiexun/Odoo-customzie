@@ -1,7 +1,7 @@
 <odoo>
     <data noupdate="0">
 
-        <!-- server action for create product line -->
+        <!-- server action for create product line -->act_window
         <record id="server_action_product_line_creator_button" model="ir.actions.server">
             <field name="name">ProdutLine Create</field>
             <field name="model_id" ref="model_momo_product_line_creator"/>
@@ -113,11 +113,19 @@
             <field name="model">momo.product.line</field>
             <field name="arch" type="xml">
                 <search string="Product Line">
-                    <field name="barcode"/>
-                    <field name="product_name"/>
+                  <field name="product_name"
+                    filter_domain="['|','|',('maker_name','ilike',self),('maker_product_no','ilike',self),('spec_cpu','ilike',self),
+                    ('spec_memory','ilike',self),('spec_hard_disc','ilike',self),('spec_driver','ilike',self)]"/>
+<!--                    <field name="barcode"/>
                     <field name="current_location"/>
                     <field name="sale_order_name"/>
-                    <field name="customer_name"/>
+                    <field name="customer_name"/>-->
+                    <field name="maker_name" />
+                    <field name="maker_product_no" />
+                    <field name="spec_cpu" />
+                    <field name="spec_memory" />
+                    <field name="spec_hard_disc" />
+                    <field name="spec_driver" />
                </search>
             </field>
         </record>
@@ -372,6 +380,18 @@
                                 <field name="rack_no" colspan="1" nolable="1"/>
                             </div>
                         </group>
+                        <group>
+                          <group>
+                            <field name="maker_name" />
+                            <field name="spec_cpu" />
+                            <field name="spec_hard_disc" />
+                          </group>
+                          <group>
+                            <field name="maker_product_no" />
+                            <field name="spec_memory" />
+                            <field name="spec_driver" />
+                          </group>
+                        </group>
                     </sheet>
                 </form>
             </field>
@@ -450,12 +470,25 @@
            <field name="priority" eval="15"/>
            <field name="arch" type="xml">
                <search string="Defective Product Line Filter">
+                 <field name="product_name"
+                   filter_domain="['|','|',('maker_name','ilike',self),('maker_product_no','ilike',self),('spec_cpu','ilike',self),
+                   ('spec_memory','ilike',self),('spec_hard_disc','ilike',self),('spec_driver','ilike',self)]"/>
+<!--                    <field name="barcode"/>
+                   <field name="current_location"/>
+                   <field name="sale_order_name"/>
+                   <field name="customer_name"/>-->
+                   <field name="maker_name" />
+                   <field name="maker_product_no" />
+                   <field name="spec_cpu" />
+                   <field name="spec_memory" />
+                   <field name="spec_hard_disc" />
+                   <field name="spec_driver" />
                    <separator/>
                    <filter string="is_defective" name="is_defective" domain="[('is_defective','=',True)]"/>
                    <separator/>
                    <group expand="0" string="Group By">
                        <filter string="Purchase Date" name="purchase_date" domain="[]" context="{'group_by':'purchase_date'}"/>
-                       <filter string="Purchase Order Name" name="purchase_order_name" domain="[]" context="{'group_by':'purchase_order_name'}"/>
+                       <filter string="Supplier Name" name="supplier_name" domain="[]" context="{'group_by':'supplier_name'}"/>
                    </group>
               </search>
            </field>
