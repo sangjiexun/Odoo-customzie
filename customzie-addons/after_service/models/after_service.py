@@ -40,8 +40,14 @@ class AfterService(models.Model):
     #Sale Order Filter
     sale_order_filter = fields.Many2one('momo.product.line', 'Sale Order Filter', required=True)
 
+    #Sale Order Id
+    sale_order_id = fields.Many2one(string='Sale Order Id',related='sale_order_filter.sale_order_id',store=True)
+
     #Sale Order Partner Id
     sale_order_partner_id = fields.Char(string='Sale Order Partner Id',related='sale_order_filter.sale_order_name',store=True)
+
+    #Sale Order Product
+    sale_order_product = fields.Many2one(string='Sale Order Product', related='sale_order_filter.product_id',store=True)
 
     #Sale Order Date
     sale_order_date = fields.Datetime(string='Sale Order Date', related='sale_order_filter.delivery_date',store=True)
@@ -51,12 +57,6 @@ class AfterService(models.Model):
 
     #Contact Person
     contact_person = fields.Many2one('res.users',string='Contact Person', default=lambda self: self.env.user)
-
-    #Sale Order Product
-    sale_order_product = fields.Many2one(string='Sale Order Product', related='sale_order_filter.product_id',store=True)
-
-    #Sale Order Id
-    sale_order_id = fields.Many2one(string='Sale Order Id',related='sale_order_filter.sale_order_id',store=True)
 
     barcode = fields.Char(string='Barcode',related='sale_order_filter.barcode',store=True)
 

@@ -15,6 +15,5 @@
         'report/after_service_report.xml',
         'data/treatment_data.xml',
         'data/ir_sequence_data.xml',
-
     ],
 }

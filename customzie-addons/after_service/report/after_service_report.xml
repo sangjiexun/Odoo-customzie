@@ -145,6 +145,7 @@
                         <div t-if="o.treatment_operator" class="col-12 bm-2">
                             <span t-field="o.company_id" class="m-0"/>：
                             <span t-field="o.treatment_operator" class="m-0"/>
+                            <image t-att-src="'/after_service/static/description/stamp.png'" />
                         </div>
                       </div>
                     </t>
