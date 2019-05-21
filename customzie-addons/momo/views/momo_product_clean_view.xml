@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- product clean form view -->
+        <record id="form_view_product_clean" model="ir.ui.view">
+            <field name="name">Product Clean Form View</field>
+            <field name="model">momo.product.clean</field>
+            <field name="arch" type="xml">
+                <form string="Product Clean">
+                    <sheet>
+                        <group>
+                            <field name="id" invisible="1"/>
+                            <field name="scan"/>
+                        </group>
+                        <field name="clean_history_ids" widget="one2many_list" style="pointer-events:none;">
+                            <tree string="Clean History" create="false" delete="false">
+                                <field name="product_line_id" invisible="1"/>
+                                <field name="barcode"/>
+                                <field name="product_name"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <footer>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- product clean window action -->
+        <record id="window_action_product_clean" model="ir.actions.act_window">
+            <field name="name">Product Clean</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.clean</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+             <field name="res_id">1</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

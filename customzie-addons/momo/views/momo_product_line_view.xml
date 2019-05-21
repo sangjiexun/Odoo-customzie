@@ -1,7 +1,7 @@
 <odoo>
     <data noupdate="0">
 
-        <!-- server action for create product line -->act_window
+        <!-- server action for create product line -->
         <record id="server_action_product_line_creator_button" model="ir.actions.server">
             <field name="name">ProdutLine Create</field>
             <field name="model_id" ref="model_momo_product_line_creator"/>
@@ -10,6 +10,25 @@
             <field name="code">
                 if records:
                     records._create_product_line()
+            </field>
+        </record>
+
+        <!-- server action for create product clean -->
+        <record id="server_action_product_clean_button" model="ir.actions.server">
+            <field name="name">Produt Clean</field>
+            <field name="model_id" ref="model_momo_product_clean"/>
+            <field name="binding_model_id" ref="model_momo_product_clean"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    'type': 'ir.actions.act_window',
+                    'name': 'Product Clean',
+                    'res_model': 'momo.product.clean',
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'res_id': model.create({}).id,
+                    'target': 'new',
+                }
             </field>
         </record>
 
@@ -144,9 +163,9 @@
                     <field name="current_location"/>
                     <field name="sale_order_name"/>
                     <field name="customer_name"/>
-                    <!--field name="printed"/>
+                    <field name="printed"/>
                     <field name="need_clean"/>
-                    <field name="is_cleaned"/-->
+                    <field name="is_cleaned"/>
                     <field name="product_rank"/>
                     <field name="is_defective"/>
                     <field name="defective_detail"/>
@@ -240,6 +259,7 @@
                         </group>
                         <field name="product_line_link_ids" widget="one2many_list">
                             <tree string="ProductLineDetail" editable="bottom">
+                                <field name="product_line_id" invisible="1"/>
                                 <field name="barcode"/>
                             </tree>
                         </field>
@@ -528,6 +548,7 @@
         <menuitem name="Product Line Picking Statistics" id="momo_product_line_picking_statistics" parent="momo_menu_root" action="product_line_picking_statistics_action"/>
         <menuitem name="Pick To Stock" id="momo_product_line_pick_to_stock" parent="momo_menu_root" action="action_pick_to_stock"/>
         <menuitem name="Product Exchange" id="momo_product_exchange" parent="momo_menu_root" action="action_product_exchange"/>
+        <menuitem name="Product Clean" id="momo_product_clean" parent="momo_menu_root" action="server_action_product_clean_button"/>
 
     </data>
 </odoo>

@@ -6,7 +6,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.graphics.barcode import code128
-from odoo.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
+
 
 class BarcodePrintWizard(models.TransientModel):
     _name = "momo.barcode.print.wizard"
@@ -286,10 +288,7 @@ class ProductLine(models.Model):
             'context': {'product_line_active_ids': self._context.get('active_ids')}
         }
 
-    @api.multi
-    def clean(self):
-        for line in self:
-            line.update({'is_cleaned': True})
+
 
     @api.one
     def pick2stock(self):
@@ -383,28 +382,63 @@ class ProductLinePicking(models.Model):
             line.product_line_id = res.id
 
 
-'''
+class ProductCleanHistory(models.Model):
+    _name = 'momo.product.clean.history'
+    _description = 'Product Clean History'
 
-class CleanHistory(models.Model):
-    _name = 'momo.clean.history'
-    _description = 'Clean History'
+    product_clean_id = fields.Many2one('momo.product.clean', 'Product Clean', index=True, required=True)
+    product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
+    barcode = fields.Char('Barcode')
+    location = fields.Char('Location')
+    product_name = fields.Char('Product Name')
+
+
+class ProductClean(models.Model):
+    _name = 'momo.product.clean'
+    _description = 'Product Clean'
     _order = 'id'
 
-    barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
+    scan = fields.Char(string="Scan", store=False)
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        lines = super(ProductLine, self).create(vals_list)
-        for line in lines:
-            line.update({'serial_no': self._get_next_serial_no(line.product_no)})
-        return lines
+    clean_history_ids = fields.One2many("momo.product.clean.history", "product_line_id", copy=True)
 
-    @api.onchange('barcode')
-    def onchange_barcode(self):
-        if self.code == 'incoming':
-            self.default_location_src_id = self.env.ref('stock.stock_location_suppliers').id
-            self.default_location_dest_id = self.env.ref('stock.stock_location_stock').id
-        elif self.code == 'outgoing':
-            self.default_location_src_id = self.env.ref('stock.stock_location_stock').id
-            self.default_location_dest_id = self.env.ref('stock.stock_location_customers').id
-'''
+    def _get_clean_history_ids(self):
+        self.clean_history_ids = self.env['momo.product.clean.history'].search(
+            [('product_clean_id', '=', self._origin.id)],
+            order="create_date desc")
+
+    @api.onchange('scan')
+    def _onchange_scan(self):
+        scan_code = self.scan
+        print("product clean id:", self._origin.id)
+        self.scan = False
+        if scan_code:
+            product_line = self.env['momo.product.line'].search([('barcode', '=', scan_code)], limit=1)
+            if not product_line:
+                raise ValidationError(_('not found this product!'))
+            else:
+                if not product_line.need_clean:
+                    raise ValidationError(_('this product do not need to clean!'))
+                else:
+                    product_clean_history = self.env['momo.product.clean.history'].search(
+                        ['&', ('barcode', '=', scan_code), ('product_clean_id', '=', self._origin.id)], limit=1)
+                    if product_clean_history:
+                        raise ValidationError(_('this product has already been cleaned!'))
+                    else:
+                        self.env['momo.product.clean.history'].create(
+                            {"product_line_id": product_line.id, "location": product_line.current_location,
+                             "barcode": scan_code, "product_name": product_line.product_name,
+                             "product_clean_id": self._origin.id})
+                        product_line.write({'is_cleaned': True})
+                        lines = []
+
+                        self._get_clean_history_ids()
+
+                        for rec in self.clean_history_ids:
+                            line_item = {
+                                'barcode': rec.barcode,
+                                'product_name': rec.product_name,
+                            }
+                            lines += [line_item]
+
+                        self.update({'clean_history_ids': lines})
