@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-import webbrowser
 from datetime import datetime as dt
-from odoo import api, fields, models
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
@@ -22,14 +20,27 @@ class BarcodePrintWizard(models.TransientModel):
         (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),], string='Print Start Column', default='1')
 
     @api.multi
-    def print_barcode1(self):
+    def print_product_barcode(self):
         product_line_active_ids = self._context.get('product_line_active_ids')
-        self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
-        #return{
-        #    "type": "ir.actions.act_url",
-        #    "url" : "/opt/barcode_print_2019_05_20_09_11_49.pdf",
-        #    "target": "self",
-        #}
+        pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row,
+                                                                              self.start_column)
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/momo/momo/hello/%s' % pdf_name,
+            'target': 'new',  # open in a new tab
+        }
+
+    @api.multi
+    def print_user_barcode(self):
+        user_active_ids = self._context.get('user_active_ids')
+        pdf_name = self.env['res.users'].count_and_create_barcode_pdf(user_active_ids, self.start_row,
+                                                                      self.start_column)
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/momo/momo/hello/%s' % pdf_name,
+            'target': 'new',  # open in a new tab
+        }
+
 
 class ProductLineGroup(models.Model):
     _name = "momo.product.line.group"
@@ -281,7 +292,8 @@ class ProductLine(models.Model):
 
     @api.multi
     def call_print_wizard(self):
-        view_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
+        res_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
+        view_id = self.env['ir.ui.view'].search([('name', '=', 'Product Barcode Print Wizard')]).id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Barcode Print Wizard',
@@ -289,7 +301,8 @@ class ProductLine(models.Model):
             'res_model': 'momo.barcode.print.wizard',
             'view_type': 'form',
             'view_mode': 'form',
-            'res_id': view_id,
+            'res_id': res_id,
+            'view_id': view_id,
             'target': 'new',
             'context': {'product_line_active_ids': self._context.get('active_ids')}
         }
@@ -331,7 +344,6 @@ class ProductLine(models.Model):
 
         c.save()
         return pdf_name
-        #webbrowser.open(pdf_name)
 
     @api.multi
     def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):
