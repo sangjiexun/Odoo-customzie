@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
-    <record id="barcode_print_wizard" model="ir.ui.view">
-        <field name="name">Barcode Print Wizard</field>
+    <record id="print_product_barcode_wizard" model="ir.ui.view">
+        <field name="name">Product Barcode Print Wizard</field>
         <field name="model">momo.barcode.print.wizard</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
@@ -12,7 +12,25 @@
                 </group>
                 <footer>
                     <button string="Cancel" special="cancel"/>
-                    <button name="print_barcode1" string="Start Print" type="object" class="oe_highlight"/>
+                    <button name="print_product_barcode" string="Start Print" type="object" class="oe_highlight"/>
+                </footer>
+            </from>
+        </field>
+    </record>
+
+        <record id="print_user_barcode_wizard" model="ir.ui.view">
+        <field name="name">User Barcode Print Wizard</field>
+        <field name="model">momo.barcode.print.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <from>
+                <group>
+                    <field name="start_row"/>
+                    <field name="start_column"/>
+                </group>
+                <footer>
+                    <button string="Cancel" special="cancel"/>
+                    <button name="print_user_barcode" string="Start Print" type="object" class="oe_highlight"/>
                 </footer>
             </from>
         </field>

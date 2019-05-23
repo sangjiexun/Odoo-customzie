@@ -4,4 +4,5 @@ from . import momo_product_line
 from . import product
 from . import product_template
 from . import purchase
+from . import res_users
 from . import stock_picking

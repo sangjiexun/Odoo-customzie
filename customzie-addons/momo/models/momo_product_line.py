@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-import webbrowser
 from datetime import datetime as dt
-from odoo import api, fields, models
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.graphics.barcode import code128
-from odoo.exceptions import UserError, ValidationError
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
+
 
 class BarcodePrintWizard(models.TransientModel):
     _name = "momo.barcode.print.wizard"
@@ -20,14 +20,27 @@ class BarcodePrintWizard(models.TransientModel):
         (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),], string='Print Start Column', default='1')
 
     @api.multi
-    def print_barcode1(self):
+    def print_product_barcode(self):
         product_line_active_ids = self._context.get('product_line_active_ids')
-        self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
-        #return{
-        #    "type": "ir.actions.act_url",
-        #    "url" : "/opt/barcode_print_2019_05_20_09_11_49.pdf",
-        #    "target": "self",
-        #}
+        pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row,
+                                                                              self.start_column)
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/momo/momo/hello/%s' % pdf_name,
+            'target': 'new',  # open in a new tab
+        }
+
+    @api.multi
+    def print_user_barcode(self):
+        user_active_ids = self._context.get('user_active_ids')
+        pdf_name = self.env['res.users'].count_and_create_barcode_pdf(user_active_ids, self.start_row,
+                                                                      self.start_column)
+        return {
+            'type': 'ir.actions.act_url',
+            'url': '/momo/momo/hello/%s' % pdf_name,
+            'target': 'new',  # open in a new tab
+        }
+
 
 class ProductLineGroup(models.Model):
     _name = "momo.product.line.group"
@@ -65,7 +78,7 @@ class ProductLineCreator(models.Model):
                                          'Product Line Creator Detail', copy=True)
     is_created = fields.Boolean('Is Created', default=False)
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
-    purchase_order_name = fields.Char('Purchase Order', related='purchase_id.name', store=True)
+    purchase_order_name = fields.Char('Purchase Order Name', related='purchase_id.name', store=True)
     create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
@@ -201,6 +214,8 @@ class ProductLine(models.Model):
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
     clean_location = fields.Char('Clean Location')
 
+    restock = fields.Boolean('Restock', default=False)
+
     remark = fields.Char('Remark')
 
     maker_name = fields.Char('Maker Name')
@@ -235,10 +250,14 @@ class ProductLine(models.Model):
     @api.one
     @api.depends('stock_picking_ids')
     def _compute_current_location(self):
-        newest_product_line_picking = self.env['momo.product.line.picking'].search([('product_line_id', '=', self.id)],
-                                                                                   order="id desc", limit=1)
+        newest_product_line_picking = self.env['momo.product.line.picking'].search([('product_line_id', '=', self.id)], order="id desc", limit=1)
+        company_user = self.env.user.company_id
+        warehouse=self.env['stock.warehouse'].search([('company_id', '=', company_user.id)], limit=1)
         if newest_product_line_picking:
-            newest_stock_picking = self.env['stock.picking'].browse(newest_product_line_picking.stock_picking_id.id)
+            if self.restock:
+                newest_stock_picking = self.env['stock.picking'].browse(warehouse.lot_stock_id.id)
+            else:
+                newest_stock_picking = self.env['stock.picking'].browse(newest_product_line_picking.stock_picking_id.id)
             self.current_location = newest_stock_picking.location_dest_id.name
         else:
             self.current_location = self.init_location
@@ -273,7 +292,8 @@ class ProductLine(models.Model):
 
     @api.multi
     def call_print_wizard(self):
-        view_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
+        res_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
+        view_id = self.env['ir.ui.view'].search([('name', '=', 'Product Barcode Print Wizard')]).id
         return {
             'type': 'ir.actions.act_window',
             'name': 'Barcode Print Wizard',
@@ -281,19 +301,18 @@ class ProductLine(models.Model):
             'res_model': 'momo.barcode.print.wizard',
             'view_type': 'form',
             'view_mode': 'form',
-            'res_id': view_id,
+            'res_id': res_id,
+            'view_id': view_id,
             'target': 'new',
             'context': {'product_line_active_ids': self._context.get('active_ids')}
         }
 
-    @api.multi
-    def clean(self):
-        for line in self:
-            line.update({'is_cleaned': True})
+
 
     @api.one
     def pick2stock(self):
-        self.write({'current_location': 'stock'})
+        self.write({'restock': True})
+#        self._compute_current_location()
 
     @api.one
     def ProductLink(self):
@@ -325,7 +344,6 @@ class ProductLine(models.Model):
 
         c.save()
         return pdf_name
-        #webbrowser.open(pdf_name)
 
     @api.multi
     def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):
@@ -382,29 +400,72 @@ class ProductLinePicking(models.Model):
             res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
             line.product_line_id = res.id
 
-
-'''
-
-class CleanHistory(models.Model):
-    _name = 'momo.clean.history'
-    _description = 'Clean History'
-    _order = 'id'
-
-    barcode = fields.Char('Barcode', compute='_compute_barcode', store=True)
-
     @api.model_create_multi
     def create(self, vals_list):
-        lines = super(ProductLine, self).create(vals_list)
+        lines = super().create(vals_list)
         for line in lines:
-            line.update({'serial_no': self._get_next_serial_no(line.product_no)})
+            res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
+            res.write({'restock': False})
         return lines
 
-    @api.onchange('barcode')
-    def onchange_barcode(self):
-        if self.code == 'incoming':
-            self.default_location_src_id = self.env.ref('stock.stock_location_suppliers').id
-            self.default_location_dest_id = self.env.ref('stock.stock_location_stock').id
-        elif self.code == 'outgoing':
-            self.default_location_src_id = self.env.ref('stock.stock_location_stock').id
-            self.default_location_dest_id = self.env.ref('stock.stock_location_customers').id
-'''
+
+class ProductCleanHistory(models.Model):
+    _name = 'momo.product.clean.history'
+    _description = 'Product Clean History'
+
+    product_clean_id = fields.Many2one('momo.product.clean', 'Product Clean', index=True, required=True)
+    product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
+    barcode = fields.Char('Barcode')
+    location = fields.Char('Location')
+    product_name = fields.Char('Product Name')
+
+
+class ProductClean(models.Model):
+    _name = 'momo.product.clean'
+    _description = 'Product Clean'
+    _order = 'id'
+
+    scan = fields.Char(string="Scan", store=False)
+
+    clean_history_ids = fields.One2many("momo.product.clean.history", "product_line_id", copy=True)
+
+    def _get_clean_history_ids(self):
+        self.clean_history_ids = self.env['momo.product.clean.history'].search(
+            [('product_clean_id', '=', self._origin.id)],
+            order="create_date desc")
+
+    @api.onchange('scan')
+    def _onchange_scan(self):
+        scan_code = self.scan
+        print("product clean id:", self._origin.id)
+        self.scan = False
+        if scan_code:
+            product_line = self.env['momo.product.line'].search([('barcode', '=', scan_code)], limit=1)
+            if not product_line:
+                raise ValidationError(_('not found this product!'))
+            else:
+                if not product_line.need_clean:
+                    raise ValidationError(_('this product do not need to clean!'))
+                else:
+                    product_clean_history = self.env['momo.product.clean.history'].search(
+                        ['&', ('barcode', '=', scan_code), ('product_clean_id', '=', self._origin.id)], limit=1)
+                    if product_clean_history:
+                        raise ValidationError(_('this product has already been cleaned!'))
+                    else:
+                        self.env['momo.product.clean.history'].create(
+                            {"product_line_id": product_line.id, "location": product_line.current_location,
+                             "barcode": scan_code, "product_name": product_line.product_name,
+                             "product_clean_id": self._origin.id})
+                        product_line.write({'is_cleaned': True})
+                        lines = []
+
+                        self._get_clean_history_ids()
+
+                        for rec in self.clean_history_ids:
+                            line_item = {
+                                'barcode': rec.barcode,
+                                'product_name': rec.product_name,
+                            }
+                            lines += [line_item]
+
+                        self.update({'clean_history_ids': lines})
