@@ -20,7 +20,7 @@ class BarcodePrintWizard(models.TransientModel):
         (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),], string='Print Start Column', default='1')
 
     @api.multi
-    def print_barcode1(self):
+    def print_product_barcode(self):
         product_line_active_ids = self._context.get('product_line_active_ids')
         pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
         return{
