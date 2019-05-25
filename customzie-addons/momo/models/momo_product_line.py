@@ -22,23 +22,21 @@ class BarcodePrintWizard(models.TransientModel):
     @api.multi
     def print_product_barcode(self):
         product_line_active_ids = self._context.get('product_line_active_ids')
-        pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row,
-                                                                              self.start_column)
-        return {
-            'type': 'ir.actions.act_url',
-            'url': '/momo/momo/hello/%s' % pdf_name,
-            'target': 'new',  # open in a new tab
+        pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
+        return{
+            "type": "ir.actions.act_url",
+            "url" : "/momo/reports/%s" % pdf_name,
+            "target": "new",
         }
 
     @api.multi
     def print_user_barcode(self):
         user_active_ids = self._context.get('user_active_ids')
-        pdf_name = self.env['res.users'].count_and_create_barcode_pdf(user_active_ids, self.start_row,
-                                                                      self.start_column)
-        return {
-            'type': 'ir.actions.act_url',
-            'url': '/momo/momo/hello/%s' % pdf_name,
-            'target': 'new',  # open in a new tab
+        pdf_name = self.env['res.users'].count_and_create_barcode_pdf(user_active_ids, self.start_row, self.start_column)
+        return{
+            "type": "ir.actions.act_url",
+            "url" : "/momo/reports/%s" % pdf_name,
+            "target": "new",
         }
 
 
@@ -325,9 +323,11 @@ class ProductLine(models.Model):
         sum_count = init_count + len(product_line_active_ids)
         page_count = (sum_count - 1) // 65 + 1
 
-        pdf_name = "/opt/barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
+        pdf_path = "/home/developer/odoo-dev/odoo/customzie-addons/momo/reports/"
+        pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
+        pdf_file = pdf_path + pdf_name
 
-        c = canvas.Canvas(pdf_name, pagesize=A4)
+        c = canvas.Canvas(pdf_file, pagesize=A4)
 
         for x in range(page_count):
 
