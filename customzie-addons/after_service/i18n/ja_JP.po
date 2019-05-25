@@ -57,7 +57,7 @@ msgstr "修理・返品統計"
 #. module: after_service
 #: model:res.groups,name:after_service.after_service_group_manager
 msgid "After Service Manager"
-msgstr ""
+msgstr "マネージャー"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
@@ -73,7 +73,7 @@ msgstr "レポーティング"
 #. module: after_service
 #: model:res.groups,name:after_service.after_service_group_user
 msgid "After Service User"
-msgstr ""
+msgstr "事務員"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__date_approve
@@ -479,12 +479,12 @@ msgstr "販売オーダー番号"
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
 msgid "Search After Service"
-msgstr ""
+msgstr "検索"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__sale_send_date
 msgid "Send Date"
-msgstr ""
+msgstr "発送日"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.after_service_form_view
@@ -592,6 +592,11 @@ msgstr "修理"
 #: model:repair.type,name:after_service.treatment_book_return
 #: model:treatment.book,name:after_service.treatment_book_return
 msgid "return"
+msgstr "返品"
+
+#. module: after_service
+#: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter_inherit_return
+msgid "Return Product"
 msgstr "返品"
 
 #. module: after_service

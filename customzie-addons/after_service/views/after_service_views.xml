@@ -99,7 +99,7 @@
                 <field name="state"/>
                 <field name="is_defective" invisible="1"/>
                 <field name="create_date" />
-                <button name="print_after_service" string="Print After Service" type="object" attrs="{'invisible':[('state','!=','done')]}" />
+                <!--<button name="print_after_service" string="Print After Service" type="object" attrs="{'invisible':[('state','!=','done')]}" />-->
             </tree>
         </field>
     </record>
