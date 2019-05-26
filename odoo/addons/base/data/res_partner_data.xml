@@ -2,16 +2,16 @@
 <odoo>
     <data noupdate="True">
         <record id="main_partner" model="res.partner" context="{'default_is_company': True}">
-            <field name="name">My Company</field>
+            <field name="name">デモ株式会社</field>
             <field name="company_id" eval="None"/>
             <field name="customer" eval="False"/>
             <field name="is_company" eval="True"/>
-            <field name="street"></field>
-            <field name="city"></field>
-            <field name="zip"></field>
+            <field name="street">常磐８丁目</field>
+            <field name="city">さいたま市</field>
+            <field name="zip">3300061</field>
             <field name="phone"></field>
-            <field name="email">info@yourcompany.com</field>
-            <field name="website">www.yourcompany.com</field>
+            <field name="email">info@wajun.co.jp</field>
+            <field name="website">www.wajun.co.jp</field>
             <field name="image" type="base64" file="base/static/img/res_company_logo.png"/>
         </record>
 
@@ -19,7 +19,7 @@
             <field name="name">System</field>
             <field name="company_id" ref="main_company"/>
             <field name="customer" eval="False"/>
-            <field name="email">root@example.com</field>
+            <field name="email">root@wajun.co.jp</field>
             <field name="active" eval="False"/>
         </record>
 
@@ -27,7 +27,7 @@
             <field name="name">Administrator</field>
             <field name="company_id" ref="main_company"/>
             <field name="customer" eval="False"/>
-            <field name="email">admin@example.com</field>
+            <field name="email">admin@wajun.co.jp</field>
             <field name="image" type="base64" file="base/static/img/avatar.png"/>
         </record>
 

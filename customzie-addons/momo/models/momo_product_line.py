@@ -310,12 +310,20 @@ class ProductLine(models.Model):
     @api.one
     def pick2stock(self):
         self.write({'restock': True})
-#        self._compute_current_location()
+        self._compute_current_location()
 
     @api.one
     def ProductLink(self):
         for line in self:
             line.write({'parent_id': line.child_ids})
+
+
+    @api.onchange('barcode')
+    def onchange_barcode(self):
+        for line in self:
+            res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
+            line.product_line_id = res.id
+
 
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):

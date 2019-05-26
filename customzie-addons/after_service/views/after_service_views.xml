@@ -275,6 +275,7 @@
         name="After Service Report"
         parent="after_service_menu_root"
         action="action_after_service_aggregate"
+        groups="after_service_group_manager"
         sequence="3"/>
 
 </odoo>

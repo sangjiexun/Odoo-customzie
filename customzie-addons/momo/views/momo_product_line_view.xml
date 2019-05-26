@@ -543,11 +543,11 @@
         <!-- Top menu item -->
         <menuitem name="MoMo" id="momo_menu_root" action="stock.stock_picking_type_action"/>
         <menuitem name="Product Line"  id="momo_menu_product_line" parent="momo_menu_root" action="action_product_line"/>
-        <menuitem name="Stock Picking" id="momo_stock_picking" parent="momo_menu_root" action="action_stock_picking"/>
+        <!--menuitem name="Stock Picking" id="momo_stock_picking" parent="momo_menu_root" action="action_stock_picking"/-->
         <menuitem name="Product Line Creator" id="momo_menu_product_line_creator" parent="momo_menu_root" action="action_product_line_creator"/>
-        <menuitem name="Product Line Picking Statistics" id="momo_product_line_picking_statistics" parent="momo_menu_root" action="product_line_picking_statistics_action"/>
+        <menuitem name="Product Line Picking Statistics" id="momo_product_line_picking_statistics" parent="base_inherit.management_statistics" action="momo.product_line_picking_statistics_action"/>
         <menuitem name="Pick To Stock" id="momo_product_line_pick_to_stock" parent="momo_menu_root" action="action_pick_to_stock"/>
-        <menuitem name="Product Exchange" id="momo_product_exchange" parent="momo_menu_root" action="action_product_exchange"/>
+        <!--menuitem name="Product Exchange" id="momo_product_exchange" parent="momo_menu_root" action="action_product_exchange"/-->
         <menuitem name="Product Clean" id="momo_product_clean" parent="momo_menu_root" action="server_action_product_clean_button"/>
 
     </data>
