@@ -4,7 +4,7 @@
         <record id="main_company" model="res.company">
             <field name="name">デモ株式会社</field>
             <field name="partner_id" ref="main_partner"/>
-            <field name="currency_id" ref="base.JPY"/>
+            <field name="currency_id" ref="base.EUR"/>
         </record>
 
         <record id="main_partner" model="res.partner">
