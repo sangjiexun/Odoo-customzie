@@ -477,9 +477,9 @@
                 </p>
                 <input type="hidden" name="redirect" t-att-value="redirect"/>
             </form>
-            <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+            <!--div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
                 <a href="/web/login" target="_self">Login by <span>Email and Password</span></a>
-            </div>
+            </div-->
         </t>
     </template>
 
