@@ -527,7 +527,7 @@ msgstr "製品明細"
 #. module: momo
 #: model:ir.actions.server,name:momo.server_action_product_clean_button
 msgid "Produt Clean"
-msgstr ""
+msgstr "清掃"
 
 #. module: momo
 #: model:ir.actions.server,name:momo.server_action_product_line_creator_button

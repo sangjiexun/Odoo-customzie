@@ -382,22 +382,20 @@
                         <h2><field name="barcode" readonly="1"/></h2>
                         <label for="current_location"/>
                         <h2><field name="current_location"/></h2>
-
-                        <div class="col-10">
-                            <label for="is_defective" />
-                            <field name="is_defective" class="oe_inline"/>
-                            <field name="defective_detail"/>
+                        <div colspan="4" col="12">
+                            <label for="is_defective" colspan="1"/>
+                            <field name="is_defective" class="oe_inline" colspan="1"/>
+                            <field name="defective_detail" colspan="3"/>
                         </div>
-
-                        <div class="col-4">
-                            <label for="product_rank" />
-                            <field name="product_rank" class="oe_inline"/>
+                        <div colspan="4" col="12">
+                            <label for="product_rank" colspan="1"/>
+                            <field name="product_rank" class="oe_inline" colspan="5"/>
                         </div>
-                        <div colspan="6">
-                            <label for="rack_prefix" String="Rack"/>
-                            <field name="rack_prefix" class="oe_inline" nolable="1"/>
-                            <field name="rack_suffix" class="oe_inline" nolable="1"/>-
-                            <field name="rack_no" class="oe_inline" nolable="1"/>
+                        <div colspan="4" col="12">
+                            <label for="rack_prefix" String="Rack" colspan="1"/>
+                            <field name="rack_prefix" class="oe_inline" colspan="1"/>
+                            <field name="rack_suffix" class="oe_inline" colspan="1"/>-
+                            <field name="rack_no" class="oe_inline" colspan="1"/>
                         </div>
                     </sheet>
                 </form>
