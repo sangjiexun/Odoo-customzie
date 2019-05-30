@@ -26,7 +26,7 @@ class BarcodePrintWizard(models.TransientModel):
         pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
         return{
             "type": "ir.actions.act_url",
-            "url" : "/momo/reports/%s" % pdf_name,
+            "url" : "/web/momo/reports/%s" % pdf_name,
             "target": "new",
         }
 
@@ -36,7 +36,7 @@ class BarcodePrintWizard(models.TransientModel):
         pdf_name = self.env['res.users'].count_and_create_barcode_pdf(user_active_ids, self.start_row, self.start_column)
         return{
             "type": "ir.actions.act_url",
-            "url" : "/momo/reports/%s" % pdf_name,
+            "url" : "/web/momo/reports/%s" % pdf_name,
             "target": "new",
         }
 

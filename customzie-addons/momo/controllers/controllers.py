@@ -4,7 +4,7 @@ from odoo.http import request
 
 class Momo(http.Controller):
 
-    @http.route('/momo/reports/<string:pdf_name>', auth='public')
+    @http.route('/web/momo/reports/<string:pdf_name>', auth='user')
     def get_pdf_file(self, pdf_name, **kwargs):
         pdf_path = "/opt/pdf/"
         pdf_file = pdf_path + pdf_name
