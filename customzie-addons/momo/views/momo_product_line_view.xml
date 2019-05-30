@@ -178,7 +178,7 @@
             <field name="name">Product Line</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">momo.product.line</field>
-            <field name="limit">80</field>
+            <field name="limit">65</field>
             <!--field name="view_mode">tree,form</field-->
             <field name="view_mode">tree</field>
             <field name="view_type">form</field>
@@ -288,8 +288,8 @@
             <field name="view_mode">tree,form</field>
             <field name="view_type">form</field>
         </record>
-        
-		<!-- window action for stock picking -->		
+
+		<!-- window action for stock picking -->
         <record id="action_stock_picking" model="ir.actions.act_window">
             <field name="name">Stock Picking</field>
             <field name="type">ir.actions.act_window</field>

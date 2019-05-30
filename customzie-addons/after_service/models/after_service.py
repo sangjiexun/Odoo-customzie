@@ -40,6 +40,9 @@ class AfterService(models.Model):
     #Sale Order Filter
     sale_order_filter = fields.Many2one('momo.product.line', 'Sale Order Filter', required=True)
 
+    #Momo Product Line Id:
+    product_line_id = fields.Integer(string='Momo Product Line Id',related='sale_order_filter.id',store=True)
+
     #Sale Order Id
     sale_order_id = fields.Many2one(string='Sale Order Id',related='sale_order_filter.sale_order_id',store=True)
 
@@ -63,7 +66,7 @@ class AfterService(models.Model):
     defect_remark = fields.Text(string='Defect Remark',related='sale_order_filter.defective_detail',store=True)
 
     #Inquiry Note
-    inquiry_note = fields.Text(string='Inquiry Note')
+    inquiry_note = fields.Text(string='Inquiry Note', required=True)
 
     #Contact Treatment
     #contact_treatment = fields.Selection(
@@ -77,16 +80,16 @@ class AfterService(models.Model):
     treatment_remark = fields.Text(string='Treatment Remark')
 
     #Order Elapsed Days
-    order_elapsed_days = fields.Char(sting='Order Elapsed Days', store=True ,readonly=True)
+    order_elapsed_days = fields.Char(sting='Order Elapsed Days', store=True )
 
     #Returned Date
-    returned_date = fields.Date(string='Returned Date',default=fields.Date.today())
+    returned_date = fields.Date(string='Returned Date',default=fields.Date.today(), required=True, store=True)
 
     #Reshipping Date
-    reshipping_date = fields.Date(string='Reshipping Date',default=fields.Date.today())
+    reshipping_date = fields.Date(string='Reshipping Date',default=fields.Date.today(), required=True, store=True)
 
     #Repair Type
-    repair_type = fields.Many2many('repair.type',string='Repair Type')
+    repair_type = fields.Many2many('repair.type',string='Repair Type', required=True)
 
     #Problem Reason
     problem_reason = fields.Many2many('problem.reason',string='Problem Reason')
@@ -95,7 +98,10 @@ class AfterService(models.Model):
     other_reason = fields.Text(string='Other Reason')
 
     #Treatment Operator
-    treatment_operator = fields.Many2one('res.users',string='Treatment Operator')
+    treatment_operator = fields.Many2one('res.users',string='Treatment Operator', default=lambda self: self.env.user)
+
+    #Treatment Date
+    treatment_date = fields.Datetime(string='Treatment Date', store=True)
 
     #Company Id
     company_id = fields.Many2one(
@@ -158,20 +164,27 @@ class AfterService(models.Model):
     @api.multi
     def button_draft(self):
         if not self.measure_type:
-            raise UserError(_("問い合わせ手段を選択ください"))
+            raise UserError(_("Please select an inquiry method."))
         else:
             if not self.treatment_book_id:
-                raise UserError(_("処置分類を入力してください"))
+                raise UserError(_("Please enter treatment category."))
             else:
                 self.write({'state': 'draft'})
+                self.write({'sale_order_id': self.sale_order_id})
+                self.write({'sale_order_partner_id': self.sale_order_partner_id})
+                self.write({'sale_order_date': self.sale_order_date})
+                self.write({'defect_remark': self.defect_remark})
+                self.write({'order_elapsed_days': self.order_elapsed_days})
+                self.write({'inquiry_note': self.inquiry_note})
         return {}
 
     @api.multi
     def button_processing(self, force=False):
         if not self.repair_type:
-            raise UserError(_("対応内容を入力してください"))
+            raise UserError(_("Please enter the corresponding content."))
         else:
             self.write({'treatment_operator': self.env.uid})
+            self.write({'treatment_date': fields.Datetime.now()})
             self.write({'is_defective': self.is_defective})
             if self.treatment_book_id.name == 'return':
                 self.write({'state': 'to approve'})

@@ -90,15 +90,15 @@
         <field name="model">after.service</field>
         <field name="arch" type="xml">
             <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'" decoration-danger="is_defective == True" delete='false'>
-                <field name="name"/>
+                <field name="name" />
                 <field name="sale_order_id" />
-                <field name="sale_order_partner_id" />
+                <field name="sale_order_partner_id"/>
                 <field name="sale_order_product" />
                 <field name="treatment_operator" />
                 <field name="treatment_book_id" />
                 <field name="state"/>
                 <field name="is_defective" invisible="1"/>
-                <field name="create_date" />
+                <field name="create_date" class="list_width"/>
                 <!--<button name="print_after_service" string="Print After Service" type="object" attrs="{'invisible':[('state','!=','done')]}" />-->
             </tree>
         </field>
@@ -167,8 +167,9 @@
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search After Service">
-                <field name="name" string="After Service"
-                  filter_domain="['|','|',('name','ilike',self),('sale_order_id','ilike',self),('sale_order_partner_id','ilike',self),('sale_order_product','ilike',self),('treatment_operator','ilike',self)]"/>
+                <field name="barcode"
+                  filter_domain="['|','|',('barcode','ilike',self),('name','ilike',self),('sale_order_id','ilike',self),('sale_order_partner_id','ilike',self),('sale_order_product','ilike',self),('treatment_operator','ilike',self)]"/>
+                <field name="name" string="After Service" />
                 <field name="sale_order_id" />
                 <field name="sale_order_partner_id" />
                 <field name="sale_order_product" />

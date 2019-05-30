@@ -333,6 +333,12 @@
                 <meta name="apple-mobile-web-app-capable" content="yes"/>
                 <meta name="mobile-web-app-capable" content="yes"/>
 
+                <!-- Full Screen Display Add Start -->
+                <meta name="viewport" content=" width=1024, user-scalable=no"/>
+                <meta name="apple-mobile-web-app-capable" content="yes"/>
+                <meta name="mobile-web-app-capable" content="yes"/>
+                <!-- Full Screen Display Add End -->
+
                 <title t-esc="title or 'Odoo'"/>
                 <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/web/static/src/img/favicon.ico'"/>
 

@@ -296,6 +296,24 @@ msgid "New"
 msgstr "新規"
 
 #. module: after_service
+#: code:customzie-addons/after_service/models/after_service.py:167
+#, python-format
+msgid "Please select an inquiry method."
+msgstr "問い合わせ手段を選択ください。"
+
+#. module: after_service
+#: code:customzie-addons/after_service/models/after_service.py:170
+#, python-format
+msgid "Please enter the corresponding content."
+msgstr "対応内容を入力してください。"
+
+#. module: after_service
+#: code:customzie-addons/after_service/models/after_service.py:36
+#, python-format
+msgid "Repair must be canceled in order to reset it to draft."
+msgstr "修理をドラフト状態に戻すにはキャンセルしなくてはなりません。"
+
+#. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.report_after_service_template
 msgid "Order Note"
 msgstr "注文メモ："
