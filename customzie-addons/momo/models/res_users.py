@@ -49,7 +49,7 @@ class Users(models.Model):
             # other pages
             else:
                 self.print_barcode(c,
-                                   user_active_ids[(65 - init_count) + 65 * (x - 1):(65 - init_count) + 65])
+                                   user_active_ids[(65 - init_count) + 65 * (x - 1):(65 - init_count) + 65 * x ])
 
         c.save()
         return pdf_name
