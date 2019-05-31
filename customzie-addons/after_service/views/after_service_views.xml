@@ -89,7 +89,7 @@
         <field name="name">after.service.tree</field>
         <field name="model">after.service</field>
         <field name="arch" type="xml">
-            <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'" decoration-danger="is_defective == True" delete='false'>
+            <tree string="After Service" decoration-muted="state in ('done','cancel')" decoration-info="state=='draft'" decoration-danger="is_defective == True" delete='false' class="o_group_header">
                 <field name="name" />
                 <field name="sale_order_id" />
                 <field name="sale_order_partner_id"/>
@@ -98,7 +98,7 @@
                 <field name="treatment_book_id" />
                 <field name="state"/>
                 <field name="is_defective" invisible="1"/>
-                <field name="create_date" class="list_width"/>
+                <field name="create_date"/>
                 <!--<button name="print_after_service" string="Print After Service" type="object" attrs="{'invisible':[('state','!=','done')]}" />-->
             </tree>
         </field>

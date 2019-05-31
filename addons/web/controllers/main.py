@@ -47,6 +47,7 @@ from odoo.http import content_disposition, dispatch_rpc, request, \
 from odoo.exceptions import AccessError, UserError, AccessDenied
 from odoo.models import check_method_name
 from odoo.service import db, security
+from openerp.http import request
 
 _logger = logging.getLogger(__name__)
 
@@ -447,8 +448,13 @@ class Home(http.Controller):
     @http.route('/web', type='http', auth="none")
     def web_client(self, s_action=None, **kw):
         ensure_db()
+        device_user_agent = request.httprequest.environ.get('HTTP_USER_AGENT','')
+        device_check = device_user_agent.find('ipad')
         if not request.session.uid:
-            return werkzeug.utils.redirect('/web/barcode_login', 303)
+            if device_check == -1:
+                return werkzeug.utils.redirect('/web/login', 303)
+            else:
+                return werkzeug.utils.redirect('/web/barcode_login', 303)
         if kw.get('redirect'):
             return werkzeug.utils.redirect(kw.get('redirect'), 303)
 
