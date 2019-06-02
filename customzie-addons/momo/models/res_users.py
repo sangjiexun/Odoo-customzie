@@ -34,9 +34,11 @@ class Users(models.Model):
         sum_count = init_count + len(user_active_ids)
         page_count = (sum_count - 1) // 65 + 1
 
+        pdf_path = "/opt/pdf/"
         pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
+        pdf_file = pdf_path + pdf_name
 
-        c = canvas.Canvas(pdf_name, pagesize=A4)
+        c = canvas.Canvas(pdf_file, pagesize=A4)
 
         for x in range(page_count):
 
