@@ -454,7 +454,6 @@ class ProductClean(models.Model):
     @api.onchange('scan')
     def _onchange_scan(self):
         scan_code = self.scan
-        print("product clean id:", self._origin.id)
         self.scan = False
         if scan_code:
             product_line = self.env['momo.product.line'].search([('barcode', '=', scan_code)], limit=1)
@@ -486,3 +485,39 @@ class ProductClean(models.Model):
                             lines += [line_item]
 
                         self.update({'clean_history_ids': lines})
+
+    @api.onchange('clean_history_ids')
+    def _onchange_active(self):
+        current_view_list = []
+        current_db_list = []
+
+        for clean_history_id in self.clean_history_ids:
+            current_view_list.append(clean_history_id.barcode)
+
+        db_lines = self.env['momo.product.clean.history'].search([('product_clean_id', '=', self._origin.id)],
+                                                                 order="create_date desc")
+        for clean_history_id in db_lines:
+            current_db_list.append(clean_history_id.barcode)
+
+        if len(current_db_list) > len(current_view_list):
+            delete_line = list(set(current_db_list).difference(set(current_view_list)))
+
+            if len(delete_line) == 1:
+                self.env['momo.product.clean.history'].search(
+                    ['&', ('product_clean_id', '=', self._origin.id), ('barcode', '=', delete_line[0])],
+                    order="create_date desc",
+                    limit=1).unlink()
+
+            lines = []
+            self._get_clean_history_ids()
+
+            for rec in self.clean_history_ids:
+                line_item = {
+                    'barcode': rec.barcode,
+                    'product_name': rec.product_name,
+                    'do_delete': rec.do_delete,
+                }
+                lines += [line_item]
+
+            self.update({'clean_history_ids': lines})
+
