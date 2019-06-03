@@ -515,7 +515,6 @@ class ProductClean(models.Model):
                 line_item = {
                     'barcode': rec.barcode,
                     'product_name': rec.product_name,
-                    'do_delete': rec.do_delete,
                 }
                 lines += [line_item]
 
