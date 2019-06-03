@@ -90,7 +90,7 @@ class ProductLineCreator(models.Model):
             if not creator.is_created:
                 product_line_group_id = self.env['momo.product.line.group'].create({'group_id': self.group_id}).id
                 if self.group_id:
-                    self.env['procurement.group'].search([('id', '=', self.group_id)]).update(
+                    self.env['procurement.group'].search([('id', '=', self.group_id)]).write(
                         {'product_line_group_id': product_line_group_id})
                 for line in creator.creator_detail_ids:
                     for i in range(int(line.need_qty)):
@@ -114,7 +114,7 @@ class ProductLineCreator(models.Model):
                         self.env['momo.product.line.link'].create(
                             {'product_line_group_id': product_line_group_id, 'product_line_id': product_line.id,
                              'barcode': product_line.barcode})
-                    creator.update({'is_created': True})
+                    creator.write({'is_created': True})
         return True
 
     @api.model
@@ -230,7 +230,7 @@ class ProductLine(models.Model):
     def create(self, vals_list):
         lines = super(ProductLine, self).create(vals_list)
         for line in lines:
-            line.update({'serial_no': self._get_next_serial_no(line.product_no)})
+            line.write({'serial_no': self._get_next_serial_no(line.product_no)})
         return lines
 
     @api.model
@@ -370,7 +370,7 @@ class ProductLine(models.Model):
             y = ymargin + sheight * (12 - (i // 5))
 
             self.draw_label(c, x, y, line.barcode)
-            line.update({'printed': True})
+            line.write({'printed': True})
             i += 1
 
         c.showPage()
