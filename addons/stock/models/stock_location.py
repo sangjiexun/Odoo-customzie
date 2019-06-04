@@ -36,6 +36,7 @@ class Location(models.Model):
         ('inventory', 'Inventory Loss'),
         ('procurement', 'Procurement'),
         ('production', 'Production'),
+        ('assemble', 'Assemble'),
         ('transit', 'Transit Location')], string='Location Type',
         default='internal', index=True, required=True,
         help="* Vendor Location: Virtual location representing the source location for products coming from your vendors"
