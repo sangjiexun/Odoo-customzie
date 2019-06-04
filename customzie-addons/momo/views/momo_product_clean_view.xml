@@ -13,10 +13,10 @@
                             <field name="scan"/>
                         </group>
                         <field name="clean_history_ids" widget="one2many_list">
-                            <tree string="Clean History" create="false" edit="false">
+                            <tree string="Clean History" create="false" editable="bottom">
                                 <field name="product_line_id" invisible="1"/>
-                                <field name="barcode"/>
-                                <field name="product_name"/>
+                                <field name="barcode" readonly="1"/>
+                                <field name="product_name" readonly="1"/>
                             </tree>
                         </field>
                     </sheet>
