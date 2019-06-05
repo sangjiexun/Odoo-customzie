@@ -445,6 +445,7 @@ class ProductClean(models.Model):
     user_id = fields.Many2one('res.users', 'Responsible', default=lambda self: self._uid)
     scan = fields.Char(string="Scan", store=False)
     result_mess = fields.Char(string="Result Message")
+    is_successful = fields.Boolean('Is Successful', default=False)
 
     clean_history_ids = fields.One2many("momo.product.clean.history", "product_line_id", copy=True)
 
@@ -461,21 +462,21 @@ class ProductClean(models.Model):
             self.update({'result_mess': ''})
             product_line = self.env['momo.product.line'].search([('barcode', '=', scan_code)], limit=1)
             if not product_line:
-                self.update({'scan_result': 'not found this product!'})
+                self.update({'is_successful': False, 'result_mess': 'not found this product!'})
             else:
                 if not product_line.need_clean:
-                    self.update({'result_mess': 'this product do not need to clean!'})
+                    self.update({'is_successful': False, 'result_mess': 'this product do not need to clean!'})
                 else:
                     product_clean_history = self.env['momo.product.clean.history'].search(
                         ['&', ('barcode', '=', scan_code), ('product_clean_id', '=', self._origin.id)], limit=1)
                     if product_clean_history:
-                        self.update({'result_mess': 'this product has already been cleaned!'})
+                        self.update({'is_successful': False, 'result_mess': 'this product has already been cleaned!'})
                     else:
                         self.env['momo.product.clean.history'].create(
                             {"product_line_id": product_line.id, "location": product_line.current_location,
                              "barcode": scan_code, "product_name": product_line.product_name,
                              "product_clean_id": self._origin.id})
-                        self.update({'result_mess': 'scan successful!'})
+                        self.update({'is_successful': True, 'result_mess': 'scan successful!'})
                         product_line.write({'is_cleaned': True})
 
             lines = []
@@ -522,6 +523,6 @@ class ProductClean(models.Model):
                     'product_name': rec.product_name,
                 }
                 lines += [line_item]
-            self.update({'result_mess': 'delete successful!'})
+            self.update({'is_successful': True, 'result_mess': 'delete successful!'})
             self.update({'clean_history_ids': lines})
 

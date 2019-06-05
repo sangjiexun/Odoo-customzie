@@ -10,9 +10,11 @@
                     <sheet>
                         <group>
                             <field name="id" invisible="1"/>
+                            <field name="is_successful" invisible="1"/>
                             <field name="user_id" readonly="1"/>
                             <field name="scan" default_focus="1" placeholder="Barcode"/>
-                            <field name="result_mess" readonly="1"/>
+                            <field name="result_mess" readonly="1" attrs="{'invisible': [('is_successful','!=', False)]}" style="color:red;" />
+                            <field name="result_mess" readonly="1" attrs="{'invisible': [('is_successful','!=', True)]}" style="color:black;" />
                         </group>
                         <field name="clean_history_ids" widget="one2many_list">
                             <tree string="Clean History" create="false" editable="bottom">
