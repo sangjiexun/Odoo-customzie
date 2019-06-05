@@ -474,6 +474,7 @@ class ProductClean(models.Model):
                             {"product_line_id": product_line.id, "location": product_line.current_location,
                              "barcode": scan_code, "product_name": product_line.product_name,
                              "product_clean_id": self._origin.id})
+                        self.update({'scan_result': 'scan successful!'})
                         product_line.write({'is_cleaned': True})
 
             lines = []
