@@ -88,9 +88,9 @@ class ProductLineCreator(models.Model):
     def _create_product_line(self):
         for creator in self:
             if not creator.is_created:
-                product_line_group_id = self.env['momo.product.line.group'].create({'group_id': self.group_id}).id
-                if self.group_id:
-                    self.env['procurement.group'].search([('id', '=', self.group_id)]).write(
+                product_line_group_id = self.env['momo.product.line.group'].create({'group_id': creator.group_id}).id
+                if creator.group_id:
+                    self.env['procurement.group'].search([('id', '=', creator.group_id)]).write(
                         {'product_line_group_id': product_line_group_id})
                 for line in creator.creator_detail_ids:
                     for i in range(int(line.need_qty)):
