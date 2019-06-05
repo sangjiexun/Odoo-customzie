@@ -442,6 +442,7 @@ class ProductClean(models.Model):
     _description = 'Product Clean'
     _order = 'id'
 
+    user_id = fields.Many2one('res.users', 'Responsible', default=lambda self: self._uid)
     scan = fields.Char(string="Scan", store=False)
 
     clean_history_ids = fields.One2many("momo.product.clean.history", "product_line_id", copy=True)
@@ -458,15 +459,30 @@ class ProductClean(models.Model):
         if scan_code:
             product_line = self.env['momo.product.line'].search([('barcode', '=', scan_code)], limit=1)
             if not product_line:
-                raise ValidationError(_('not found this product!'))
+                warning_mess = {
+                    'title': _('Waring!'),
+                    'message': _(
+                        'not found this product!'),
+                }
+                return {'warning': warning_mess}
             else:
                 if not product_line.need_clean:
-                    raise ValidationError(_('this product do not need to clean!'))
+                    warning_mess = {
+                        'title': _('Waring!'),
+                        'message': _(
+                            'this product do not need to clean!'),
+                    }
+                    return {'warning': warning_mess}
                 else:
                     product_clean_history = self.env['momo.product.clean.history'].search(
                         ['&', ('barcode', '=', scan_code), ('product_clean_id', '=', self._origin.id)], limit=1)
                     if product_clean_history:
-                        raise ValidationError(_('this product has already been cleaned!'))
+                        warning_mess = {
+                            'title': _('Waring!'),
+                            'message': _(
+                                'this product has already been cleaned!'),
+                        }
+                        return {'warning': warning_mess}
                     else:
                         self.env['momo.product.clean.history'].create(
                             {"product_line_id": product_line.id, "location": product_line.current_location,
