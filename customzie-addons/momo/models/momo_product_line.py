@@ -489,7 +489,7 @@ class ProductClean(models.Model):
                 }
                 lines += [line_item]
 
-            self.update({'clean_history_ids': lines})
+            self.update({'user_id': self._uid, 'clean_history_ids': lines})
 
     @api.onchange('clean_history_ids')
     def _onchange_active(self):
@@ -524,5 +524,5 @@ class ProductClean(models.Model):
                 }
                 lines += [line_item]
             self.update({'is_successful': True, 'result_mess': 'delete successful!'})
-            self.update({'clean_history_ids': lines})
+            self.update({'user_id': self._uid, 'clean_history_ids': lines})
 
