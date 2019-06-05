@@ -11,7 +11,8 @@
                         <group>
                             <field name="id" invisible="1"/>
                             <field name="user_id" readonly="1"/>
-                            <field name="scan" default_focus="1"/>
+                            <field name="scan" default_focus="1" placeholder="Barcode"/>
+                            <field name="scan_result" readonly="1"/>
                         </group>
                         <field name="clean_history_ids" widget="one2many_list">
                             <tree string="Clean History" create="false" editable="bottom">

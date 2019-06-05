@@ -457,50 +457,36 @@ class ProductClean(models.Model):
         scan_code = self.scan
         self.scan = False
         if scan_code:
+            self.update({'scan_result': ''})
             product_line = self.env['momo.product.line'].search([('barcode', '=', scan_code)], limit=1)
             if not product_line:
-                warning_mess = {
-                    'title': _('Waring!'),
-                    'message': _(
-                        'not found this product!'),
-                }
-                return {'warning': warning_mess}
+                self.update({'scan_result': 'not found this product!'})
             else:
                 if not product_line.need_clean:
-                    warning_mess = {
-                        'title': _('Waring!'),
-                        'message': _(
-                            'this product do not need to clean!'),
-                    }
-                    return {'warning': warning_mess}
+                    self.update({'scan_result': 'this product do not need to clean!'})
                 else:
                     product_clean_history = self.env['momo.product.clean.history'].search(
                         ['&', ('barcode', '=', scan_code), ('product_clean_id', '=', self._origin.id)], limit=1)
                     if product_clean_history:
-                        warning_mess = {
-                            'title': _('Waring!'),
-                            'message': _(
-                                'this product has already been cleaned!'),
-                        }
-                        return {'warning': warning_mess}
+                        self.update({'scan_result': 'this product has already been cleaned!'})
                     else:
                         self.env['momo.product.clean.history'].create(
                             {"product_line_id": product_line.id, "location": product_line.current_location,
                              "barcode": scan_code, "product_name": product_line.product_name,
                              "product_clean_id": self._origin.id})
                         product_line.write({'is_cleaned': True})
-                        lines = []
 
-                        self._get_clean_history_ids()
+            lines = []
+            self._get_clean_history_ids()
 
-                        for rec in self.clean_history_ids:
-                            line_item = {
-                                'barcode': rec.barcode,
-                                'product_name': rec.product_name,
-                            }
-                            lines += [line_item]
+            for rec in self.clean_history_ids:
+                line_item = {
+                    'barcode': rec.barcode,
+                    'product_name': rec.product_name,
+                }
+                lines += [line_item]
 
-                        self.update({'clean_history_ids': lines})
+            self.update({'clean_history_ids': lines})
 
     @api.onchange('clean_history_ids')
     def _onchange_active(self):
