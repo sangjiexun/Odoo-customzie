@@ -132,13 +132,9 @@
             <field name="model">momo.product.line</field>
             <field name="arch" type="xml">
                 <search string="Product Line">
-                  <field name="product_name"
-                    filter_domain="['|','|',('maker_name','ilike',self),('maker_product_no','ilike',self),('spec_cpu','ilike',self),
+                  <field name="barcode"
+                    filter_domain="['|','|','|','|','|','|',('barcode','ilike',self),('maker_name','ilike',self),('maker_product_no','ilike',self),('spec_cpu','ilike',self),
                     ('spec_memory','ilike',self),('spec_hard_disc','ilike',self),('spec_driver','ilike',self)]"/>
-<!--                    <field name="barcode"/>
-                    <field name="current_location"/>
-                    <field name="sale_order_name"/>
-                    <field name="customer_name"/>-->
                     <field name="maker_name" />
                     <field name="maker_product_no" />
                     <field name="spec_cpu" />
@@ -475,13 +471,9 @@
            <field name="priority" eval="15"/>
            <field name="arch" type="xml">
                <search string="Defective Product Line Filter">
-                 <field name="product_name"
-                   filter_domain="['|','|',('maker_name','ilike',self),('maker_product_no','ilike',self),('spec_cpu','ilike',self),
+                 <field name="barcode"
+                   filter_domain="['|','|','|','|','|','|',('barcode','ilike',self),('maker_name','ilike',self),('maker_product_no','ilike',self),('spec_cpu','ilike',self),
                    ('spec_memory','ilike',self),('spec_hard_disc','ilike',self),('spec_driver','ilike',self)]"/>
-<!--                    <field name="barcode"/>
-                   <field name="current_location"/>
-                   <field name="sale_order_name"/>
-                   <field name="customer_name"/>-->
                    <field name="maker_name" />
                    <field name="maker_product_no" />
                    <field name="spec_cpu" />

@@ -175,6 +175,7 @@ class AfterService(models.Model):
                 self.write({'sale_order_date': self.sale_order_date})
                 self.write({'defect_remark': self.defect_remark})
                 self.write({'order_elapsed_days': self.order_elapsed_days})
+                self.write({'barcode': self.barcode})
                 self.write({'inquiry_note': self.inquiry_note})
         return {}
 

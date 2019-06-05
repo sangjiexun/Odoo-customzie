@@ -317,6 +317,11 @@
         </div>
 
         <div class="footer o_standard_footer">
+          <div class="row">
+              <div class="col-9 text-right">
+                  <img t-if="company.company_stamp" t-att-src="image_data_uri(company.company_stamp)" style="max-height: 150px;" alt="Stamp"/>
+              </div>
+          </div>
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4">
                     <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>

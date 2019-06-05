@@ -948,7 +948,13 @@ class Session(http.Controller):
     @http.route('/web/session/logout', type='http', auth="none")
     def logout(self, redirect='/web'):
         request.session.logout(keep_db=True)
-        return werkzeug.utils.redirect(redirect, 303)
+        device_user_agent = request.httprequest.environ.get('HTTP_USER_AGENT','')
+        device_check = device_user_agent.find('ipad')
+        if device_check == -1:
+            return werkzeug.utils.redirect('/web/login', 303)
+        else:
+            return werkzeug.utils.redirect('/web/barcode_login', 303)
+        #return werkzeug.utils.redirect(redirect, 303)
 
 
 class DataSet(http.Controller):

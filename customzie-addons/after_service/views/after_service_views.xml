@@ -168,7 +168,7 @@
         <field name="arch" type="xml">
             <search string="Search After Service">
                 <field name="barcode"
-                  filter_domain="['|','|',('barcode','ilike',self),('name','ilike',self),('sale_order_id','ilike',self),('sale_order_partner_id','ilike',self),('sale_order_product','ilike',self),('treatment_operator','ilike',self)]"/>
+                  filter_domain="['|','|','|','|','|',('barcode','ilike',self),('name','ilike',self),('sale_order_id','ilike',self),('sale_order_partner_id','ilike',self),('sale_order_product','ilike',self),('treatment_operator','ilike',self)]"/>
                 <field name="name" string="After Service" />
                 <field name="sale_order_id" />
                 <field name="sale_order_partner_id" />
