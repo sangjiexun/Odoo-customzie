@@ -37,6 +37,7 @@ class PurchaseOrder(models.Model):
                     'need_qty': line.product_qty,
                 }
                 self.env['momo.product.line.creator.detail'].create(res)
+        creator._create_product_line()
         return True
 
     @api.model
