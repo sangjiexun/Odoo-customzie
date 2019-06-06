@@ -12,4 +12,53 @@
             </xpath>
         </field>
     </record>
+
+    <template id="view_company_stamp_in_external_layout_background" inherit_id="web.external_layout_background">
+      <xpath expr="//div[@class='article o_report_layout_background']" position="replace">
+        <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <div class="col-12 text-right">
+                <img t-if="company.company_stamp" t-att-src="image_data_uri(company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+        </div>
+      </xpath>
+    </template>
+
+    <template id="view_company_stamp_in_external_layout_boxed" inherit_id="web.external_layout_boxed">
+      <xpath expr="//div[@class='article o_report_layout_boxed']" position="replace">
+        <div class="article o_report_layout_boxed" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <div class="col-12 text-right">
+                <img t-if="company.company_stamp" t-att-src="image_data_uri(company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+        </div>
+      </xpath>
+    </template>
+
+    <template id="view_company_stamp_in_external_layout_clean" inherit_id="web.external_layout_clean">
+      <xpath expr="//div[@class='article o_report_layout_clean']" position="replace">
+        <div class="article o_report_layout_clean"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <div class="col-12 text-right">
+                <img t-if="company.company_stamp" t-att-src="image_data_uri(company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+        </div>
+      </xpath>
+    </template>
+
+    <template id="view_company_stamp_in_external_layout_standard" inherit_id="web.external_layout_standard">
+      <xpath expr="//div[@class='article o_report_layout_standard']" position="replace">
+        <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <div class="col-12 text-right">
+                <img t-if="company.company_stamp" t-att-src="image_data_uri(company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+        </div>
+      </xpath>
+    </template>
+
 </odoo>
