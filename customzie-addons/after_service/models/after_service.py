@@ -101,7 +101,7 @@ class AfterService(models.Model):
     treatment_operator = fields.Many2one('res.users',string='Treatment Operator', default=lambda self: self.env.user)
 
     #Treatment Date
-    treatment_date = fields.Datetime(string='Treatment Date', store=True)
+    treatment_date = fields.Datetime(string='Treatment Date')
 
     #Company Id
     company_id = fields.Many2one(
@@ -185,7 +185,7 @@ class AfterService(models.Model):
             raise UserError(_("Please enter the corresponding content."))
         else:
             self.write({'treatment_operator': self.env.uid})
-            self.write({'treatment_date': fields.Datetime.now()})
+            self.write({'treatment_date': datetime.now()})
             self.write({'is_defective': self.is_defective})
             if self.treatment_book_id.name == 'return':
                 self.write({'state': 'to approve'})
