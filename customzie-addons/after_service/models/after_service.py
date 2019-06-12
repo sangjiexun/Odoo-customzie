@@ -117,7 +117,7 @@ class AfterService(models.Model):
         ('cancel', 'Cancelled')], string='Status',
         copy=False, default='draft')
 
-    is_defective = fields.Boolean(string='Is Defective', default=False)
+    is_defective = fields.Boolean(string='Is Defective', related='sale_order_filter.is_defective')
 
     measure_type = fields.Selection(
         [('val1', 'mail'),
@@ -187,7 +187,7 @@ class AfterService(models.Model):
             self.write({'treatment_operator': self.env.uid})
             self.write({'treatment_date': datetime.now()})
             self.write({'is_defective': self.is_defective})
-            if self.treatment_book_id.name == 'return':
+            if self.is_defective:
                 self.write({'state': 'to approve'})
             else:
                 self.write({'state': 'done', 'date_approve': fields.Date.context_today(self)})
