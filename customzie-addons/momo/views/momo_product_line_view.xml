@@ -516,16 +516,47 @@
             <field name="act_window_id" ref="action_product_exchange"/>
         </record>
 
-
         <!-- Top menu item -->
-        <menuitem name="MoMo" id="momo_menu_root" action="stock.stock_picking_type_action"/>
-        <menuitem name="Product Line"  id="momo_menu_product_line" parent="momo_menu_root" action="action_product_line"/>
-        <!--menuitem name="Stock Picking" id="momo_stock_picking" parent="momo_menu_root" action="action_stock_picking"/-->
-        <menuitem name="Product Line Creator" id="momo_menu_product_line_creator" parent="momo_menu_root" action="action_product_line_creator"/>
-        <menuitem name="Product Line Picking Statistics" id="momo_product_line_picking_statistics" parent="base_inherit.management_statistics" action="momo.product_line_picking_statistics_action"/>
-        <menuitem name="Pick To Stock" id="momo_product_line_pick_to_stock" parent="momo_menu_root" action="action_pick_to_stock"/>
-        <!--menuitem name="Product Exchange" id="momo_product_exchange" parent="momo_menu_root" action="action_product_exchange"/-->
-        <menuitem name="Product Clean" id="momo_product_clean" parent="momo_menu_root" action="server_action_product_clean_button"/>
+        <menuitem id="momo_menu_root"
+            name="MoMo"
+            groups="momo_product_group_operator"
+            sequence="2"/>
+
+        <menuitem id="momo_menu_product_line"
+            name="Product Line"
+            parent="momo_menu_root"
+            groups="momo_product_group_operator"
+            action="action_product_line"
+            sequence="10"/>
+
+        <menuitem id="momo_menu_product_line_creator"
+            name="Product Line Creator"
+            parent="momo_menu_root"
+            groups="momo_product_group_user"
+            action="action_product_line_creator"
+            sequence="10"/>
+
+        <menuitem id="momo_product_line_picking_statistics"
+            name="Product Line Picking Statistics"
+            parent="momo_menu_root"
+            groups="momo_product_group_manager"
+            action="product_line_picking_statistics_action"
+            sequence="10"/>
+
+        <menuitem id="momo_product_line_pick_to_stock"
+            name="Pick To Stock"
+            parent="momo_menu_root"
+            groups="momo_product_group_user"
+            action="action_pick_to_stock"
+            sequence="10"/>
+
+        <menuitem id="momo_product_clean"
+            name="Product Clean"
+            parent="momo_menu_root"
+            groups="momo_product_group_operator"
+            action="server_action_product_clean_button"
+            sequence="10"/>
 
     </data>
+
 </odoo>

@@ -356,7 +356,7 @@
     <menuitem
         name="Leaves"
         id="menu_hr_holidays_root"
-        sequence="95"
+        sequence="1"
         web_icon="hr_holidays,static/description/icon.png"
         groups="base.group_user"/>
 

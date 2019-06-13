@@ -1,163 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <menuitem id="menu_management_root"
-        name="Management Menu"
-        groups="base_inherit.group_ceo" sequence="1"/>
+    <record model="ir.ui.menu" id="mail.menu_root_discuss">
+        <field name="groups_id" eval="[(3, ref('base.group_user'))]"/>
+    </record>
 
-    <!--統計-->
-    <menuitem id="management_statistics"
-        name="Statistics"
-        groups="base_inherit.group_ceo"
-        parent="menu_management_root" sequence="8"/>
+    <record model="ir.ui.menu" id="mail.menu_root_discuss">
+        <field name="groups_id" eval="[(4, ref('base_inherit.make_invisible'))]"/>
+    </record>
 
-    <!--休暇分析-->
-    <menuitem id="hr_holidays.menu_hr_available_holidays_report_tree"
-        name="Leaves Analysis"
-        groups="base_inherit.group_ceo"
-        action="hr_holidays.action_hr_available_holidays_report"
-        parent="management_statistics" sequence="10"/>
+    <record model="ir.ui.menu" id="calendar.mail_menu_calendar">
+        <field name="groups_id" eval="[(3, ref('base.group_user'))]"/>
+    </record>
 
-    <menuitem id="return_report"
-        name="Return Report"
-        groups="base_inherit.group_ceo"
-        parent="management_statistics" sequence="10"/>
-
-    <!--menuitem id="management_man_hour"
-        name="Man-hour Report"
-        groups="base_inherit.group_ceo"
-        action="hr_holidays.action_hr_available_holidays_report"
-        parent="management_statistics" sequence="10"/-->
-
-
-    <!--取引関連-->
-    <menuitem id="management_deal_report"
-        name="Deal Reporting"
-        groups="base_inherit.group_ceo"
-        parent="menu_management_root" sequence="9"/>
-
-    <!--購買レポート-->
-    <menuitem id="purchase.purchase_report"
-        name="Purchase Reporting"
-        action="purchase.action_purchase_order_report_all"
-        groups="base_inherit.group_ceo"
-        parent="management_deal_report" sequence="10"/>
-
-    <!--販売レポート-->
-    <menuitem id="sale.menu_report_product_all"
-        name="Sale Reporting"
-        action="sale.action_order_report_all"
-        groups="base_inherit.group_ceo"
-        parent="management_deal_report" sequence="10"/>
-
-    <!--menuitem id="sale.menu_sale_report"
-        name="Reporting"
-        parent="sale.sale_menu_root"
-        sequence="5"
-        groups="base_inherit.make_invisible"/-->
-
-    <!--在庫関連-->
-    <menuitem id="management_warehouse_report"
-        name="Stock Reporting"
-        groups="base_inherit.group_ceo"
-        parent="menu_management_root" sequence="10"/>
-
-    <menuitem id="stock_account.management_valuation_report"
-        name="Valuation Reporting"
-        action="stock_account.action_stock_inventory_valuation"
-        parent="management_warehouse_report" sequence="10" />
-
-    <menuitem id="stock.menu_valuation"
-        name="Inventory Reporting"
-        action="stock.action_stock_quantity_history"
-        parent="management_warehouse_report" sequence="10" />
-
-    <menuitem id="stock.menu_warehouse_report"
-        name="Reporting"
-        sequence="99"
-        parent="stock.menu_stock_root"
-        groups="base_inherit.make_invisible"/>
-
-    <menuitem action="stock.stock_move_action"
-          id="stock.stock_move_menu"
-          parent="stock.menu_warehouse_report" sequence="140"
-          groups="base_inherit.make_invisible"/>
-
-    <menuitem
-        id="mail.menu_root_discuss"
-        name="Discuss"
-        action="mail.action_discuss"
-        web_icon="mail,static/description/icon.png"
-        groups="base_inherit.make_invisible"
-        sequence="1"/>
-
-    <menuitem
-        id="calendar.mail_menu_calendar"
-        name="Calendar"
-        sequence="2"
-        action="calendar.action_calendar_event"
-        web_icon="calendar,static/description/icon.png"
-        groups="base_inherit.make_invisible"/>
-
-    <menuitem
-        id="calendar.menu_calendar_configuration"
-        name="Calendar"
-        parent="base.menu_custom"
-        groups="base_inherit.make_invisible"/>
-
-    <menuitem
-        id="calendar.menu_calendar_event_type"
-        parent="calendar.menu_calendar_configuration"
-        action="calendar.action_calendar_event_type"
-        groups="base_inherit.make_invisible"/>
-
-    <menuitem
-        id="calendar.menu_calendar_alarm"
-        parent="calendar.menu_calendar_configuration"
-        action="calendar.action_calendar_alarm"
-        groups="base_inherit.make_invisible"/>
-
-    <menuitem id="mrp.menu_mrp_reporting"
-        name="Reporting"
-        parent="mrp.menu_mrp_root"
-        groups="base_inherit.make_invisible"
-          sequence="25"/>
-
-    <menuitem
-        id="hr_holidays.menu_hr_holidays_dashboard"
-        name="Overview"
-        parent="hr_holidays.menu_hr_holidays_root"
-        sequence="1"
-        action="hr_holidays.action_hr_holidays_dashboard"
-        groups="base.group_user"/>
-
-    <menuitem
-        id="hr_holidays.menu_hr_holidays_report"
-        name="Reporting"
-        parent="hr_holidays.menu_hr_holidays_root"
-        sequence="99"
-        groups="base_inherit.make_invisible"/>
-
-    <menuitem
-        name="Report by Department"
-        parent="hr_holidays.menu_hr_holidays_report"
-        action="hr_holidays.action_hr_holidays_summary_dept"
-        groups="base_inherit.make_invisible"
-        id="hr_holidays.menu_hr_holidays_summary_dept"/>
-
-    <menuitem
-        id="hr_holidays.hr_leave_menu_new_request"
-        parent="hr_holidays.menu_hr_holidays_my_leaves"
-        groups="base_inherit.make_invisible"
-        action="hr_holidays.hr_leave_action_new_request"
-        sequence="2"/>
-
-    <menuitem
-        id="hr_holidays.hr_holidays_menu_manager_payroll_to_report"
-        name="Leaves to report"
-        parent="hr_holidays.hr_holidays_menu_manager_payroll"
-        groups="base_inherit.make_invisible"
-        action="hr_holidays.hr_leave_action_payroll"
-        sequence="1"/>
+    <record model="ir.ui.menu" id="calendar.mail_menu_calendar">
+        <field name="groups_id" eval="[(4, ref('base_inherit.make_invisible'))]"/>
+    </record>
 
 </odoo>
