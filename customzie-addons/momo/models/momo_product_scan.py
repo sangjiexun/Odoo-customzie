@@ -143,7 +143,7 @@ class ProductScan(models.Model):
             self.env['momo.product.scan.line'].create(
                 {"product_line_id": line.product_line_id.id, "location": line.product_line_id.current_location,
                  "barcode": line.product_line_id.barcode, "product_name": line.product_line_id.product_name,
-                 "product_scan_id": self.id})
+                 "product_id": line.product_id.id, "product_scan_id": self.id})
 
             self.env['momo.product.line.picking'].create(
                 {"product_line_id": line.product_line_id.id, "stock_picking_id": self.picking_id.id,
