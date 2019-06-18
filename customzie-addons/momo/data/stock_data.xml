@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_location_stock_A_1" model="stock.location">
+            <field name="name">A_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_A_2" model="stock.location">
+            <field name="name">A_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_A_3" model="stock.location">
+            <field name="name">A_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_A_4" model="stock.location">
+            <field name="name">A_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_A_5" model="stock.location">
+            <field name="name">A_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_A_6" model="stock.location">
+            <field name="name">A_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B_1" model="stock.location">
+            <field name="name">B_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B_2" model="stock.location">
+            <field name="name">B_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B_3" model="stock.location">
+            <field name="name">B_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B_4" model="stock.location">
+            <field name="name">B_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B_5" model="stock.location">
+            <field name="name">B_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B_6" model="stock.location">
+            <field name="name">B_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_C_1" model="stock.location">
+            <field name="name">C_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_C_2" model="stock.location">
+            <field name="name">C_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_C_3" model="stock.location">
+            <field name="name">C_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_C_4" model="stock.location">
+            <field name="name">C_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_C_5" model="stock.location">
+            <field name="name">C_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_C_6" model="stock.location">
+            <field name="name">C_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_D_1" model="stock.location">
+            <field name="name">D_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_D_2" model="stock.location">
+            <field name="name">D_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_D_3" model="stock.location">
+            <field name="name">D_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_D_4" model="stock.location">
+            <field name="name">D_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_D_5" model="stock.location">
+            <field name="name">D_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_D_6" model="stock.location">
+            <field name="name">D_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_E_1" model="stock.location">
+            <field name="name">E_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_E_2" model="stock.location">
+            <field name="name">E_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_E_3" model="stock.location">
+            <field name="name">E_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_E_4" model="stock.location">
+            <field name="name">E_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_E_5" model="stock.location">
+            <field name="name">E_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_E_6" model="stock.location">
+            <field name="name">E_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_F_1" model="stock.location">
+            <field name="name">F_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_F_2" model="stock.location">
+            <field name="name">F_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_F_3" model="stock.location">
+            <field name="name">F_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_F_4" model="stock.location">
+            <field name="name">F_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_F_5" model="stock.location">
+            <field name="name">F_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_F_6" model="stock.location">
+            <field name="name">F_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_G_1" model="stock.location">
+            <field name="name">G_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_G_2" model="stock.location">
+            <field name="name">G_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_G_3" model="stock.location">
+            <field name="name">G_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_G_4" model="stock.location">
+            <field name="name">G_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_G_5" model="stock.location">
+            <field name="name">G_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_G_6" model="stock.location">
+            <field name="name">G_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_H_1" model="stock.location">
+            <field name="name">H_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_H_2" model="stock.location">
+            <field name="name">H_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_H_3" model="stock.location">
+            <field name="name">H_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_H_4" model="stock.location">
+            <field name="name">H_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_H_5" model="stock.location">
+            <field name="name">H_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_H_6" model="stock.location">
+            <field name="name">H_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_I_1" model="stock.location">
+            <field name="name">I_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_I_2" model="stock.location">
+            <field name="name">I_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_I_3" model="stock.location">
+            <field name="name">I_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_I_4" model="stock.location">
+            <field name="name">I_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_I_5" model="stock.location">
+            <field name="name">I_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_I_6" model="stock.location">
+            <field name="name">I_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_J_1" model="stock.location">
+            <field name="name">J_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_J_2" model="stock.location">
+            <field name="name">J_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_J_3" model="stock.location">
+            <field name="name">J_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_J_4" model="stock.location">
+            <field name="name">J_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_J_5" model="stock.location">
+            <field name="name">J_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_J_6" model="stock.location">
+            <field name="name">J_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_K_1" model="stock.location">
+            <field name="name">K_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_K_2" model="stock.location">
+            <field name="name">K_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_K_3" model="stock.location">
+            <field name="name">K_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_K_4" model="stock.location">
+            <field name="name">K_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_K_5" model="stock.location">
+            <field name="name">K_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_K_6" model="stock.location">
+            <field name="name">K_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_L_1" model="stock.location">
+            <field name="name">L_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_L_2" model="stock.location">
+            <field name="name">L_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_L_3" model="stock.location">
+            <field name="name">L_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_L_4" model="stock.location">
+            <field name="name">L_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_L_5" model="stock.location">
+            <field name="name">L_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_L_6" model="stock.location">
+            <field name="name">L_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_M_1" model="stock.location">
+            <field name="name">M_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_M_2" model="stock.location">
+            <field name="name">M_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_M_3" model="stock.location">
+            <field name="name">M_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_M_4" model="stock.location">
+            <field name="name">M_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_M_5" model="stock.location">
+            <field name="name">M_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_M_6" model="stock.location">
+            <field name="name">M_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_N_1" model="stock.location">
+            <field name="name">N_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_N_2" model="stock.location">
+            <field name="name">N_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_N_3" model="stock.location">
+            <field name="name">N_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_N_4" model="stock.location">
+            <field name="name">N_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_N_5" model="stock.location">
+            <field name="name">N_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_N_6" model="stock.location">
+            <field name="name">N_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_O_1" model="stock.location">
+            <field name="name">O_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_O_2" model="stock.location">
+            <field name="name">O_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_O_3" model="stock.location">
+            <field name="name">O_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_O_4" model="stock.location">
+            <field name="name">O_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_O_5" model="stock.location">
+            <field name="name">O_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_O_6" model="stock.location">
+            <field name="name">O_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_P_1" model="stock.location">
+            <field name="name">P_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_P_2" model="stock.location">
+            <field name="name">P_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_P_3" model="stock.location">
+            <field name="name">P_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_P_4" model="stock.location">
+            <field name="name">P_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_P_5" model="stock.location">
+            <field name="name">P_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_P_6" model="stock.location">
+            <field name="name">P_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_Q_1" model="stock.location">
+            <field name="name">Q_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Q_2" model="stock.location">
+            <field name="name">Q_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Q_3" model="stock.location">
+            <field name="name">Q_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Q_4" model="stock.location">
+            <field name="name">Q_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Q_5" model="stock.location">
+            <field name="name">Q_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Q_6" model="stock.location">
+            <field name="name">Q_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_R_1" model="stock.location">
+            <field name="name">R_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_R_2" model="stock.location">
+            <field name="name">R_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_R_3" model="stock.location">
+            <field name="name">R_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_R_4" model="stock.location">
+            <field name="name">R_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_R_5" model="stock.location">
+            <field name="name">R_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_R_6" model="stock.location">
+            <field name="name">R_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_S_1" model="stock.location">
+            <field name="name">S_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_S_2" model="stock.location">
+            <field name="name">S_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_S_3" model="stock.location">
+            <field name="name">S_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_S_4" model="stock.location">
+            <field name="name">S_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_S_5" model="stock.location">
+            <field name="name">S_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_S_6" model="stock.location">
+            <field name="name">S_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_T_1" model="stock.location">
+            <field name="name">T_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_T_2" model="stock.location">
+            <field name="name">T_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_T_3" model="stock.location">
+            <field name="name">T_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_T_4" model="stock.location">
+            <field name="name">T_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_T_5" model="stock.location">
+            <field name="name">T_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_T_6" model="stock.location">
+            <field name="name">T_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_U_1" model="stock.location">
+            <field name="name">U_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_U_2" model="stock.location">
+            <field name="name">U_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_U_3" model="stock.location">
+            <field name="name">U_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_U_4" model="stock.location">
+            <field name="name">U_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_U_5" model="stock.location">
+            <field name="name">U_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_U_6" model="stock.location">
+            <field name="name">U_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_V_1" model="stock.location">
+            <field name="name">V_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_V_2" model="stock.location">
+            <field name="name">V_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_V_3" model="stock.location">
+            <field name="name">V_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_V_4" model="stock.location">
+            <field name="name">V_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_V_5" model="stock.location">
+            <field name="name">V_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_V_6" model="stock.location">
+            <field name="name">V_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_W_1" model="stock.location">
+            <field name="name">W_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_W_2" model="stock.location">
+            <field name="name">W_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_W_3" model="stock.location">
+            <field name="name">W_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_W_4" model="stock.location">
+            <field name="name">W_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_W_5" model="stock.location">
+            <field name="name">W_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_W_6" model="stock.location">
+            <field name="name">W_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_X_1" model="stock.location">
+            <field name="name">X_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_X_2" model="stock.location">
+            <field name="name">X_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_X_3" model="stock.location">
+            <field name="name">X_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_X_4" model="stock.location">
+            <field name="name">X_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_X_5" model="stock.location">
+            <field name="name">X_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_X_6" model="stock.location">
+            <field name="name">X_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_Y_1" model="stock.location">
+            <field name="name">Y_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Y_2" model="stock.location">
+            <field name="name">Y_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Y_3" model="stock.location">
+            <field name="name">Y_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Y_4" model="stock.location">
+            <field name="name">Y_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Y_5" model="stock.location">
+            <field name="name">Y_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Y_6" model="stock.location">
+            <field name="name">Y_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_Z_1" model="stock.location">
+            <field name="name">Z_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Z_2" model="stock.location">
+            <field name="name">Z_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Z_3" model="stock.location">
+            <field name="name">Z_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Z_4" model="stock.location">
+            <field name="name">Z_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Z_5" model="stock.location">
+            <field name="name">Z_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_Z_6" model="stock.location">
+            <field name="name">Z_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_AA_1" model="stock.location">
+            <field name="name">AA_1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>            
+        </record>
+        <record id="stock_location_stock_AA_2" model="stock.location">
+            <field name="name">AA_2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_AA_3" model="stock.location">
+            <field name="name">AA_3</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_AA_4" model="stock.location">
+            <field name="name">AA_4</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_AA_5" model="stock.location">
+            <field name="name">AA_5</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_AA_6" model="stock.location">
+            <field name="name">AA_6</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+    </data>
+</odoo>
