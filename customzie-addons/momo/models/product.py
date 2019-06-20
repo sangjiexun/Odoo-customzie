@@ -23,12 +23,3 @@ class ProductProduct(models.Model):
         if vals.get('product_no', 'New') == 'New':
             vals['product_no'] = self.env['ir.sequence'].next_by_code('product.product')
         return super(ProductProduct, self).create(vals)
-
-
-class MakerInfo(models.Model):
-
-    _name = 'maker.info'
-    _description = 'Maker Info'
-    _order = 'id'
-
-    name = fields.Char('Maker', required=True, index=True)

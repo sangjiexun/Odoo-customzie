@@ -26,7 +26,7 @@
                             <field name="product_line_group_id" invisible="1"/>
                             <field name="picking_name" readonly="1"/>
                             <field name="user_id" readonly="1"/>
-                            <field name="scan" default_focus="1" placeholder="Barcode"/>
+                            <field name="scan" default_focus="1" placeholder="Please scan a Barcode"/>
                             <field name="error_mess" readonly="1" style="color:red;"/>
                         </group>
                             <field name="scan_lines" widget="one2many_list">
