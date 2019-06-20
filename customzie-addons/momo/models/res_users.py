@@ -12,7 +12,6 @@ class Users(models.Model):
 
     @api.multi
     def call_print_wizard(self):
-        print("user print barcode.")
         res_id = self.env['momo.barcode.print.wizard'].create({'start_row': "1", 'start_column': "1"}).id
         view_id = self.env['ir.ui.view'].search([('name', '=', 'User Barcode Print Wizard')]).id
         return {

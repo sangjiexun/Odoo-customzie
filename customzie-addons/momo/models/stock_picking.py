@@ -9,6 +9,38 @@ class Picking(models.Model):
     purchase_id = fields.Many2one(related="group_id.purchase_id", string="Purchase Order", store=True, readonly=False)
     product_line_picking_ids = fields.One2many('momo.product.line.picking', 'stock_picking_id', 'Product Line Picking',
                                                copy=True)
+    product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group', index=True)
+    scan_over = fields.Boolean('Scan Over', default=False)
+
+    @api.multi
+    def open_scan_pop(self):
+        product_sacn = self.env['momo.product.scan'].search(
+            ['&', ('picking_id', '=', self.id), ('picking_type_id', '=', self.picking_type_id.id)], limit=1)
+        if product_sacn:
+            res_id = product_sacn.id
+        else:
+            res_id = self.env['momo.product.scan'].create(
+                {'picking_id': self.id, 'picking_name': self.name, 'picking_type_id': self.picking_type_id.id,
+                 'product_line_group_id': self.product_line_group_id.id}).id
+            if self.product_line_group_id and self.product_line_group_id.product_line_link_ids:
+                for product_line_link in self.product_line_group_id.product_line_link_ids:
+                    if product_line_link.linked:
+                        self.env['momo.product.scan.line'].create(
+                            {"product_line_id": product_line_link.product_line_id.id,
+                             "location": product_line_link.product_line_id.current_location,
+                             "barcode": product_line_link.product_line_id.barcode,
+                             "product_name": product_line_link.product_line_id.product_name,
+                             "product_id": product_line_link.product_id.id,
+                             "product_scan_id": res_id})
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Product Scan',
+            'res_model': 'momo.product.scan',
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_id': res_id,
+            'target': 'new',
+        }
 
     @api.multi
     def action_stock_picking(self):
@@ -35,13 +67,3 @@ class Picking(models.Model):
             'res_model': 'momo.product.line.group',
             'res_id': self.group_id.product_line_group_id.id,
         }
-
-    @api.multi
-    def _create_product_line_picking(self):
-        for picking in self:
-            product_line_group = picking.group_id.product_line_group_id
-            if product_line_group:
-                for line in product_line_group.product_line_link_ids:
-                    self.env['momo.product.line.picking'].create(
-                        {'stock_picking_id': picking.id, 'product_line_id': line.product_line_id.id,
-                         'barcode': line.barcode})

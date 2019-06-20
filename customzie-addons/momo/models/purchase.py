@@ -23,6 +23,7 @@ class PurchaseOrder(models.Model):
     def button_approve(self, force=False):
         result = super(PurchaseOrder, self).button_approve(force=force)
         self._create_product_line_creator()
+        self._create_product_scan_lines()
         return result
 
     @api.multi
@@ -38,6 +39,17 @@ class PurchaseOrder(models.Model):
                 }
                 self.env['momo.product.line.creator.detail'].create(res)
         creator._create_product_line()
+        return True
+
+    @api.multi
+    def _create_product_scan_lines(self):
+        product_line_group = self.env['momo.product.line.group'].search([('group_id', '=', self.group_id.id)],
+                                                                        order="id desc", limit=1)
+        if product_line_group:
+            pickings = self.env['stock.picking'].search([('group_id', '=', self.group_id.id)])
+            if pickings:
+                for picking in pickings:
+                    picking.write({'product_line_group_id': product_line_group.id})
         return True
 
     @api.model

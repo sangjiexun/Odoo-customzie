@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         'views/wizard_product_line.xml',
         'views/momo_product_clean_view.xml',
+        'views/momo_product_scan_view.xml',
         'views/res_users_view.xml',
         'views/momo_product_line_view.xml',
         'views/product_template_views.xml',

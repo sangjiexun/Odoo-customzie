@@ -1,6 +1,25 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
+        <!-- server action for create product clean -->
+        <record id="server_action_product_clean_button" model="ir.actions.server">
+            <field name="name">Produt Clean</field>
+            <field name="model_id" ref="model_momo_product_clean"/>
+            <field name="binding_model_id" ref="model_momo_product_clean"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = {
+                    'type': 'ir.actions.act_window',
+                    'name': 'Product Clean',
+                    'res_model': 'momo.product.clean',
+                    'view_type': 'form',
+                    'view_mode': 'form',
+                    'res_id': model.create({}).id,
+                    'target': 'new',
+                }
+            </field>
+        </record>
+
         <!-- product clean form view -->
         <record id="form_view_product_clean" model="ir.ui.view">
             <field name="name">Product Clean Form View</field>
