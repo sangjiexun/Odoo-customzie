@@ -7,7 +7,7 @@
     'version': '12.0.1.0',
     'category': '',
     # any module necessary for this one to work correctly
-    'depends': ['hr_holidays', 'sale_management', 'purchase', 'stock_account', 'website', 'mrp', 'contacts'],
+    'depends': ['hr_holidays', 'sale_management', 'purchase', 'stock_account', 'website', 'contacts'],
     'application': False,
     'data': [
         'security/base_groups.xml',

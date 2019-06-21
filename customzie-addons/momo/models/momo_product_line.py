@@ -106,11 +106,11 @@ class ProductLineCreator(models.Model):
                             'maker_name': line.product_id.product_tmpl_id.maker_name.name,
                             'maker_product_no': line.product_id.product_tmpl_id.maker_product_no,
                             'product_no': line.product_id.product_tmpl_id.product_no,
-                            'ceo_price': line.product_id.product_tmpl_id.ceo_price,
-                            'spec_cpu': line.product_id.product_tmpl_id.spec_cpu,
-                            'spec_memory': line.product_id.product_tmpl_id.spec_memory,
-                            'spec_hard_disc': line.product_id.product_tmpl_id.spec_hard_disc,
-                            'spec_driver': line.product_id.product_tmpl_id.spec_driver,
+#                            'ceo_price': line.product_id.product_tmpl_id.ceo_price,
+#                            'spec_cpu': line.product_id.product_tmpl_id.spec_cpu,
+#                            'spec_memory': line.product_id.product_tmpl_id.spec_memory,
+#                            'spec_hard_disc': line.product_id.product_tmpl_id.spec_hard_disc,
+#                            'spec_driver': line.product_id.product_tmpl_id.spec_driver,
 
                         }
                         product_line = self.env['momo.product.line'].create(res)
@@ -200,20 +200,6 @@ class ProductLine(models.Model):
         ('D', 'd rank'),
     ], string='Ranking',  translate=True, default='N')
 
-    rack_prefix = fields.Selection([
-        ('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D'), ('E', 'E'), ('F', 'F'),
-    ], string='Rack Prefix', default='')
-
-    rack_suffix = fields.Selection([
-        ('a', 'a'), ('b', 'b'), ('c', 'c'), ('d', 'd'), ('e', 'e'), ('f', 'f'),
-        ('g', 'g'), ('h', 'h'), ('i', 'i'), ('j', 'j'), ('k', 'k'), ('l', 'l'), ('m', 'm'),
-        ('n', 'n'), ('o', 'o'), ('p', 'p'), ('q', 'q'), ('r', 'r'), ('s', 's'), ('t', 't'),
-        ('u', 'u'), ('v', 'v'), ('w', 'w'), ('x', 'x'), ('y', 'y'), ('z', 'z'),
-    ], string='Rack Suffix', default='a')
-
-    rack_no = fields.Selection([
-        ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5')], string='Rack No', default='1')
-
     need_clean = fields.Boolean('Need Clean', default=True)
     is_cleaned = fields.Boolean('Is Cleaned', default=False)
     clean_location = fields.Char('Clean Location')
@@ -225,11 +211,11 @@ class ProductLine(models.Model):
     maker_name = fields.Char('Maker Name')
     maker_product_no = fields.Char('Maker Product')
     product_no = fields.Char('Product No', readonly=True, index=True, copy=False, default='New')
-    ceo_price = fields.Float('Ceo Cost', company_dependent=True, groups="base_inherit.group_ceo",)
-    spec_cpu = fields.Char('Spec Cpu')
-    spec_memory = fields.Char('Spec Memory')
-    spec_hard_disc = fields.Char('Spec HardDisk')
-    spec_driver = fields.Char('Spec Driver')
+#    ceo_price = fields.Float('Ceo Cost', company_dependent=True, groups="base_inherit.group_ceo",)
+#    spec_cpu = fields.Char('Spec Cpu')
+#    spec_memory = fields.Char('Spec Memory')
+#    spec_hard_disc = fields.Char('Spec HardDisk')
+#    spec_driver = fields.Char('Spec Driver')
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -311,8 +297,6 @@ class ProductLine(models.Model):
             'context': {'product_line_active_ids': self._context.get('active_ids')}
         }
 
-
-
     @api.one
     def pick2stock(self):
         self.write({'restock': True})
@@ -323,13 +307,11 @@ class ProductLine(models.Model):
         for line in self:
             line.write({'parent_id': line.child_ids})
 
-
     @api.onchange('barcode')
     def onchange_barcode(self):
         for line in self:
             res = self.env['momo.product.line'].search([('barcode', '=', line.barcode)])
             line.product_line_id = res.id
-
 
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):

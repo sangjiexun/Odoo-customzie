@@ -319,16 +319,6 @@
                             <field name="is_defective" class="oe_inline" colspan="1"/>
                             <field name="defective_detail" colspan="3"/>
                         </div>
-                        <div colspan="4" col="12">
-                            <label for="product_rank" colspan="1"/>
-                            <field name="product_rank" class="oe_inline" colspan="5"/>
-                        </div>
-                        <div colspan="4" col="12">
-                            <label for="rack_prefix" String="Rack" colspan="1"/>
-                            <field name="rack_prefix" class="oe_inline" colspan="1"/>
-                            <field name="rack_suffix" class="oe_inline" colspan="1"/>-
-                            <field name="rack_no" class="oe_inline" colspan="1"/>
-                        </div>
                     </sheet>
                 </form>
             </field>
