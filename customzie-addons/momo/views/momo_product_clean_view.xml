@@ -10,7 +10,7 @@
             <field name="code">
                 action = {
                     'type': 'ir.actions.act_window',
-                    'name': 'Product Clean',
+                    'name': '清掃',
                     'res_model': 'momo.product.clean',
                     'view_type': 'form',
                     'view_mode': 'form',
