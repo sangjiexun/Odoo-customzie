@@ -131,7 +131,7 @@ msgstr "<strong>説明</strong>"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.report_pricelist
 msgid "<strong>Price List Name</strong>:<br/>"
-msgstr "<strong>P価格表名</strong>:<br/>"
+msgstr "<strong>価格表名</strong>:<br/>"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.report_simple_label
@@ -495,12 +495,12 @@ msgstr "会議椅子"
 #. module: product
 #: model:ir.model,name:product.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "構成設定"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view
 msgid "Configure Variants"
-msgstr ""
+msgstr "バリアントを設定"
 
 #. module: product
 #: model:product.category,name:product.product_category_consumable

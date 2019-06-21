@@ -233,12 +233,12 @@ msgstr "許可された取引先"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.mail_channel_view_form_
 msgid "Auto Subscribe Departments"
-msgstr ""
+msgstr "自動購読部門"
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_mail_channel__subscription_department_ids
 msgid "Automatically subscribe members of those departments to the channel."
-msgstr ""
+msgstr "これらの部署のメンバーを自動的にチャンネルに登録する"
 
 #. module: hr
 #: selection:hr.employee,certificate:0
@@ -403,7 +403,7 @@ msgstr "出生国"
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.open_module_tree_department
 msgid "Create a new department"
-msgstr ""
+msgstr "部署を作成してください"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__create_uid
@@ -581,7 +581,7 @@ msgstr "従業員タグ"
 msgid ""
 "Enter here the private address of the employee, not the one linked to your "
 "company."
-msgstr ""
+msgstr "ここにあなたの会社にリンクされているものではなく、従業員の私用アドレスを入力してください"
 
 #. module: hr
 #: selection:mail.alias,alias_contact:0
@@ -699,7 +699,7 @@ msgstr "グループ化"
 #. module: hr
 #: model:ir.model,name:hr.model_hr_department
 msgid "HR Department"
-msgstr ""
+msgstr "HR部門"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_mail_channel__subscription_department_ids
@@ -778,7 +778,7 @@ msgstr "チェックされている場合は、新しいメッセージに注意
 #: model:ir.model.fields,help:hr.field_hr_employee__message_has_error
 #: model:ir.model.fields,help:hr.field_hr_job__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "チェックすると、一部のメッセージに配信エラーがあります"
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee__active
@@ -791,7 +791,7 @@ msgstr "アクティブ項目をFalse にセットすると、リソースレコ
 #: code:addons/hr/models/hr.py:296
 #, python-format
 msgid "Import Template for Employees"
-msgstr ""
+msgstr "従業員用のインポートテンプレート"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -914,12 +914,12 @@ msgstr "新製品、マーケティングキャンペーン、オファーを開
 #. module: hr
 #: selection:hr.employee,marital:0
 msgid "Legal Cohabitant"
-msgstr ""
+msgstr "同居人"
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.action_hr_job
 msgid "Let's create a job position."
-msgstr ""
+msgstr "求人を作成しましょう"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__message_main_attachment_id
@@ -1407,17 +1407,17 @@ msgstr "社会保障番号"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__spouse_birthdate
 msgid "Spouse Birthdate"
-msgstr ""
+msgstr "配偶者誕生日"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__spouse_complete_name
 msgid "Spouse Complete Name"
-msgstr ""
+msgstr "配偶者フルネーム"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_hr_job_form
 msgid "Start Recruitment"
-msgstr ""
+msgstr "募集を始める"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_job__state
