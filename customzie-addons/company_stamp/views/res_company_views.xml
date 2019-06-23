@@ -13,7 +13,43 @@
         </field>
     </record>
 
-    <template id="view_company_stamp_in_external_layout_background" inherit_id="web.external_layout_background">
+    <template id="view_company_stamp_in_after_service_report" inherit_id="after_service.report_after_service_template">
+      <xpath expr="//div[@class='col-12 text-center']" position="after">
+            <div class="col-12 text-right">
+                <img t-if="res_company.company_stamp" t-att-src="image_data_uri(res_company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+      </xpath>
+    </template>
+
+    <template id="view_company_stamp_in_report_saleorder_document" inherit_id="account.report_invoice_document">
+      <xpath expr="//div[@class='col-auto mw-100 mb-2']" position="before">
+            <div class="col-12 text-right">
+                <img t-if="res_company.company_stamp" t-att-src="image_data_uri(res_company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+      </xpath>
+    </template>
+
+    <template id="view_company_stamp_in_report_payment_receipt_document" inherit_id="account.report_payment_receipt_document">
+      <xpath expr="//div[@class='row mt64']" position="after">
+            <div class="col-12 text-right">
+                <img t-if="res_company.company_stamp" t-att-src="image_data_uri(res_company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+      </xpath>
+    </template>
+
+<!--    <template id="view_company_stamp_in_after_service_report" inherit_id="after_service.report_after_service_template">
+      <xpath expr="//div[@class='col-12 text-center']" position="after">
+            <div class="col-12 text-right">
+                <img t-if="res_company.company_stamp" t-att-src="image_data_uri(res_company.company_stamp)" style="max-height: 250px;" alt="Stamp"/>
+            </div>
+            <t t-raw="0"/>
+      </xpath>
+    </template>-->
+
+<!--    <template id="view_company_stamp_in_external_layout_background" inherit_id="web.external_layout_background">
       <xpath expr="//div[@class='article o_report_layout_background']" position="replace">
         <div class="article o_report_layout_background" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
             <t t-call="web.address_layout"/>
@@ -60,5 +96,5 @@
         </div>
       </xpath>
     </template>
-
+-->
 </odoo>
