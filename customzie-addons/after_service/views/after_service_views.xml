@@ -34,7 +34,8 @@
                         <field name="inquiry_date" attrs="{'readonly':[('state','!=','draft')]}"/>
                         <field name="measure_type" attrs="{'readonly':[('state','!=','draft')]}" options="{'horizontal':true}"/>
                         <field name="sale_order_partner_id" />
-                        <field name="sale_order_date" />
+                        <field name="sale_order_date" />                <field name="deficit_price" sum="Total Deficit" widget="monetary"/>
+                        <field name="deficit_price" />
                         <field name="order_elapsed_days" attrs="{'invisible':[('order_elapsed_days','==', '')]}"/>
                     </group>
                 </group>
@@ -97,6 +98,7 @@
                 <field name="treatment_operator" />
                 <field name="treatment_book_id" />
                 <field name="state"/>
+                <field name="deficit_price" sum="Total Deficit" widget="monetary"/>
                 <field name="is_defective" invisible="1"/>
                 <field name="create_date"/>
                 <!--<button name="print_after_service" string="Print After Service" type="object" attrs="{'invisible':[('state','!=','done')]}" />-->
@@ -126,6 +128,7 @@
               <field name="treatment_operator" />
               <field name="treatment_book_id" />
               <field name="state"/>
+              <field name="deficit_price" sum="Total Deficit" widget="monetary"/>
               <field name="is_defective" invisible="1" />
               <field name="create_date" />
             </tree>

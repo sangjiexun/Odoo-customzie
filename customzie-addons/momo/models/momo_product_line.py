@@ -180,6 +180,8 @@ class ProductLine(models.Model):
 
     product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group')
 
+    sale_price_unit = fields.Float('Sale Unit Price', compute='_compute_sale_info', store=True, default=0.0)
+
     # Hierarchy fields
     parent_id = fields.Many2one(
         'momo.product.line',
@@ -270,6 +272,9 @@ class ProductLine(models.Model):
                 self.sale_order_id = newest_sale_order.id
                 self.customer_id = newest_sale_order.partner_id.id
                 self.delivery_date = newest_sale_order.create_date
+                newest_sale_order_line = self.env['sale.order.line'].browse(newest_sale_order.id)
+                if newest_sale_order_line:
+                    self.sale_price_unit = newest_sale_order_line.price_unit
 
     @api.model
     def search_for_scanner(self, location, barcode):
@@ -402,6 +407,8 @@ class ProductLinePicking(models.Model):
     is_defective = fields.Boolean(related='product_line_id.is_defective')
     state = fields.Char(string='State')
 
+    sale_price_unit = fields.Float('Sale Unit Price', required=True, related='product_line_id.sale_price_unit')
+    
     @api.onchange('barcode')
     def onchange_barcode(self):
         for line in self:

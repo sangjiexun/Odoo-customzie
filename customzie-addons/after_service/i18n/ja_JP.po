@@ -374,6 +374,11 @@ msgid "<strong>Sale Order Date</strong>"
 msgstr "購入日"
 
 #. module: after_service
+#: model:ir.model.fields,field_description:after_service.field_after_service__deficit_price
+msgid "Deficit Price"
+msgstr "損失金額（税込）"
+
+#. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__inquiry_date
 msgid "Inquiry Date"
 msgstr "受理日"

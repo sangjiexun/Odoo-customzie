@@ -55,6 +55,9 @@ class AfterService(models.Model):
     #Sale Order Date
     sale_order_date = fields.Datetime(string='Sale Order Date', related='sale_order_filter.delivery_date',store=True)
 
+    #Deficit Price
+    deficit_price = fields.Float('Deficit Price', related='sale_order_filter.sale_price_unit',store=True)
+
     #Inquiry Date
     inquiry_date = fields.Date(string='Inquiry Date',default=fields.Date.today())
 
@@ -94,7 +97,7 @@ class AfterService(models.Model):
     #Problem Reason
     problem_reason = fields.Many2many('problem.reason',string='Problem Reason')
 
-    #Other Reason
+    #Other Reason                self.write({'deficit_price': self.sale_price_unit})
     other_reason = fields.Text(string='Other Reason')
 
     #Treatment Operator
@@ -173,6 +176,7 @@ class AfterService(models.Model):
                 self.write({'sale_order_id': self.sale_order_id})
                 self.write({'sale_order_partner_id': self.sale_order_partner_id})
                 self.write({'sale_order_date': self.sale_order_date})
+                self.write({'deficit_price': self.sale_price_unit})
                 self.write({'defect_remark': self.defect_remark})
                 self.write({'order_elapsed_days': self.order_elapsed_days})
                 self.write({'barcode': self.barcode})
