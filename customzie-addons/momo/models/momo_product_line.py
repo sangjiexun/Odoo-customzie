@@ -156,6 +156,10 @@ class ProductLine(models.Model):
     stock_picking_ids = fields.One2many('momo.product.line.picking', 'product_line_id', 'Stock Picking',
                                         copy=True)
 
+   # product_tmpl_id = fields.Char(related='product_id.product_tmpl_id.id')
+    attribute_line_ids = fields.One2many('product.template.attribute.line', 'product_tmpl_id', string='Attributes')
+    attribute_value_ids = fields.Many2many('product.attribute.value', 'product_product_id', string='Attribute Values')
+
     current_location = fields.Char('Current Location', compute='_compute_current_location', store=True, translate=True)
 
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
