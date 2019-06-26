@@ -282,4 +282,56 @@
         groups="after_service_group_manager"
         sequence="3"/>
 
+    <menuitem id="momo_product_line_picking_statistics"
+        name="Product Line Picking Statistics"
+        parent="momo.momo_menu_root"
+        groups="momo.momo_product_group_manager"
+        action="after_service.product_line_picking_statistics_action"
+        sequence="10"/>
+
+        <!-- statistics -->
+        <record id="product_line_picking_pivot" model="ir.ui.view">
+            <field name="name">product.line.picking.pivot</field>
+            <field name="model">momo.production.picking.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Product Line Picking" disable_linking="True" display_quantity="True">
+                    <field name="picking_type_name" type="row"/>
+                    <field name="create_date" interval="month" type="col"/>
+
+                </pivot>
+            </field>
+        </record>
+
+        <record id='product_line_picking_graph' model='ir.ui.view'>
+            <field name="name">product.line.picking.graph</field>
+            <field name="model">momo.production.picking.report</field>
+            <field name="arch" type="xml">
+                <graph string="Product Line Picking">
+                    <field name="picking_type_name" type="row"/>
+                    <field name="create_date" interval="month" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="product_line_picking_statistics_action" model="ir.actions.act_window">
+          <field name="name">Product Line Picking Statistics</field>
+          <field name="res_model">momo.production.picking.report</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">pivot,graph</field>
+          <field name="view_id"></field>  <!-- force empty -->
+          <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+              No data for analysis
+            </p>
+          </field>
+        </record>
+
+        <record id="product_line_picking_pivot_action" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="product_line_picking_pivot"/>
+            <field name="act_window_id" ref="product_line_picking_statistics_action"/>
+        </record>
+
+
 </odoo>

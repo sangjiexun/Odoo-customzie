@@ -11,3 +11,5 @@ access_repair_type_manager,AfterServiceManager,model_repair_type,after_service_g
 access_problem_reason_operator,AfterServiceOperator,model_problem_reason,after_service_group_operator,1,0,0,0
 access_problem_reason_user,AfterServiceUser,model_problem_reason,after_service_group_user,1,1,0,0
 access_problem_reason_manager,AfterServiceManager,model_problem_reason,after_service_group_manager,1,1,1,1
+access_momo_production_picking_report,ProductLineUser,model_momo_production_picking_report,,1,0,0,0
+

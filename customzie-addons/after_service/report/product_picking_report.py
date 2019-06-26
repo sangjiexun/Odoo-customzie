@@ -16,6 +16,7 @@ class ProductionReport(models.Model):
     create_uid = fields.Many2one('res.users', string="User", readonly=True)
     create_date = fields.Datetime('Create Date', readonly=True)
 
+
     def init(self):
         tools.drop_view_if_exists(self._cr, 'momo_production_picking_report')
 
