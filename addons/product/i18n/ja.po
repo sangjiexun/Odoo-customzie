@@ -62,11 +62,6 @@ msgid "%s (copy)"
 msgstr "%s (コピー)"
 
 #. module: product
-#: model:product.attribute.value,name:product.product_attribute_value_5
-msgid "1 year"
-msgstr "1 年"
-
-#. module: product
 #: model:product.product,description_sale:product.product_product_4
 #: model:product.product,description_sale:product.product_product_4b
 #: model:product.product,description_sale:product.product_product_4c
@@ -74,11 +69,6 @@ msgstr "1 年"
 #: model:product.template,description_sale:product.product_product_4b_product_template
 msgid "160x80cm, with large legs."
 msgstr ""
-
-#. module: product
-#: model:product.attribute.value,name:product.product_attribute_value_6
-msgid "2 year"
-msgstr "2 年"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_view_kanban
@@ -250,13 +240,6 @@ msgstr ""
 "例：小売業者向けに10％、本製品で5ユーロのプロモーションなど"
 
 #. module: product
-#: model:product.attribute.value,name:product.product_attribute_value_2
-#: model:product.template.attribute.value,name:product.product_template_attribute_value_1
-#: model:product.template.attribute.value,name:product.product_template_attribute_value_2
-msgid "Aluminium"
-msgstr "アルミニウム"
-
-#. module: product
 #: selection:product.attribute,create_variant:0
 msgid "Always"
 msgstr "常に作成"
@@ -372,11 +355,6 @@ msgid "Big-sized image"
 msgstr "大サイズのイメージ"
 
 #. module: product
-#: model:product.attribute.value,name:product.product_attribute_value_4
-msgid "Black"
-msgstr "黒"
-
-#. module: product
 #: model:product.product,name:product.product_product_10
 #: model:product.template,name:product.product_product_10_product_template
 msgid "Cabinet with Doors"
@@ -442,11 +420,6 @@ msgstr "重量単位を選択"
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
 msgid "Codes"
 msgstr "コード"
-
-#. module: product
-#: model:product.attribute,name:product.product_attribute_2
-msgid "Color"
-msgstr "色"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_product__color
@@ -770,11 +743,6 @@ msgstr ""
 #: model:product.template,description:product.product_product_27_product_template
 msgid "Drawer with two routing possiblities."
 msgstr ""
-
-#. module: product
-#: model:product.attribute,name:product.product_attribute_3
-msgid "Duration"
-msgstr "日数"
 
 #. module: product
 #: model:product.product,description_sale:product.consu_delivery_03
@@ -1171,11 +1139,6 @@ msgid ""
 "receipt of the products in your warehouse. Used by the scheduler for "
 "automatic computation of the purchase order planning."
 msgstr "発注書の確認と、倉庫内の製品の受領日の間のリードタイム。購買発注計画の自動計算のためのスケジューラによって使用されます。"
-
-#. module: product
-#: model:product.attribute,name:product.product_attribute_1
-msgid "Legs"
-msgstr "脚"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_attribute__attribute_line_ids
@@ -2041,11 +2004,6 @@ msgid ""
 msgstr ""
 
 #. module: product
-#: model:product.attribute.value,name:product.product_attribute_value_1
-msgid "Steel"
-msgstr "スチール"
-
-#. module: product
 #: selection:product.template,type:0
 msgid "Storable Product"
 msgstr "在庫可能品"
@@ -2511,11 +2469,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
 msgid "Weights"
 msgstr "重量等"
-
-#. module: product
-#: model:product.attribute.value,name:product.product_attribute_value_3
-msgid "White"
-msgstr "白"
 
 #. module: product
 #: code:addons/product/models/product_attribute.py:46
