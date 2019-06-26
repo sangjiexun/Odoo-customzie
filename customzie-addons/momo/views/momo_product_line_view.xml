@@ -243,13 +243,6 @@
             <field name="act_window_id" ref="action_stock_picking"/>
         </record>
 
-        <record id="product_line_picking_action" model="ir.actions.act_window.view">
-            <field name="sequence" eval="2"/>
-            <field name="view_mode">graph</field>
-            <field name="view_id" ref="product_line_picking_graph"/>
-            <field name="act_window_id" ref="product_line_picking_statistics_action"/>
-        </record>
-
         <!-- Pick to stock -->
         <record id='product_line_picking_to_stock_form' model='ir.ui.view'>
             <field name="name">product.line.pick.to.stock</field>
