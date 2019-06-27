@@ -29,7 +29,6 @@
         'views/res_config_settings_views.xml',
         'views/mail_channel_views.xml',
         'data/hr_data.xml',
-        'data/hr_initial.xml',
     ],
 #    'demo': [
 #        'data/hr_demo.xml'

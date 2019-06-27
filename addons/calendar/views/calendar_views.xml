@@ -347,7 +347,7 @@
         sequence="2"
         action="action_calendar_event"
         web_icon="calendar,static/description/icon.png"
-        groups="base.group_user"/>
+        groups="base.group_no_one"/>
 
     <menuitem
         id="menu_calendar_configuration"

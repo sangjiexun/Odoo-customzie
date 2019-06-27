@@ -10,13 +10,6 @@ class ProductTemplate(models.Model):
         "maker.info", string="Maker Name")
     maker_product_no = fields.Char('Maker Product')
     product_no = fields.Char('Product No', required=True, index=True, copy=False, default='New')
-#    ceo_price = fields.Float(
-#        'Ceo Cost', company_dependent=True,
-#        groups="base_inherit.group_ceo",)
-#    spec_cpu = fields.Char('Spec Cpu')
-#    spec_memory = fields.Char('Spec Memory')
-#    spec_hard_disc = fields.Char('Spec HardDisk')
-#    spec_driver = fields.Char('Spec Driver')
 
     @api.model
     def create(self, vals):

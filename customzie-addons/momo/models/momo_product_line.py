@@ -158,7 +158,7 @@ class ProductLine(models.Model):
 
     product_tmpl_id = fields.Integer(related='product_id.product_tmpl_id.id', store=True, string='Tmpl Id')
     attribute_line_ids = fields.One2many('product.template.attribute.line', 'product_tmpl_id', 'Product Attributes')
-    #attribute_value_ids = fields.Many2many('product.attribute.value', 'product_attribute_value_product_product_rel', 'product_product_id', 'product_attribute_value_id', string='Attribute Values')
+    attribute_value_ids = fields.One2many('product.attribute.value', string='Attribute Values', compute="_compute_product_attribute_value_ids")
 
     current_location = fields.Char('Current Location', compute='_compute_current_location', store=True, translate=True)
 
@@ -217,11 +217,6 @@ class ProductLine(models.Model):
     maker_name = fields.Char('Maker Name')
     maker_product_no = fields.Char('Maker Product')
     product_no = fields.Char('Product No', readonly=True, index=True, copy=False, default='New')
-#    ceo_price = fields.Float('Ceo Cost', company_dependent=True, groups="base_inherit.group_ceo",)
-#    spec_cpu = fields.Char('Spec Cpu')
-#    spec_memory = fields.Char('Spec Memory')
-#    spec_hard_disc = fields.Char('Spec HardDisk')
-#    spec_driver = fields.Char('Spec Driver')
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -388,6 +383,11 @@ class ProductLine(models.Model):
 
 #        os.remove(pdf_path)
 
+    @api.multi
+    def _compute_product_attribute_value_ids(self):
+        #self.ensure_one()
+        #return self.env['product.product'].search([('id', '=', self.product_id)]).attribute_value_ids
+        return
 
 class ProductLinePicking(models.Model):
     _name = 'momo.product.line.picking'

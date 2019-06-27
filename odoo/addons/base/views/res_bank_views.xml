@@ -74,6 +74,8 @@
                             <field name="bank_id"/>
                             <field name="currency_id" groups="base.group_multi_currency" options="{'no_create': True}"/>
                             <field name="acc_holder_name"/>
+                            <field name="branch_code"/>
+                            <field name="branch_name"/>
                         </group>
                     </group>
                 </form>
@@ -87,6 +89,8 @@
                     <field name="sequence" invisible="1"/>
                     <field name="acc_number"/>
                     <field name="bank_name"/>
+                    <field name="branch_code"/>
+                    <field name="branch_name"/>
                     <field name="company_id" groups="base.group_multi_company"/>
                     <field name="partner_id"/>
                     <field name="acc_holder_name" invisible="1"/>
