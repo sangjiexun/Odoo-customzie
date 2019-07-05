@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * hr
-# 
+#
 # Translators:
 # SHIMIZU Taku <shimizu.taku@gmail.com>, 2018
 # Martin Trigaux, 2018
@@ -11,7 +11,8 @@
 # kent_ocean <ke.tanabe@gmail.com>, 2018
 # Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2018
 # Yoshi Tashiro <tashiro@roomsfor.hk>, 2019
-# 
+# youshinan <youshinan82@gmail.com>, 2019
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
@@ -232,17 +233,17 @@ msgstr "許可された取引先"
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.mail_channel_view_form_
 msgid "Auto Subscribe Departments"
-msgstr ""
+msgstr "自動購読部門"
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_mail_channel__subscription_department_ids
 msgid "Automatically subscribe members of those departments to the channel."
-msgstr ""
+msgstr "これらの部署のメンバーを自動的にチャンネルに登録する"
 
 #. module: hr
 #: selection:hr.employee,certificate:0
 msgid "Bachelor"
-msgstr ""
+msgstr "学士"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__bank_account_id
@@ -292,7 +293,7 @@ msgstr "出生"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__certificate
 msgid "Certificate Level"
-msgstr ""
+msgstr "学位"
 
 #. module: hr
 #: model:hr.job,name:hr.job_ceo
@@ -397,12 +398,12 @@ msgstr "オープンソースプロジェクトへの貢献"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__country_of_birth
 msgid "Country of Birth"
-msgstr ""
+msgstr "出生国"
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.open_module_tree_department
 msgid "Create a new department"
-msgstr ""
+msgstr "部署を作成してください"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__create_uid
@@ -504,12 +505,12 @@ msgstr ""
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__emergency_contact
 msgid "Emergency Contact"
-msgstr ""
+msgstr "緊急連絡人"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__emergency_phone
 msgid "Emergency Phone"
-msgstr ""
+msgstr "緊急連絡電話"
 
 #. module: hr
 #: model:ir.model,name:hr.model_hr_employee
@@ -525,7 +526,7 @@ msgstr "従業員の区分"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__google_drive_link
 msgid "Employee Documents"
-msgstr ""
+msgstr "従業員文書"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_category__name
@@ -580,7 +581,7 @@ msgstr "従業員タグ"
 msgid ""
 "Enter here the private address of the employee, not the one linked to your "
 "company."
-msgstr ""
+msgstr "ここにあなたの会社にリンクされているものではなく、従業員の私用アドレスを入力してください"
 
 #. module: hr
 #: selection:mail.alias,alias_contact:0
@@ -611,7 +612,7 @@ msgstr "女"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__study_field
 msgid "Field of Study"
-msgstr ""
+msgstr "専門"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_consultant
@@ -698,7 +699,7 @@ msgstr "グループ化"
 #. module: hr
 #: model:ir.model,name:hr.model_hr_department
 msgid "HR Department"
-msgstr ""
+msgstr "HR部門"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_mail_channel__subscription_department_ids
@@ -777,7 +778,7 @@ msgstr "チェックされている場合は、新しいメッセージに注意
 #: model:ir.model.fields,help:hr.field_hr_employee__message_has_error
 #: model:ir.model.fields,help:hr.field_hr_job__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "チェックすると、一部のメッセージに配信エラーがあります"
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee__active
@@ -790,7 +791,7 @@ msgstr "アクティブ項目をFalse にセットすると、リソースレコ
 #: code:addons/hr/models/hr.py:296
 #, python-format
 msgid "Import Template for Employees"
-msgstr ""
+msgstr "従業員用のインポートテンプレート"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_ceo
@@ -913,12 +914,12 @@ msgstr "新製品、マーケティングキャンペーン、オファーを開
 #. module: hr
 #: selection:hr.employee,marital:0
 msgid "Legal Cohabitant"
-msgstr ""
+msgstr "同居人"
 
 #. module: hr
 #: model_terms:ir.actions.act_window,help:hr.action_hr_job
 msgid "Let's create a job position."
-msgstr ""
+msgstr "求人を作成しましょう"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department__message_main_attachment_id
@@ -958,7 +959,7 @@ msgstr "既婚"
 #. module: hr
 #: selection:hr.employee,certificate:0
 msgid "Master"
-msgstr ""
+msgstr "マスター"
 
 #. module: hr
 #: model_terms:hr.job,website_description:hr.job_cto
@@ -1325,7 +1326,7 @@ msgstr "世界中にイベント組織を拡大"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__study_school
 msgid "School"
-msgstr ""
+msgstr "学校"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.res_config_settings_view_form
@@ -1406,17 +1407,17 @@ msgstr "社会保障番号"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__spouse_birthdate
 msgid "Spouse Birthdate"
-msgstr ""
+msgstr "配偶者誕生日"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee__spouse_complete_name
 msgid "Spouse Complete Name"
-msgstr ""
+msgstr "配偶者フルネーム"
 
 #. module: hr
 #: model_terms:ir.ui.view,arch_db:hr.view_hr_job_form
 msgid "Start Recruitment"
-msgstr ""
+msgstr "募集を始める"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_job__state

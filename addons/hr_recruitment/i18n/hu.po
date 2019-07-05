@@ -5,8 +5,8 @@
 # Translators:
 # Martin Trigaux, 2018
 # krnkris, 2018
-# gezza <geza.nagy@oregional.hu>, 2018
 # Tibor Kőnig <konig.tibor@evitalit.hu>, 2018
+# gezza <geza.nagy@oregional.hu>, 2019
 # Ákos Nagy <akos.nagy@oregional.hu>, 2019
 # 
 msgid ""
@@ -36,7 +36,7 @@ msgstr ""
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_hr_job_kanban
 msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
 
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_hr_job_kanban
@@ -768,7 +768,7 @@ msgstr "Leírás"
 #. module: hr_recruitment
 #: model:ir.model,name:hr_recruitment.model_digest_digest
 msgid "Digest"
-msgstr ""
+msgstr "Kivonat"
 
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.hr_job_simple_form
@@ -788,7 +788,7 @@ msgstr "Megjelenített név"
 #: code:addons/hr_recruitment/models/digest.py:16
 #, python-format
 msgid "Do not have access, skip this data for user's digest email"
-msgstr ""
+msgstr "Nincs hozzáférés, adat kihagyása a felhasználó kivonat e-mailjéből"
 
 #. module: hr_recruitment
 #: model:hr.recruitment.degree,name:hr_recruitment.degree_bac5
@@ -842,7 +842,7 @@ msgstr "E-mail álnevek"
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.hr_job_survey
 msgid "Email alias"
-msgstr ""
+msgstr "E-mail álnév"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_id
@@ -1234,7 +1234,7 @@ msgstr "Legutóbb frissítve "
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_crm_case_jobs_filter
 msgid "Late Activities"
-msgstr ""
+msgstr "Késő tevékenységek"
 
 #. module: hr_recruitment
 #: model_terms:ir.actions.act_window,help:hr_recruitment.action_hr_job
@@ -1804,6 +1804,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Tevékenységeken alapuló állapot\n"
+"Lejárt: Az esedékesség dátuma már elmúlt\n"
+"Ma: A tevékenység dátuma ma van\n"
+"Tervezett: Jövőbeli tevékenységek."
 
 #. module: hr_recruitment
 #: model_terms:ir.ui.view,arch_db:hr_recruitment.view_crm_case_jobs_filter

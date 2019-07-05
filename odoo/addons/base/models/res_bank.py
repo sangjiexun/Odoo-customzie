@@ -84,6 +84,8 @@ class ResPartnerBank(models.Model):
     partner_id = fields.Many2one('res.partner', 'Account Holder', ondelete='cascade', index=True, domain=['|', ('is_company', '=', True), ('parent_id', '=', False)], required=True)
     bank_id = fields.Many2one('res.bank', string='Bank')
     bank_name = fields.Char(related='bank_id.name', readonly=False)
+    branch_code = fields.Char('Branch Code')
+    branch_name = fields.Char('Branch Name')
     bank_bic = fields.Char(related='bank_id.bic', readonly=False)
     sequence = fields.Integer()
     currency_id = fields.Many2one('res.currency', string='Currency')

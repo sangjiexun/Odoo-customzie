@@ -8,6 +8,8 @@ import ipaddress
 import itertools
 import logging
 import hmac
+import random
+import string
 
 from collections import defaultdict
 from hashlib import sha256
@@ -107,6 +109,11 @@ class Groups(models.Model):
         ('name_uniq', 'unique (category_id, name)', 'The name of the group must be unique within an application!')
     ]
 
+    @api.multi
+    @api.constrains('users')
+    def _check_one_user_type(self):
+        self.mapped('users')._check_one_user_type()
+
     @api.depends('category_id.name', 'name')
     def _compute_full_name(self):
         # Important: value must be stored in environment of group, not group1!
@@ -199,9 +206,9 @@ class Users(models.Model):
     __uid_cache = defaultdict(dict)             # {dbname: {uid: password}}
 
     # User can write on a few of his own fields (but not his groups for example)
-    SELF_WRITEABLE_FIELDS = ['signature', 'action_id', 'company_id', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz']
+    SELF_WRITEABLE_FIELDS = ['signature', 'action_id', 'company_id', 'user_barcode', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz']
     # User can read a few of his own fields
-    SELF_READABLE_FIELDS = ['signature', 'company_id', 'login', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz', 'tz_offset', 'groups_id', 'partner_id', '__last_update', 'action_id']
+    SELF_READABLE_FIELDS = ['signature', 'company_id', 'login', 'user_barcode', 'email', 'name', 'image', 'image_medium', 'image_small', 'lang', 'tz', 'tz_offset', 'groups_id', 'partner_id', '__last_update', 'action_id']
 
     def _default_groups(self):
         default_user = self.env.ref('base.default_user', raise_if_not_found=False)
@@ -213,6 +220,7 @@ class Users(models.Model):
     partner_id = fields.Many2one('res.partner', required=True, ondelete='restrict', auto_join=True,
         string='Related Partner', help='Partner-related data of the user')
     login = fields.Char(required=True, help="Used to log into the system")
+    user_barcode = fields.Char(help="Used to log into the system by barcode")
     password = fields.Char(
         compute='_compute_password', inverse='_set_password',
         invisible=True, copy=False,
@@ -387,6 +395,13 @@ class Users(models.Model):
             raise ValidationError(_('The "App Switcher" action cannot be selected as home action.'))
 
     @api.multi
+    @api.constrains('groups_id')
+    def _check_one_user_type(self):
+        for user in self:
+            if len(user.groups_id.filtered(lambda x: x.category_id.xml_id == 'base.module_category_user_type')) > 1:
+                raise ValidationError(_('The user cannot have more than one user types.'))
+
+    @api.multi
     def toggle_active(self):
         for user in self:
             if not user.active and not user.partner_id.active:
@@ -426,9 +441,19 @@ class Users(models.Model):
         users = super(Users, self.with_context(default_customer=False)).create(vals_list)
         for user in users:
             user.partner_id.active = user.active
+            user.update({'user_barcode': self._get_next_user_barcode()})
             if user.partner_id.company_id:
                 user.partner_id.write({'company_id': user.company_id.id})
         return users
+
+    @api.model
+    def _get_next_user_barcode(self):
+        while True:
+            random_str = ''.join(random.choices(string.ascii_letters + string.digits, k=9))
+            result = self.with_context(active_test=False).search([('user_barcode', '=', random_str)], limit=1)
+            if not result:
+                break
+        return random_str
 
     @api.multi
     def write(self, values):
@@ -545,6 +570,10 @@ class Users(models.Model):
     def _get_login_domain(self, login):
         return [('login', '=', login)]
 
+    @api.model
+    def _get_user_barcode_domain(self, user_barcode):
+        return [('user_barcode', '=', user_barcode)]
+
     @classmethod
     def _login(cls, db, login, password):
         if not password:
@@ -569,6 +598,26 @@ class Users(models.Model):
         return user.id
 
     @classmethod
+    def _login_by_user_barcode(cls, db, user_barcode):
+        ip = request.httprequest.environ['REMOTE_ADDR'] if request else 'n/a'
+        try:
+            with cls.pool.cursor() as cr:
+                self = api.Environment(cr, SUPERUSER_ID, {})[cls._name]
+                with self._assert_can_auth():
+                    user = self.search(self._get_user_barcode_domain(user_barcode))
+                    if not user:
+                        raise AccessDenied()
+                    user = user.sudo(user.id)
+                    user._update_last_login()
+        except AccessDenied:
+            _logger.info("Login failed for db:%s login:%s from %s", db, user_barcode, ip)
+            raise
+
+        _logger.info("Login successful for db:%s login:%s from %s", db, user_barcode, ip)
+
+        return user.id
+
+    @classmethod
     def authenticate(cls, db, login, password, user_agent_env):
         """Verifies and returns the user ID corresponding to the given
           ``login`` and ``password`` combination, or False if there was
@@ -580,6 +629,33 @@ class Users(models.Model):
                relevant environment attributes
         """
         uid = cls._login(db, login, password)
+        if user_agent_env and user_agent_env.get('base_location'):
+            with cls.pool.cursor() as cr:
+                env = api.Environment(cr, uid, {})
+                if env.user.has_group('base.group_system'):
+                    # Successfully logged in as system user!
+                    # Attempt to guess the web base url...
+                    try:
+                        base = user_agent_env['base_location']
+                        ICP = env['ir.config_parameter']
+                        if not ICP.get_param('web.base.url.freeze'):
+                            ICP.set_param('web.base.url', base)
+                    except Exception:
+                        _logger.exception("Failed to update web.base.url configuration parameter")
+        return uid
+
+    @classmethod
+    def authenticate_by_user_barcode(cls, db, user_barcode, user_agent_env):
+        """Verifies and returns the user ID corresponding to the given
+          ``login`` and ``password`` combination, or False if there was
+          no matching user.
+           :param str db: the database on which user is trying to authenticate
+           :param str login: username
+           :param str password: user password
+           :param dict user_agent_env: environment dictionary describing any
+               relevant environment attributes
+        """
+        uid = cls._login_by_user_barcode(db, user_barcode)
         if user_agent_env and user_agent_env.get('base_location'):
             with cls.pool.cursor() as cr:
                 env = api.Environment(cr, uid, {})
@@ -901,7 +977,14 @@ class UsersImplied(models.Model):
             if 'groups_id' in values:
                 # complete 'groups_id' with implied groups
                 user = self.new(values)
-                gs = user.groups_id | user.groups_id.mapped('trans_implied_ids')
+                group_public = self.env.ref('base.group_public', raise_if_not_found=False)
+                group_portal = self.env.ref('base.group_portal', raise_if_not_found=False)
+                if group_public and group_public in user.groups_id:
+                    gs = self.env.ref('base.group_public') | self.env.ref('base.group_public').trans_implied_ids
+                elif group_portal and group_portal in user.groups_id:
+                    gs = self.env.ref('base.group_portal') | self.env.ref('base.group_portal').trans_implied_ids
+                else:
+                    gs = user.groups_id | user.groups_id.mapped('trans_implied_ids')
                 values['groups_id'] = type(self).groups_id.convert_to_write(gs, user.groups_id)
         return super(UsersImplied, self).create(vals_list)
 
@@ -913,9 +996,9 @@ class UsersImplied(models.Model):
             for user in self.with_context({}):
                 if not user.has_group('base.group_user'):
                     vals = {'groups_id': [(5, 0, 0)] + values['groups_id']}
-                else:
-                    gs = set(concat(g.trans_implied_ids for g in user.groups_id))
-                    vals = {'groups_id': [(4, g.id) for g in gs]}
+                    super(UsersImplied, user).write(vals)
+                gs = set(concat(g.trans_implied_ids for g in user.groups_id))
+                vals = {'groups_id': [(4, g.id) for g in gs]}
                 super(UsersImplied, user).write(vals)
         return res
 
@@ -1177,7 +1260,12 @@ class UsersView(models.Model):
                 values[f] = get_boolean_group(f) in gids
             elif is_selection_groups(f):
                 selected = [gid for gid in get_selection_groups(f) if gid in gids]
-                values[f] = selected and selected[-1] or False
+                # if 'Internal User' is in the group, this is the "User Type" group
+                # and we need to show 'Internal User' selected, not Public/Portal.
+                if self.env.ref('base.group_user').id in selected:
+                    values[f] = self.env.ref('base.group_user').id
+                else:
+                    values[f] = selected and selected[-1] or False
 
     @api.model
     def fields_get(self, allfields=None, attributes=None):
