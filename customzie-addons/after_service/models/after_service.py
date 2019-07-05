@@ -95,6 +95,8 @@ class AfterService(models.Model):
     treatment_book_id = fields.Many2one(
         'treatment.book', string='Treatment Type',required=True)
 
+    treatment_name = fields.Char(string='Treatment Name',default='')
+
     treatment_remark = fields.Text(string='Treatment Remark')
 
     #Order Elapsed Days
@@ -173,6 +175,7 @@ class AfterService(models.Model):
     @api.onchange('treatment_book_id')
     def onchange_treatment_book_id(self):
         if self.treatment_book_id:
+            self.treatment_name = self.treatment_book_id.name
             self.treatment_remark = self.treatment_book_id.treatment_book
 
     @api.multi
@@ -235,6 +238,7 @@ class AfterService(models.Model):
             self.write({'order_elapsed_days': self.order_elapsed_days})
             self.write({'barcode': self.barcode})
             self.write({'inquiry_note': self.inquiry_note})
+            self.write({'treatment_name': self.treatment_name})
             self.write({'treatment_operator': self.env.uid})
             self.write({'treatment_date': datetime.now()})
             self.write({'date_approve': fields.Date.context_today(self)})
