@@ -6,6 +6,7 @@
     <record id="resource_calendar_std" model="resource.calendar">
         <field name="name">Standard 40 Hours/Week</field>
         <field name="company_id" ref="base.main_company"/>
+        <field name="tz">Asia/Tokyo</field>
     </record>
 
     <record id="base.main_company" model="res.company">

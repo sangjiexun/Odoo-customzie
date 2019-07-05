@@ -76,7 +76,11 @@ msgstr ""
 #. module: hr_holidays
 #: code:addons/hr_holidays/models/hr_leave.py:440
 #, python-format
+<<<<<<< Updated upstream
 msgid "%s on %s :%.2f day(s)"
+=======
+msgid "%s : %.1f 日"
+>>>>>>> Stashed changes
 msgstr ""
 
 #. module: hr_holidays
@@ -2159,7 +2163,7 @@ msgstr "日数は0より大きくなければなりません。"
 msgid ""
 "The number of remaining leaves is not sufficient for this leave type.\n"
 "Please also check the leaves waiting for validation."
-msgstr ""
+msgstr "休暇残数が足りません。人事管理者へ問い合わせてください。"
 
 #. module: hr_holidays
 #: sql_constraint:hr.leave.allocation:0

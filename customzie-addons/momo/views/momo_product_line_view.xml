@@ -1,0 +1,416 @@
+<odoo>
+    <data noupdate="0">
+
+        <!-- server action for create product line -->
+        <record id="server_action_product_line_creator_button" model="ir.actions.server">
+            <field name="name">ProdutLine Create</field>
+            <field name="model_id" ref="model_momo_product_line_creator"/>
+            <field name="binding_model_id" ref="model_momo_product_line_creator"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                records._create_product_line()
+            </field>
+        </record>
+
+        <!-- form view for product line creator -->
+        <record id="view_product_line_creator_form" model="ir.ui.view">
+            <field name="name">Product Line Creator Form View</field>
+            <field name="model">momo.product.line.creator</field>
+            <field name="arch" type="xml">
+                <form string="Product Line">
+                    <sheet>
+                        <group>
+                            <field name="is_created" readonly="1"/>
+                            <field name="create_date" readonly="1"/>
+                            <field name="create_type" readonly="1"/>
+                            <field name="purchase_order_name" readonly="1"/>
+                            <field name="init_location_id"/>
+                        </group>
+                        <field name="creator_detail_ids" widget="one2many_list">
+                            <tree string="CreatorDetail" editable="bottom">
+                                <field name="product_id"/>
+                                <field name="need_qty"/>
+                                <field name="need_clean"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for product line creator -->
+        <record id="view_product_line_creator_tree" model="ir.ui.view">
+            <field name="name">Product Line Creator Tree View</field>
+            <field name="model">momo.product.line.creator</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="create_type"/>
+                    <field name="is_created"/>
+                    <field name="create_date"/>
+                    <field name="purchase_order_name"/>
+                    <field name="init_location"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for product line creator -->
+        <record id="action_product_line_creator" model="ir.actions.act_window">
+            <field name="name">Product Line Creator</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line.creator</field>
+            <field name="limit">15</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+        <!-- server action for print product line barcode-->
+        <record id="action_barcode_print_button" model="ir.actions.server">
+            <field name="name">Barcode Print</field>
+            <field name="model_id" ref="model_momo_product_line"/>
+            <field name="binding_model_id" ref="model_momo_product_line"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.call_print_wizard()
+            </field>
+        </record>
+
+        <!-- form view for product line -->
+        <record id="view_product_line_form" model="ir.ui.view">
+            <field name="name">Product Line Form View</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <form string="Product Line">
+                    <sheet>
+                        <group>
+                            <field name="barcode" readonly="1"/>
+                            <field name="init_location" readonly="1"/>
+                            <field name="current_location" readonly="1"/>
+                            <field name="sale_order_name" readonly="1"/>
+                            <field name="customer_name" readonly="1"/>
+                            <field name="printed" readonly="1"/>
+                            <field name="need_clean"/>
+                            <field name="is_cleaned" readonly="1"/>
+                        </group>
+                        <field name="stock_picking_ids" widget="one2many_list">
+                            <tree string="StockPicking" editable="bottom">
+                                <field name="picking_type_id_name"/>
+                                <field name="name"/>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- search view for product line -->
+        <record id="view_product_line_search" model="ir.ui.view">
+            <field name="name">Product Line Search View</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <search string="Product Line">
+                  <field name="barcode" />
+                    <field name="maker_name" />
+                    <field name="maker_product_no" />
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="supplier_name"/>
+                    <field name="purchase_date"/>
+                    <field name="current_location"/>
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+               </search>
+            </field>
+        </record>
+
+        <!-- tree view for product line -->
+        <record id="view_product_line_tree" model="ir.ui.view">
+            <field name="name">Product Line List View</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Production Line Tree" create="false" edit="false" delete="false">
+                    <field name="barcode" />
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="product_rank"/>
+                    <field name="is_defective"/>
+                    <field name="defective_detail"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tree view for product line -->
+        <record id="view_product_line_tree_momo" model="ir.ui.view">
+            <field name="name">Product Line List View Momo</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Production Line Tree Momo" create="false" edit="false" delete="false">
+                    <field name="barcode"/>
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="supplier_name"/>
+                    <field name="purchase_date"/>
+                    <field name="current_location"/>
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+                    <field name="attribute_display" readonly="1"/>
+                    <field name="product_rank"/>
+                    <field name="is_defective"/>
+                    <field name="defective_detail"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for product line -->
+        <record id="action_product_line" model="ir.actions.act_window">
+            <field name="name">Product Line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line</field>
+            <field name="limit">65</field>
+            <field name="view_id" ref="view_product_line_tree_momo"/>
+            <!--field name="view_mode">tree,form</field-->
+            <field name="view_mode">tree</field>
+            <field name="view_type">form</field>
+        </record>
+
+
+        <!-- tree view for stock picking -->
+        <record id="view_stock_picking_tree" model="ir.ui.view">
+            <field name="name">stock.picking.newtree</field>
+            <field name="model">stock.picking</field>
+            <field name="mode">primary</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='backorder_id']" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="scan_over"/>
+                    <button name="open_scan_pop" string="Scan" type="object" class="oe_highlight"
+                            attrs="{'invisible':[('state', '!=', 'assigned')]} "/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- form view for product line group -->
+        <record id="view_product_link_group_form" model="ir.ui.view">
+            <field name="name">Picking Line Group Form View</field>
+            <field name="model">momo.product.line.group</field>
+            <field name="arch" type="xml">
+                <form string="Product Line Group">
+                    <sheet>
+                        <group>
+                            <field name="id"/>
+                            <field name="create_date"/>
+                        </group>
+                        <field name="product_line_link_ids" widget="one2many_list">
+                            <tree string="ProductLineDetail" editable="bottom">
+                                <field name="product_line_id" invisible="1"/>
+                                <field name="barcode"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- tree view for product line group -->
+        <record id="view_product_link_group_tree" model="ir.ui.view">
+            <field name="name">Picking Line Group Tree View</field>
+            <field name="model">momo.product.line.group</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- window action for product line group -->
+        <record id="action_group_comfirm" model="ir.actions.act_window">
+            <field name="name">Product line Group</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line.group</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+        </record>
+
+		<!-- window action for stock picking -->
+        <record id="action_stock_picking" model="ir.actions.act_window">
+            <field name="name">Stock Picking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="limit">15</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <!-- action_stock_picking_view_tree -->
+        <record id="action_stock_picking_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_stock_picking_tree"/>
+            <field name="act_window_id" ref="action_stock_picking"/>
+        </record>
+
+        <!-- Pick to stock -->
+        <record id='product_line_picking_to_stock_form' model='ir.ui.view'>
+            <field name="name">product.line.pick.to.stock</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <form string="Product Pick to Stock" create="false" delete="false">
+                    <header>
+                        <button name="pick2stock" string="pick2stock" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <label for="product_name"/>
+                        <h1><field name="product_name"/></h1>
+                        <label for="barcode"/>
+                        <h2><field name="barcode" readonly="1"/></h2>
+                        <label for="current_location"/>
+                        <h2><field name="current_location"/></h2>
+                        <div colspan="4" col="12">
+                            <label for="is_defective" colspan="1"/>
+                            <field name="is_defective" class="oe_inline" colspan="1"/>
+                            <field name="defective_detail" colspan="3"/>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id='product_line_picking_to_stock_tree' model='ir.ui.view'>
+            <field name="name">product.line.pick.to.stock</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Product Pick to Stock">
+                    <field name="barcode"/>
+                    <field name="is_defective"/>
+                    <field name="defective_detail"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pick_to_stock" model="ir.actions.act_window">
+            <field name="name">Pick To Stock</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">current</field>
+            <field name="search_view_id" ref="view_product_line_search"/>
+        </record>
+
+        <record id="action_pick_to_stock_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_line_tree_momo"/>
+            <field name="act_window_id" ref="action_pick_to_stock"/>
+        </record>
+
+        <record id="action_pick_to_stock_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_line_picking_to_stock_form"/>
+            <field name="act_window_id" ref="action_pick_to_stock"/>
+        </record>
+
+
+        <record id="view_defective_product_line_filter" model="ir.ui.view">
+           <field name="name">defective.product.line.filter</field>
+           <field name="model">momo.product.line</field>
+           <field name="priority" eval="15"/>
+           <field name="arch" type="xml">
+               <search string="Defective Product Line Filter">
+                    <field string="Attributes Display" name="attribute_display" groups="product.group_product_variant"/>
+                    <field name="barcode" />
+<!--                      filter_domain="['|','|','|',('barcode','ilike',self),('sale_order_name','ilike',self),('customer_name','ilike',self),('purchase_order_name','ilike',self)]"/>-->
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="is_defective"/>
+                    <separator/>
+                   <filter string="is_defective" name="is_defective" domain="[('is_defective','=',True)]"/>
+                   <separator/>
+                   <group expand="0" string="Group By">
+                       <filter string="Purchase Date" name="purchase_date" domain="[]" context="{'group_by':'purchase_date'}"/>
+                       <filter string="Supplier Name" name="supplier_name" domain="[]" context="{'group_by':'supplier_name'}"/>
+                   </group>
+              </search>
+           </field>
+       </record>
+
+        <record id="action_product_exchange" model="ir.actions.act_window">
+            <field name="name">Product Exchange</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">momo.product.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">main</field>
+            <field name="search_view_id" ref="view_product_line_search"/>
+        </record>
+
+<!--        <record id="action_product_exchange_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_line_tree"/>
+            <field name="act_window_id" ref="action_product_exchange"/>
+        </record>
+-->
+
+
+        <!-- Top menu item -->
+        <menuitem id="momo_menu_root"
+            name="MoMo"
+            groups="momo_product_group_operator"
+            sequence="2"/>
+
+        <menuitem id="momo_menu_product_line"
+            name="Product Line"
+            parent="momo_menu_root"
+            groups="momo_product_group_operator"
+            action="action_product_line"
+            sequence="10"/>
+
+        <menuitem id="momo_menu_product_line_creator"
+            name="Product Line Creator"
+            parent="momo_menu_root"
+            groups="momo_product_group_user"
+            action="action_product_line_creator"
+            sequence="10"/>
+
+        <!--menuitem id="momo_product_line_pick_to_stock"
+            name="Pick To Stock"
+            parent="momo_menu_root"
+            groups="momo_product_group_user"
+            action="action_pick_to_stock"
+            sequence="10"/-->
+
+        <menuitem id="momo_product_clean"
+            name="Product Clean"
+            parent="momo_menu_root"
+            groups="momo_product_group_operator"
+            action="server_action_product_clean_button"
+            sequence="10"/>
+
+    </data>
+
+</odoo>
