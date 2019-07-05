@@ -40,7 +40,7 @@
         </record>
 
         <menuitem name="Channels/Partner" id="mail_channel_partner_menu" parent="base.menu_email"
-            action="mail_channel_partner_action" sequence="92" groups="base.group_no_one"/>
+            action="mail_channel_partner_action" sequence="92" groups="base.group_hidden"/>
 
         <!-- mail.channel -->
         <record id="mail_channel_view_kanban" model="ir.ui.view">
@@ -191,7 +191,7 @@
         <!-- settings !-->
         <menuitem id="mail_channel_menu_settings" parent="base.menu_email" sequence="90"
             name="Channels" action="mail_channel_action_view"
-            groups="base.group_no_one"/>
+            groups="base.group_hidden"/>
 
 
 
@@ -203,13 +203,13 @@
                 'default_active_id': 'mailbox_inbox'
             }&quot;"/>
         </record>
-    <!--mod by youshinan-->
+
     <menuitem
         id="mail.menu_root_discuss"
         name="Discuss"
         action="action_discuss"
         web_icon="mail,static/description/icon.png"
-        groups="base.make_invisible"
+        groups="base.group_hidden"
         sequence="1"/>
 
     <!--

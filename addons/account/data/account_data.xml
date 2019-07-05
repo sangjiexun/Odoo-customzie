@@ -42,7 +42,7 @@
 
         <record forcecreate="True" id="decimal_payment" model="decimal.precision">
             <field name="name">Payment Terms</field>
-            <field name="digits">6</field>
+            <field name="digits">2</field>
         </record>
 
         <record id="account_payment_term_net" model="account.payment.term">

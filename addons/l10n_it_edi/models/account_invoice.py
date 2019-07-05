@@ -49,6 +49,12 @@ class AccountInvoice(models.Model):
 
     @api.multi
     def invoice_validate(self):
+        # Clean context from default_type to avoid making attachment
+        # with wrong values in subsequent operations
+        cleaned_ctx = dict(self.env.context)
+        cleaned_ctx.pop('default_type', None)
+        self = self.with_context(cleaned_ctx)
+
         super(AccountInvoice, self).invoice_validate()
         for invoice in self:
             if invoice.company_id.country_id != self.env.ref('base.it'):
@@ -112,7 +118,7 @@ class AccountInvoice(models.Model):
             raise UserError(_("%s must have a street.") % (buyer.display_name))
         if not buyer.zip:
             raise UserError(_("%s must have a post code.") % (buyer.display_name))
-        if len(buyer.zip) != 5:
+        if len(buyer.zip) != 5 and buyer.country_id.code == 'IT':
             raise UserError(_("%s must have a post code of length 5.") % (buyer.display_name))
         if not buyer.city:
             raise UserError(_("%s must have a city.") % (buyer.display_name))

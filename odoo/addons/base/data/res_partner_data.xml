@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="True">
+    <data noupdate="1">
         <record id="main_partner" model="res.partner" context="{'default_is_company': True}">
-            <field name="name">My Company</field>
+            <field name="name">デモ株式会社</field>
             <field name="company_id" eval="None"/>
             <field name="customer" eval="False"/>
             <field name="is_company" eval="True"/>
-            <field name="street"></field>
-            <field name="city"></field>
-            <field name="zip"></field>
-            <field name="phone"></field>
-            <field name="email">info@yourcompany.com</field>
-            <field name="website">www.yourcompany.com</field>
+            <field name="street">志村２丁目１５−９</field>
+            <field name="city">板橋区</field>
+            <field name="zip">1740056</field>
+            <field name="phone">(03)-5918-9313</field>
+            <field name="email">info@wajun.co.jp</field>
+            <field name="website">www.wajun.co.jp</field>
             <field name="image" type="base64" file="base/static/img/res_company_logo.png"/>
         </record>
 
@@ -19,17 +19,19 @@
             <field name="name">System</field>
             <field name="company_id" ref="main_company"/>
             <field name="customer" eval="False"/>
-            <field name="email">root@example.com</field>
+            <field name="email">root@wajun.co.jp</field>
             <field name="active" eval="False"/>
         </record>
 
         <record model="res.partner" id="base.partner_admin">
-            <field name="name">Administrator</field>
+            <field name="name">HelpDesk Admin</field>
             <field name="company_id" ref="main_company"/>
             <field name="customer" eval="False"/>
-            <field name="email">admin@example.com</field>
+            <field name="email">admin@wajun.co.jp</field>
             <field name="image" type="base64" file="base/static/img/avatar.png"/>
         </record>
+
+
 
         <record id="public_partner" model="res.partner">
             <field name="name">Public user</field>
@@ -39,7 +41,16 @@
         <!--
         Resource: res.partner.title
         -->
-        <record id="res_partner_title_madam" model="res.partner.title">
+        <record id="res_partner_title_mr" model="res.partner.title">
+            <field name="name">様</field>
+            <field name="shortcut">Mr.</field>
+        </record>
+        <record id="res_partner_title_inside" model="res.partner.title">
+            <field name="name">御中</field>
+            <field name="shortcut"></field>
+        </record>
+
+        <!--record id="res_partner_title_madam" model="res.partner.title">
             <field name="name">Madam</field>
             <field name="shortcut">Mrs.</field>
         </record>
@@ -58,7 +69,7 @@
         <record id="res_partner_title_prof" model="res.partner.title">
             <field name="name">Professor</field>
             <field name="shortcut">Prof.</field>
-        </record>
+        </record-->
 
         <record id="res_partner_industry_A" model="res.partner.industry">
             <field name="name">Agriculture</field>

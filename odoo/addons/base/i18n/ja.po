@@ -6938,7 +6938,17 @@ msgstr "口座保持者"
 #. module: base
 #: model:ir.model.fields,field_description:base.field_res_partner_bank__acc_holder_name
 msgid "Account Holder Name"
-msgstr ""
+msgstr "名義人"
+
+#. module: base
+#: model:ir.model.fields,field_description:base.field_res_partner_bank__branch_code
+msgid "Branch Code"
+msgstr "支店番号"
+
+#. module: base
+#: model:ir.model.fields,field_description:base.field_res_partner_bank__branch_name
+msgid "Branch Name"
+msgstr "支店名"
 
 #. module: base
 #: model:ir.module.module,shortdesc:base.module_account_invoice_extract
@@ -13730,7 +13740,7 @@ msgstr "個人"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_partner_filter
 msgid "Individuals"
-msgstr ""
+msgstr "個人"
 
 #. module: base
 #: model:res.country,name:base.id
@@ -15945,7 +15955,7 @@ msgstr "多言語勘定科目表"
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_res_partner_filter
 msgid "My Contacts"
-msgstr ""
+msgstr "私の連絡先"
 
 #. module: base
 #: model_terms:ir.ui.view,arch_db:base.view_attachment_search
