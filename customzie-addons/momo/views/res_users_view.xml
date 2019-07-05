@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- server action for res user barcode-->
+        <record id="action_user_barcode_print_button" model="ir.actions.server">
+            <field name="name">User Barcode Print</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="binding_model_id" ref="base.model_res_users"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    action = records.call_print_wizard()
+            </field>
+        </record>
+    </data>
+</odoo>

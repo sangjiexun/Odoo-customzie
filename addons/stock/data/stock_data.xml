@@ -57,6 +57,12 @@
             <field name="usage">production</field>
             <field name="company_id"></field>
         </record>
+        <record id="location_assemble" model="stock.location">
+            <field name="name">Assemble</field>
+            <field name="location_id" ref="stock_location_locations_virtual"/>
+            <field name="usage">assemble</field>
+            <field name="company_id"></field>
+        </record>
         <record id="stock_location_suppliers" model="stock.location">
             <field name="name">Vendors</field>
             <field name="location_id" ref="stock_location_locations_partner"/>
@@ -113,7 +119,11 @@
             <field name="fields_id" search="[('model','=','product.template'),('name','=','property_stock_production')]"/>
             <field eval="'stock.location,'+str(location_production)" name="value"/>
         </record>
-
+        <record forcecreate="True" id="property_stock_assemble" model="ir.property">
+            <field name="name">property_stock_assemble</field>
+            <field name="fields_id" search="[('model','=','product.template'),('name','=','property_stock_assemble')]"/>
+            <field eval="'stock.location,'+str(location_assemble)" name="value"/>
+        </record>
 
         <!--
     Resource: stock.warehouse
@@ -123,6 +133,8 @@
         <record id="warehouse0" model="stock.warehouse">
             <field name="partner_id" ref="base.main_partner"/>
             <field name="code">WH</field>
+            <field name="reception_steps">two_steps</field>
+            <field name="delivery_steps">pick_ship</field>
         </record>
  
         <record id="sequence_mrp_op" model="ir.sequence">
@@ -158,8 +170,8 @@
                 'record': obj().env.ref('stock.warehouse0').wh_output_stock_loc_id,
                 'noupdate': True,
             }, {
-                'xml_id': 'stock.location_pack_zone',
-                'record': obj().env.ref('stock.warehouse0').wh_pack_stock_loc_id,
+                'xml_id': 'stock.location_clean_zone',
+                'record': obj().env.ref('stock.warehouse0').wh_clean_stock_loc_id,
                 'noupdate': True,
             }, {
                 'xml_id': 'stock.picking_type_internal',

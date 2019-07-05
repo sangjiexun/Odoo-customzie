@@ -47,6 +47,7 @@ from odoo.http import content_disposition, dispatch_rpc, request, \
 from odoo.exceptions import AccessError, UserError, AccessDenied
 from odoo.models import check_method_name
 from odoo.service import db, security
+from openerp.http import request
 
 _logger = logging.getLogger(__name__)
 
@@ -447,8 +448,13 @@ class Home(http.Controller):
     @http.route('/web', type='http', auth="none")
     def web_client(self, s_action=None, **kw):
         ensure_db()
+        device_user_agent = request.httprequest.environ.get('HTTP_USER_AGENT','')
+        device_check = device_user_agent.find('ipad')
         if not request.session.uid:
-            return werkzeug.utils.redirect('/web/login', 303)
+            if device_check == -1:
+                return werkzeug.utils.redirect('/web/login', 303)
+            else:
+                return werkzeug.utils.redirect('/web/barcode_login', 303)
         if kw.get('redirect'):
             return werkzeug.utils.redirect(kw.get('redirect'), 303)
 
@@ -514,6 +520,54 @@ class Home(http.Controller):
             values['debug'] = True
 
         response = request.render('web.login', values)
+        response.headers['X-Frame-Options'] = 'DENY'
+        return response
+
+    @http.route('/web/barcode_login', type='http', auth="none", sitemap=False)
+    def web_barcode_login(self, redirect=None, **kw):
+        ensure_db()
+        request.params['login_success'] = False
+        if request.httprequest.method == 'GET' and redirect and request.session.uid:
+            return http.redirect_with_hash(redirect)
+
+        if not request.uid:
+            request.uid = odoo.SUPERUSER_ID
+
+        values = request.params.copy()
+        try:
+            values['databases'] = http.db_list()
+        except odoo.exceptions.AccessDenied:
+            values['databases'] = None
+
+        if request.httprequest.method == 'POST':
+            old_uid = request.uid
+            try:
+                uid = request.session.authenticate_by_user_barcode(request.session.db, request.params['user_barcode'])
+                request.params['login_success'] = True
+                return http.redirect_with_hash(self._login_redirect(uid, redirect=redirect))
+            except odoo.exceptions.AccessDenied as e:
+                request.uid = old_uid
+                if e.args == odoo.exceptions.AccessDenied().args:
+                    values['error'] = _("User barcode not exists")
+                else:
+                    values['error'] = e.args[0]
+        else:
+            if 'error' in request.params and request.params.get('error') == 'access':
+                values['error'] = _('Only employee can access this database. Please contact the administrator.')
+
+        if 'login' not in values and request.session.get('auth_login'):
+            values['login'] = request.session.get('auth_login')
+
+        if not odoo.tools.config['list_db']:
+            values['disable_database_manager'] = True
+
+        # otherwise no real way to test debug mode in template as ?debug =>
+        # values['debug'] = '' but that's also the fallback value when
+        # missing variables in qweb
+        if 'debug' in values:
+            values['debug'] = True
+
+        response = request.render('web.barcode_login', values)
         response.headers['X-Frame-Options'] = 'DENY'
         return response
 
@@ -894,7 +948,13 @@ class Session(http.Controller):
     @http.route('/web/session/logout', type='http', auth="none")
     def logout(self, redirect='/web'):
         request.session.logout(keep_db=True)
-        return werkzeug.utils.redirect(redirect, 303)
+        device_user_agent = request.httprequest.environ.get('HTTP_USER_AGENT','')
+        device_check = device_user_agent.find('ipad')
+        if device_check == -1:
+            return werkzeug.utils.redirect('/web/login', 303)
+        else:
+            return werkzeug.utils.redirect('/web/barcode_login', 303)
+        #return werkzeug.utils.redirect(redirect, 303)
 
 
 class DataSet(http.Controller):

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--Assemble No-->
+        <record id="sequence_momo_assemble_no" model="ir.sequence">
+            <field name="name">Assemble No</field>
+            <field name="code">nashi.assemble</field>
+            <field name="prefix">AS</field>
+            <field name="padding">6</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="treatment_book_onlineclose" model="treatment.book">
+            <field name="name">onlineclose</field>
+            <field name="treatment_book">お客様の問い合わせる内容はオンラインで解決しました。</field>
+        </record>
+        <record id="treatment_book_repair" model="treatment.book">
+            <field name="name">repair</field>
+            <field name="treatment_book">送料負担にて、商品を修理させて頂きます。修理詳細は下記にご参照ください。</field>
+        </record>
+        <record id="treatment_book_return" model="treatment.book">
+            <field name="name">return</field>
+            <field name="treatment_book">送料負担にて、返金させて頂きます。</field>
+        </record>
+        <record id="memory_exchange" model="repair.type">
+            <field name="name">memory</field>
+        </record>
+        <record id="hdd_ssd_exchange" model="repair.type">
+            <field name="name">hdd_ssd</field>
+        </record>
+        <record id="os_reinstall" model="repair.type">
+            <field name="name">os</field>
+        </record>
+        <record id="body_exchange" model="repair.type">
+            <field name="name">body</field>
+        </record>
+        <record id="other" model="repair.type">
+            <field name="name">other</field>
+        </record>
+        <record id="reason1" model="problem.reason">
+            <field name="name">reason1</field>
+        </record>
+        <record id="reason2" model="problem.reason">
+            <field name="name">reason2</field>
+        </record>
+        <record id="reason3" model="problem.reason">
+            <field name="name">reason3</field>
+        </record>
+        <record id="reason4" model="problem.reason">
+            <field name="name">reason4</field>
+        </record>
+        <record id="reason5" model="problem.reason">
+            <field name="name">reason5</field>
+        </record>
+        <record id="reason6" model="problem.reason">
+            <field name="name">reason6</field>
+        </record>
+        <record id="reason7" model="problem.reason">
+            <field name="name">reason7</field>
+        </record>
+        <record id="reason8" model="problem.reason">
+            <field name="name">reason8</field>
+        </record>
+        <record id="reason9" model="problem.reason">
+            <field name="name">reason9</field>
+        </record>
+        <record id="reason10" model="problem.reason">
+            <field name="name">reason10</field>
+        </record>
+    </data>
+</odoo>

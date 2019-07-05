@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+
+    <record id="delete_product_barcode_pdf" model="ir.cron">
+        <field name="name">Delete Product Barcode Pdf</field>
+        <field name="model_id" ref="model_momo_product_line"/>
+        <field name="state">code</field>
+        <field name="code">model._delete_barcode_pdf()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+    </record>
+</odoo>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- We want to activate product variant by default for easier demoing. -->
+        <record id="base.group_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('product.group_product_variant'))]"/>
+        </record>
+
+        <!-- Variants -->
+        <record id="product_attribute_1" model="product.attribute">
+            <field name="name">intel CPU</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_1" model="product.attribute.value">
+            <field name="name">i3</field>
+            <field name="attribute_id" ref="product_attribute_1"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_2" model="product.attribute.value">
+            <field name="name">i5</field>
+            <field name="attribute_id" ref="product_attribute_1"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_3" model="product.attribute.value">
+            <field name="name">i7</field>
+            <field name="attribute_id" ref="product_attribute_1"/>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="product_attribute_2" model="product.attribute">
+            <field name="name">AMD CPU</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_4" model="product.attribute.value">
+            <field name="name">ryzen3</field>
+            <field name="attribute_id" ref="product_attribute_2"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_5" model="product.attribute.value">
+            <field name="name">ryzen5</field>
+            <field name="attribute_id" ref="product_attribute_2"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_6" model="product.attribute.value">
+            <field name="name">ryzen7</field>
+            <field name="attribute_id" ref="product_attribute_2"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="product_attribute_value_7" model="product.attribute.value">
+            <field name="name">ryzen9</field>
+            <field name="attribute_id" ref="product_attribute_2"/>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="product_attribute_3" model="product.attribute">
+            <field name="name">Memory</field>
+        </record>
+        <record id="product_attribute_value_8" model="product.attribute.value">
+            <field name="name">1GB</field>
+            <field name="attribute_id" ref="product_attribute_3"/>
+        </record>
+        <record id="product_attribute_value_9" model="product.attribute.value">
+            <field name="name">2GB</field>
+            <field name="attribute_id" ref="product_attribute_3"/>
+        </record>
+        <record id="product_attribute_value_10" model="product.attribute.value">
+            <field name="name">4GB</field>
+            <field name="attribute_id" ref="product_attribute_3"/>
+        </record>
+        <record id="product_attribute_value_11" model="product.attribute.value">
+            <field name="name">8GB</field>
+            <field name="attribute_id" ref="product_attribute_3"/>
+        </record>
+        <record id="product_attribute_value_12" model="product.attribute.value">
+            <field name="name">12GB</field>
+            <field name="attribute_id" ref="product_attribute_3"/>
+        </record>
+        <record id="product_attribute_value_13" model="product.attribute.value">
+            <field name="name">16GB</field>
+            <field name="attribute_id" ref="product_attribute_3"/>
+        </record>
+
+        <record id="product_attribute_4" model="product.attribute">
+            <field name="name">HDD</field>
+        </record>
+        <record id="product_attribute_value_14" model="product.attribute.value">
+            <field name="name">500GB</field>
+            <field name="attribute_id" ref="product_attribute_4"/>
+        </record>
+        <record id="product_attribute_value_15" model="product.attribute.value">
+            <field name="name">1TB</field>
+            <field name="attribute_id" ref="product_attribute_4"/>
+        </record>
+        <record id="product_attribute_value_16" model="product.attribute.value">
+            <field name="name">2TB</field>
+            <field name="attribute_id" ref="product_attribute_4"/>
+        </record>
+        <record id="product_attribute_value_17" model="product.attribute.value">
+            <field name="name">3TB</field>
+            <field name="attribute_id" ref="product_attribute_4"/>
+        </record>
+        <record id="product_attribute_value_18" model="product.attribute.value">
+            <field name="name">4TB</field>
+            <field name="attribute_id" ref="product_attribute_4"/>
+        </record>
+
+        <record id="product_attribute_5" model="product.attribute">
+            <field name="name">SSD</field>
+        </record>
+        <record id="product_attribute_value_19" model="product.attribute.value">
+            <field name="name">128GB</field>
+            <field name="attribute_id" ref="product_attribute_5"/>
+        </record>
+        <record id="product_attribute_value_20" model="product.attribute.value">
+            <field name="name">256GB</field>
+            <field name="attribute_id" ref="product_attribute_5"/>
+        </record>
+        <record id="product_attribute_value_21" model="product.attribute.value">
+            <field name="name">512GB</field>
+            <field name="attribute_id" ref="product_attribute_5"/>
+        </record>
+        <record id="product_attribute_value_22" model="product.attribute.value">
+            <field name="name">1TB</field>
+            <field name="attribute_id" ref="product_attribute_5"/>
+        </record>
+    </data>
+</odoo>

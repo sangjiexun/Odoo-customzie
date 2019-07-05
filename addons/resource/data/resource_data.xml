@@ -20,7 +20,7 @@
 
 </data>
 
-<data noupdate="1">
+<!--data noupdate="1">
 
     <record id="resource_calendar_std_35h" model="resource.calendar">
         <field name="name">Standard 35 Hours/Week</field>
@@ -62,6 +62,6 @@
         />
     </record>
 
-</data>
+</data-->
 
 </odoo>

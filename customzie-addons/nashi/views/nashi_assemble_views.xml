@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- assemble form view -->
+        <record id="form_view_assemble" model="ir.ui.view">
+            <field name="name">Assemble Form View</field>
+            <field name="model">nashi.assemble</field>
+            <field name="arch" type="xml">
+                <form string="Assemble">
+                    <header>
+                        <button name="button_mark_done" attrs="{'invisible': [('state', '!=', 'progress')]}" string="Mark as Done" type="object" class="oe_highlight"/>
+                        <button name="action_assign" attrs="{'invisible': ['|', ('availability', 'in', ('assigned', 'none')), ('is_locked', '=', False)]}" string="Check availability" type="object" class="oe_highlight"/>
+                        <button name="action_assemble" attrs="{'invisible': ['|', '|', '|', '|', ('is_locked', '=', False), ('check_to_done', '=', True), ('availability', 'not in', ['partially_available', 'assigned']), ('state', 'not in', ('confirmed','progress'))]}" string="Assemble" type="object" class="oe_highlight"/>
+                        <button name="action_assemble" attrs="{'invisible': ['|', '|', '|', '|', ('is_locked', '=', False), ('check_to_done', '=', True), ('availability', '!=', 'waiting'), ('state', 'not in', ('confirmed','progress'))]}" string="Assemble" type="object"/>
+                        <button name="action_cancel" type="object" string="Cancel" attrs="{'invisible': ['|', '|', ('is_locked', '=', False), ('state', 'in', ('done','cancel')), ('check_to_done', '=', True)]}"/>
+                        <button name="button_scrap" type="object" string="Scrap" attrs="{'invisible': ['|', '|',  ('is_locked', '=', False), ('state', 'in', ('done','cancel')), ('check_to_done', '=', True)]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="confirmed,progress,done"/>
+                    </header>
+                    <sheet>
+                        <field name="is_locked" invisible="1"/>
+                        <field name="check_to_done" invisible="1"/>
+                        <field name="availability" groups="base.group_no_one"/>
+                        <group>
+                            <group>
+                                <field name="id" invisible="1"/>
+                                <field name="name"/>
+                                <field name="create_date"/>
+                            </group>
+                            <group>
+                                <field name="user_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Pick Lines">
+                                <field name="pick_lines" widget="one2many_list">
+                                    <tree string="Product Product" editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="pick_qty"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Return Lines">
+                                <field name="return_lines" widget="one2many_list">
+                                    <tree string="Product Product" editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="return_qty"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- assemble tree view -->
+        <record id="tree_view_assemble" model="ir.ui.view">
+            <field name="name">Assemble Tree View</field>
+            <field name="model">nashi.assemble</field>
+            <field name="arch" type="xml">
+                <tree string="Assemble Tree">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="state"/>
+                    <field name="create_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- assemble window action -->
+        <record id="window_action_assemble" model="ir.actions.act_window">
+            <field name="name">Assemble</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nashi.assemble</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="target">main</field>
+        </record>
+    </data>
+</odoo>

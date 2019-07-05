@@ -127,7 +127,7 @@
             </field>
     </record>
 
-    <menuitem 
+    <menuitem
         action="stock_move_line_action" 
         id="stock_move_line_menu" 
         parent="stock.menu_warehouse_report" sequence="150"/>

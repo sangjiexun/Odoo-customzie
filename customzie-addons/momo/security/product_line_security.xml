@@ -1,0 +1,36 @@
+<odoo>
+	<record id="module_momo_category" model="ir.module.category">
+		<field name="name">Product Line</field>
+    </record>
+    <!-- Product Line Operator Group -->
+    <record id="momo_product_group_operator" model="res.groups">
+        <field name="name">Product Line Operator</field>
+        <field name="category_id" ref="module_momo_category" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+    </record>
+    <!-- Product Line User Group -->
+    <record id="momo_product_group_user" model="res.groups">
+        <field name="name">Product Line User</field>
+        <field name="category_id" ref="module_momo_category" />
+        <field name="implied_ids" eval="[(4, ref('momo_product_group_operator'))]" />
+    </record>
+
+    <!--  Product Line Manager Group -->
+    <record id="momo_product_group_manager" model="res.groups">
+        <field name="name">Product Line Manager</field>
+        <field name="category_id" ref="module_momo_category" />
+        <field name="implied_ids" eval="[(4, ref('momo_product_group_user'))]" />
+        <field name="users" eval="[
+            (4, ref('base.user_root')),
+            (4, ref('base.user_admin')) ]" />
+    </record>
+
+    <!--data noupdate="0">
+        <record id="product_line_user_rule" model="ir.rule">
+            <field name="name">Product Line User Access</field>
+            <field name="model_id" ref="model_momo_product_line" />
+            <field name="domain_force"> [(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('momo_product_group_operator'))]" />
+        </record>
+    </data-->
+</odoo>
