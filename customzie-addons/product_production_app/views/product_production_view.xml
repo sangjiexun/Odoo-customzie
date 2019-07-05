@@ -1,0 +1,48 @@
+<?xml version="1.0"?> 
+<odoo>
+    <record id="view_form_product_production" model="ir.ui.view">
+    	<field name="name">製品フォーム</field>
+		<field name="model">product.production</field>
+		<field name="arch" type="xml">
+        <form string="product_production">
+	        <header>
+		        <button name="button_print" type="object" string="製品シリアル番号プリント" />
+	        </header>
+	        <sheet>
+		        <group name="group_top">
+			        <group name="group_left">
+    	                <field name="name" />
+	  		            <field name="barcode"/>
+			            <field name="product_no" />
+                        <field name="purchase_order_name" />
+			        </group>
+			        <group name="group_right">
+		                <field name="repair_order_name" />
+		                <field name="sale_order_name" />
+				        <field name="stock_status"/>
+				        <field name="stock_status_child"/>
+			        </group>
+		        </group>
+	        </sheet>
+        </form>
+		</field>
+    </record>
+    <record id="view_tree_product_production" model="ir.ui.view">
+        <field name="name">製品一覧</field>
+        <field name="model">product.production</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="barcode"/>  
+                <field name="product_no"/>  
+                <field name="purchase_order_name"/>  
+                <field name="repair_order_name"/>  
+                <field name="sale_order_name"/>  
+                <field name="serial_no"/>  
+                <field name="stock_status"/>  
+                <field name="stock_status_child"/>
+                <field name="remark"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

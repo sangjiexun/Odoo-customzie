@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="product_production_list_template" name="product_production List">
+        <div id="wrap" class="container">
+            <h1>PP WEB</h1>
+            <t t-foreach="pps" t-as="pp">
+                <div class="row">
+                    <span t-field="pp.name" />,
+                    <span t-field="pp.serial_no" />,
+                    <span t-field="pp.stock_status" /> </div>
+            </t>
+        </div>
+    </template>
+</odoo>

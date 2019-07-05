@@ -408,7 +408,7 @@
         name="Reporting"
         parent="menu_hr_holidays_root"
         sequence="99"
-        groups="hr_holidays.make_invisible"/>
+        groups="base.make_invisible"/>
 
     <record id="hr_leave_action_new_request" model="ir.actions.act_window">
         <field name="name">New Request</field>
@@ -447,14 +447,11 @@
         <field name="view_id" ref="hr_leave_view_form"/>
     </record>
 
-    <!-- Move to The base by youshinan-->
-    <record id ="make_invisible" model="res.groups">
-        <field name="name">Invisible</field>
-    </record>
+    <!--mod by youshinan-->
     <menuitem
         id="hr_leave_menu_new_request"
         parent="menu_hr_holidays_my_leaves"
-        groups="hr_holidays.make_invisible"
+        groups="base.make_invisible"
         action="hr_leave_action_new_request"
         sequence="2"/>
 
@@ -579,7 +576,7 @@
         id="hr_holidays_menu_manager_payroll_to_report"
         name="Leaves to report"
         parent="hr_holidays_menu_manager_payroll"
-        groups="hr_holidays.make_invisible"
+        groups="base.make_invisible"
         action="hr_leave_action_payroll"
         sequence="1"/>
 
