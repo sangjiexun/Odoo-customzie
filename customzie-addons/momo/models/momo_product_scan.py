@@ -185,7 +185,7 @@ class ProductScan(models.Model):
             self.env['momo.product.scan.line'].create(
                 {"product_line_id": line.product_line_id.id, "location": line.product_line_id.current_location,
                  "barcode": line.product_line_id.barcode, "product_name": line.product_line_id.product_name,
-                 "product_scan_id": self.id})
+                 "product_id": line.product_line_id.product_id.id, "product_scan_id": self.id})
 
             self.env['momo.product.line.picking'].create(
                 {"product_line_id": line.product_line_id.id, "stock_picking_id": self.picking_id.id,
@@ -195,9 +195,9 @@ class ProductScan(models.Model):
                                                                          ["id", "product_name"], groupby="product_name")
 
         for scan_line_group in scan_line_groups:
-            product = self.env['product.template'].search([('name', '=', scan_line_group['product_name'])])
+            #product = self.env['product.template'].search([('name', '=', scan_line_group['product_name'])])
             move_line = self.env['stock.move.line'].search(
-                ['&', ('picking_id', '=', self.picking_id.id), ('product_id', '=', product.id)])
+                ['&', ('picking_id', '=', self.picking_id.id), ('product_id', '=', 1)])
             move_line.write({'qty_done': int(scan_line_group['product_name_count'])})
         self.picking_id.button_validate()
         self.write({'product_line_group_id': self.picking_id.product_line_group_id.id})
