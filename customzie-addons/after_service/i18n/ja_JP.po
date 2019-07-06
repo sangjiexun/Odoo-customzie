@@ -392,12 +392,12 @@ msgstr "商品個数"
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__deficit_price
 msgid "Deficit Price"
-msgstr "損失金額（税込）"
+msgstr "金額（税込）"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__deficit_total_price
 msgid "Deficit Total Price"
-msgstr "損失総金額（税込）"
+msgstr "総金額（税込）"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.after_service_aggregate_tree_view
@@ -756,3 +756,19 @@ msgstr "メール"
 #: selection:after.service,measure_type:0
 msgid "telephone"
 msgstr "電話"
+
+#. module: after_service
+#: model_terms:ir.actions.act_window,help:after_service.product_line_picking_statistics_action
+msgid "No data for analysis"
+msgstr "統計情報はありません"
+
+#. module: after_service
+#: model:ir.actions.act_window,name:after_service.product_line_picking_statistics_action
+#: model:ir.ui.menu,name:after_service.momo_product_line_picking_statistics
+msgid "Product Line Picking Statistics"
+msgstr "作業統計"
+
+#. module: after_service
+#: model:ir.model,name:after_service.model_momo_production_picking_report
+msgid "Production Picking / Report"
+msgstr "作業統計レポート"
