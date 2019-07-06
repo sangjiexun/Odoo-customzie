@@ -195,7 +195,7 @@ class ProductScan(models.Model):
                                                                          ["id", "product_name"], groupby="product_name")
 
         for scan_line_group in scan_line_groups:
-            #product = self.env['product.template'].search([('name', '=', scan_line_group['product_name'])])
+            ##product = self.env['product.template'].search([('name', '=', scan_line_group['product_name'])])
             move_line = self.env['stock.move.line'].search(
                 ['&', ('picking_id', '=', self.picking_id.id), ('product_id', '=', 1)])
             move_line.write({'qty_done': int(scan_line_group['product_name_count'])})
