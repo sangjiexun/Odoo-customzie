@@ -16,6 +16,7 @@
                 <field name="state" widget="statusbar" statusbar_visible="draft,to processing,done" readonly="1"/>
             </header>
             <sheet>
+              <field name='treatment_name' invisible="1" />
               <div>
                   <h1>
                       <field name="name" />
@@ -52,8 +53,8 @@
                 <group>
                     <field name="treatment_remark" attrs="{'readonly':[('state','!=','draft')]}"/>
                 </group>
-                <hr attrs="{'invisible':['|',('state','==','draft'),('treatment_book_id','==','オンライン解決')]}"/>
-                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_book_id','==','オンライン解決')]}">
+                <hr attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}"/>
+                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}">
                   <group>
                     <field name="returned_date" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
@@ -64,12 +65,12 @@
                     <field name="repair_type" widget="many2many_checkboxes" options="{'horizontal':true}" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
                 </group>
-                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_book_id','==','オンライン解決')]}">
+                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}">
                   <group>
                     <field name="problem_reason" widget="many2many_checkboxes" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
                 </group>
-                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_book_id','==','オンライン解決')]}">
+                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}">
                   <group>
                     <field name="other_reason" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
@@ -180,9 +181,9 @@
                 <field name="sale_order_product" />
                 <field name="treatment_operator" />
                 <separator/>
-                <filter string="onlineclose" name="treatment_book_onlineclose" domain="[('treatment_book_id','=','オンライン解決')]"/>
-                <filter string="repair" name="treatment_book_repair" domain="[('treatment_book_id','=','修理')]"/>
-                <filter string="return" name="treatment_book_return" domain="[('treatment_book_id','=','返品')]"/>
+                <filter string="onlineclose" name="treatment_book_onlineclose" domain="[('treatment_name','=','オンライン解決')]"/>
+                <filter string="repair" name="treatment_book_repair" domain="[('treatment_name','=','修理')]"/>
+                <filter string="return" name="treatment_book_return" domain="[('treatment_name','=','返品')]"/>
                 <separator/>
                 <filter string="is_defective" name="is_defective" domain="[('is_defective','=',True)]"/>
                 <separator/>
@@ -199,9 +200,8 @@
         <field name="mode">primary</field>
         <field name="inherit_id" ref="after_service.view_after_service_filter"/>
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='treatment_book_repair']" position="before">
-                <separator/>
-                <filter string="Return Product" name="return_product" domain="[('treatment_book_id','=','返品')]"/>
+            <xpath expr="//filter[@name='treatment_book_return']" position="replace">
+                <filter string="Return Product" name="return_product" domain="[('treatment_name','=','返品')]"/>
             </xpath>
         </field>
     </record>
