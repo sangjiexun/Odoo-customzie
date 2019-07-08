@@ -29,9 +29,9 @@ class PurchaseOrder(models.Model):
     @api.multi
     def _create_product_line_creator(self):
         company_user = self.env.user.company_id
-        warehouse=self.env['stock.warehouse'].search([('company_id', '=', company_user.id)], limit=1)
+        #warehouse=self.env['stock.warehouse'].search([('company_id', '=', company_user.id)], limit=1)
         creator = self.env['momo.product.line.creator'].create(
-            {'create_type': 'auto', 'purchase_id': self.id, 'init_location_id': warehouse.lot_stock_id.id, 'group_id': self.group_id.id})
+            {'create_type': 'auto', 'purchase_id': self.id, 'init_location_id': self.env.ref('stock.stock_location_suppliers').id, 'group_id': self.group_id.id})
         for order in self:
             for line in order.order_line:
                 res = {
