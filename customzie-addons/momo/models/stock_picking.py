@@ -32,7 +32,8 @@ class Picking(models.Model):
                              "product_name": product_line_link.product_line_id.product_name,
                              "product_id": product_line_link.product_id.id,
                              "product_scan_id": res_id, "is_defective": product_line_link.is_defective,
-                             "defective_detail": product_line_link.defective_detail})
+                             "defective_detail": product_line_link.defective_detail,
+                             "product_rank": product_line_link.product_rank})
         return {
             'type': 'ir.actions.act_window',
             'name': 'Product Scan',

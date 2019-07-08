@@ -14,6 +14,17 @@ class ProductScanLine(models.Model):
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     is_defective = fields.Boolean('Is Defective', default=False)
     defective_detail = fields.Text('Defective Detail')
+    product_rank = fields.Selection([
+        ('N', 'n rank'),
+        ('NS', 'ns rank'),
+        ('S', 's rank'),
+        ('SA', 'sa rank'),
+        ('A', 'a rank'),
+        ('AB', 'ab rank'),
+        ('B', 'b rank'),
+        ('C', 'c rank'),
+        ('D', 'd rank'),
+    ], string='Ranking', translate=True, default='N')
 
 
 class ProductScan(models.Model):
@@ -43,6 +54,7 @@ class ProductScan(models.Model):
                 'product_name': scan_line.product_name,
                 'is_defective': scan_line.is_defective,
                 'defective_detail': scan_line.defective_detail,
+                "product_rank": scan_line.product_rank
             }
             lines += [line_item]
         picking = self.env['stock.picking'].search([('id', '=', picking_id)], limit=1)
@@ -155,13 +167,15 @@ class ProductScan(models.Model):
             current_view_list.append(scan_line.barcode)
             self.env['momo.product.scan.line'].search(
                 ['&', ('product_scan_id', '=', self._origin.id), ('barcode', '=', scan_line.barcode)], limit=1).write({
-                'is_defective': scan_line.is_defective, 'defective_detail': scan_line.defective_detail})
+                'is_defective': scan_line.is_defective, 'defective_detail': scan_line.defective_detail,
+                "product_rank": scan_line.product_rank})
             linked_line = self.env['momo.product.line.link'].search(
                 ['&', ('product_line_group_id', '=', picking.product_line_group_id.id),
                  ('barcode', '=', scan_line.barcode)],
                 order="create_date desc",
                 limit=1)
-            linked_line.write({'is_defective': scan_line.is_defective, 'defective_detail': scan_line.defective_detail})
+            linked_line.write({'is_defective': scan_line.is_defective, 'defective_detail': scan_line.defective_detail,
+                               "product_rank": scan_line.product_rank})
 
         db_lines = self.env['momo.product.scan.line'].search([('product_scan_id', '=', self._origin.id)],
                                                              order="create_date desc")
@@ -194,14 +208,15 @@ class ProductScan(models.Model):
                 {"product_line_id": line.product_line_id.id, "location": line.product_line_id.current_location,
                  "barcode": line.product_line_id.barcode, "product_name": line.product_line_id.product_name,
                  "product_id": line.product_id.id, "product_scan_id": self.id, 'is_defective': line.is_defective,
-                 'defective_detail': line.defective_detail})
+                 'defective_detail': line.defective_detail, "product_rank": line.product_rank})
 
             self.env['momo.product.line.picking'].create(
                 {"product_line_id": line.product_line_id.id, "stock_picking_id": self.picking_id.id,
                  "barcode": line.product_line_id.barcode})
 
             self.env['momo.product.line'].search([('barcode', '=', line.product_line_id.barcode)], limit=1).write(
-                {'is_defective': line.is_defective, 'defective_detail': line.defective_detail})
+                {'is_defective': line.is_defective, 'defective_detail': line.defective_detail,
+                 "product_rank": line.product_rank})
 
         scan_line_groups = self.env['momo.product.scan.line'].read_group(domain=[('product_scan_id', '=', self.id)],
                                                                          fields=["product_id"],

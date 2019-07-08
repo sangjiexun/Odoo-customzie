@@ -62,6 +62,17 @@ class ProductLineLink(models.Model):
     is_defective = fields.Boolean('Is Defective', default=False)
     defective_detail = fields.Text('Defective Detail')
     barcode = fields.Char('Barcode')
+    product_rank = fields.Selection([
+        ('N', 'n rank'),
+        ('NS', 'ns rank'),
+        ('S', 's rank'),
+        ('SA', 'sa rank'),
+        ('A', 'a rank'),
+        ('AB', 'ab rank'),
+        ('B', 'b rank'),
+        ('C', 'c rank'),
+        ('D', 'd rank'),
+    ], string='Ranking', translate=True, default='N')
 
     @api.onchange('barcode')
     def onchange_barcode(self):

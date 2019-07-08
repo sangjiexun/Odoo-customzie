@@ -35,6 +35,7 @@
                                 <field name="barcode" readonly="1"/>
                                 <field name="product_name" readonly="1"/>
                                 <field name="is_defective"/>
+                                <field name="product_rank"/>
                                 <field name="defective_detail"/>
                             </tree>
                         </field>
