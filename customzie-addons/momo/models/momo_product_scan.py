@@ -199,34 +199,36 @@ class ProductScan(models.Model):
         self._set_scan_screen(picking_id)
 
     def scan_over(self):
-        self.env['momo.product.scan.line'].search([('product_scan_id', '=', self.id)]).unlink()
-        linked_lines = self.env['momo.product.line.link'].search(
-            ['&', ('product_line_group_id', '=', self.picking_id.product_line_group_id.id), ('linked', '=', True)])
+        if not self.picking_id.scan_over:
+            self.env['momo.product.scan.line'].search([('product_scan_id', '=', self.id)]).unlink()
+            linked_lines = self.env['momo.product.line.link'].search(
+                ['&', ('product_line_group_id', '=', self.picking_id.product_line_group_id.id), ('linked', '=', True)])
 
-        for line in linked_lines:
-            self.env['momo.product.scan.line'].create(
-                {"product_line_id": line.product_line_id.id, "location": line.product_line_id.current_location,
-                 "barcode": line.product_line_id.barcode, "product_name": line.product_line_id.product_name,
-                 "product_id": line.product_id.id, "product_scan_id": self.id, 'is_defective': line.is_defective,
-                 'defective_detail': line.defective_detail, "product_rank": line.product_rank})
+            for line in linked_lines:
+                self.env['momo.product.scan.line'].create(
+                    {"product_line_id": line.product_line_id.id, "location": line.product_line_id.current_location,
+                     "barcode": line.product_line_id.barcode, "product_name": line.product_line_id.product_name,
+                     "product_id": line.product_id.id, "product_scan_id": self.id, 'is_defective': line.is_defective,
+                     'defective_detail': line.defective_detail, "product_rank": line.product_rank})
 
-            self.env['momo.product.line.picking'].create(
-                {"product_line_id": line.product_line_id.id, "stock_picking_id": self.picking_id.id,
-                 "barcode": line.product_line_id.barcode})
+                self.env['momo.product.line.picking'].create(
+                    {"product_line_id": line.product_line_id.id, "stock_picking_id": self.picking_id.id,
+                     "barcode": line.product_line_id.barcode})
 
-            self.env['momo.product.line'].search([('barcode', '=', line.product_line_id.barcode)], limit=1).write(
-                {'is_defective': line.is_defective, 'defective_detail': line.defective_detail,
-                 "product_rank": line.product_rank})
+                self.env['momo.product.line'].search([('barcode', '=', line.product_line_id.barcode)], limit=1).write(
+                    {'is_defective': line.is_defective, 'defective_detail': line.defective_detail,
+                     "product_rank": line.product_rank})
 
-        scan_line_groups = self.env['momo.product.scan.line'].read_group(domain=[('product_scan_id', '=', self.id)],
-                                                                         fields=["product_id"],
-                                                                         groupby="product_id")
+            scan_line_groups = self.env['momo.product.scan.line'].read_group(domain=[('product_scan_id', '=', self.id)],
+                                                                             fields=["product_id"],
+                                                                             groupby="product_id")
 
-        for scan_line_group in scan_line_groups:
-            move_line = self.env['stock.move.line'].search(
-                ['&', ('picking_id', '=', self.picking_id.id), ('product_id', '=', scan_line_group['product_id'][0])])
-            move_line.write({'qty_done': int(scan_line_group['product_id_count'])})
-        self.picking_id.button_validate()
-        self.write({'product_line_group_id': self.picking_id.product_line_group_id.id})
-        self.product_line_group_id.write({'useable': True})
-        self.picking_id.write({'scan_over': True})
+            for scan_line_group in scan_line_groups:
+                move_line = self.env['stock.move.line'].search(
+                    ['&', ('picking_id', '=', self.picking_id.id), ('product_id', '=', scan_line_group['product_id'][0])])
+                move_line.write({'qty_done': int(scan_line_group['product_id_count'])})
+            self.picking_id.button_validate()
+            self.write({'product_line_group_id': self.picking_id.product_line_group_id.id})
+            self.product_line_group_id.write({'useable': True})
+            self.picking_id.write({'scan_over': True})
+
