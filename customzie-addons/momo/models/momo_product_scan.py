@@ -149,11 +149,20 @@ class ProductScan(models.Model):
         current_view_list = []
         current_db_list = []
         picking_id = self.picking_id.id
+        picking = self.env['stock.picking'].search([('id', '=', picking_id)], limit=1)
+
         for scan_line in self.scan_lines:
             current_view_list.append(scan_line.barcode)
             self.env['momo.product.scan.line'].search(
                 ['&', ('product_scan_id', '=', self._origin.id), ('barcode', '=', scan_line.barcode)], limit=1).write({
                 'is_defective': scan_line.is_defective, 'defective_detail': scan_line.defective_detail})
+            linked_line = self.env['momo.product.line.link'].search(
+                ['&', ('product_line_group_id', '=', picking.product_line_group_id.id),
+                 ('barcode', '=', scan_line.barcode)],
+                order="create_date desc",
+                limit=1)
+            linked_line.write({'is_defective': scan_line.is_defective, 'defective_detail': scan_line.defective_detail})
+
         db_lines = self.env['momo.product.scan.line'].search([('product_scan_id', '=', self._origin.id)],
                                                              order="create_date desc")
         for scan_line in db_lines:
@@ -167,7 +176,6 @@ class ProductScan(models.Model):
                     ['&', ('product_scan_id', '=', self._origin.id), ('barcode', '=', delete_line[0])],
                     order="create_date desc",
                     limit=1).unlink()
-                picking = self.env['stock.picking'].search([('id', '=', picking_id)], limit=1)
                 line = self.env['momo.product.line.link'].search(
                     ['&', ('product_line_group_id', '=', picking.product_line_group_id.id),
                      ('barcode', '=', delete_line[0])],
@@ -185,11 +193,15 @@ class ProductScan(models.Model):
             self.env['momo.product.scan.line'].create(
                 {"product_line_id": line.product_line_id.id, "location": line.product_line_id.current_location,
                  "barcode": line.product_line_id.barcode, "product_name": line.product_line_id.product_name,
-                 "product_id": line.product_id.id, "product_scan_id": self.id})
+                 "product_id": line.product_id.id, "product_scan_id": self.id, 'is_defective': line.is_defective,
+                 'defective_detail': line.defective_detail})
 
             self.env['momo.product.line.picking'].create(
                 {"product_line_id": line.product_line_id.id, "stock_picking_id": self.picking_id.id,
                  "barcode": line.product_line_id.barcode})
+
+            self.env['momo.product.line'].search([('barcode', '=', line.product_line_id.barcode)], limit=1).write(
+                {'is_defective': line.is_defective, 'defective_detail': line.defective_detail})
 
         scan_line_groups = self.env['momo.product.scan.line'].read_group(domain=[('product_scan_id', '=', self.id)],
                                                                          fields=["product_id"],

@@ -59,7 +59,8 @@ class ProductLineLink(models.Model):
     product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
     linked = fields.Boolean('Linked', default=True)
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
-
+    is_defective = fields.Boolean('Is Defective', default=False)
+    defective_detail = fields.Text('Defective Detail')
     barcode = fields.Char('Barcode')
 
     @api.onchange('barcode')
