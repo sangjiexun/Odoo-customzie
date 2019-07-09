@@ -39,7 +39,6 @@ class AfterService(models.Model):
 
     #Sale Order Filter
     sale_order_filter = fields.Many2one(string='Sale Order Filter',comodel_name='momo.product.line', required=True)
-    #sale_order_filter = fields.Many2one(string='Sale Order Filter',comodel_name='momo.product.line', required=True, domain=lambda self: [('sale_order_name', 'is not', 'null')])
 
     #Momo Product Line Id:
     product_line_id = fields.Integer(string='Momo Product Line Id',related='sale_order_filter.id',store=True)

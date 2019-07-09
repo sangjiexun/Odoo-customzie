@@ -153,6 +153,7 @@ class ProductLine(models.Model):
     _description = 'Product Line'
     _order = 'id'
 
+    name=fields.Char('Name', compute='_compute_barcode',store=True, readonly=False)
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     product_no = fields.Char(related='product_id.product_no')
     product_name = fields.Char(related='product_id.product_tmpl_id.name')
@@ -241,6 +242,7 @@ class ProductLine(models.Model):
     def _compute_barcode(self):
         for line in self:
             line.barcode = str(line.product_no) + str(line.serial_no)
+            line.name = line.barcode
 
     @api.one
     @api.depends('stock_picking_ids')
@@ -404,7 +406,7 @@ class ProductLinePicking(models.Model):
     state = fields.Char(string='State')
 
     sale_price_unit = fields.Float('Sale Unit Price', required=True, related='product_line_id.sale_price_unit')
-    
+
     @api.onchange('barcode')
     def onchange_barcode(self):
         for line in self:

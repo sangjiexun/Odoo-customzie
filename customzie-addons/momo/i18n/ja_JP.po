@@ -625,13 +625,13 @@ msgstr "販売ID"
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_order_id
 msgid "Sale Order Id"
-msgstr "注文番号"
+msgstr "注文ID"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_order_name
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__sale_order_name
 msgid "Sale Order Name"
-msgstr "注文名"
+msgstr "注文番号"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_price_unit
@@ -812,4 +812,3 @@ msgstr "S:中古品ですが、使用感の少ない美品 "
 #: selection:momo.product.line,product_rank:0
 msgid "sa rank"
 msgstr "SA:僅かに小傷、目立たない薄汚れがある程度の中古美品"
-

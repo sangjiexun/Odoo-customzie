@@ -240,7 +240,7 @@ msgstr "瑕疵状態"
 
 #. module: after_service
 #: model_terms:ir.ui.view,arch_db:after_service.view_after_service_filter
-#: model:treatment.book,name:after_service.treatment_book_repair
+#: model_terms:ir.ui.view,arch_db:after_service.view_defective_product_line_filter
 msgid "is_defective"
 msgstr "瑕疵品"
 
@@ -362,7 +362,7 @@ msgstr "担当者"
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__sale_order_filter
 msgid "Sale Order Filter"
-msgstr "検索"
+msgstr "商品バーコード"
 
 #. module: after_service
 #: model:ir.model.fields,field_description:after_service.field_after_service__sale_order_partner_id

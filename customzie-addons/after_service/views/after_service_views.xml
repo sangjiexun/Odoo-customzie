@@ -24,21 +24,21 @@
               </div>
                 <group>
                     <group>
-                        <field name="sale_order_filter" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="contact_person" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="sale_order_id" />
-                        <field name="sale_order_product" />
-                        <field name="deficit_price" />
-                        <field name="product_cnt" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="order_elapsed_days" readonly="1" attrs="{'invisible':[('order_elapsed_days','==', '')]}"/>
+                      <field name="contact_person" attrs="{'readonly':[('state','!=','draft')]}"/>
+                      <field name="sale_order_filter" attrs="{'readonly':[('state','!=','draft')]}" widget="momo_product_line_many2one" domain="[('sale_order_name','!=','none')]"/>
+                      <field name="sale_order_id" />
+                      <field name="sale_order_product" />
+                      <field name="deficit_price" />
+                      <field name="product_cnt" attrs="{'readonly':[('state','!=','draft')]}"/>
                     </group>
                     <group>
-                        <field name="inquiry_date" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="measure_type" attrs="{'readonly':[('state','!=','draft')]}" options="{'horizontal':true}"/>
-                        <field name="sale_order_partner_name" />
-                        <field name="barcode" />
-                        <field name="sale_order_date" />
-                        <field name="defect_remark" attrs="{'invisible':[('defect_remark','==', 'none')]}" />
+                      <field name="inquiry_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                      <field name="measure_type" attrs="{'readonly':[('state','!=','draft')]}" options="{'horizontal':true}"/>
+                      <field name="sale_order_partner_id" />
+                      <!--<field name="barcode" />-->
+                      <field name="sale_order_date" />
+                      <field name="order_elapsed_days" readonly="1" attrs="{'invisible':[('order_elapsed_days','==', '')]}"/>
+                      <field name="defect_remark" attrs="{'invisible':[('defect_remark','==', 'none')]}" />
                     </group>
                 </group>
                 <hr />
