@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-02 21:42+0000\n"
-"PO-Revision-Date: 2019-07-02 21:42+0000\n"
+"POT-Creation-Date: 2019-07-10 12:38+0000\n"
+"PO-Revision-Date: 2019-07-10 12:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -124,6 +124,11 @@ msgstr "作成者"
 #: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__create_date
 msgid "Created on"
 msgstr "作成日"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__creator_detail
+msgid "Creator Detail"
+msgstr ""
 
 #. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.view_product_line_creator_form
@@ -593,6 +598,8 @@ msgstr "購買オーダ"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__product_rank
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_link__product_rank
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__product_rank
 msgid "Ranking"
 msgstr "ランク"
 
@@ -600,6 +607,12 @@ msgstr "ランク"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__name
 msgid "Reference"
 msgstr "参照"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__reference_cost
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__reference_cost
+msgid "Reference Cost"
+msgstr "定価用コスト"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__remark
@@ -745,16 +758,22 @@ msgstr ""
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "a rank"
 msgstr "A:特に大きなヨゴレ、傷のない問題のない中古品"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "ab rank"
 msgstr "AB:使用感はあるが、特に問題なく使用できる中古品 "
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "b rank"
 msgstr "B:使用感、ヨゴレ、キズ、シミ等あるが問題なく使用できる中古品 "
 
@@ -765,11 +784,15 @@ msgstr "バーコード印刷設定"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "c rank"
 msgstr "C:キズ、ヨゴレ、使用感がかなりあり、大きな傷等もある中古品 "
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "d rank"
 msgstr "Ｄ:故障や、裂け等があり、現状では使用できないジャンク品"
 
@@ -790,11 +813,15 @@ msgstr ""
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "n rank"
 msgstr "N:新品"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "ns rank"
 msgstr "NS:小傷ある展示品または未使用品 "
 
@@ -805,10 +832,15 @@ msgstr "再入庫"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "s rank"
 msgstr "S:中古品ですが、使用感の少ない美品 "
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "sa rank"
 msgstr "SA:僅かに小傷、目立たない薄汚れがある程度の中古美品"
+

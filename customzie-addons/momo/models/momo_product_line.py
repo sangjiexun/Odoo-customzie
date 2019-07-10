@@ -6,6 +6,7 @@ from reportlab.lib.units import mm
 from reportlab.graphics.barcode import code128
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from odoo.addons import decimal_precision as dp
 import shutil, os
 
 
@@ -93,6 +94,7 @@ class ProductLineCreator(models.Model):
     is_created = fields.Boolean('Is Created', default=False)
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
     purchase_order_name = fields.Char('Purchase Order Name', related='purchase_id.name', store=True)
+
     create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
@@ -114,11 +116,11 @@ class ProductLineCreator(models.Model):
                             'purchase_id': creator.purchase_id.id,
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
-
                             'maker_name': line.product_id.product_tmpl_id.maker_name.name,
                             'maker_product_no': line.product_id.product_tmpl_id.maker_product_no,
                             'product_no': line.product_id.product_tmpl_id.product_no,
                             'attribute_display': line.product_id.attribute_display,
+                            'creator_detail': line.id,
                         }
                         product_line = self.env['momo.product.line'].create(res)
                         self.env['momo.product.line.link'].create(
@@ -146,6 +148,8 @@ class ProductLineCreatorDetail(models.Model):
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     need_qty = fields.Float('Need Quantity', default=0.0, required=True)
     need_clean = fields.Boolean('Need Clean', default=True)
+    reference_cost = fields.Float(
+        'Reference Cost', digits=dp.get_precision('Product Price'), groups="base.group_reference_cost")
 
 
 class ProductLine(models.Model):
@@ -186,6 +190,8 @@ class ProductLine(models.Model):
     product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group')
 
     sale_price_unit = fields.Float('Sale Unit Price', compute='_compute_sale_info', store=True, default=0.0)
+    creator_detail = fields.Many2one('momo.product.line.creator.detail', 'Creator Detail', index=True)
+    reference_cost = fields.Float('Reference Cost', related='creator_detail.reference_cost', groups="base.group_reference_cost")
 
     # Hierarchy fields
     parent_id = fields.Many2one(
