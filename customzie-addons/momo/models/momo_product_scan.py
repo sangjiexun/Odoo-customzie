@@ -123,7 +123,7 @@ class ProductScan(models.Model):
                         self.update({'error_mess': 'wrong product typet!'})
                     else:
                         scaned_qty = self.env['momo.product.scan.line'].search_count(
-                            ['&', ('product_name', '=', product_line.product_id.product_tmpl_id.name),
+                            ['&', ('product_id', '=', product_line.product_id.id),
                              ('product_scan_id', '=', self._origin.id)])
                         if scaned_qty >= int(product_line_move.product_qty):
                             self.update({'error_mess': 'this product is enough!'})
