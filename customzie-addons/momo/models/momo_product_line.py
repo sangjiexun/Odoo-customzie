@@ -160,7 +160,7 @@ class ProductLine(models.Model):
     name=fields.Char('Name', compute='_compute_barcode',store=True, readonly=False)
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     product_no = fields.Char(related='product_id.product_no')
-    product_name = fields.Char(related='product_id.product_tmpl_id.name')
+    product_name = fields.Char('Product Name', related='product_id.product_tmpl_id.name')
     #product_display_name = fields.Char(related='product_id.display_name', string='Product Display Name', store=True)
     serial_no = fields.Char(string='Serial No')
     barcode = fields.Char('Barcode', compute='_compute_barcode', store=True, readonly=False)

@@ -12,6 +12,8 @@ class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     attribute_display= fields.Char(compute='_compute_attribute_value', string='Attribute_display', store=True)
+    is_component = fields.Boolean('Is Component', default=False)
+
 
     @api.depends('attribute_value_ids', 'default_code')
     def _compute_attribute_value(self):

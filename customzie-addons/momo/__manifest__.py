@@ -30,7 +30,6 @@
         'views/momo_product_scan_view.xml',
         'views/res_users_view.xml',
         'views/momo_product_line_view.xml',
-        'views/product_template_views.xml',
         'views/product_views.xml',
         'data/ir_sequence_data.xml',
         'data/maker_data.xml',
