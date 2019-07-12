@@ -331,9 +331,10 @@ class ProductLine(models.Model):
 
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
+        barcodes = 55
         init_count = (start_row - 1) * 5 + (start_column - 1)
         sum_count = init_count + len(product_line_active_ids)
-        page_count = (sum_count - 1) // 65 + 1
+        page_count = (sum_count - 1) // barcodes + 1
 
         pdf_path = "/opt/pdf/"
         pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
@@ -344,15 +345,15 @@ class ProductLine(models.Model):
         for x in range(page_count):
 
             if x == 0:
-                self.print_barcode(c, product_line_active_ids[0:(65 - init_count)], start_row, start_column)
+                self.print_barcode(c, product_line_active_ids[0:(barcodes - init_count)], start_row, start_column)
             # last page
             elif x == page_count - 1:
                 self.print_barcode(c,
-                                   product_line_active_ids[(65 - init_count) + 65 * (x - 1):(sum_count - init_count)])
+                                   product_line_active_ids[(barcodes - init_count) + barcodes * (x - 1):(sum_count - init_count)])
             # other pages
             else:
                 self.print_barcode(c,
-                                   product_line_active_ids[(65 - init_count) + 65 * (x - 1):(65 - init_count) + 65 * x ])
+                                   product_line_active_ids[(barcodes - init_count) + barcodes * (x - 1):(barcodes - init_count) + barcodes * x ])
 
         c.save()
         return pdf_name
@@ -360,17 +361,22 @@ class ProductLine(models.Model):
     @api.multi
     def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):
 
-        xmargin = 3.5 * mm
-        ymargin = 10.92 * mm
-        swidth = 40.6 * mm
-        sheight = 21.2 * mm
+        xmargin = 0 * mm
+        ymargin = 22 * mm
+        swidth = 40 * mm
+        sheight = 25 * mm
+#        xmargin = 3.5 * mm
+#        ymargin = 10.92 * mm
+#        swidth = 40.6 * mm
+#        sheight = 21.2 * mm
+
         i = (start_row - 1) * 5 + (start_column - 1)
 
         for product_line_active_id in product_line_active_ids:
             line = self.env['momo.product.line'].search([('id', '=', product_line_active_id)])
 
             x = xmargin + swidth * (i % 5)
-            y = ymargin + sheight * (12 - (i // 5))
+            y = ymargin + sheight * (10 - (i // 5))
 
             self.draw_label(c, x, y, line.barcode)
             line.write({'printed': True})
@@ -381,10 +387,10 @@ class ProductLine(models.Model):
     @staticmethod
     def draw_label(c, x, y, data):
         c.setLineWidth(0.5)
-        c.rect(x, y, 40.6 * mm, 21.2 * mm, stroke=0, fill=0)
-        c.setFont("Courier-Bold", 8)
-        c.drawString(x + 8.6 * mm, y + 13.4 * mm, data)
-        barcode = code128.Code128(data, barWidth=0.26 * mm, barHeight=8.0 * mm, checksum=False)
+        c.rect(x, y, 40 * mm, 25 * mm, stroke=0, fill=0)
+        c.setFont("Courier-Bold", 10)
+        c.drawString(x + 6.6 * mm, y + 15.4 * mm, data)
+        barcode = code128.Code128(data, barWidth=0.3 * mm, barHeight=10.0 * mm, checksum=False)
         barcode.drawOn(c, x - 3.3 * mm, y + 3.4 * mm)
 
     @api.multi
