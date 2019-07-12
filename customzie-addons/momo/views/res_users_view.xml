@@ -9,7 +9,7 @@
             <field name="state">code</field>
             <field name="code">
                 if records:
-                    action = records.call_print_wizard()
+                    action = records.print_user_barcode()
             </field>
         </record>
     </data>
