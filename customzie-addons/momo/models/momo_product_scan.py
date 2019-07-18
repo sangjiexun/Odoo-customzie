@@ -11,7 +11,7 @@ class ProductScanLine(models.Model):
     barcode = fields.Char('Barcode')
     location = fields.Char('Location')
     product_name = fields.Char('Product Name')
-    product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
+    product_id = fields.Many2one('product.product', 'Product')
     is_defective = fields.Boolean('Is Defective', default=False)
     defective_detail = fields.Text('Defective Detail')
     product_rank = fields.Selection([
