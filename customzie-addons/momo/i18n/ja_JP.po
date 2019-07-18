@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-25 14:52+0000\n"
-"PO-Revision-Date: 2019-05-25 14:52+0000\n"
+"POT-Creation-Date: 2019-07-10 12:38+0000\n"
+"PO-Revision-Date: 2019-07-10 12:38+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,10 +36,28 @@ msgid "13"
 msgstr ""
 
 #. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.form_view_product_scan
+msgid "Are you sure you want over this scan?"
+msgstr ""
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__attribute_display
+#: model:ir.model.fields,field_description:momo.field_product_product__attribute_display
+msgid "Attribute_display"
+msgstr "スペック"
+
+#. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_defective_product_line_filter
+msgid "Attributes"
+msgstr "属性"
+
+#. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_clean_history__barcode
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__barcode
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__barcode
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__barcode
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__barcode
+#: model_terms:ir.ui.view,arch_db:momo.form_view_product_clean
 msgid "Barcode"
 msgstr "バーコード"
 
@@ -60,19 +78,6 @@ msgid "Cancel"
 msgstr "取消"
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__ceo_price
-#: model:ir.model.fields,field_description:momo.field_product_product__ceo_price
-#: model:ir.model.fields,field_description:momo.field_product_template__ceo_price
-msgid "Ceo Cost"
-msgstr "仕入原価"
-
-#. module: momo
-#: model_terms:ir.ui.view,arch_db:momo.view_product_exchange_form
-msgid "Child Line"
-msgstr "関連明細"
-
-#. module: momo
-#: model:ir.model,name:momo.model_momo_clean_history
 #: model:ir.model.fields,field_description:momo.field_momo_product_clean__clean_history_ids
 #: model_terms:ir.ui.view,arch_db:momo.form_view_product_clean
 msgid "Clean History"
@@ -99,6 +104,8 @@ msgstr "清掃タイプ"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group__create_uid
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__create_uid
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__create_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__create_uid
 msgid "Created by"
 msgstr "作成者"
 
@@ -113,8 +120,15 @@ msgstr "作成者"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group__create_date
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__create_date
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__create_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__create_date
 msgid "Created on"
 msgstr "作成日"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__creator_detail
+msgid "Creator Detail"
+msgstr ""
 
 #. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.view_product_line_creator_form
@@ -139,12 +153,20 @@ msgstr "お客様名"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__defective_detail
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__defective_detail
 msgid "Defective Detail"
 msgstr "不良明細"
 
 #. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.view_defective_product_line_filter
 msgid "Defective Product Line Filter"
+msgstr ""
+
+#. module: momo
+#: model:ir.actions.server,name:momo.delete_product_barcode_pdf_ir_actions_server
+#: model:ir.cron,cron_name:momo.delete_product_barcode_pdf
+#: model:ir.cron,name:momo.delete_product_barcode_pdf
+msgid "Delete Product Barcode Pdf"
 msgstr ""
 
 #. module: momo
@@ -163,8 +185,16 @@ msgstr "配送日"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group__display_name
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__display_name
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__display_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__display_name
 msgid "Display Name"
 msgstr "表示名"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_clean__error_mess
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__error_mess
+msgid "Error Message"
+msgstr "エラーメッセージ"
 
 #. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.view_defective_product_line_filter
@@ -187,6 +217,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group__id
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__id
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__id
 msgid "ID"
 msgstr ""
 
@@ -205,6 +237,11 @@ msgstr "清掃済"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_creator__is_created
 msgid "Is Created"
 msgstr "生成済"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__is_defective
+msgid "Is Defective"
+msgstr "瑕疵状態"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__is_defective
@@ -228,6 +265,8 @@ msgstr "印刷済"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group____last_update
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link____last_update
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan____last_update
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line____last_update
 msgid "Last Modified on"
 msgstr "最終更新日"
 
@@ -242,6 +281,8 @@ msgstr "最終更新日"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group__write_uid
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__write_uid
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__write_uid
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__write_uid
 msgid "Last Updated by"
 msgstr "最終更新者"
 
@@ -256,21 +297,20 @@ msgstr "最終更新者"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_group__write_date
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__write_date
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__write_date
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__write_date
 msgid "Last Updated on"
 msgstr "最終更新日"
 
 #. module: momo
-#: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_tree
-msgid "Link List"
-msgstr "リンク"
-
-#. module: momo
-#: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_form
-msgid "List of Product Lline Picking"
-msgstr ""
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_link__linked
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__linked
+msgid "Linked"
+msgstr "リンク済"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_clean_history__location
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__location
 msgid "Location"
 msgstr "ロケーション"
 
@@ -293,7 +333,6 @@ msgstr "メーカー情報"
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__maker_name
 #: model:ir.model.fields,field_description:momo.field_product_product__maker_name
 #: model:ir.model.fields,field_description:momo.field_product_template__maker_name
-#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
 msgid "Maker Name"
 msgstr "メーカー名"
 
@@ -305,19 +344,9 @@ msgid "Maker Product"
 msgstr "メーカー製品No"
 
 #. module: momo
-#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
-msgid "Maker Product No"
-msgstr "メーカー製品No"
-
-#. module: momo
 #: model:ir.ui.menu,name:momo.momo_menu_root
 msgid "MoMo"
 msgstr "製品管理"
-
-#. module: momo
-#: model:ir.actions.server,name:momo.server_action_one_step_button
-msgid "Move With One Step"
-msgstr "ワンステップ移動"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__product_name
@@ -337,11 +366,6 @@ msgid "Need Quantity"
 msgstr "要生成数"
 
 #. module: momo
-#: model_terms:ir.actions.act_window,help:momo.product_line_picking_statistics_action
-msgid "No data for analysis"
-msgstr ""
-
-#. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__purchase_order_name
 msgid "Order Reference"
 msgstr "オーダ参照"
@@ -356,6 +380,11 @@ msgstr ""
 #: model:ir.ui.menu,name:momo.momo_product_line_pick_to_stock
 msgid "Pick To Stock"
 msgstr "再入庫"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__picking_name
+msgid "Picking Name"
+msgstr ""
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__picking_type_id
@@ -387,6 +416,8 @@ msgstr "調達グループ"
 #: model:ir.model,name:momo.model_product_product
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__product_id
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__product_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_link__product_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__product_id
 msgid "Product"
 msgstr "プロダクト"
 
@@ -406,7 +437,6 @@ msgstr "製品清掃履歴"
 
 #. module: momo
 #: model:ir.actions.act_window,name:momo.action_product_exchange
-#: model_terms:ir.ui.view,arch_db:momo.view_product_exchange_form
 msgid "Product Exchange"
 msgstr ""
 
@@ -416,6 +446,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:momo.field_momo_product_clean_history__product_line_id
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__product_line_id
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__product_line_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__product_line_id
 #: model:ir.module.category,name:momo.module_momo_category
 #: model:ir.ui.menu,name:momo.momo_menu_product_line
 #: model_terms:ir.ui.view,arch_db:momo.view_product_line_creator_form
@@ -441,7 +472,9 @@ msgstr ""
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__product_line_group_id
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_link__product_line_group_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__product_line_group_id
 #: model:ir.model.fields,field_description:momo.field_procurement_group__product_line_group_id
+#: model:ir.model.fields,field_description:momo.field_stock_picking__product_line_group_id
 #: model_terms:ir.ui.view,arch_db:momo.view_product_link_group_form
 msgid "Product Line Group"
 msgstr ""
@@ -454,35 +487,27 @@ msgstr ""
 #. module: momo
 #: model:res.groups,name:momo.momo_product_group_manager
 msgid "Product Line Manager"
-msgstr ""
+msgstr "製品管理者"
 
 #. module: momo
 #: model:res.groups,name:momo.momo_product_group_operator
 msgid "Product Line Operator"
-msgstr ""
+msgstr "作業員"
 
 #. module: momo
 #: model:ir.model,name:momo.model_momo_product_line_picking
 #: model:ir.model.fields,field_description:momo.field_stock_picking__product_line_picking_ids
-#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_graph
-#: model_terms:ir.ui.view,arch_db:momo.product_line_picking_pivot
-#: model_terms:ir.ui.view,arch_db:momo.view_stock_picking_form
 msgid "Product Line Picking"
 msgstr ""
 
 #. module: momo
-#: model:ir.actions.act_window,name:momo.product_line_picking_statistics_action
-#: model:ir.ui.menu,name:momo.momo_product_line_picking_statistics
-msgid "Product Line Picking Statistics"
-msgstr "ピック統計"
-
-#. module: momo
 #: model:res.groups,name:momo.momo_product_group_user
 msgid "Product Line User"
-msgstr ""
+msgstr "事務"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_clean_history__product_name
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__product_name
 msgid "Product Name"
 msgstr "製品名"
 
@@ -500,6 +525,18 @@ msgid "Product Pick to Stock"
 msgstr "製品再入庫"
 
 #. module: momo
+#: model:ir.model,name:momo.model_momo_product_scan
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__product_scan_id
+#: model_terms:ir.ui.view,arch_db:momo.form_view_product_scan
+msgid "Product Scan"
+msgstr "製品スキャン"
+
+#. module: momo
+#: model:ir.model,name:momo.model_momo_product_scan_line
+msgid "Product Scan Line"
+msgstr ""
+
+#. module: momo
 #: model:ir.model,name:momo.model_product_template
 msgid "Product Template"
 msgstr "プロダクトテンプレート"
@@ -515,19 +552,24 @@ msgid "ProductLineDetail"
 msgstr ""
 
 #. module: momo
-#: model_terms:ir.ui.view,arch_db:momo.view_product_exchange_form
-msgid "ProductLink"
-msgstr ""
-
-#. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.view_product_line_tree
 msgid "Production Line Tree"
 msgstr "製品明細"
 
 #. module: momo
+#: model_terms:ir.ui.view,arch_db:momo.view_product_line_tree_momo
+msgid "Production Line Tree Momo"
+msgstr ""
+
+#. module: momo
 #: model:ir.actions.server,name:momo.server_action_product_clean_button
 msgid "Produt Clean"
 msgstr "清掃"
+
+#. module: momo
+#: model:ir.actions.server,name:momo.server_action_product_scan_button
+msgid "Produt Scan"
+msgstr ""
 
 #. module: momo
 #: model:ir.actions.server,name:momo.server_action_product_line_creator_button
@@ -555,22 +597,9 @@ msgid "Purchase Order Name"
 msgstr "購買オーダ"
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__rack_no
-msgid "Rack No"
-msgstr "ラックNo"
-
-#. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__rack_prefix
-msgid "Rack Prefix"
-msgstr "ラックPre"
-
-#. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__rack_suffix
-msgid "Rack Suffix"
-msgstr "ラックSuf"
-
-#. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__product_rank
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_link__product_rank
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan_line__product_rank
 msgid "Ranking"
 msgstr "ランク"
 
@@ -580,9 +609,21 @@ msgid "Reference"
 msgstr "参照"
 
 #. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__reference_cost
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_creator_detail__reference_cost
+msgid "Reference Cost"
+msgstr "定価用コスト"
+
+#. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__remark
 msgid "Remark"
 msgstr "リマーク"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_clean__user_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__user_id
+msgid "Responsible"
+msgstr "担当者"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__restock
@@ -597,13 +638,19 @@ msgstr "販売ID"
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_order_id
 msgid "Sale Order Id"
-msgstr "注文番号"
+msgstr "注文ID"
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_order_name
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__sale_order_name
 msgid "Sale Order Name"
-msgstr "注文名"
+msgstr "注文番号"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__sale_price_unit
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__sale_price_unit
+msgid "Sale Unit Price"
+msgstr ""
 
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_clean__scan
@@ -612,41 +659,31 @@ msgid "Scan"
 msgstr "スキャン"
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__serial_no
-msgid "Serial No"
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__scan_barcode
+#: model_terms:ir.ui.view,arch_db:momo.form_view_product_scan
+msgid "Scan Barcode"
 msgstr ""
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__spec_cpu
-#: model:ir.model.fields,field_description:momo.field_product_product__spec_cpu
-#: model:ir.model.fields,field_description:momo.field_product_template__spec_cpu
-#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
-msgid "Spec Cpu"
-msgstr "CPU"
+#: model_terms:ir.ui.view,arch_db:momo.form_view_product_scan
+msgid "Scan Line"
+msgstr ""
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__spec_driver
-#: model:ir.model.fields,field_description:momo.field_product_product__spec_driver
-#: model:ir.model.fields,field_description:momo.field_product_template__spec_driver
-#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
-msgid "Spec Driver"
-msgstr "ドライバー"
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__scan_lines
+msgid "Scan Lines"
+msgstr ""
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__spec_hard_disc
-#: model:ir.model.fields,field_description:momo.field_product_product__spec_hard_disc
-#: model:ir.model.fields,field_description:momo.field_product_template__spec_hard_disc
-#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
-msgid "Spec HardDisk"
-msgstr "ハードディスク"
+#: model:ir.model.fields,field_description:momo.field_stock_picking__scan_over
+#: model_terms:ir.ui.view,arch_db:momo.form_view_product_scan
+msgid "Scan Over"
+msgstr ""
 
 #. module: momo
-#: model:ir.model.fields,field_description:momo.field_momo_product_line__spec_memory
-#: model:ir.model.fields,field_description:momo.field_product_product__spec_memory
-#: model:ir.model.fields,field_description:momo.field_product_template__spec_memory
-#: model_terms:ir.ui.view,arch_db:momo.product_template_search_view_inherit
-msgid "Spec Memory"
-msgstr "メモリ"
+#: model:ir.model.fields,field_description:momo.field_momo_product_line__serial_no
+msgid "Serial No"
+msgstr ""
 
 #. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.print_product_barcode_wizard
@@ -657,14 +694,20 @@ msgstr "印刷開始"
 #. module: momo
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__state
 msgid "State"
-msgstr "都道府県/州"
+msgstr ""
 
 #. module: momo
 #: model:ir.actions.act_window,name:momo.action_stock_picking
 #: model:ir.model.fields,field_description:momo.field_momo_product_line__stock_picking_ids
 #: model:ir.model.fields,field_description:momo.field_momo_product_line_picking__stock_picking_id
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__picking_id
 msgid "Stock Picking"
 msgstr "在庫ピッキング"
+
+#. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_scan__picking_type_id
+msgid "Stock Picking Type"
+msgstr ""
 
 #. module: momo
 #: model_terms:ir.ui.view,arch_db:momo.view_product_line_form
@@ -688,6 +731,11 @@ msgid "Transfer"
 msgstr "運送"
 
 #. module: momo
+#: model:ir.model.fields,field_description:momo.field_momo_product_line_group__useable
+msgid "Useable"
+msgstr ""
+
+#. module: momo
 #: model:ir.actions.server,name:momo.action_user_barcode_print_button
 msgid "User Barcode Print"
 msgstr "社員バーコード印刷"
@@ -703,23 +751,29 @@ msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
 msgstr ""
 
 #. module: momo
-#: code:addons/momo/models/purchase.py:51
+#: code:addons/momo/models/purchase.py:65
 #, python-format
 msgid "You must set a Vendor Location for this partner %s"
 msgstr ""
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "a rank"
 msgstr "A:特に大きなヨゴレ、傷のない問題のない中古品"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "ab rank"
 msgstr "AB:使用感はあるが、特に問題なく使用できる中古品 "
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "b rank"
 msgstr "B:使用感、ヨゴレ、キズ、シミ等あるが問題なく使用できる中古品 "
 
@@ -730,11 +784,15 @@ msgstr "バーコード印刷設定"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "c rank"
 msgstr "C:キズ、ヨゴレ、使用感がかなりあり、大きな傷等もある中古品 "
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "d rank"
 msgstr "Ｄ:故障や、裂け等があり、現状では使用できないジャンク品"
 
@@ -755,17 +813,15 @@ msgstr ""
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "n rank"
 msgstr "N:新品"
 
 #. module: momo
-#: code:addons/momo/models/momo_product_line.py:453
-#, python-format
-msgid "not found this product!"
-msgstr "製品が存在していません、製品バーコードをあらかじめご確認ください。"
-
-#. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "ns rank"
 msgstr "NS:小傷ある展示品または未使用品 "
 
@@ -776,23 +832,15 @@ msgstr "再入庫"
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "s rank"
 msgstr "S:中古品ですが、使用感の少ない美品 "
 
 #. module: momo
 #: selection:momo.product.line,product_rank:0
+#: selection:momo.product.line.link,product_rank:0
+#: selection:momo.product.scan.line,product_rank:0
 msgid "sa rank"
 msgstr "SA:僅かに小傷、目立たない薄汚れがある程度の中古美品"
-
-#. module: momo
-#: code:addons/momo/models/momo_product_line.py:456
-#, python-format
-msgid "this product do not need to clean!"
-msgstr "清掃必要ない製品です。商品バーコードをあらかじめご確認ください。"
-
-#. module: momo
-#: code:addons/momo/models/momo_product_line.py:461
-#, python-format
-msgid "this product has already been cleaned!"
-msgstr "既に清掃済みです。商品バーコードをあらかじめご確認ください。"
 

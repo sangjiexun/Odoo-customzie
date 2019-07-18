@@ -30,6 +30,7 @@
                         <field name="creator_detail_ids" widget="one2many_list">
                             <tree string="CreatorDetail" editable="bottom">
                                 <field name="product_id"/>
+                                <field name="reference_cost"/>
                                 <field name="need_qty"/>
                                 <field name="need_clean"/>
                             </tree>
@@ -116,6 +117,14 @@
                   <field name="barcode" />
                     <field name="maker_name" />
                     <field name="maker_product_no" />
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="supplier_name"/>
+                    <field name="purchase_date"/>
+                    <field name="current_location"/>
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
                </search>
             </field>
         </record>
@@ -126,18 +135,35 @@
             <field name="model">momo.product.line</field>
             <field name="arch" type="xml">
                 <tree string="Production Line Tree" create="false" edit="false" delete="false">
-                    <field name="product_name"/>
+                    <field name="barcode" />
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="product_rank"/>
+                    <field name="is_defective"/>
+                    <field name="defective_detail"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- tree view for product line -->
+        <record id="view_product_line_tree_momo" model="ir.ui.view">
+            <field name="name">Product Line List View Momo</field>
+            <field name="model">momo.product.line</field>
+            <field name="arch" type="xml">
+                <tree string="Production Line Tree Momo" create="false" edit="false" delete="false">
                     <field name="barcode"/>
-                    <field name="attribute_value_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="product_id"/>
+                    <field name="reference_cost"/>
                     <field name="purchase_order_name"/>
                     <field name="supplier_name"/>
                     <field name="purchase_date"/>
                     <field name="current_location"/>
                     <field name="sale_order_name"/>
                     <field name="customer_name"/>
-                    <field name="printed"/>
-                    <field name="need_clean"/>
-                    <field name="is_cleaned"/>
+                    <field name="attribute_display" readonly="1"/>
                     <field name="product_rank"/>
                     <field name="is_defective"/>
                     <field name="defective_detail"/>
@@ -151,6 +177,7 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">momo.product.line</field>
             <field name="limit">65</field>
+            <field name="view_id" ref="view_product_line_tree_momo"/>
             <!--field name="view_mode">tree,form</field-->
             <field name="view_mode">tree</field>
             <field name="view_type">form</field>
@@ -294,7 +321,7 @@
         <record id="action_pick_to_stock_view_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="view_product_line_tree"/>
+            <field name="view_id" ref="view_product_line_tree_momo"/>
             <field name="act_window_id" ref="action_pick_to_stock"/>
         </record>
 
@@ -312,11 +339,16 @@
            <field name="priority" eval="15"/>
            <field name="arch" type="xml">
                <search string="Defective Product Line Filter">
-                   <field string="Attributes" name="attribute_line_ids" groups="product.group_product_variant"/>
+                    <field string="Attributes Display" name="attribute_display" groups="product.group_product_variant"/>
                     <field name="barcode" />
-                   <field name="maker_name" />
-                   <field name="maker_product_no" />
-                   <separator/>
+<!--                      filter_domain="['|','|','|',('barcode','ilike',self),('sale_order_name','ilike',self),('customer_name','ilike',self),('purchase_order_name','ilike',self)]"/>-->
+                    <field name="sale_order_name"/>
+                    <field name="customer_name"/>
+                    <field name="product_id"/>
+                    <!--field name="product_display_name"/-->
+                    <field name="purchase_order_name"/>
+                    <field name="is_defective"/>
+                    <separator/>
                    <filter string="is_defective" name="is_defective" domain="[('is_defective','=',True)]"/>
                    <separator/>
                    <group expand="0" string="Group By">
@@ -337,12 +369,13 @@
             <field name="search_view_id" ref="view_product_line_search"/>
         </record>
 
-        <record id="action_product_exchange_tree" model="ir.actions.act_window.view">
+<!--        <record id="action_product_exchange_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_product_line_tree"/>
             <field name="act_window_id" ref="action_product_exchange"/>
         </record>
+-->
 
 
         <!-- Top menu item -->
@@ -365,12 +398,12 @@
             action="action_product_line_creator"
             sequence="10"/>
 
-        <menuitem id="momo_product_line_pick_to_stock"
+        <!--menuitem id="momo_product_line_pick_to_stock"
             name="Pick To Stock"
             parent="momo_menu_root"
             groups="momo_product_group_user"
             action="action_pick_to_stock"
-            sequence="10"/>
+            sequence="10"/-->
 
         <menuitem id="momo_product_clean"
             name="Product Clean"

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="stock_location_stock_B1_A1" model="stock.location">
+            <field name="name">B1-A1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_B1_A2" model="stock.location">
+            <field name="name">B1-A2</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+
+        <record id="stock_location_stock_2F_RL_A1" model="stock.location">
+            <field name="name">2F-RL-A1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+
+        <record id="stock_location_stock_2F_RL_B1" model="stock.location">
+            <field name="name">2F-RL-B1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+
+        <record id="stock_location_stock_2F_RM_A1" model="stock.location">
+            <field name="name">2F-RM-A1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_2F_RM_B1" model="stock.location">
+            <field name="name">2F-RM-B1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+
+        <record id="stock_location_stock_2F_RR_A1" model="stock.location">
+            <field name="name">2F-RR-A1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+
+        <record id="stock_location_stock_2F_RR_B1" model="stock.location">
+            <field name="name">2F-RR-B1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_2F_RR_C1" model="stock.location">
+            <field name="name">2F-RR-C1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_2F_RR_D1" model="stock.location">
+            <field name="name">2F-RR-D1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+        <record id="stock_location_stock_2F_RR_E1" model="stock.location">
+            <field name="name">2F-RR-E1</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+        </record>
+
+        <!--record id="stock_location_stock_3F_Return" model="stock.location">
+            <field name="name">2F-Return</field>
+            <field name="location_id" ref="stock.stock_location_stock"/>
+            <field name="usage">internal</field>
+            <field name="return_location">True</field>
+        </record-->
+        
+    </data>
+</odoo>

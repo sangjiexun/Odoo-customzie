@@ -6,6 +6,7 @@ from reportlab.lib.units import mm
 from reportlab.graphics.barcode import code128
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from odoo.addons import decimal_precision as dp
 import shutil, os
 
 
@@ -59,8 +60,20 @@ class ProductLineLink(models.Model):
     product_line_id = fields.Many2one('momo.product.line', 'Product Line', index=True, required=True)
     linked = fields.Boolean('Linked', default=True)
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
-
+    is_defective = fields.Boolean('Is Defective', default=False)
+    defective_detail = fields.Text('Defective Detail')
     barcode = fields.Char('Barcode')
+    product_rank = fields.Selection([
+        ('N', 'n rank'),
+        ('NS', 'ns rank'),
+        ('S', 's rank'),
+        ('SA', 'sa rank'),
+        ('A', 'a rank'),
+        ('AB', 'ab rank'),
+        ('B', 'b rank'),
+        ('C', 'c rank'),
+        ('D', 'd rank'),
+    ], string='Ranking', translate=True, default='N')
 
     @api.onchange('barcode')
     def onchange_barcode(self):
@@ -81,6 +94,7 @@ class ProductLineCreator(models.Model):
     is_created = fields.Boolean('Is Created', default=False)
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
     purchase_order_name = fields.Char('Purchase Order Name', related='purchase_id.name', store=True)
+
     create_type = fields.Char('Create Type', default='manu')
     init_location_id = fields.Many2one('stock.location', 'Init Location',
                                        domain="[('active','=',True),('usage','=','internal')]")
@@ -102,16 +116,11 @@ class ProductLineCreator(models.Model):
                             'purchase_id': creator.purchase_id.id,
                             'init_location': creator.init_location,
                             'need_clean': line.need_clean,
-
                             'maker_name': line.product_id.product_tmpl_id.maker_name.name,
                             'maker_product_no': line.product_id.product_tmpl_id.maker_product_no,
                             'product_no': line.product_id.product_tmpl_id.product_no,
-#                            'ceo_price': line.product_id.product_tmpl_id.ceo_price,
-#                            'spec_cpu': line.product_id.product_tmpl_id.spec_cpu,
-#                            'spec_memory': line.product_id.product_tmpl_id.spec_memory,
-#                            'spec_hard_disc': line.product_id.product_tmpl_id.spec_hard_disc,
-#                            'spec_driver': line.product_id.product_tmpl_id.spec_driver,
-
+                            'attribute_display': line.product_id.attribute_display,
+                            'creator_detail': line.id,
                         }
                         product_line = self.env['momo.product.line'].create(res)
                         self.env['momo.product.line.link'].create(
@@ -139,6 +148,8 @@ class ProductLineCreatorDetail(models.Model):
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     need_qty = fields.Float('Need Quantity', default=0.0, required=True)
     need_clean = fields.Boolean('Need Clean', default=True)
+    reference_cost = fields.Float(
+        'Reference Cost', digits=dp.get_precision('Product Price'), groups="base.group_reference_cost")
 
 
 class ProductLine(models.Model):
@@ -146,20 +157,18 @@ class ProductLine(models.Model):
     _description = 'Product Line'
     _order = 'id'
 
+    name=fields.Char('Name', compute='_compute_barcode',store=True, readonly=False)
     product_id = fields.Many2one('product.product', 'Product', index=True, required=True)
     product_no = fields.Char(related='product_id.product_no')
-    product_name = fields.Char(related='product_id.product_tmpl_id.name')
+    product_name = fields.Char('Product Name', related='product_id.product_tmpl_id.name')
+    #product_display_name = fields.Char(related='product_id.display_name', string='Product Display Name', store=True)
     serial_no = fields.Char(string='Serial No')
     barcode = fields.Char('Barcode', compute='_compute_barcode', store=True, readonly=False)
     printed = fields.Boolean('Is Printed', default=False)
     init_location = fields.Char('Init Location', required=True)
     stock_picking_ids = fields.One2many('momo.product.line.picking', 'product_line_id', 'Stock Picking',
                                         copy=True)
-
-    product_tmpl_id = fields.Integer(related='product_id.product_tmpl_id.id', store=True, string='Tmpl Id')
-    attribute_line_ids = fields.One2many('product.template.attribute.line', 'product_tmpl_id', 'Product Attributes')
-    attribute_value_ids = fields.One2many('product.attribute.value', string='Attribute Values', compute="_compute_product_attribute_value_ids")
-
+    attribute_display = fields.Char(string='Attribute_display')
     current_location = fields.Char('Current Location', compute='_compute_current_location', store=True, translate=True)
 
     purchase_id = fields.Many2one('purchase.order', 'Purchase Order')
@@ -181,6 +190,8 @@ class ProductLine(models.Model):
     product_line_group_id = fields.Many2one('momo.product.line.group', 'Product Line Group')
 
     sale_price_unit = fields.Float('Sale Unit Price', compute='_compute_sale_info', store=True, default=0.0)
+    creator_detail = fields.Many2one('momo.product.line.creator.detail', 'Creator Detail', index=True)
+    reference_cost = fields.Float('Reference Cost', related='creator_detail.reference_cost', groups="base.group_reference_cost")
 
     # Hierarchy fields
     parent_id = fields.Many2one(
@@ -237,6 +248,7 @@ class ProductLine(models.Model):
     def _compute_barcode(self):
         for line in self:
             line.barcode = str(line.product_no) + str(line.serial_no)
+            line.name = line.barcode
 
     @api.one
     @api.depends('stock_picking_ids')
@@ -319,9 +331,10 @@ class ProductLine(models.Model):
 
     @api.multi
     def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
+        barcodes = 55
         init_count = (start_row - 1) * 5 + (start_column - 1)
         sum_count = init_count + len(product_line_active_ids)
-        page_count = (sum_count - 1) // 65 + 1
+        page_count = (sum_count - 1) // barcodes + 1
 
         pdf_path = "/opt/pdf/"
         pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
@@ -332,15 +345,15 @@ class ProductLine(models.Model):
         for x in range(page_count):
 
             if x == 0:
-                self.print_barcode(c, product_line_active_ids[0:(65 - init_count)], start_row, start_column)
+                self.print_barcode(c, product_line_active_ids[0:(barcodes - init_count)], start_row, start_column)
             # last page
             elif x == page_count - 1:
                 self.print_barcode(c,
-                                   product_line_active_ids[(65 - init_count) + 65 * (x - 1):(sum_count - init_count)])
+                                   product_line_active_ids[(barcodes - init_count) + barcodes * (x - 1):(sum_count - init_count)])
             # other pages
             else:
                 self.print_barcode(c,
-                                   product_line_active_ids[(65 - init_count) + 65 * (x - 1):(65 - init_count) + 65 * x ])
+                                   product_line_active_ids[(barcodes - init_count) + barcodes * (x - 1):(barcodes - init_count) + barcodes * x ])
 
         c.save()
         return pdf_name
@@ -348,17 +361,22 @@ class ProductLine(models.Model):
     @api.multi
     def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):
 
-        xmargin = 3.5 * mm
-        ymargin = 10.92 * mm
-        swidth = 40.6 * mm
-        sheight = 21.2 * mm
+        xmargin = 0 * mm
+        ymargin = 22 * mm
+        swidth = 40 * mm
+        sheight = 25 * mm
+#        xmargin = 3.5 * mm
+#        ymargin = 10.92 * mm
+#        swidth = 40.6 * mm
+#        sheight = 21.2 * mm
+
         i = (start_row - 1) * 5 + (start_column - 1)
 
         for product_line_active_id in product_line_active_ids:
             line = self.env['momo.product.line'].search([('id', '=', product_line_active_id)])
 
             x = xmargin + swidth * (i % 5)
-            y = ymargin + sheight * (12 - (i // 5))
+            y = ymargin + sheight * (10 - (i // 5))
 
             self.draw_label(c, x, y, line.barcode)
             line.write({'printed': True})
@@ -369,10 +387,10 @@ class ProductLine(models.Model):
     @staticmethod
     def draw_label(c, x, y, data):
         c.setLineWidth(0.5)
-        c.rect(x, y, 40.6 * mm, 21.2 * mm, stroke=0, fill=0)
-        c.setFont("Courier-Bold", 8)
-        c.drawString(x + 8.6 * mm, y + 13.4 * mm, data)
-        barcode = code128.Code128(data, barWidth=0.26 * mm, barHeight=8.0 * mm, checksum=False)
+        c.rect(x, y, 40 * mm, 25 * mm, stroke=0, fill=0)
+        c.setFont("Courier-Bold", 10)
+        c.drawString(x + 6.6 * mm, y + 15.4 * mm, data)
+        barcode = code128.Code128(data, barWidth=0.3 * mm, barHeight=10.0 * mm, checksum=False)
         barcode.drawOn(c, x - 3.3 * mm, y + 3.4 * mm)
 
     @api.multi
@@ -380,14 +398,6 @@ class ProductLine(models.Model):
         pdf_path = "/opt/pdf/"
         shutil.rmtree(pdf_path)
         os.mkdir(pdf_path)
-
-#        os.remove(pdf_path)
-
-    @api.multi
-    def _compute_product_attribute_value_ids(self):
-        #self.ensure_one()
-        #return self.env['product.product'].search([('id', '=', self.product_id)]).attribute_value_ids
-        return
 
 class ProductLinePicking(models.Model):
     _name = 'momo.product.line.picking'
@@ -408,7 +418,7 @@ class ProductLinePicking(models.Model):
     state = fields.Char(string='State')
 
     sale_price_unit = fields.Float('Sale Unit Price', required=True, related='product_line_id.sale_price_unit')
-    
+
     @api.onchange('barcode')
     def onchange_barcode(self):
         for line in self:

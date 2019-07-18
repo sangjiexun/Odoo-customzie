@@ -10,6 +10,7 @@ class ProductTemplate(models.Model):
         "maker.info", string="Maker Name")
     maker_product_no = fields.Char('Maker Product')
     product_no = fields.Char('Product No', required=True, index=True, copy=False, default='New')
+    is_component = fields.Boolean('Is Component', default=False)
 
     @api.model
     def create(self, vals):

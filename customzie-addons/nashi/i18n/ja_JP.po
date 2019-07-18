@@ -1,0 +1,666 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* nashi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-27 00:26+0000\n"
+"PO-Revision-Date: 2019-06-27 00:26+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: nashi
+#: code:addons/nashi/models/stock_rule.py:19
+#, python-format
+msgid " <br/><br/> The components will be taken from <b>%s</b>."
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "<i class=\"fa fa-ellipsis-v\" role=\"img\" aria-label=\"Manage\" title=\"Manage\"/>"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "<span>New</span>"
+msgstr "<span>新規</span>"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "<span>View</span>"
+msgstr "<span>ビュー</span>"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_rule__action
+msgid "Action"
+msgstr "アクション"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "All"
+msgstr "全て"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__assemble_pull_id
+msgid "Asemble Rule"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:101
+#: code:addons/nashi/models/stock_warehouse.py:141
+#: code:addons/nashi/models/stock_warehouse.py:208
+#: model:ir.actions.act_window,name:nashi.window_action_assemble
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__assemble_steps
+#: model:ir.module.category,name:nashi.module_assemble_category
+#: model:ir.ui.menu,name:nashi.nashi_assemble
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+#: model:stock.location.route,name:nashi.route_warehouse0_assemble
+#: selection:stock.rule,action:0
+#, python-format
+msgid "Assemble"
+msgstr "組立"
+
+#. module: nashi
+#: model:res.groups,name:nashi.assemble_group_manager
+msgid "Assemble Manager"
+msgstr "組立マネージャー"
+
+#. module: nashi
+#: selection:stock.picking.type,code:0
+msgid "Assemble Operation"
+msgstr "組立オペレーション"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__assem_type_id
+msgid "Assemble Operation Type"
+msgstr "組立タイプ"
+
+#. module: nashi
+#: model:res.groups,name:nashi.assemble_group_operator
+msgid "Assemble Operator"
+msgstr "組立オペレーター"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__assemble_id
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__assemble_id
+#: model:ir.model.fields,field_description:nashi.field_stock_move_line__assemble_id
+msgid "Assemble Order"
+msgstr "組立オーダ"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_move__assemble_id
+msgid "Assemble Order for finished products"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_move__pick_assemble_id
+msgid "Assemble Order for pick products"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__pick_lines
+msgid "Assemble Pick Lines"
+msgstr "Pick明細"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__return_lines
+msgid "Assemble Return Lines"
+msgstr "生成明細"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.tree_view_assemble
+msgid "Assemble Tree"
+msgstr "組立リスト"
+
+#. module: nashi
+#: model:res.groups,name:nashi.assemble_group_user
+msgid "Assemble User"
+msgstr "組立ユーザー"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__assemble_to_resupply
+msgid "Assemble to Resupply"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__move_return_ids
+msgid "Assembled Products"
+msgstr "組立製品"
+
+#. module: nashi
+#: selection:nashi.assemble,availability:0
+msgid "Available"
+msgstr "組立"
+
+#. module: nashi
+#: selection:stock.rule,action:0
+msgid "Buy"
+msgstr "購入"
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:54
+#, python-format
+msgid "Can't find any assemble location."
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Cancel"
+msgstr "取消"
+
+#. module: nashi
+#: selection:nashi.assemble,state:0
+msgid "Cancelled"
+msgstr "取消"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__check_to_done
+msgid "Check Assembled Qty"
+msgstr "利用可能確認"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Check availability"
+msgstr "検証"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__company_id
+msgid "Company"
+msgstr "会社"
+
+#. module: nashi
+#: selection:nashi.assemble,state:0
+msgid "Confirmed"
+msgstr "確認"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__create_uid
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__create_uid
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__create_uid
+msgid "Created by"
+msgstr "作成者"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__create_date
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__create_date
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__create_date
+msgid "Created on"
+msgstr "作成日"
+
+#. module: nashi
+#: selection:stock.picking.type,code:0
+msgid "Customers"
+msgstr "顧客"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__date_planned_finished
+msgid "Deadline End"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__date_planned_start
+msgid "Deadline Start"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__display_name
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__display_name
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__display_name
+msgid "Display Name"
+msgstr "表示名"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_move__is_done
+#: selection:nashi.assemble,state:0
+msgid "Done"
+msgstr "完了"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__date_finished
+msgid "End Date"
+msgstr "終了日"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_move_line__lot_produced_id
+msgid "Finished Lot/Serial Number"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__location_dest_id
+msgid "Finished Products Location"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__id
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__id
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__id
+msgid "ID"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_nashi_assemble__propagate
+msgid "If checked, when the previous move of the move (which was generated by a next procurement) is cancelled or split, the move generated by this move will too"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+#: selection:nashi.assemble,state:0
+msgid "In Progress"
+msgstr "進行中"
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_stock_move_line__lot_produced_qty
+msgid "Informative, not used in matching"
+msgstr ""
+
+#. module: nashi
+#: selection:stock.picking.type,code:0
+msgid "Internal"
+msgstr "内部"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__is_locked
+msgid "Is Locked"
+msgstr "ロック済"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble____last_update
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line____last_update
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line____last_update
+msgid "Last Modified on"
+msgstr "最終更新日"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__write_uid
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__write_uid
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__write_uid
+msgid "Last Updated by"
+msgstr "最終更新者"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__write_date
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__write_date
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__write_date
+msgid "Last Updated on"
+msgstr "最終更新日"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "Late"
+msgstr "遅延"
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_nashi_assemble__location_src_id
+msgid "Location where the system will look for components."
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_nashi_assemble__location_dest_id
+msgid "Location where the system will stock the finished products."
+msgstr "システムが完成品を在庫するロケーション。"
+
+#. module: nashi
+#: code:addons/nashi/models/nashi_assemble.py:264
+#: code:addons/nashi/models/stock_warehouse.py:117
+#, python-format
+msgid "Make To Order"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Mark as Done"
+msgstr "完了としてマーク"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__availability
+msgid "Materials Availability"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_move_line__done_move
+msgid "Move Done"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__name
+msgid "Name"
+msgstr "名称"
+
+#. module: nashi
+#: model:ir.ui.menu,name:nashi.nashi_menu_root
+msgid "Nashi"
+msgstr "組立て"
+
+#. module: nashi
+#: code:addons/nashi/models/nashi_assemble.py:194
+#: code:addons/nashi/models/nashi_assemble.py:200
+#, python-format
+msgid "New"
+msgstr ""
+
+#. module: nashi
+#: selection:nashi.assemble,availability:0
+msgid "None"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_picking_type__count_as_late
+msgid "Number of Assemble Orders Late"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_picking_type__count_as_waiting
+msgid "Number of Assemble Orders Waiting"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_picking_type__count_as_todo
+msgid "Number of Assemble Orders to Process"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__picking_type_id
+msgid "Operation Type"
+msgstr "オペレーションタイプ"
+
+#. module: nashi
+#: selection:nashi.assemble,availability:0
+msgid "Partially Available"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Pick Lines"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:190
+#, python-format
+msgid "Pick Products"
+msgstr "組立て(Pick)"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__pick_qty
+msgid "Pick Quantity"
+msgstr ""
+
+#. module: nashi
+#: selection:stock.warehouse,assemble_steps:0
+msgid "Pick components, manufacture and then store products (3 steps)"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__move_pick_ids
+msgid "Pick products for assembling"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:83
+#, python-format
+msgid "Pick products, assemble and then store products (3 steps)"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__pba_mto_pull_id
+msgid "Picking Before Asemble MTO Rule"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__pba_type_id
+msgid "Picking Before Assemble Operation Type"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__pba_route_id
+msgid "Picking Before Assemble Route"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_stock_picking_type
+msgid "Picking Type"
+msgstr "ピッキングタイプ"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__pba_loc_id
+msgid "Picking before Assemble Location"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+#: selection:nashi.assemble,state:0
+msgid "Planned"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:169
+#, python-format
+msgid "Post-Assemble"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:163
+#, python-format
+msgid "Pre-Assemble"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__procurement_group_id
+msgid "Procurement Group"
+msgstr "調達グループ"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_pick_line__product_id
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__product_id
+msgid "Product"
+msgstr "プロダクト"
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Product Product"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "Production Order"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__propagate
+msgid "Propagate cancel and split"
+msgstr "取消/分割を展開"
+
+#. module: nashi
+#: selection:stock.rule,action:0
+msgid "Pull & Push"
+msgstr ""
+
+#. module: nashi
+#: selection:stock.rule,action:0
+msgid "Pull From"
+msgstr ""
+
+#. module: nashi
+#: selection:stock.rule,action:0
+msgid "Push To"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_move_line__lot_produced_qty
+msgid "Quantity Finished Product"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__location_src_id
+msgid "Raw Materials Location"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__user_id
+msgid "Responsible"
+msgstr "担当者"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Return Lines"
+msgstr "生成明細"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble_return_line__return_qty
+msgid "Return Quantity"
+msgstr "数量"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.form_view_assemble
+msgid "Scrap"
+msgstr "廃棄"
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:182
+#, python-format
+msgid "Sequence assemble"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:180
+#, python-format
+msgid "Sequence picking before assemble"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:181
+#, python-format
+msgid "Sequence stock after assemble"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "Settings"
+msgstr "管理設定"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__date_start
+msgid "Start Date"
+msgstr "開始日"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_nashi_assemble__state
+msgid "State"
+msgstr "都道府県/州"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__saa_rule_id
+msgid "Stock After Asemble Rule"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__saa_type_id
+msgid "Stock After Assemble Operation Type"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_stock_move
+msgid "Stock Move"
+msgstr "在庫移動"
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_stock_rule
+msgid "Stock Rule"
+msgstr "在庫規則"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_warehouse__saa_loc_id
+msgid "Stock after Assemble Location"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_warehouse.py:199
+#, python-format
+msgid "Store Finished Products"
+msgstr "入庫品（組立て）"
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_stock_move__is_done
+#: model:ir.model.fields,help:nashi.field_stock_move_line__done_move
+msgid "Technical Field to order moves"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_nashi_assemble__check_to_done
+msgid "Technical Field to see if we can show 'Mark as Done' button"
+msgstr ""
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+msgid "To Process"
+msgstr "未処理"
+
+#. module: nashi
+#: model:ir.model.fields,field_description:nashi.field_stock_picking_type__code
+msgid "Type of Operation"
+msgstr "処理タイプ"
+
+#. module: nashi
+#: selection:stock.picking.type,code:0
+msgid "Vendors"
+msgstr "仕入先"
+
+#. module: nashi
+#: model_terms:ir.ui.view,arch_db:nashi.stock_production_type_kanban
+#: selection:nashi.assemble,availability:0
+msgid "Waiting"
+msgstr "待機中"
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_stock_warehouse
+msgid "Warehouse"
+msgstr "倉庫"
+
+#. module: nashi
+#: model:ir.model.fields,help:nashi.field_stock_warehouse__assemble_to_resupply
+msgid "When products are asembled, they can be asembled in this warehouse."
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/stock_rule.py:17
+#, python-format
+msgid "When products are needed in <b>%s</b>, <br/> a assemble order is created to fulfill the need."
+msgstr ""
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_nashi_assemble
+msgid "nashi.assemble"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_nashi_assemble_pick_line
+msgid "nashi.assemble.pick.line"
+msgstr ""
+
+#. module: nashi
+#: model:ir.model,name:nashi.model_nashi_assemble_return_line
+msgid "nashi.assemble.return.line"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/nashi_assemble.py:282
+#, python-format
+msgid "you must set at least one pick product"
+msgstr ""
+
+#. module: nashi
+#: code:addons/nashi/models/nashi_assemble.py:284
+#, python-format
+msgid "you must set at least one return product."
+msgstr ""
+

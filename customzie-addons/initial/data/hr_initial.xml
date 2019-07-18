@@ -26,12 +26,13 @@
 
     <!--Employees-->
 
-      <record id="employee_admin" model="hr.employee">
+      <record id="hr.employee_admin" model="hr.employee">
+
           <field name="work_location">4F</field>
           <field name="work_phone">(03)-5918-9313</field>
           <field name="work_email">ceo@wajun.co.jp</field>
           <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
-          <field name="department_id" ref="dep_administration"/>
+          <field name="department_id" ref="hr.dep_administration"/>
       </record>
 
       <record id="employee_ceo" model="hr.employee">
@@ -45,8 +46,8 @@
 
       <record id="employee_sale_001" model="hr.employee">
           <field name="name">販売マネージャー</field>
-          <field name="user_id" ref="base.user_sale_001"/>
-          <field name="department_id" ref="dep_sales"/>
+          <field name="user_id" ref="initial.user_sale_001"/>
+          <field name="department_id" ref="hr.dep_sales"/>
           <field name="parent_id" ref="employee_ceo"/>
           <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
           <field name="work_location">Building 1, 3F</field>
@@ -55,8 +56,8 @@
       </record>
       <record id="employee_sale_002" model="hr.employee">
           <field name="name">販売太郎</field>
-          <field name="user_id" ref="base.user_sale_002"/>
-          <field name="department_id" ref="dep_sales"/>
+          <field name="user_id" ref="initial.user_sale_002"/>
+          <field name="department_id" ref="hr.dep_sales"/>
           <field name="parent_id" ref="employee_sale_001"/>
           <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
           <field name="work_location">Building 1, 3F</field>
@@ -64,6 +65,92 @@
           <field name="work_email">sale002@wajun.co.jp</field>
       </record>
 
+      <record id="employee_office_001" model="hr.employee">
+          <field name="name">事務マネージャー</field>
+          <field name="user_id" ref="initial.user_office_001"/>
+          <field name="department_id" ref="dep_management"/>
+          <field name="parent_id" ref="employee_ceo"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">office001@wajun.co.jp</field>
+      </record>
+      <record id="employee_office_002" model="hr.employee">
+          <field name="name">事務花子</field>
+          <field name="user_id" ref="initial.user_office_002"/>
+          <field name="department_id" ref="dep_management"/>
+          <field name="parent_id" ref="employee_office_001"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">office002@wajun.co.jp</field>
+      </record>
+
+      <record id="employee_stock_001" model="hr.employee">
+          <field name="name">在庫マネージャー</field>
+          <field name="user_id" ref="initial.user_stock_001"/>
+          <field name="department_id" ref="dep_production"/>
+          <field name="parent_id" ref="employee_ceo"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">stock001@wajun.co.jp</field>
+      </record>
+
+      <record id="employee_stock_002" model="hr.employee">
+          <field name="name">倉庫次郎</field>
+          <field name="user_id" ref="initial.user_stock_002"/>
+          <field name="department_id" ref="dep_production"/>
+          <field name="parent_id" ref="employee_stock_001"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">stock002@wajun.co.jp</field>
+      </record>
+
+      <record id="employee_stock_003" model="hr.employee">
+          <field name="name">倉庫三郎</field>
+          <field name="user_id" ref="initial.user_stock_003"/>
+          <field name="department_id" ref="dep_production"/>
+          <field name="parent_id" ref="employee_stock_001"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">stock003@wajun.co.jp</field>
+      </record>
+
+      <record id="employee_operator_001" model="hr.employee">
+          <field name="name">製造マネージャー</field>
+          <field name="user_id" ref="initial.user_operator_001"/>
+          <field name="department_id" ref="dep_production"/>
+          <field name="parent_id" ref="employee_ceo"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">operator001@wajun.co.jp</field>
+      </record>
+
+      <record id="employee_operator_002" model="hr.employee">
+          <field name="name">製造太郎</field>
+          <field name="user_id" ref="initial.user_operator_002"/>
+          <field name="department_id" ref="dep_production"/>
+          <field name="parent_id" ref="employee_operator_001"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">operator002@wajun.co.jp</field>
+      </record>
+
+      <record id="employee_operator_003" model="hr.employee">
+          <field name="name">製造四郎</field>
+          <field name="user_id" ref="initial.user_operator_003"/>
+          <field name="department_id" ref="dep_production"/>
+          <field name="parent_id" ref="employee_operator_001"/>
+          <field name="category_ids" eval="[(6, 0, [ref('employee_category_1')])]"/>
+          <field name="work_location">Building 1, 3F</field>
+          <field name="work_phone">(03)-5918-9313</field>
+          <field name="work_email">operator003@wajun.co.jp</field>
+      </record>
 
     </data>
 </odoo>

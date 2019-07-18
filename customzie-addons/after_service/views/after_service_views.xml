@@ -11,11 +11,12 @@
                 <button name="button_confirm" type="object" states="draft" string="To Processing" class="oe_highlight"/>
                 <button name="button_approve" type="object" states='to approve' string="Approve Order" class="oe_highlight" groups="after_service.after_service_group_manager"/>
                 <button name="button_processing" type="object" states='to processing' string="Processing Order" class="oe_highlight" />
-                <button name="button_draft"  type="object" states="cancel" string="Set to Draft" />
+                <!--<button name="button_draft"  type="object" states="cancel" string="Set to Draft" />-->
                 <button name="button_cancel" type="object" states="done" string="Cancel" groups="after_service.after_service_group_manager"/>
                 <field name="state" widget="statusbar" statusbar_visible="draft,to processing,done" readonly="1"/>
             </header>
             <sheet>
+              <field name='treatment_name' invisible="1" />
               <div>
                   <h1>
                       <field name="name" />
@@ -23,20 +24,21 @@
               </div>
                 <group>
                     <group>
-                        <field name="sale_order_filter" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="contact_person" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="sale_order_id" />
-                        <field name="sale_order_product" />
-                        <field name="defect_remark" attrs="{'invisible':[('defect_remark','==', 'none')]}" />
-                        <field name="barcode" />
+                      <field name="contact_person" attrs="{'readonly':[('state','!=','draft')]}"/>
+                      <field name="sale_order_filter" attrs="{'readonly':[('state','!=','draft')]}" widget="momo_product_line_many2one" domain="[('sale_order_name','!=','none')]"/>
+                      <field name="sale_order_id" />
+                      <field name="sale_order_product" />
+                      <field name="deficit_price" />
+                      <field name="product_cnt" attrs="{'readonly':[('state','!=','draft')]}"/>
                     </group>
                     <group>
-                        <field name="inquiry_date" attrs="{'readonly':[('state','!=','draft')]}"/>
-                        <field name="measure_type" attrs="{'readonly':[('state','!=','draft')]}" options="{'horizontal':true}"/>
-                        <field name="sale_order_partner_id" />
-                        <field name="sale_order_date" />                <field name="deficit_price" sum="Total Deficit" widget="monetary"/>
-                        <field name="deficit_price" />
-                        <field name="order_elapsed_days" attrs="{'invisible':[('order_elapsed_days','==', '')]}"/>
+                      <field name="inquiry_date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                      <field name="measure_type" attrs="{'readonly':[('state','!=','draft')]}" options="{'horizontal':true}"/>
+                      <field name="sale_order_partner_id" />
+                      <!--<field name="barcode" />-->
+                      <field name="sale_order_date" />
+                      <field name="order_elapsed_days" readonly="1" attrs="{'invisible':[('order_elapsed_days','==', '')]}"/>
+                      <field name="defect_remark" attrs="{'invisible':[('defect_remark','==', 'none')]}" />
                     </group>
                 </group>
                 <hr />
@@ -51,26 +53,26 @@
                 <group>
                     <field name="treatment_remark" attrs="{'readonly':[('state','!=','draft')]}"/>
                 </group>
-                <hr attrs="{'invisible':[('state','==','draft')]}"/>
-                <group attrs="{'invisible':[('state','==','draft')]}">
+                <hr attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}"/>
+                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}">
                   <group>
-                    <field name="returned_date" />
+                    <field name="returned_date" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
                   <group>
-                    <field name="reshipping_date" />
+                    <field name="reshipping_date" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
                   <group>
-                    <field name="repair_type" widget="many2many_checkboxes" options="{'horizontal':true}"/>
-                  </group>
-                </group>
-                <group attrs="{'invisible':[('state','==','draft')]}">
-                  <group>
-                    <field name="problem_reason" widget="many2many_checkboxes"/>
+                    <field name="repair_type" widget="many2many_checkboxes" options="{'horizontal':true}" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
                 </group>
-                <group attrs="{'invisible':[('state','==','draft')]}">
+                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}">
                   <group>
-                    <field name="other_reason" />
+                    <field name="problem_reason" widget="many2many_checkboxes" attrs="{'readonly':[('state','==','done')]}"/>
+                  </group>
+                </group>
+                <group attrs="{'invisible':['|',('state','==','draft'),('treatment_name','==','オンライン解決')]}">
+                  <group>
+                    <field name="other_reason" attrs="{'readonly':[('state','==','done')]}"/>
                   </group>
                   <group>
                   </group>
@@ -98,7 +100,8 @@
                 <field name="treatment_operator" />
                 <field name="treatment_book_id" />
                 <field name="state"/>
-                <field name="deficit_price" sum="Total Deficit" widget="monetary"/>
+                <!--<field name="deficit_price" sum="Total Deficit" widget="monetary"/>-->
+                <field name="deficit_total_price" sum="Total Deficit" widget="monetary"/>
                 <field name="is_defective" invisible="1"/>
                 <field name="create_date"/>
                 <!--<button name="print_after_service" string="Print After Service" type="object" attrs="{'invisible':[('state','!=','done')]}" />-->
@@ -128,7 +131,8 @@
               <field name="treatment_operator" />
               <field name="treatment_book_id" />
               <field name="state"/>
-              <field name="deficit_price" sum="Total Deficit" widget="monetary"/>
+              <!--<field name="deficit_price" sum="Total Deficit" widget="monetary"/>-->
+              <field name="deficit_total_price" sum="Total Deficit" widget="monetary"/>
               <field name="is_defective" invisible="1" />
               <field name="create_date" />
             </tree>
@@ -170,16 +174,16 @@
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search After Service">
-                <field name="barcode"
-                  filter_domain="['|','|','|','|','|',('barcode','ilike',self),('name','ilike',self),('sale_order_id','ilike',self),('sale_order_partner_id','ilike',self),('sale_order_product','ilike',self),('treatment_operator','ilike',self)]"/>
+                <field name="barcode" />
                 <field name="name" string="After Service" />
                 <field name="sale_order_id" />
                 <field name="sale_order_partner_id" />
                 <field name="sale_order_product" />
                 <field name="treatment_operator" />
                 <separator/>
-                <filter string="repair" name="treatment_book_repair" domain="[('treatment_book_id','=','修理')]"/>
-                <filter string="return" name="treatment_book_return" domain="[('treatment_book_id','=','返品')]"/>
+                <filter string="onlineclose" name="treatment_book_onlineclose" domain="[('treatment_name','=','オンライン解決')]"/>
+                <filter string="repair" name="treatment_book_repair" domain="[('treatment_name','=','修理')]"/>
+                <filter string="return" name="treatment_book_return" domain="[('treatment_name','=','返品')]"/>
                 <separator/>
                 <filter string="is_defective" name="is_defective" domain="[('is_defective','=',True)]"/>
                 <separator/>
@@ -196,9 +200,8 @@
         <field name="mode">primary</field>
         <field name="inherit_id" ref="after_service.view_after_service_filter"/>
         <field name="arch" type="xml">
-            <xpath expr="//filter[@name='treatment_book_repair']" position="before">
-                <separator/>
-                <filter string="Return Product" name="return_product" domain="[('treatment_book_id','=','返品')]"/>
+            <xpath expr="//filter[@name='treatment_book_return']" position="replace">
+                <filter string="Return Product" name="return_product" domain="[('treatment_name','=','返品')]"/>
             </xpath>
         </field>
     </record>
@@ -226,10 +229,38 @@
     </record>
 
     <!-- Action to open the treatment book -->
+    <record id="action_treatment_book" model="ir.actions.act_window">
+        <field name="name">Treatment Book</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">treatment.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new treatment
+            </p>
+        </field>
+    </record>
+
+    <!-- Action to open the repair type -->
     <record id="action_repair_type" model="ir.actions.act_window">
         <field name="name">Repair Type</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">repair.type</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new treatment
+            </p>
+        </field>
+    </record>
+
+    <!-- Action to open the problem reason -->
+    <record id="action_problem_reason" model="ir.actions.act_window">
+        <field name="name">Repair Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">problem.reason</field>
         <field name="view_mode">tree,form</field>
         <field name="view_type">form</field>
         <field name="help" type="html">
@@ -267,22 +298,36 @@
         name="After Service"
         parent="after_service_menu_root"
         action="action_after_service"
-        sequence="2"/>
-
-<!--    <menuitem id="menu_repair_type"
-        name="Repair type"
-        parent="after_service_menu_root"
-        action="action_repair_type"
-        sequence="3"/>-->
+        sequence="1"/>
 
     <menuitem id="menu_after_service_report"
         name="After Service Report"
         parent="after_service_menu_root"
         action="action_after_service_aggregate"
         groups="after_service_group_manager"
+        sequence="2"/>
+
+<!--    <menuitem id="menu_treatment_book"
+        name="Treatment Book"
+        parent="after_service_menu_root"
+        action="action_treatment_book"
+        groups="after_service_group_manager"
         sequence="3"/>
 
+    <menuitem id="menu_repair_type"
+        name="Repair type"
+        parent="after_service_menu_root"
+        action="action_repair_type"
+        groups="after_service_group_manager"
+        sequence="4"/>
 
+    <menuitem id="menu_problem_reason"
+        name="Problem Reason"
+        parent="after_service_menu_root"
+        action="action_problem_reason"
+        groups="after_service_group_manager"
+        sequence="5"/>
+-->
     <!-- statistics -->
     <record id="product_line_picking_pivot" model="ir.ui.view">
         <field name="name">product.line.picking.pivot</field>

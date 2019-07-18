@@ -26,19 +26,23 @@
                             <field name="product_line_group_id" invisible="1"/>
                             <field name="picking_name" readonly="1"/>
                             <field name="user_id" readonly="1"/>
-                            <field name="scan" default_focus="1" placeholder="Please scan a Barcode"/>
+                            <field name="scan_barcode" default_focus="1" placeholder="Scan Barcode"/>
                             <field name="error_mess" readonly="1" style="color:red;"/>
                         </group>
-                            <field name="scan_lines" widget="one2many_list">
-                                <tree string="Scan Line" create="false" editable="bottom">
-                                    <field name="product_line_id" invisible="1"/>
-                                    <field name="barcode" readonly="1"/>
-                                    <field name="product_name" readonly="1"/>
-                                </tree>
-                            </field>
+                        <field name="scan_lines" widget="one2many_list">
+                            <tree string="Scan Line" create="false" editable="bottom">
+                                <field name="product_line_id" invisible="1"/>
+                                <field name="barcode" readonly="1"/>
+                                <field name="product_name" readonly="1"/>
+                                <field name="is_defective"/>
+                                <field name="product_rank"/>
+                                <field name="defective_detail"/>
+                            </tree>
+                        </field>
                     </sheet>
                     <footer>
-                        <button name="scan_over" string="Scan Over" type="object"/>
+                        <button name="scan_over" string="Scan Over" type="object"
+                                confirm="Are you sure you want over this scan?" style="background:red;color:white;"/>
                     </footer>
                 </form>
             </field>

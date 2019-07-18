@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_putaway_inherit" model="ir.ui.view">
+        <field name="name">product.putaway.inherit.form</field>
+        <field name="model">product.putaway</field>
+        <!--field name="inherit_id" ref="stock.view_putaway" /-->
+        <field name="arch" type="xml">
+            <form string="Putaway">
+                <group colspan="4">
+                    <field name="name"/>
+                </group>
+                <p class="oe_grey">
+                The rules defined per product will be applied before the rules defined per product category.
+                </p>
+                <!--field name="product_location_ids" colspan="4" nolabel="1">
+                    <tree editable="bottom">
+                        <field name="sequence" widget='handle'/>
+                        <field name="product_id" required="1"/>
+                        <field name="fixed_location_id" domain="[('id', 'child_of', context.get('location_id'))]"/>
+                    </tree>
+                </field-->
+                <!--field name="fixed_location_ids" colspan="4" nolabel="1">
+                    <tree editable="bottom">
+                        <field name="sequence" widget='handle'/>
+                        <field name="category_id" required="1"/>
+                        <field name="fixed_location_id" domain="[('id', 'child_of', context.get('location_id'))]"/>
+                    </tree>
+                </field-->
+            </form>
+        </field>
+    </record>
+
+    <record id="stock_fixed_putaway_strat_form" model="ir.ui.view">
+        <field name="name">stock.fixed.putaway.strat.form</field>
+        <field name="model">stock.fixed.putaway.strat</field>
+        <field name="arch" type="xml">
+            <form string="Putaway">
+                <group>
+                    <group>
+                        <field name="putaway_id"/>
+                        <field name="fixed_location_id"/>
+                        <field name="sequence"/>
+                    </group>
+                    <group>
+                        <field name="category_id"/>
+                        <field name="product_id"/>
+                  </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+        <record id="action_putaway" model="ir.actions.act_window">
+            <field name="name">Putaway</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.putaway</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="target">current</field>
+            <!--field name="search_view_id" ref="view_product_line_search"/-->
+        </record>
+
+        <!--record id="action_putaway_view_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_product_line_tree"/>
+            <field name="act_window_id" ref="action_pick_to_stock"/>
+        </record-->
+
+        <record id="action_putaway_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_putaway_inherit"/>
+            <field name="act_window_id" ref="action_putaway"/>
+        </record>
+
+
+    <menuitem id="product_putaway"
+        name="Product Putaway"
+        parent="momo.momo_menu_root"
+        groups="stock.group_adv_location"
+        action="action_putaway"
+        sequence="10"/>
+
+
+</odoo>

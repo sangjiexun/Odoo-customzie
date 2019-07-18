@@ -39,6 +39,7 @@ def execute(connector, method, *args):
 
 class db_backup(models.Model):
     _name = 'db.backup'
+    _description = 'db-backup'
 
     @api.multi
     def get_db_list(self, host, port, context={}):
@@ -58,13 +59,13 @@ class db_backup(models.Model):
     name = fields.Char('Database', required=True, help='Database you want to schedule backups for',
                        default=_get_db_name)
     folder = fields.Char('Backup Directory', help='Absolute path for storing the backups', required='True',
-                         default='/odoo/backups')
+                         default='/opt/backups')
     backup_type = fields.Selection([('zip', 'Zip'), ('dump', 'Dump')], 'Backup Type', required=True, default='zip')
     autoremove = fields.Boolean('Auto. Remove Backups',
                                 help='If you check this option you can choose to automaticly remove the backup after xx days')
     days_to_keep = fields.Integer('Remove after x days',
                                   help="Choose after how many days the backup should be deleted. For example:\nIf you fill in 5 the backups will be removed after 5 days.",
-                                  required=True)
+                                  required=True, default=7)
 
     # Columns for external server (SFTP)
     sftp_write = fields.Boolean('Write to external server with sftp',

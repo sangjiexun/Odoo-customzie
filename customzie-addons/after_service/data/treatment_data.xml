@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
+        <record id="treatment_book_onlineclose" model="treatment.book">
+            <field name="name">onlineclose</field>
+            <field name="treatment_book">お客様の問い合わせる内容はオンラインで解決しました。</field>
+        </record>
         <record id="treatment_book_repair" model="treatment.book">
             <field name="name">repair</field>
             <field name="treatment_book">送料負担にて、商品を修理させて頂きます。修理詳細は下記にご参照ください。</field>

@@ -49,7 +49,7 @@ class Assemble(models.Model):
         ('planned', 'Planned'),
         ('progress', 'In Progress'),
         ('done', 'Done'),
-        ('cancel', 'Cancelled')], string='State',
+        ('cancel', 'Cancelled')], string='Status',
         copy=False, default='confirmed', track_visibility='onchange')
 
     availability = fields.Selection([

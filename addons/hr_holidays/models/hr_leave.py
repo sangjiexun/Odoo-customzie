@@ -458,8 +458,8 @@ class HolidaysRequest(models.Model):
                     target = leave.employee_id.name
                 res.append(
                     (leave.id,
-                     _("%s on %s :%.2f day(s)") %
-                     (target, leave.holiday_status_id.name, leave.number_of_days))
+                     _("%s : %.1f 日") %
+                     (target, leave.number_of_days))
                 )
         return res
 

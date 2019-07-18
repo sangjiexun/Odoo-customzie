@@ -7,7 +7,7 @@
       <field name="numbercall">-1</field>
       <field name="priority">5</field>
       <field name="doall">False</field>
-      <field name="active">False</field>
+      <field name="active">True</field>
       <field name="interval_number">1</field>
       <field name="model_id" ref="model_db_backup"/>
       <field name="state">code</field>

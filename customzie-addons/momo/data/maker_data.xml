@@ -10,6 +10,9 @@
         <record id="maker_dell" model="maker.info">
             <field name="name">DELL（デル）</field>
         </record>
+        <record id="maker_hp" model="maker.info">
+            <field name="name">HP</field>
+        </record>
         <record id="maker_toshiba" model="maker.info">
             <field name="name">東芝</field>
         </record>
