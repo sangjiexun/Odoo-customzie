@@ -44,5 +44,5 @@ class Users(models.Model):
         #c.rect(x + 2 * mm, y + 2 * mm, 40 * mm, 20 * mm, stroke=True, fill=0)
         c.setFont("Courier-Bold", 10)
         c.drawString(x + 6 * mm, y + 6 * mm, data)
-        barcode = code128.Code128(data, barWidth=0.25 * mm, barHeight=9 * mm, checksum=False)
+        barcode = code128.Code128(data, barWidth=0.25 * mm, barHeight= 9 * mm, checksum=False)
         barcode.drawOn(c, x - 1 * mm, y + 10 * mm)
