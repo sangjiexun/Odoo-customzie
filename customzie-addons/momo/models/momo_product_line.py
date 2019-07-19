@@ -10,38 +10,6 @@ from odoo.addons import decimal_precision as dp
 import shutil, os
 
 
-class BarcodePrintWizard(models.TransientModel):
-    _name = "momo.barcode.print.wizard"
-    _description = 'barcode.print.wizard'
-
-    start_row = fields.Selection([
-        (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'), (6, '6'), (7, '7'), (8, '8'),
-        (9, '9'), (10, '10'), (11, '11'), (12, '12'), (13, '13'),], string='Print Start Row', default='1')
-
-    start_column = fields.Selection([
-        (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),], string='Print Start Column', default='1')
-
-    @api.multi
-    def print_product_barcode(self):
-        product_line_active_ids = self._context.get('product_line_active_ids')
-        pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(product_line_active_ids, self.start_row, self.start_column)
-        return{
-            "type": "ir.actions.act_url",
-            "url" : "/web/momo/reports/%s" % pdf_name,
-            "target": "new",
-        }
-
-    @api.multi
-    def print_user_barcode(self):
-        user_active_ids = self._context.get('user_active_ids')
-        pdf_name = self.env['res.users'].count_and_create_barcode_pdf(user_active_ids, self.start_row, self.start_column)
-        return{
-            "type": "ir.actions.act_url",
-            "url" : "/web/momo/reports/%s" % pdf_name,
-            "target": "new",
-        }
-
-
 class ProductLineGroup(models.Model):
     _name = "momo.product.line.group"
     _description = 'momo.product.line.group'
@@ -313,6 +281,16 @@ class ProductLine(models.Model):
             'context': {'product_line_active_ids': self._context.get('active_ids')}
         }
 
+    @api.multi
+    def print_product_barcode(self):
+        pdf_name = self.env['momo.product.line'].count_and_create_barcode_pdf(self._context.get('active_ids'))
+        return{
+            "type": "ir.actions.act_url",
+            "url" : "/web/momo/reports/%s" % pdf_name,
+            "target": "new",
+        }
+
+
     @api.one
     def pick2stock(self):
         self.write({'restock': True})
@@ -330,68 +308,41 @@ class ProductLine(models.Model):
             line.product_line_id = res.id
 
     @api.multi
-    def count_and_create_barcode_pdf(self, product_line_active_ids, start_row=1, start_column=1):
-        barcodes = 55
-        init_count = (start_row - 1) * 5 + (start_column - 1)
-        sum_count = init_count + len(product_line_active_ids)
-        page_count = (sum_count - 1) // barcodes + 1
-
+    def count_and_create_barcode_pdf(self, product_line_active_ids):
+        page_count = len(product_line_active_ids)
         pdf_path = "/opt/pdf/"
         pdf_name = "barcode_print_" + dt.now().strftime('%Y_%m_%d_%H_%M_%S') + ".pdf"
         pdf_file = pdf_path + pdf_name
 
-        c = canvas.Canvas(pdf_file, pagesize=A4)
+        c = canvas.Canvas(pdf_file)
+        c.setPageSize((44 * mm, 24 * mm))
 
-        for x in range(page_count):
-
-            if x == 0:
-                self.print_barcode(c, product_line_active_ids[0:(barcodes - init_count)], start_row, start_column)
-            # last page
-            elif x == page_count - 1:
-                self.print_barcode(c,
-                                   product_line_active_ids[(barcodes - init_count) + barcodes * (x - 1):(sum_count - init_count)])
-            # other pages
-            else:
-                self.print_barcode(c,
-                                   product_line_active_ids[(barcodes - init_count) + barcodes * (x - 1):(barcodes - init_count) + barcodes * x ])
-
+        x = y = 0
+        for i in range(page_count):
+            line = self.env['momo.product.line'].search([('id', '=', product_line_active_ids[i])])
+            self.draw_label(c, x, y, line.barcode)
+            line.write({'printed': True})
+            c.showPage()
         c.save()
         return pdf_name
 
     @api.multi
-    def print_barcode(self, c, product_line_active_ids, start_row=1, start_column=1):
-
-        xmargin = 0 * mm
-        ymargin = 22 * mm
-        swidth = 40 * mm
-        sheight = 25 * mm
-#        xmargin = 3.5 * mm
-#        ymargin = 10.92 * mm
-#        swidth = 40.6 * mm
-#        sheight = 21.2 * mm
-
-        i = (start_row - 1) * 5 + (start_column - 1)
-
+    def print_barcode(self, c, product_line_active_ids):
+        x = y = 0
         for product_line_active_id in product_line_active_ids:
             line = self.env['momo.product.line'].search([('id', '=', product_line_active_id)])
-
-            x = xmargin + swidth * (i % 5)
-            y = ymargin + sheight * (10 - (i // 5))
-
             self.draw_label(c, x, y, line.barcode)
             line.write({'printed': True})
-            i += 1
-
         c.showPage()
 
     @staticmethod
     def draw_label(c, x, y, data):
-        c.setLineWidth(0.5)
-        c.rect(x, y, 40 * mm, 25 * mm, stroke=0, fill=0)
-        c.setFont("Courier-Bold", 10)
-        c.drawString(x + 6.6 * mm, y + 15.4 * mm, data)
-        barcode = code128.Code128(data, barWidth=0.3 * mm, barHeight=10.0 * mm, checksum=False)
-        barcode.drawOn(c, x - 3.3 * mm, y + 3.4 * mm)
+        #c.setLineWidth(0.5)
+        #c.rect(x + 2 * mm, y + 2 * mm, 40 * mm, 20 * mm, stroke=True, fill=0)
+        c.setFont("Courier-Bold", 12)
+        c.drawString(x + 6 * mm, y + 5 * mm, data)
+        barcode = code128.Code128(data, barWidth=0.27 * mm, barHeight=10 * mm, checksum=False)
+        barcode.drawOn(c, x - 1 * mm, y + 9 * mm)
 
     @api.multi
     def _delete_barcode_pdf(self):
