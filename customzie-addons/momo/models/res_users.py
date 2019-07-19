@@ -42,7 +42,7 @@ class Users(models.Model):
     def draw_label(c, x, y, data):
         #c.setLineWidth(0.5)
         #c.rect(x + 2 * mm, y + 2 * mm, 40 * mm, 20 * mm, stroke=True, fill=0)
-        c.setFont("Courier-Bold", 12)
-        c.drawString(x + 6 * mm, y + 5 * mm, data)
-        barcode = code128.Code128(data, barWidth=0.27 * mm, barHeight=10 * mm, checksum=False)
-        barcode.drawOn(c, x - 1 * mm, y + 9 * mm)
+        c.setFont("Courier-Bold", 10)
+        c.drawString(x + 6 * mm, y + 6 * mm, data)
+        barcode = code128.Code128(data, barWidth=0.25 * mm, barHeight=9 * mm, checksum=False)
+        barcode.drawOn(c, x - 1 * mm, y + 10 * mm)
